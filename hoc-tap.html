@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Không Gian Học Tập - E-Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* CSS tự động định dạng cho nội dung Google Doc trả về */
+        .doc-content p { margin-bottom: 1rem; line-height: 1.7; color: #334155; font-size: 1.05rem; }
+        .doc-content h2 { font-size: 1.5rem; font-weight: 700; color: #1e3a8a; margin-top: 2rem; margin-bottom: 1rem; }
+        .doc-content h3 { font-size: 1.25rem; font-weight: 600; color: #0f172a; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .doc-content table { width: 100%; border: 1px solid #cbd5e1; margin: 1.5rem 0; border-collapse: collapse; }
+        .doc-content th, .doc-content td { border: 1px solid #cbd5e1; padding: 12px; text-align: left; }
+        .doc-content th { background-color: #f8fafc; font-weight: 600; }
+        .doc-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #334155; }
+        
+        /* Hiệu ứng chuyển Tab mượt mà */
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen pb-12">
+
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 id="page-title" class="text-xl font-bold tracking-wide text-amber-400">Đang tải dữ liệu...</h1>
+                <p class="text-xs text-slate-400 mt-1">E-Academy Learning System 2026</p>
+            </div>
+            <button onclick="window.history.back()" class="text-sm bg-slate-800 hover:bg-slate-700 border border-slate-700 px-4 py-2 rounded-lg transition text-slate-300 flex items-center">
+                <span>&larr; Quay lại</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            
+            <nav class="flex border-b border-slate-200 bg-slate-100/50">
+                <button data-tab="theory" class="tab-btn flex-1 py-4 text-sm md:text-base font-bold text-indigo-600 border-b-2 border-indigo-600 bg-white transition focus:outline-none">
+                    📘 PHẦN A: LÝ THUYẾT TRỌNG TÂM
+                </button>
+                <button data-tab="exercise" class="tab-btn flex-1 py-4 text-sm md:text-base font-semibold text-slate-500 hover:text-slate-800 transition focus:outline-none border-b-2 border-transparent">
+                    ✍️ PHẦN B: BÀI TẬP TỰ LUYỆN
+                </button>
+                <button data-tab="quiz" class="tab-btn flex-1 py-4 text-sm md:text-base font-semibold text-slate-500 hover:text-slate-800 transition focus:outline-none border-b-2 border-transparent">
+                    🍕 PHẦN C: ĐẤU TRƯỜNG PIZZA
+                </button>
+            </nav>
+
+            <div class="p-6 md:p-10 min-h-[400px] relative">
+                
+                <div id="loading-spinner" class="absolute inset-0 bg-white z-10 flex flex-col items-center justify-center text-slate-500">
+                    <div class="animate-spin inline-block w-10 h-10 border-[4px] border-current border-t-transparent text-indigo-600 rounded-full mb-4"></div>
+                    <p class="font-medium text-lg">Đang trích xuất dữ liệu từ thư viện...</p>
+                    <p class="text-xs text-slate-400 mt-1">Vui lòng chờ trong giây lát</p>
+                </div>
+
+                <div id="pane-theory" class="tab-pane fade-in doc-content hidden"></div>
+
+                <div id="pane-exercise" class="tab-pane fade-in doc-content hidden"></div>
+
+                <div id="pane-quiz" class="tab-pane fade-in hidden">
+                    <div id="quiz-setup" class="text-center py-10">
+                        <div class="text-6xl mb-4">🍕</div>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Sẵn sàng thử thách?</h2>
+                        <p class="text-slate-500 mb-6">Hệ thống sẽ tính điểm và thời gian làm bài của bạn.</p>
+                        <button id="btn-start-quiz" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+                            Bắt đầu Đấu trường
+                        </button>
+                    </div>
+
+                    <div id="quiz-play" class="hidden max-w-2xl mx-auto">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-200">
+                            <span id="quiz-progress" class="font-semibold text-slate-600 text-sm bg-slate-100 px-3 py-1 rounded-full">Câu 1/10</span>
+                            <span id="quiz-timer" class="font-bold text-orange-600 bg-orange-100 px-4 py-1 rounded-full animate-pulse">⏱ 30s</span>
+                        </div>
+                        
+                        <h3 id="quiz-question" class="text-xl font-bold text-slate-900 mb-6 leading-relaxed">Đang tải câu hỏi...</h3>
+                        
+                        <div id="quiz-options" class="space-y-3 mb-8">
+                            </div>
+
+                        <div class="flex justify-end">
+                            <button id="btn-next-question" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition">
+                                Câu tiếp theo &rarr;
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="quiz-result" class="hidden text-center py-10">
+                        <div class="text-6xl mb-4">🏆</div>
+                        <h2 class="text-3xl font-extrabold text-slate-800 mb-2">Hoàn thành xuất sắc!</h2>
+                        <p id="quiz-score-text" class="text-lg text-slate-600 font-medium mb-6">Bạn trả lời đúng: 0/0 câu</p>
+                        <button onclick="window.location.reload()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 px-6 rounded-lg transition">
+                            Làm lại bài thi
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 1. TẦNG API SERVICE (Giao tiếp với Google Apps Script)
+        class ApiService {
+            constructor() {
+                // THAY THẾ LINK WEB APP CỦA BẠN VÀO ĐÂY
+                this.scriptUrl = "URL_WEB_APP_APPS_SCRIPT_CUA_BAN";
+            }
+
+            // Gỉa lập gọi API (Trong thực tế bạn dùng fetch)
+            async fetchLessonData(mon, buoi) {
+                try {
+                    // Code thực tế: 
+                    // const response = await fetch(`${this.scriptUrl}?action=getAll&mon=${mon}&buoi=${buoi}`);
+                    // return await response.json();
+                    
+                    // Code giả lập để bạn test giao diện ngay mà chưa cần nối backend
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve({
+                                theory: "<h2>Khái niệm trọng tâm</h2><p>Đây là nội dung lý thuyết được tự động lấy từ Google Doc.</p><ul><li>Đặc điểm 1</li><li>Đặc điểm 2</li></ul>",
+                                exercise: "<h2>Bài tập thực hành</h2><p>Làm các bài tập sau vào vở:</p><p>Bài 1: Tính toán...</p>",
+                                quiz: [
+                                    { question: "1 + 1 bằng mấy?", options: ["1", "2", "3", "4"], correct: "2", time: 15 },
+                                    { question: "Thủ đô Việt Nam là?", options: ["Hà Nội", "Đà Nẵng", "Huế", "TP.HCM"], correct: "Hà Nội", time: 10 }
+                                ]
+                            });
+                        }, 1000); // Giả lập mạng chậm 1 giây
+                    });
+                } catch (error) {
+                    console.error("Lỗi API:", error);
+                    throw error;
+                }
+            }
+        }
+
+        // 2. TẦNG UI MANAGER (Quản lý Giao diện & Tabs)
+        class UIManager {
+            constructor() {
+                this.tabs = document.querySelectorAll('.tab-btn');
+                this.panes = document.querySelectorAll('.tab-pane');
+                this.spinner = document.getElementById('loading-spinner');
+                
+                this.initEvents();
+            }
+
+            initEvents() {
+                this.tabs.forEach(tab => {
+                    tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+                });
+            }
+
+            switchTab(targetId) {
+                // Reset tất cả các tab & pane
+                this.tabs.forEach(t => {
+                    t.classList.remove('text-indigo-600', 'border-indigo-600');
+                    t.classList.add('text-slate-500', 'border-transparent');
+                });
+                this.panes.forEach(p => p.classList.add('hidden'));
+
+                // Kích hoạt tab được chọn
+                const activeTab = document.querySelector(`.tab-btn[data-tab="${targetId}"]`);
+                const activePane = document.getElementById(`pane-${targetId}`);
+                
+                if (targetId === 'theory') {
+                    activeTab.classList.add('text-indigo-600', 'border-indigo-600');
+                } else if (targetId === 'exercise') {
+                    activeTab.classList.add('text-emerald-600', 'border-emerald-600');
+                } else if (targetId === 'quiz') {
+                    activeTab.classList.add('text-orange-600', 'border-orange-600');
+                }
+                
+                activeTab.classList.remove('text-slate-500', 'border-transparent');
+                activePane.classList.remove('hidden');
+            }
+
+            hideLoading() {
+                this.spinner.classList.add('hidden');
+            }
+
+            renderDocContent(theoryHtml, exerciseHtml) {
+                document.getElementById('pane-theory').innerHTML = theoryHtml || "<p>Chưa có nội dung lý thuyết.</p>";
+                document.getElementById('pane-exercise').innerHTML = exerciseHtml || "<p>Chưa có bài tập.</p>";
+            }
+
+            setTitle(mon, buoi) {
+                document.getElementById('page-title').innerText = `${mon.toUpperCase()} - BUỔI HỌC ${buoi}`;
+            }
+        }
+
+        // 3. TẦNG QUIZ ENGINE (Bộ máy xử lý Trắc nghiệm OOP)
+        class QuizEngine {
+            constructor(quizData) {
+                this.questions = quizData;
+                this.currentIndex = 0;
+                this.score = 0;
+                this.timer = null;
+                this.timeLeft = 0;
+
+                // Bind DOM Elements
+                this.uiSetup = document.getElementById('quiz-setup');
+                this.uiPlay = document.getElementById('quiz-play');
+                this.uiResult = document.getElementById('quiz-result');
+                this.elQuestion = document.getElementById('quiz-question');
+                this.elOptions = document.getElementById('quiz-options');
+                this.elProgress = document.getElementById('quiz-progress');
+                this.elTimer = document.getElementById('quiz-timer');
+                this.btnNext = document.getElementById('btn-next-question');
+
+                // Events
+                document.getElementById('btn-start-quiz').addEventListener('click', () => this.start());
+                this.btnNext.addEventListener('click', () => this.nextQuestion());
+            }
+
+            start() {
+                if(!this.questions || this.questions.length === 0) {
+                    alert("Chưa có dữ liệu câu hỏi trắc nghiệm!"); return;
+                }
+                this.uiSetup.classList.add('hidden');
+                this.uiPlay.classList.remove('hidden');
+                this.loadQuestion();
+            }
+
+            loadQuestion() {
+                clearInterval(this.timer); // Xóa đồng hồ cũ
+                this.btnNext.classList.add('hidden'); // Ẩn nút Next
+
+                const q = this.questions[this.currentIndex];
+                this.elProgress.innerText = `Câu ${this.currentIndex + 1}/${this.questions.length}`;
+                this.elQuestion.innerText = q.question;
+                
+                // Render đáp án
+                this.elOptions.innerHTML = '';
+                const labels = ['A', 'B', 'C', 'D'];
+                q.options.forEach((opt, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-orange-400 hover:bg-orange-50 font-medium text-slate-700 transition flex items-center";
+                    btn.innerHTML = `<span class="bg-slate-200 text-slate-600 font-bold w-8 h-8 rounded-lg flex items-center justify-center mr-3">${labels[index]}</span> ${opt}`;
+                    
+                    // Sự kiện chọn đáp án
+                    btn.addEventListener('click', () => this.selectAnswer(btn, opt, q.correct));
+                    this.elOptions.appendChild(btn);
+                });
+
+                // Khởi động đồng hồ
+                this.timeLeft = q.time || 20;
+                this.updateTimerUI();
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateTimerUI();
+                    if (this.timeLeft <= 0) this.timeUp();
+                }, 1000);
+            }
+
+            updateTimerUI() {
+                this.elTimer.innerText = `⏱ ${this.timeLeft}s`;
+                if(this.timeLeft <= 5) this.elTimer.classList.add('text-red-600', 'bg-red-100');
+                else this.elTimer.classList.remove('text-red-600', 'bg-red-100');
+            }
+
+            selectAnswer(btnElement, selectedOpt, correctOpt) {
+                clearInterval(this.timer); // Dừng thời gian
+                
+                // Khóa tất cả các nút
+                const allBtns = this.elOptions.querySelectorAll('button');
+                allBtns.forEach(b => {
+                    b.disabled = true;
+                    b.classList.remove('hover:border-orange-400', 'hover:bg-orange-50');
+                });
+
+                // Chấm điểm & Đổi màu
+                if (selectedOpt === correctOpt) {
+                    btnElement.classList.add('border-emerald-500', 'bg-emerald-50');
+                    btnElement.querySelector('span').classList.add('bg-emerald-500', 'text-white');
+                    this.score++;
+                } else {
+                    btnElement.classList.add('border-red-500', 'bg-red-50');
+                    btnElement.querySelector('span').classList.add('bg-red-500', 'text-white');
+                    // Hiển thị đáp án đúng
+                    allBtns.forEach(b => {
+                        if(b.innerText.includes(correctOpt)) {
+                            b.classList.add('border-emerald-500');
+                        }
+                    });
+                }
+                
+                this.btnNext.classList.remove('hidden');
+            }
+
+            timeUp() {
+                clearInterval(this.timer);
+                const allBtns = this.elOptions.querySelectorAll('button');
+                allBtns.forEach(b => b.disabled = true);
+                this.elQuestion.innerText += " (HẾT GIỜ!)";
+                this.elQuestion.classList.add('text-red-500');
+                this.btnNext.classList.remove('hidden');
+            }
+
+            nextQuestion() {
+                this.elQuestion.classList.remove('text-red-500');
+                this.currentIndex++;
+                if (this.currentIndex >= this.questions.length) {
+                    this.showResult();
+                } else {
+                    this.loadQuestion();
+                }
+            }
+
+            showResult() {
+                this.uiPlay.classList.add('hidden');
+                this.uiResult.classList.remove('hidden');
+                document.getElementById('quiz-score-text').innerText = `Bạn trả lời đúng: ${this.score}/${this.questions.length} câu`;
+                
+                // Nâng cao: Chỗ này có thể gọi ApiService.submitScore(this.score) để gửi điểm về Sheet
+            }
+        }
+
+        // ==========================================
+        // KHỞI CHẠY ỨNG DỤNG (MAIN APP CONTROLLER)
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', async () => {
+            const ui = new UIManager();
+            const api = new ApiService();
+
+            // 1. Đọc tham số URL (Ví dụ: hoc-tap.html?mon=toan7&buoi=01)
+            const urlParams = new URLSearchParams(window.location.search);
+            const mon = urlParams.get('mon') || 'Môn Học';
+            const buoi = urlParams.get('buoi') || '01';
+
+            ui.setTitle(mon, buoi);
+
+            try {
+                // 2. Kéo toàn bộ dữ liệu từ Google Script
+                const data = await api.fetchLessonData(mon, buoi);
+                
+                // 3. Đổ dữ liệu Docs vào giao diện
+                ui.renderDocContent(data.theory, data.exercise);
+                
+                // 4. Khởi tạo chức năng Trắc nghiệm
+                new QuizEngine(data.quiz);
+
+                // 5. Tắt Loading & Bật tab mặc định
+                ui.hideLoading();
+                ui.switchTab('theory');
+
+            } catch (error) {
+                document.getElementById('loading-spinner').innerHTML = `<p class="text-red-500 font-bold">Lỗi tải dữ liệu. Vui lòng thử lại sau.</p>`;
+            }
+        });
+
+    </script>
+</body>
+</html>
