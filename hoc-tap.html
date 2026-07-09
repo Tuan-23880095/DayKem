@@ -357,6 +357,18 @@
             // const menu = await api.getMenuData();
         });
     </script>
-</body>
+    <script src="js/models.js"></script> <script src="js/quiz.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+             // ...
+             // Khi nhận được data.quiz từ api, bạn ném nó qua Factory
+             const questionObjects = QuestionFactory.createList(data.quiz);
+             
+             // Sau đó đưa list object này vào QuizEngine
+             new QuizEngine(questionObjects);
+        });
+    </script>
+
 </body>
 </html>
