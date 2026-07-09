@@ -64,152 +64,34 @@
         <p class="mt-1">Bản quyền thuộc ThS.Đinh Quốc Tuấn - Hoạt động phục vụ giảng dạy, phi lợi nhuận.</p>
     </footer>
 
+    <script src="js/api.js"></script>
+
     <script>
-        // 1. TẦNG API SERVICE (Lấy cấu trúc CSDL từ Sheet)
-        class ApiService {
-            constructor() {
-                // Đổi link này thành URL Ứng dụng Web Apps Script của bạn
-                this.scriptUrl = "https://script.google.com/macros/s/AKfycby3ghorZliZOtha2I6nUs8UCJ8XbuMNaGBTCidhTiK_smK0kLKnKARAK0bYZgUi3ioJ0g/exec"; 
-            }
-
-            async fetchMenuData() {
-                try {
-                    // Code kết nối thật (bỏ comment khi đã viết xong backend):
-                    // const res = await fetch(`${this.scriptUrl}?action=getMenu`);
-                    // return await res.json();
-                    
-                    // Code GIẢ LẬP cấu trúc CSDL để bạn chạy thử giao diện ngay lập tức
-                    return new Promise(resolve => {
-                        setTimeout(() => {
-                            resolve({
-                                // Bảng Khối Lớp - Môn Học
-                                courses: [
-                                    { id: 'toan7', name: 'Toán Học 7', icon: '🧮', color: 'blue' },
-                                    { id: 'khtn6', name: 'Khoa Học Tự Nhiên 6', icon: '🧪', color: 'emerald' },
-                                    { id: 'toan10', name: 'Toán Học 10', icon: '📐', color: 'purple' }
-                                ],
-                                // Bảng Danh Sách Buổi Học
-                                sessions: [
-                                    { courseId: 'toan7', sessionId: '01', title: 'Tập hợp Q các số hữu tỉ' },
-                                    { courseId: 'toan7', sessionId: '02', title: 'Cộng, trừ, nhân, chia số hữu tỉ' },
-                                    { courseId: 'khtn6', sessionId: '04', title: 'Đo khối lượng & Đo nhiệt độ' },
-                                    { courseId: 'khtn6', sessionId: '05', title: 'Sự đa dạng và các thể của chất' },
-                                    { courseId: 'toan10', sessionId: '01', title: 'Mệnh đề và tập hợp (Phần 1)' }
-                                ]
-                            });
-                        }, 800); // Giả lập mạng chậm 0.8 giây
-                    });
-                } catch (error) {
-                    console.error("Lỗi tải Menu:", error);
-                    throw error;
-                }
-            }
-        }
-
-        // 2. TẦNG UI MANAGER (Vẽ giao diện động dựa trên Data)
+        /**
+         * CLASS: HomeUIManager
+         * Nhiệm vụ: Nhận dữ liệu từ API và dựng box giao diện động ra màn hình
+         */
         class HomeUIManager {
             constructor() {
                 this.container = document.getElementById('course-container');
                 this.spinner = document.getElementById('loading-spinner');
             }
 
+            // Hàm quét mảng dữ liệu và vẽ các khối môn học, buổi học
             render(data) {
-                this.spinner.classList.add('hidden'); // Tắt loading
-                this.container.innerHTML = ''; // Xóa rỗng container
+                this.spinner.classList.add('hidden'); // Tắt hiệu ứng loading quay tròn
+                this.container.innerHTML = ''; // Làm sạch vùng chứa trước khi vẽ
 
-                // Duyệt qua từng môn học để vẽ Box Khối Lớp
+                // Duyệt qua từng môn học cấu hình từ hệ thống
                 data.courses.forEach(course => {
-                    // Lọc ra các buổi học thuộc về môn học này
-                    const courseSessions = data.sessions.filter(s => s.courseId === course.id);
-                    
-                    // Tạo HTML cho danh sách buổi học
-                    let sessionsHtml = '';
-                    if (courseSessions.length === 0) {
-                        sessionsHtml = `<p class="text-sm text-slate-400 italic p-4 text-center border border-dashed rounded-lg">Chưa có bài học nào được mở.</p>`;
-                    } else {
-                        courseSessions.forEach(session => {
-                            sessionsHtml += `
-                            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 hover:border-${course.color}-400 transition group">
-                                <div class="font-bold text-slate-900 text-sm pb-3 border-b border-slate-100 mb-3">
-                                    <span class="mr-1">🗓️</span> Buổi ${session.sessionId}: ${session.title}
-                                </div>
-                                <div class="flex justify-between items-center ml-2">
-                                    <span class="text-xs font-medium text-slate-500">Gồm Lý thuyết, Bài tập & Đấu trường</span>
-                                    <a href="hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 group-hover:bg-${course.color}-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
-                                        Vào học <span class="ml-1">&rarr;</span>
-                                    </a>
-                                </div>
-                            </div>`;
-                        });
-                    }
-
-                    // Lắp ghép thành một Block Môn Học hoàn chỉnh
-                    const courseBlock = document.createElement('div');
-                    courseBlock.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6 fade-in';
-                    courseBlock.innerHTML = `
-                        <div class="flex items-center space-x-3 mb-5 border-b border-slate-100 pb-4">
-                            <span class="text-2xl bg-${course.color}-50 p-2.5 rounded-xl text-${course.color}-600 shadow-sm">${course.icon}</span>
-                            <h4 class="font-extrabold text-lg text-slate-900 uppercase tracking-wide">Khối Lớp: ${course.name}</h4>
-                        </div>
-                        <div class="space-y-3">
-                            ${sessionsHtml}
-                        </div>
-                    `;
-                    
-                    this.container.appendChild(courseBlock);
-                });
-            }
-
-            showError(message) {
-                this.spinner.innerHTML = `
-                    <div class="text-red-500 text-4xl mb-3">⚠️</div>
-                    <p class="font-bold text-red-600 mb-2">Lỗi kết nối máy chủ!</p>
-                    <p class="text-sm text-slate-500">${message}</p>
-                    <button onclick="window.location.reload()" class="mt-4 bg-slate-800 text-white px-4 py-2 rounded-lg text-sm">Thử lại</button>
-                `;
-            }
-        }
-
-        // ==========================================
-        // KHỞI CHẠY ỨNG DỤNG
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', async () => {
-            const api = new ApiService();
-            const ui = new HomeUIManager();
-
-            try {
-                // Gọi API lấy dữ liệu cấu trúc chương trình
-                const menuData = await api.fetchMenuData();
-                
-                // Trình bày dữ liệu ra màn hình
-                ui.render(menuData);
-            } catch (error) {
-                ui.showError("Không thể tải danh sách bài học. Vui lòng kiểm tra lại cấu hình Google Apps Script.");
-            }
-        });
-    </script>
-   <script src="js/api.js"></script>
-
-    <script>
-        // Class xử lý giao diện riêng cho trang chủ
-        class HomeUIManager {
-            constructor() {
-                this.container = document.getElementById('course-container');
-                this.spinner = document.getElementById('loading-spinner');
-            }
-
-            // Hàm vẽ các khối môn học và buổi học
-            render(data) {
-                this.spinner.classList.add('hidden'); 
-                this.container.innerHTML = ''; 
-
-                data.courses.forEach(course => {
+                    // Lọc lấy các buổi học tương ứng thuộc về ID môn học này
                     const courseSessions = data.sessions.filter(s => s.courseId === course.id);
                     
                     let sessionsHtml = '';
                     if (courseSessions.length === 0) {
                         sessionsHtml = `<p class="text-sm text-slate-400 italic p-4 text-center border border-dashed rounded-lg">Chưa có bài học nào được mở.</p>`;
                     } else {
+                        // Tự động sinh danh sách các buổi học động kèm tham số URL (?mon=...&buoi=...)
                         courseSessions.forEach(session => {
                             sessionsHtml += `
                             <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 hover:border-${course.color}-400 transition group">
@@ -226,6 +108,7 @@
                         });
                     }
 
+                    // Đóng gói thành Box khối lớp hoàn chỉnh theo kiến trúc UI mẫu
                     const courseBlock = document.createElement('div');
                     courseBlock.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6 fade-in';
                     courseBlock.innerHTML = `
@@ -242,36 +125,35 @@
                 });
             }
 
+            // Hiện màn hình báo lỗi đồng bộ dữ liệu
             showError(message) {
                 this.spinner.innerHTML = `
-                    <div class="text-center">
+                    <div class="text-center p-4">
                         <div class="text-red-500 text-4xl mb-3">⚠️</div>
-                        <p class="font-bold text-red-600 mb-2">Lỗi kết nối máy chủ!</p>
-                        <p class="text-sm text-slate-500">${message}</p>
+                        <p class="font-bold text-red-600 mb-2">Lỗi kết nối máy chủ Học viện!</p>
+                        <p class="text-xs text-slate-400 max-w-sm mx-auto mb-4">${message}</p>
+                        <button onclick="window.location.reload()" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-medium px-4 py-2 rounded-lg transition">Thử lại</button>
                     </div>
                 `;
             }
         }
 
         // --- ĐIỂM KHỞI CHẠY ỨNG DỤNG TRANG CHỦ ---
-        // Lệnh này đảm bảo toàn bộ HTML, CSS, thẻ Div đã tải xong 100% thì code JS mới bắt đầu chạy
         document.addEventListener('DOMContentLoaded', async () => {
-            // Khởi tạo 2 công cụ: 1 cái để kéo mạng, 1 cái để vẽ giao diện
+            // ApiService lúc này được khởi tạo trực tiếp từ file ngoài js/api.js một cách an toàn
             const api = new ApiService();
             const ui = new HomeUIManager();
 
             try {
-                // Gọi API lấy dữ liệu cấu trúc chương trình
+                // Triển khai kéo cổng dữ liệu từ Apps Script
                 const menuData = await api.getMenuData();
                 
-                // Trình bày dữ liệu ra màn hình
+                // Đưa tập dữ liệu vào hàm dựng UI của lớp đối tượng
                 ui.render(menuData);
             } catch (error) {
-                ui.showError("Không thể tải danh sách bài học. Vui lòng kiểm tra lại URL Google Apps Script.");
+                ui.showError("Không thể đồng bộ lộ trình. Vui lòng kiểm tra lại cấu hình kết nối Google Apps Script hoặc file js/api.js.");
             }
         });
     </script>
 </body>
 </html>
-
-
