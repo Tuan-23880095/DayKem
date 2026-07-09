@@ -1,15 +1,195 @@
-<div class="tabs">
-   <button id="btn-theory" data-target="pane-theory">Lý Thuyết</button>
-   <button id="btn-exercise" data-target="pane-exercise">Bài Tập</button>
-   <button id="btn-quiz" data-target="pane-quiz">Trắc Nghiệm</button>
-</div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Học Tập Trực Tuyến - E-Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-<div id="content-container">
-   <div id="loading-spinner">Đang tải...</div>
-   <div id="pane-theory" class="view-pane hidden"></div>
-   <div id="pane-exercise" class="view-pane hidden"></div>
-   <div id="pane-quiz" class="view-pane hidden"></div>
-</div>
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-6xl">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.reload()">
+                <div class="bg-amber-500 p-2 rounded-lg text-xl shadow-inner">🎓</div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wide uppercase text-amber-400">E-Academy</h1>
+                    <p class="text-xs text-slate-400">Học Chủ Động - Bứt Phá Điểm Số</p>
+                </div>
+            </div>
+            <span class="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300 font-medium hidden md:inline-block">
+                Hệ Thống Giảng Dạy 2026
+            </span>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+        
+        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 md:p-10 text-white mb-10 shadow-lg relative overflow-hidden fade-in">
+            <div class="relative z-10 max-w-2xl">
+                <span class="bg-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-indigo-500/20">
+                    Bảng điều khiển học sinh
+                </span>
+                <h2 class="text-2xl md:text-4xl font-extrabold mt-4 mb-3 leading-tight">Chào mừng bạn đến với Không Gian Học Tập Chất Lượng Cao</h2>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                    Hệ thống tự động đồng bộ bài học thời gian thực. Chọn môn học và buổi học bên dưới để bắt đầu luyện tập Lý thuyết, Bài tập và tham gia Đấu trường Pizza.
+                </p>
+            </div>
+            <div class="absolute right-0 bottom-0 top-0 opacity-10 text-[12rem] select-none pointer-events-none flex items-center pr-10 transform translate-y-12">
+                📐
+            </div>
+        </div>
+
+        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
+            <span class="w-1.5 h-6 bg-indigo-600 rounded mr-3"></span>Chương trình học các khối lớp
+        </h3>
+        
+        <div id="course-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 relative min-h-[300px]">
+            <div id="loading-spinner" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                <div class="animate-spin inline-block w-10 h-10 border-[4px] border-current border-t-transparent text-indigo-600 rounded-full mb-4"></div>
+                <p class="font-medium">Đang đồng bộ chương trình học từ máy chủ...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 mt-auto text-center text-xs text-slate-500">
+        <p>&copy; 2026 Hệ thống quản lý học tập trực tuyến E-Academy.</p>
+        <p class="mt-1">Bản quyền thuộc ThS.Đinh Quốc Tuấn - Hoạt động phục vụ giảng dạy, phi lợi nhuận.</p>
+    </footer>
+
+    <script>
+        // 1. TẦNG API SERVICE (Lấy cấu trúc CSDL từ Sheet)
+        class ApiService {
+            constructor() {
+                // Đổi link này thành URL Ứng dụng Web Apps Script của bạn
+                this.scriptUrl = "URL_WEB_APP_APPS_SCRIPT_CUA_BAN"; 
+            }
+
+            async fetchMenuData() {
+                try {
+                    // Code kết nối thật (bỏ comment khi đã viết xong backend):
+                    // const res = await fetch(`${this.scriptUrl}?action=getMenu`);
+                    // return await res.json();
+                    
+                    // Code GIẢ LẬP cấu trúc CSDL để bạn chạy thử giao diện ngay lập tức
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve({
+                                // Bảng Khối Lớp - Môn Học
+                                courses: [
+                                    { id: 'toan7', name: 'Toán Học 7', icon: '🧮', color: 'blue' },
+                                    { id: 'khtn6', name: 'Khoa Học Tự Nhiên 6', icon: '🧪', color: 'emerald' },
+                                    { id: 'toan10', name: 'Toán Học 10', icon: '📐', color: 'purple' }
+                                ],
+                                // Bảng Danh Sách Buổi Học
+                                sessions: [
+                                    { courseId: 'toan7', sessionId: '01', title: 'Tập hợp Q các số hữu tỉ' },
+                                    { courseId: 'toan7', sessionId: '02', title: 'Cộng, trừ, nhân, chia số hữu tỉ' },
+                                    { courseId: 'khtn6', sessionId: '04', title: 'Đo khối lượng & Đo nhiệt độ' },
+                                    { courseId: 'khtn6', sessionId: '05', title: 'Sự đa dạng và các thể của chất' },
+                                    { courseId: 'toan10', sessionId: '01', title: 'Mệnh đề và tập hợp (Phần 1)' }
+                                ]
+                            });
+                        }, 800); // Giả lập mạng chậm 0.8 giây
+                    });
+                } catch (error) {
+                    console.error("Lỗi tải Menu:", error);
+                    throw error;
+                }
+            }
+        }
+
+        // 2. TẦNG UI MANAGER (Vẽ giao diện động dựa trên Data)
+        class HomeUIManager {
+            constructor() {
+                this.container = document.getElementById('course-container');
+                this.spinner = document.getElementById('loading-spinner');
+            }
+
+            render(data) {
+                this.spinner.classList.add('hidden'); // Tắt loading
+                this.container.innerHTML = ''; // Xóa rỗng container
+
+                // Duyệt qua từng môn học để vẽ Box Khối Lớp
+                data.courses.forEach(course => {
+                    // Lọc ra các buổi học thuộc về môn học này
+                    const courseSessions = data.sessions.filter(s => s.courseId === course.id);
+                    
+                    // Tạo HTML cho danh sách buổi học
+                    let sessionsHtml = '';
+                    if (courseSessions.length === 0) {
+                        sessionsHtml = `<p class="text-sm text-slate-400 italic p-4 text-center border border-dashed rounded-lg">Chưa có bài học nào được mở.</p>`;
+                    } else {
+                        courseSessions.forEach(session => {
+                            sessionsHtml += `
+                            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 hover:border-${course.color}-400 transition group">
+                                <div class="font-bold text-slate-900 text-sm pb-3 border-b border-slate-100 mb-3">
+                                    <span class="mr-1">🗓️</span> Buổi ${session.sessionId}: ${session.title}
+                                </div>
+                                <div class="flex justify-between items-center ml-2">
+                                    <span class="text-xs font-medium text-slate-500">Gồm Lý thuyết, Bài tập & Đấu trường</span>
+                                    <a href="hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 group-hover:bg-${course.color}-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
+                                        Vào học <span class="ml-1">&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>`;
+                        });
+                    }
+
+                    // Lắp ghép thành một Block Môn Học hoàn chỉnh
+                    const courseBlock = document.createElement('div');
+                    courseBlock.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6 fade-in';
+                    courseBlock.innerHTML = `
+                        <div class="flex items-center space-x-3 mb-5 border-b border-slate-100 pb-4">
+                            <span class="text-2xl bg-${course.color}-50 p-2.5 rounded-xl text-${course.color}-600 shadow-sm">${course.icon}</span>
+                            <h4 class="font-extrabold text-lg text-slate-900 uppercase tracking-wide">Khối Lớp: ${course.name}</h4>
+                        </div>
+                        <div class="space-y-3">
+                            ${sessionsHtml}
+                        </div>
+                    `;
+                    
+                    this.container.appendChild(courseBlock);
+                });
+            }
+
+            showError(message) {
+                this.spinner.innerHTML = `
+                    <div class="text-red-500 text-4xl mb-3">⚠️</div>
+                    <p class="font-bold text-red-600 mb-2">Lỗi kết nối máy chủ!</p>
+                    <p class="text-sm text-slate-500">${message}</p>
+                    <button onclick="window.location.reload()" class="mt-4 bg-slate-800 text-white px-4 py-2 rounded-lg text-sm">Thử lại</button>
+                `;
+            }
+        }
+
+        // ==========================================
+        // KHỞI CHẠY ỨNG DỤNG
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', async () => {
+            const api = new ApiService();
+            const ui = new HomeUIManager();
+
+            try {
+                // Gọi API lấy dữ liệu cấu trúc chương trình
+                const menuData = await api.fetchMenuData();
+                
+                // Trình bày dữ liệu ra màn hình
+                ui.render(menuData);
+            } catch (error) {
+                ui.showError("Không thể tải danh sách bài học. Vui lòng kiểm tra lại cấu hình Google Apps Script.");
+            }
+        });
+    </script>
+</body>
+</html>
 
 <script src="js/api.js"></script>
 <script src="js/quiz.js"></script>
