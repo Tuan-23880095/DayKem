@@ -9,7 +9,7 @@
 class ApiService {
     constructor(scriptUrl = null) {
         // THAY BẰNG URL WEB APP GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
-        this.scriptUrl = scriptUrl || "https://script.google.com/macros/s/AKfycb.../exec";
+        this.scriptUrl = scriptUrl || "https://script.google.com/macros/s/AKfycby3ghorZliZOtha2I6nUs8UCJ8XbuMNaGBTCidhTiK_smK0kLKnKARAK0bYZgUi3ioJ0g/exec";
     }
 
     /**
