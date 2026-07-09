@@ -1,0 +1,183 @@
+/* ==============================================================
+   TỆP CSS TÙY CHỈNH - E-ACADEMY 2026
+   Mục đích: Định dạng nội dung Google Doc và các hiệu ứng App
+============================================================== */
+
+/* --- 1. TÙY CHỈNH THANH CUỘN (SCROLLBAR) HIỆN ĐẠI --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9; /* slare-100 */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* slate-300 */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* slate-400 */
+}
+
+/* --- 2. ĐỊNH DẠNG NỘI DUNG TỪ GOOGLE DOC (.doc-content) --- */
+/* Vì nội dung từ Google Doc trả về là HTML thô (không có class Tailwind), 
+   ta phải css thủ công để nó đồng bộ với thiết kế của toàn trang web */
+
+.doc-content {
+    color: #334155; /* text-slate-700 */
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+/* Các đoạn văn */
+.doc-content p {
+    margin-bottom: 1.25rem;
+}
+
+/* Các thẻ tiêu đề */
+.doc-content h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a; /* text-slate-900 */
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e2e8f0; /* border-slate-200 */
+}
+
+.doc-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a; /* text-blue-900 - Nổi bật tiêu đề con */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.doc-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #334155; 
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Danh sách (Bullet points & Numbers) */
+.doc-content ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.doc-content ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.doc-content li {
+    margin-bottom: 0.5rem;
+}
+
+.doc-content li::marker {
+    color: #6366f1; /* text-indigo-500 - Làm đẹp dấu chấm danh sách */
+}
+
+/* Bảng biểu (Tránh vỡ giao diện trên điện thoại) */
+.doc-content .table-wrapper {
+    overflow-x: auto; /* Cho phép cuộn ngang nếu bảng quá to */
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1;
+}
+
+.doc-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.doc-content th, 
+.doc-content td {
+    border: 1px solid #cbd5e1;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.doc-content th {
+    background-color: #f8fafc; /* bg-slate-50 */
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.doc-content tr:nth-child(even) {
+    background-color: #f8fafc; /* Hiệu ứng dòng ngựa vằn cho bảng */
+}
+
+/* Hình ảnh (Từ Google Doc xuất ra) */
+.doc-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5rem auto;
+    display: block;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); /* shadow-md */
+}
+
+/* Các đoạn chữ in đậm, in nghiêng đặc biệt */
+.doc-content strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.doc-content a {
+    color: #2563eb; /* text-blue-600 */
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+}
+
+.doc-content a:hover {
+    color: #1e40af; /* text-blue-800 */
+}
+
+
+/* --- 3. HIỆU ỨNG CHUYỂN ĐỘNG (ANIMATIONS) --- */
+
+/* Hiệu ứng mờ dần và trượt lên nhẹ (Dùng khi chuyển Tab) */
+.fade-in {
+    animation: fadeInSlideUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hiệu ứng nảy nhẹ cho Nút chọn đáp án Trắc nghiệm */
+.btn-pop {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-pop:active {
+    transform: scale(0.97); /* Hơi lún xuống khi click */
+}
+
+/* Hiệu ứng rung nhẹ khi gần hết giờ (Dành cho đồng hồ) */
+.shake-warning {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+    40%, 60% { transform: translate3d(2px, 0, 0); }
+}
