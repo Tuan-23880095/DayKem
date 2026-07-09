@@ -188,31 +188,90 @@
             }
         });
     </script>
-    <script src="js/api.js"></script>
+   <script src="js/api.js"></script>
 
     <script>
+        // Class xử lý giao diện riêng cho trang chủ
+        class HomeUIManager {
+            constructor() {
+                this.container = document.getElementById('course-container');
+                this.spinner = document.getElementById('loading-spinner');
+            }
+
+            // Hàm vẽ các khối môn học và buổi học
+            render(data) {
+                this.spinner.classList.add('hidden'); 
+                this.container.innerHTML = ''; 
+
+                data.courses.forEach(course => {
+                    const courseSessions = data.sessions.filter(s => s.courseId === course.id);
+                    
+                    let sessionsHtml = '';
+                    if (courseSessions.length === 0) {
+                        sessionsHtml = `<p class="text-sm text-slate-400 italic p-4 text-center border border-dashed rounded-lg">Chưa có bài học nào được mở.</p>`;
+                    } else {
+                        courseSessions.forEach(session => {
+                            sessionsHtml += `
+                            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 hover:border-${course.color}-400 transition group">
+                                <div class="font-bold text-slate-900 text-sm pb-3 border-b border-slate-100 mb-3">
+                                    <span class="mr-1">🗓️</span> Buổi ${session.sessionId}: ${session.title}
+                                </div>
+                                <div class="flex justify-between items-center ml-2">
+                                    <span class="text-xs font-medium text-slate-500">Lý thuyết, Bài tập & Đấu trường</span>
+                                    <a href="hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 group-hover:bg-${course.color}-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
+                                        Vào học <span class="ml-1">&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>`;
+                        });
+                    }
+
+                    const courseBlock = document.createElement('div');
+                    courseBlock.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6 fade-in';
+                    courseBlock.innerHTML = `
+                        <div class="flex items-center space-x-3 mb-5 border-b border-slate-100 pb-4">
+                            <span class="text-2xl bg-${course.color}-50 p-2.5 rounded-xl text-${course.color}-600 shadow-sm">${course.icon}</span>
+                            <h4 class="font-extrabold text-lg text-slate-900 uppercase tracking-wide">Khối Lớp: ${course.name}</h4>
+                        </div>
+                        <div class="space-y-3">
+                            ${sessionsHtml}
+                        </div>
+                    `;
+                    
+                    this.container.appendChild(courseBlock);
+                });
+            }
+
+            showError(message) {
+                this.spinner.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-red-500 text-4xl mb-3">⚠️</div>
+                        <p class="font-bold text-red-600 mb-2">Lỗi kết nối máy chủ!</p>
+                        <p class="text-sm text-slate-500">${message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // --- ĐIỂM KHỞI CHẠY ỨNG DỤNG TRANG CHỦ ---
+        // Lệnh này đảm bảo toàn bộ HTML, CSS, thẻ Div đã tải xong 100% thì code JS mới bắt đầu chạy
         document.addEventListener('DOMContentLoaded', async () => {
-            // Khởi tạo Object API từ Class chúng ta vừa định nghĩa
+            // Khởi tạo 2 công cụ: 1 cái để kéo mạng, 1 cái để vẽ giao diện
             const api = new ApiService();
-            
-            // Bây giờ bạn có thể gọi thoải mái!
-            // const menu = await api.getMenuData();
+            const ui = new HomeUIManager();
+
+            try {
+                // Gọi API lấy dữ liệu cấu trúc chương trình
+                const menuData = await api.getMenuData();
+                
+                // Trình bày dữ liệu ra màn hình
+                ui.render(menuData);
+            } catch (error) {
+                ui.showError("Không thể tải danh sách bài học. Vui lòng kiểm tra lại URL Google Apps Script.");
+            }
         });
     </script>
-    <script src="js/models.js"></script> <script src="js/quiz.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-             // ...
-             // Khi nhận được data.quiz từ api, bạn ném nó qua Factory
-             const questionObjects = QuestionFactory.createList(data.quiz);
-             
-             // Sau đó đưa list object này vào QuizEngine
-             new QuizEngine(questionObjects);
-        });
-    </script>
-
 </body>
 </html>
-<script src="js/quiz.js"></script>
+
 
