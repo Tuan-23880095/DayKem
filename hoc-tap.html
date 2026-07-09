@@ -245,10 +245,14 @@
                 }, 1000);
             }
 
+           
             updateTimerUI() {
                 this.elTimer.innerText = `⏱ ${this.timeLeft}s`;
-                if(this.timeLeft <= 5) this.elTimer.classList.add('text-red-600', 'bg-red-100');
-                else this.elTimer.classList.remove('text-red-600', 'bg-red-100');
+                if(this.timeLeft <= 5) {
+                    this.elTimer.classList.add('text-red-600', 'bg-red-100', 'shake-warning');
+                } else {
+                    this.elTimer.classList.remove('text-red-600', 'bg-red-100', 'shake-warning');
+                }
             }
 
             selectAnswer(btnElement, selectedOpt, correctOpt) {
