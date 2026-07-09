@@ -101,29 +101,18 @@
             }
 
             // Gỉa lập gọi API (Trong thực tế bạn dùng fetch)
-            async fetchLessonData(mon, buoi) {
-                try {
-                    // Code thực tế: 
-                    // const response = await fetch(`${this.scriptUrl}?action=getAll&mon=${mon}&buoi=${buoi}`);
-                    // return await response.json();
-                    
-                    // Code giả lập để bạn test giao diện ngay mà chưa cần nối backend
-                    return new Promise(resolve => {
-                        setTimeout(() => {
-                            resolve({
-                                theory: "<h2>Khái niệm trọng tâm</h2><p>Đây là nội dung lý thuyết được tự động lấy từ Google Doc.</p><ul><li>Đặc điểm 1</li><li>Đặc điểm 2</li></ul>",
-                                exercise: "<h2>Bài tập thực hành</h2><p>Làm các bài tập sau vào vở:</p><p>Bài 1: Tính toán...</p>",
-                                quiz: [
-                                    { question: "1 + 1 bằng mấy?", options: ["1", "2", "3", "4"], correct: "2", time: 15 },
-                                    { question: "Thủ đô Việt Nam là?", options: ["Hà Nội", "Đà Nẵng", "Huế", "TP.HCM"], correct: "Hà Nội", time: 10 }
-                                ]
-                            });
-                        }, 1000); // Giả lập mạng chậm 1 giây
-                    });
-                } catch (error) {
-                    console.error("Lỗi API:", error);
-                    throw error;
-                }
+        async fetchLessonData(mon, buoi) {
+            try {
+                // CODE THỰC TẾ: Gọi API thẳng đến Google Apps Script của bạn
+                const response = await fetch(`${this.scriptUrl}?action=getAllDoc&mon=${mon}&buoi=${buoi}`);
+                
+                // Chờ dữ liệu trả về và chuyển thành dạng JSON
+                const data = await response.json();
+                return data;
+                
+            } catch (error) {
+                console.error("Lỗi API:", error);
+                throw error;
             }
         }
 
