@@ -61,10 +61,10 @@ class ApiService {
      * @param {string} buoi - Mã buổi (VD: 01)
      */
     async getLessonDocs(mon, buoi) {
-        const url = `${this.scriptUrl}?action=getAllDoc&mon=${mon}&buoi=${buoi}`;
+        // SỬA action=getLesson và truyền thêm docId=${mon}
+        const url = `${this.scriptUrl}?action=getLesson&docId=${mon}&buoi=${buoi}`;
         return await this._fetchData(url);
     }
-
     /**
      * 3. Lấy dữ liệu Câu hỏi trắc nghiệm
      * Sử dụng cho tab Đấu trường Pizza trong trang hoc-tap.html
