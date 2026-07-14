@@ -8,7 +8,7 @@
 
 class ApiService {
     constructor() {
-        this.scriptUrl = "https://script.google.com/macros/s/AKfycby3ghorZliZOtha2I6nUs8UCJ8XbuMNaGBTCidhTiK_smK0kLKnKARAK0bYZgUi3ioJ0g/exec";
+        this.scriptUrl = "https://script.google.com/macros/s/AKfycbzg8LZYHrckTmQEXESXXTsA7KWfs4eCnjqaj6gkfXQq20FKo0MimfZVgiY6RgKDRbp1sQ/exec";
     }
 
     /**
