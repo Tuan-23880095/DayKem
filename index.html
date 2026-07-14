@@ -69,44 +69,47 @@
     <script>
         /**
          * CLASS: HomeUIManager
-         * Nhiệm vụ: Nhận dữ liệu từ API và dựng box giao diện động ra màn hình
+         * Đã sửa lỗi Tailwind JIT bằng cách dùng Map cấu hình màu tĩnh
+         * Đã sửa lỗi liên kết file 404
          */
         class HomeUIManager {
-            const colorMap = {
-              blue: { bg: 'bg-blue-50', text: 'text-blue-600', hover: 'hover:border-blue-400', btnHover: 'group-hover:bg-blue-600' },
-              red: { bg: 'bg-red-50', text: 'text-red-600', hover: 'hover:border-red-400', btnHover: 'group-hover:bg-red-600' }
-              // ...
-            };
-            // Sau đó gọi: class="${colorMap[course.color].bg}"
             constructor() {
                 this.container = document.getElementById('course-container');
                 this.spinner = document.getElementById('loading-spinner');
+                
+                // MAP MÀU SẮC TĨNH CHO TAILWIND CSS
+                this.colorMap = {
+                    blue: { bg: 'bg-blue-50', text: 'text-blue-600', borderHover: 'hover:border-blue-400', btnHover: 'group-hover:bg-blue-600' },
+                    red: { bg: 'bg-red-50', text: 'text-red-600', borderHover: 'hover:border-red-400', btnHover: 'group-hover:bg-red-600' },
+                    green: { bg: 'bg-green-50', text: 'text-green-600', borderHover: 'hover:border-green-400', btnHover: 'group-hover:bg-green-600' },
+                    orange: { bg: 'bg-orange-50', text: 'text-orange-600', borderHover: 'hover:border-orange-400', btnHover: 'group-hover:bg-orange-600' },
+                    indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', borderHover: 'hover:border-indigo-400', btnHover: 'group-hover:bg-indigo-600' }
+                };
             }
 
-            // Hàm quét mảng dữ liệu và vẽ các khối môn học, buổi học
             render(data) {
-                this.spinner.classList.add('hidden'); // Tắt hiệu ứng loading quay tròn
-                this.container.innerHTML = ''; // Làm sạch vùng chứa trước khi vẽ
+                this.spinner.classList.add('hidden'); 
+                this.container.innerHTML = ''; 
 
-                // Duyệt qua từng môn học cấu hình từ hệ thống
                 data.courses.forEach(course => {
-                    // Lọc lấy các buổi học tương ứng thuộc về ID môn học này
                     const courseSessions = data.sessions.filter(s => s.courseId === course.id);
+                    
+                    // Lấy bộ màu an toàn, nếu cấu hình sai màu mặc định là blue
+                    const colors = this.colorMap[course.color] || this.colorMap['blue'];
                     
                     let sessionsHtml = '';
                     if (courseSessions.length === 0) {
                         sessionsHtml = `<p class="text-sm text-slate-400 italic p-4 text-center border border-dashed rounded-lg">Chưa có bài học nào được mở.</p>`;
                     } else {
-                        // Tự động sinh danh sách các buổi học động kèm tham số URL (?mon=...&buoi=...)
                         courseSessions.forEach(session => {
                             sessionsHtml += `
-                            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 hover:border-${course.color}-400 transition group">
+                            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 ${colors.borderHover} transition group">
                                 <div class="font-bold text-slate-900 text-sm pb-3 border-b border-slate-100 mb-3">
                                     <span class="mr-1">🗓️</span> Buổi ${session.sessionId}: ${session.title}
                                 </div>
                                 <div class="flex justify-between items-center ml-2">
                                     <span class="text-xs font-medium text-slate-500">Lý thuyết, Bài tập & Đấu trường</span>
-                                    <a href="hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 group-hover:bg-${course.color}-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
+                                    <a href="duan-hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 ${colors.btnHover} text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
                                         Vào học <span class="ml-1">&rarr;</span>
                                     </a>
                                 </div>
@@ -114,12 +117,11 @@
                         });
                     }
 
-                    // Đóng gói thành Box khối lớp hoàn chỉnh theo kiến trúc UI mẫu
                     const courseBlock = document.createElement('div');
                     courseBlock.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6 fade-in';
                     courseBlock.innerHTML = `
                         <div class="flex items-center space-x-3 mb-5 border-b border-slate-100 pb-4">
-                            <span class="text-2xl bg-${course.color}-50 p-2.5 rounded-xl text-${course.color}-600 shadow-sm">${course.icon}</span>
+                            <span class="text-2xl ${colors.bg} p-2.5 rounded-xl ${colors.text} shadow-sm">${course.icon}</span>
                             <h4 class="font-extrabold text-lg text-slate-900 uppercase tracking-wide">Khối Lớp: ${course.name}</h4>
                         </div>
                         <div class="space-y-3">
@@ -131,8 +133,8 @@
                 });
             }
 
-            // Hiện màn hình báo lỗi đồng bộ dữ liệu
             showError(message) {
+                // ... (Giữ nguyên logic cũ của bạn) ...
                 this.spinner.innerHTML = `
                     <div class="text-center p-4">
                         <div class="text-red-500 text-4xl mb-3">⚠️</div>
@@ -143,23 +145,6 @@
                 `;
             }
         }
-
-        // --- ĐIỂM KHỞI CHẠY ỨNG DỤNG TRANG CHỦ ---
-        document.addEventListener('DOMContentLoaded', async () => {
-            // ApiService lúc này được khởi tạo trực tiếp từ file ngoài js/api.js một cách an toàn
-            const api = new ApiService();
-            const ui = new HomeUIManager();
-
-            try {
-                // Triển khai kéo cổng dữ liệu từ Apps Script
-                const menuData = await api.getMenuData();
-                
-                // Đưa tập dữ liệu vào hàm dựng UI của lớp đối tượng
-                ui.render(menuData);
-            } catch (error) {
-                ui.showError("Không thể đồng bộ lộ trình. Vui lòng kiểm tra lại cấu hình kết nối Google Apps Script hoặc file js/api.js.");
-            }
-        });
     </script>
 </body>
 </html>
