@@ -47,65 +47,15 @@
                 </div>
 
                 <div id="pane-theory" class="tab-pane fade-in doc-content hidden"></div>
-
                 <div id="pane-exercise" class="tab-pane fade-in doc-content hidden"></div>
 
                 <div id="pane-quiz" class="tab-pane fade-in hidden">
-                    <div id="quiz-setup" class="text-center py-10 max-w-md mx-auto">
-                        <div class="text-6xl mb-4">🍕</div>
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Sẵn sàng thử thách?</h2>
-                        <p class="text-slate-500 mb-6">Hệ thống sẽ tính điểm và ghi nhận thành tích của bạn.</p>
-                        
-                        <div class="mb-6 text-left bg-orange-50 p-5 rounded-2xl border border-orange-100 shadow-inner">
-                            <label for="student-name" class="block text-sm font-bold text-orange-900 mb-2">
-                                👤 Nhập tên của bạn để lưu điểm:
-                            </label>
-                            <input type="text" id="student-name" placeholder="VD: Nguyễn Văn A..." class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition font-medium text-slate-800" required>
-                        </div>
-
-                        <button id="btn-start-quiz" class="bg-orange-500 hover:bg-orange-600 w-full text-white font-bold py-4 px-8 rounded-xl shadow-lg transition transform hover:scale-105">
-                            Bắt đầu Đấu trường
-                        </button>
                     </div>
-
-                    <div id="quiz-play" class="hidden max-w-2xl mx-auto">
-                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-200">
-                            <span id="quiz-progress" class="font-semibold text-slate-600 text-sm bg-slate-100 px-3 py-1 rounded-full">Câu 1/10</span>
-                            <span id="quiz-timer" class="font-bold text-orange-600 bg-orange-100 px-4 py-1 rounded-full animate-pulse">⏱ 30s</span>
-                        </div>
-                        
-                        <h3 id="quiz-question" class="text-xl font-bold text-slate-900 mb-6 leading-relaxed">Đang tải câu hỏi...</h3>
-                        
-                        <div id="quiz-options" class="space-y-3 mb-8">
-                            </div>
-
-                        <div class="flex justify-end">
-                            <button id="btn-next-question" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition">
-                                Câu tiếp theo &rarr;
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="quiz-result" class="hidden text-center py-10">
-                        <div class="text-6xl mb-4">🏆</div>
-                        <h2 class="text-3xl font-extrabold text-slate-800 mb-2">Hoàn thành xuất sắc!</h2>
-                        <p id="quiz-score-text" class="text-lg text-slate-600 font-medium mb-6">Bạn trả lời đúng: 0/0 câu</p>
-                        <button onclick="window.location.reload()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 px-6 rounded-lg transition">
-                            Làm lại bài thi
-                        </button>
-                    </div>
-                </div>
-
             </div>
         </div>
     </main>
 
     <script src="js/api.js"></script>
-    
-    <script src="js/models.js"></script>
-    
-    <script src="js/quiz.js"></script>
-    
     <script src="js/app.js"></script>
 
 </body>
