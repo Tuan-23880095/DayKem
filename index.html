@@ -72,6 +72,12 @@
          * Nhiệm vụ: Nhận dữ liệu từ API và dựng box giao diện động ra màn hình
          */
         class HomeUIManager {
+            const colorMap = {
+              blue: { bg: 'bg-blue-50', text: 'text-blue-600', hover: 'hover:border-blue-400', btnHover: 'group-hover:bg-blue-600' },
+              red: { bg: 'bg-red-50', text: 'text-red-600', hover: 'hover:border-red-400', btnHover: 'group-hover:bg-red-600' }
+              // ...
+            };
+            // Sau đó gọi: class="${colorMap[course.color].bg}"
             constructor() {
                 this.container = document.getElementById('course-container');
                 this.spinner = document.getElementById('loading-spinner');
