@@ -145,6 +145,23 @@
                 `;
             }
         }
+        // --- ĐIỂM KHỞI CHẠY ỨNG DỤNG TRANG CHỦ ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Khởi tạo các đối tượng
+            const api = new ApiService();
+            const ui = new HomeUIManager();
+
+            try {
+                // Gọi API lấy dữ liệu từ Google Apps Script
+                const menuData = await api.getMenuData();
+                
+                // Đổ dữ liệu ra màn hình và tắt loading
+                ui.render(menuData);
+            } catch (error) {
+                console.error("Lỗi:", error);
+                ui.showError("Không thể đồng bộ lộ trình. Vui lòng kiểm tra lại cấu hình kết nối Google Apps Script.");
+            }
+        });
     </script>
 </body>
 </html>
