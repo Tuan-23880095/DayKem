@@ -275,7 +275,7 @@ class QuizEngine {
         if (this.api) {
             try {
                 const payload = {
-                    studentName: "Học sinh Ẩn danh", // Ở phiên bản nâng cấp, bạn có thể lấy tên nhập từ prompt
+                    studentName: this.studentName, // ĐÃ SỬA: Lấy tên thật của học sinh thay vì ghi "Ẩn danh"
                     courseId: this.mon,
                     sessionId: this.buoi,
                     score: this.score,
