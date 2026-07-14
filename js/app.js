@@ -167,13 +167,11 @@ class StudyApp {
             // 5. Đổ dữ liệu văn bản Lý thuyết & Bài tập ra màn hình thông qua UIManager
             this.ui.renderDocContent(docData.lythuyet, docData.baitap);
 
-            // 6. ÁP DỤNG OOP & FACTORY PATTERN: 
-            // Chuyển đổi mảng dữ liệu thô (JSON Array) nhận từ Google Sheet thành một danh sách 
-            // các đối tượng Câu hỏi thông minh đã được phân loại (Trắc nghiệm, Đúng/Sai, Điền từ).
+           // 6. ÁP DỤNG OOP & FACTORY PATTERN: 
             const questionObjects = QuestionFactory.createList(rawQuizData);
 
-            // 7. Khởi tạo bộ máy Đấu trường trắc nghiệm Pizza và nạp danh sách câu hỏi OOP vào
-            this.quizEngine = new QuizEngine(questionObjects);
+            // 7. ĐÃ SỬA: Truyền thêm api, tham số 'mon' và 'buoi' vào Quiz Engine để nó có thể lưu điểm
+            this.quizEngine = new QuizEngine(questionObjects, this.api, mon, buoi);
 
             // 8. Tắt màn hình chờ Loading và kích hoạt Tab xem Lý Thuyết đầu tiên cho học sinh
             this.ui.hideLoading();
