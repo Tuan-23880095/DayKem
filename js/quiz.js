@@ -29,10 +29,13 @@ class QuizEngine {
         this.elQuestion = document.getElementById('quiz-question');
         this.elOptions = document.getElementById('quiz-options');
         this.elProgress = document.getElementById('quiz-progress');
+        
         this.elTimer = document.getElementById('quiz-timer');
         this.btnNext = document.getElementById('btn-next-question');
         this.btnStart = document.getElementById('btn-start-quiz');
-
+        // THÊM 2 DÒNG NÀY VÀO CUỐI CONSTRUCTOR:
+        this.elStudentName = document.getElementById('student-name'); 
+        this.studentName = "Học sinh Ẩn danh"; // Biến lưu trữ tên
         // 2. Lắng nghe sự kiện click cho các nút điều hướng
         if (this.btnStart) {
             this.btnStart.addEventListener('click', () => this.start());
@@ -49,6 +52,16 @@ class QuizEngine {
         if (!this.questions || this.questions.length === 0) {
             alert("Chưa có dữ liệu câu hỏi trắc nghiệm cho buổi học này!"); 
             return;
+        }
+        // --- TÍNH NĂNG MỚI: KIỂM TRA TÊN ---
+        if (this.elStudentName) {
+            const nameInput = this.elStudentName.value.trim();
+            if (nameInput === "") {
+                alert("Vui lòng nhập tên của bạn trước khi làm bài nhé!");
+                this.elStudentName.focus(); // Tự động nháy con trỏ chuột vào ô nhập tên
+                return; // Chặn lại, không chạy code phía dưới nữa
+            }
+            this.studentName = nameInput; // Lưu tên học sinh đã nhập
         }
         // Chuyển đổi màn hình
         this.uiSetup.classList.add('hidden');
