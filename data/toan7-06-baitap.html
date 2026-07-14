@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Toán 7 - Buổi 6</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-color: #ffffff; color: #111827; }
+        .title-font { font-family: 'Quicksand', sans-serif; }
+        .hint-box { transition: all 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <header class="w-full bg-white border-b-4 border-blue-600 py-4 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo BDVH" class="h-16 object-contain">
+            <div class="text-center">
+                <h1 class="text-2xl md:text-3xl font-bold title-font text-blue-700 uppercase tracking-wide">Phiếu Bài Tập Toán 7</h1>
+                <p class="text-sm md:text-base font-semibold text-gray-600 mt-1">Buổi 6: Biểu diễn số thập phân, Quy tắc làm tròn & Ước lượng</p>
+            </div>
+            <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo HCMUS" class="h-16 object-contain">
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
+        
+        <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-5 mb-8 flex flex-col md:flex-row justify-between text-lg font-semibold text-gray-700">
+            <div class="mb-2 md:mb-0">Họ và tên học sinh: <span class="inline-block w-48 border-b-2 border-gray-400"></span></div>
+            <div>Lớp: <span class="inline-block w-24 border-b-2 border-gray-400"></span></div>
+        </div>
+
+        <h2 class="text-xl font-bold text-white bg-gradient-to-r from-blue-600 to-blue-400 inline-block px-6 py-2 rounded-lg mb-6 shadow-md title-font">PHẦN I. BÀI TẬP TRÊN LỚP</h2>
+
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-emerald-700 border-l-4 border-emerald-500 pl-3 mb-3">DẠNG 1: BIỂU DIỄN SỐ HỮU TỈ DƯỚI DẠNG SỐ THẬP PHÂN</h3>
+            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-lg mb-4 text-sm md:text-base">
+                <strong>Phương pháp:</strong> Thực hiện phép chia tử số cho mẫu số. Nếu phép chia dừng lại (phần dư bằng 0) thì ta được số thập phân hữu hạn. Nếu phép chia không bao giờ chấm dứt và xuất hiện một cụm chữ số lặp lại thì ta được số thập phân vô hạn tuần hoàn.
+            </div>
+            
+            <div class="space-y-4">
+                <p class="font-bold text-gray-800">Bài 1. Hãy biểu diễn các số hữu tỉ sau đây dưới dạng số thập phân và phân loại chúng:</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pl-4">
+                    <div>a) $\frac{12}{25}$</div>
+                    <div>b) $\frac{27}{2}$</div>
+                    <div>c) $\frac{10}{9}$</div>
+                    <div>d) $\frac{-35}{111}$</div>
+                </div>
+
+                <p class="font-bold text-gray-800 mt-6">Bài 2. Hoàn thành các phát biểu sau đây để hiểu rõ chu kì của số thập phân:</p>
+                <ul class="list-none space-y-3 pl-4">
+                    <li>a) Số $a = 5,123$ là một số thập phân hữu hạn nên $a$ là một số ....................................</li>
+                    <li>b) Số $b = 6,15555... = 6,1(5)$ là một số thập phân vô hạn tuần hoàn nên $b$ là số ....................................</li>
+                    <li>c) Số $\pi = 3,14159265...$ là một số thập phân vô hạn không tuần hoàn, vậy $\pi$ là số ....................................</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-amber-700 border-l-4 border-amber-500 pl-3 mb-3">DẠNG 2: LÀM TRÒN SỐ (THEO HÀNG VÀ THEO ĐỘ CHÍNH XÁC d)</h3>
+            <div class="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg mb-4 text-sm md:text-base">
+                <strong>Phương pháp:</strong><br>
+                - Nếu làm tròn theo độ chính xác $d$ là số chục ($d=50$), ta làm tròn đến hàng trăm.<br>
+                - Nếu độ chính xác $d$ là số phần nghìn ($d=0,005$ hoặc $d=0,006$), ta làm tròn đến hàng phần trăm.
+            </div>
+            
+            <div class="space-y-4">
+                <p class="font-bold text-gray-800">Bài 3. Làm tròn các số sau theo yêu cầu:</p>
+                <ul class="list-none space-y-2 pl-4">
+                    <li>a) Làm tròn số 3,1415 và số $\pi$ đến hàng phần mười.</li>
+                    <li>b) Làm tròn số -12,3456 đến hàng phần trăm.</li>
+                </ul>
+
+                <p class="font-bold text-gray-800 mt-4">Bài 4. Làm tròn số căn cứ vào độ chính xác $d$ cho trước:</p>
+                <ul class="list-none space-y-2 pl-4">
+                    <li>a) Làm tròn số -4,3456 với độ chính xác $d = 0,006$.</li>
+                    <li>b) Làm tròn số 12.735.590 với độ chính xác $d = 500$.</li>
+                    <li>c) Hãy quy tròn số $x = \sqrt{10} = 3,741657...$ với độ chính xác $d = 0,005$.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-purple-700 border-l-4 border-purple-500 pl-3 mb-3">DẠNG 3: ƯỚC LƯỢNG KẾT QUẢ PHÉP TÍNH</h3>
+            <div class="bg-purple-50 border border-purple-200 text-purple-800 p-4 rounded-lg mb-4 text-sm md:text-base">
+                <strong>Phương pháp:</strong> Làm tròn các số đến chữ số ở hàng cao nhất của mỗi số, sau đó mới thực hiện phép tính để dự đoán nhanh kết quả.
+            </div>
+            
+            <div class="space-y-4">
+                <p class="font-bold text-gray-800">Bài 5. Hãy ước lượng kết quả của các phép tính sau:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pl-4">
+                    <div>a) $7148 \cdot 593$</div>
+                    <div>b) $(-11,032) \cdot (-24,3)$</div>
+                    <div>c) $5999 \cdot 101$</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-rose-700 border-l-4 border-rose-500 pl-3 mb-3">DẠNG 4: BÀI TOÁN THỰC TẾ</h3>
+            <div class="space-y-4 pl-2">
+                <p><strong>Bài 6.</strong> Dân số của Việt Nam tính đến ngày 20/01/2021 là <strong>97.800.744</strong> người. Hãy làm tròn số này đến hàng triệu.</p>
+                <p><strong>Bài 7.</strong> Cho biết 1 inch $\approx$ 2,54 cm. Tính độ dài đường chéo bằng đơn vị cm của một màn hình tivi <strong>32 inch</strong> và làm tròn kết quả đến hàng phần mười.</p>
+                <p><strong>Bài 8.</strong> Một hãng hàng không quốc tế quy định mỗi hành khách được mang hai va li không tính cước; mỗi va li cân nặng không vượt quá <strong>23 kg</strong>. Hỏi một va li cân nặng <strong>50,99 pound</strong> sau khi quy đổi sang kilôgam và làm tròn đến hàng đơn vị thì có vượt quá quy định về khối lượng không? (Cho biết 1 pound $\approx$ 0,45359237 kg).</p>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-orange-400 inline-block px-6 py-2 rounded-lg mt-6 mb-6 shadow-md title-font">PHẦN II. BÀI TẬP VỀ NHÀ (TỰ LUYỆN)</h2>
+        
+        <div class="space-y-4 pl-2 mb-10">
+            <p><strong>Bài 9.</strong> Viết các phân số sau dưới dạng số thập phân (chỉ rõ chu kì nếu là số vô hạn tuần hoàn):<br>
+            $\frac{5}{16};\quad \frac{7}{50};\quad \frac{11}{40};\quad \frac{9}{200}$</p>
+            
+            <p><strong>Bài 10.</strong> Tính chung 9 tháng đầu năm 2019, tổng lượng khách du lịch quốc tế đến Việt Nam đạt <strong>12.870.506</strong> lượt khách. Hãy làm tròn số này đến hàng trăm.</p>
+            
+            <p><strong>Bài 11.</strong> Ước lượng kết quả các phép tính sau rồi so sánh với kết quả tìm được bằng máy tính cầm tay:
+            <br>a) $(-35,1) \cdot (-64) : 13$
+            <br>b) $(-8,8) \cdot (-4,1) : 2,6$
+            </p>
+        </div>
+
+        <div class="border-t-2 border-gray-200 pt-8">
+            <button onclick="toggleHints()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center gap-2 w-full md:w-auto mx-auto">
+                <span id="hint-icon">💡</span> <span id="hint-text">Hiển thị gợi ý & Đáp án cho Giáo viên</span>
+            </button>
+            
+            <div id="hints-container" class="hidden hint-box mt-6 bg-indigo-50 border-2 border-indigo-200 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-indigo-800 mb-4 title-font border-b border-indigo-200 pb-2">💡 Gợi ý tổ chức lớp học & Đáp án nhanh:</h3>
+                
+                <div class="space-y-4 text-gray-800">
+                    <div class="bg-white p-4 rounded shadow-sm border border-indigo-100">
+                        <strong class="text-indigo-700">Lưu ý ở Dạng 2 (Độ chính xác $d$):</strong> Học sinh rất dễ nhầm lẫn yêu cầu làm tròn theo $d$. Bạn cần nhắc các em: <em>"Hàng làm tròn luôn lớn hơn độ chính xác $d$ một bậc"</em>.
+                        <ul class="list-disc pl-6 mt-2 text-sm md:text-base">
+                            <li><strong>Ví dụ Bài 4a:</strong> $d = 0,006$ (hàng phần nghìn) $\rightarrow$ phải làm tròn đến hàng phần trăm. <strong>Kết quả: -4,35</strong>.</li>
+                            <li><strong>Ví dụ Bài 4b:</strong> $d = 500$ (hàng trăm) $\rightarrow$ phải làm tròn đến hàng nghìn. <strong>Kết quả: 12.736.000</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded shadow-sm border border-indigo-100">
+                        <strong class="text-indigo-700">Với Bài 5 (Ước lượng):</strong> Nhắc học sinh làm tròn tới chữ số cao nhất.
+                        <p class="mt-1 text-sm md:text-base"><strong>Ví dụ Bài 5a:</strong> $7148 \approx 7000$; $593 \approx 600$. Tích ước lượng là: $7000 \cdot 600 = 4.200.000$.</p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded shadow-sm border border-indigo-100">
+                        <strong class="text-indigo-700">Với Bài 8:</strong> Học sinh cần thực hiện phép nhân $50,99 \cdot 0,45359237$ trước, ra kết quả khoảng 23,128..., sau đó làm tròn đến hàng đơn vị là <strong>23 kg</strong>. Do đó, va li này <strong>không vượt quá</strong> quy định. Đây là một bài toán tính ứng dụng rất hay.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-6 mt-8 text-center text-sm">
+        <div class="max-w-4xl mx-auto px-4">
+            <p>© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleHints() {
+            const container = document.getElementById("hints-container");
+            const hintText = document.getElementById("hint-text");
+            
+            if (container.classList.contains("hidden")) {
+                container.classList.remove("hidden");
+                hintText.innerText = "Ẩn gợi ý & Đáp án";
+            } else {
+                container.classList.add("hidden");
+                hintText.innerText = "Hiển thị gợi ý & Đáp án cho Giáo viên";
+            }
+        }
+    </script>
+</body>
+</html>
