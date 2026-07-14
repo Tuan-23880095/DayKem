@@ -1,7 +1,7 @@
 class ApiService {
     constructor() {
         // Vẫn giữ link này để lấy danh sách bài học (Menu) cho trang chủ
-        this.scriptUrl = "https://script.google.com/macros/s/AKfycbx3UhPn7K_oduq1AqOTTztO-G52OrHPK04ElZKYNIOgBQXTheRyjHd8HJW8p7uHVveF-Q/exec";
+        this.scriptUrl = "https://script.google.com/macros/s/AKfycbx5SpGz9VSnGg_7MfpYS_Y2JUd4Z7DMo46F5TV6B-1x3Dx6LYFjxziXCubwIOCtoqWXqw/exec";
     }
 
     async getMenuData() {
