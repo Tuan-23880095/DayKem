@@ -251,7 +251,7 @@ class QuizEngine {
     /**
      * Hiển thị bảng tổng kết điểm
      */
-    showResult() {
+    async showResult() {
         this.uiPlay.classList.add('hidden');
         this.uiResult.classList.remove('hidden');
         this.uiResult.classList.add('fade-in');
