@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 7: Số Vô Tỉ Và Căn Bậc Hai Số Học - Toán 7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-slate-50/50">
+
+    <header class="bg-white border-b-4 border-emerald-500 py-6 px-4 shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-4xl">🎯</span>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black title-font text-slate-900 tracking-tight">
+                        TOÁN 7 - BUỔI 7: SỐ VÔ TỈ & CẦN BẬC HAI SỐ HỌC
+                    </h1>
+                    <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Hệ thống bài tập năng lực tích hợp giải thuật tự động</p>
+                </div>
+            </div>
+            <div id="status-panel" class="hidden flex items-center gap-3 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-200">
+                <span class="text-sm font-bold text-slate-700">✍️ Học sinh: <span id="user-display" class="text-emerald-700"></span></span>
+                <div class="h-4 w-px bg-emerald-300"></div>
+                <span class="text-sm font-bold text-blue-600">⭐ Đã hoàn thành: <span id="progress-count">0</span>/15 bài</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-4xl my-6">
+        
+        <div id="auth-screen" class="bg-white p-8 rounded-2xl border border-slate-200 shadow-xl max-w-md mx-auto my-10 text-center">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-4xl">🚀</span>
+            </div>
+            <h2 class="text-2xl font-extrabold title-font text-slate-900 mb-2">Bắt Đầu Học Tập</h2>
+            <p class="text-sm text-slate-500 mb-6">Vui lòng nhập họ tên của em để hệ thống ghi nhận kết quả rèn luyện nhé!</p>
+            
+            <form id="start-form" onsubmit="initWorkspace(event)" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Họ và Tên Học Sinh <span class="text-red-500">*</span></label>
+                    <input type="text" id="student-name" required placeholder="Ví dụ: Nguyễn Văn A" 
+                        class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-900 font-medium transition-all">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg rounded-xl shadow-md transition-all duration-150 transform active:scale-95 flex items-center justify-center gap-2">
+                    Vào Học Bài Ngay 🏁
+                </button>
+            </form>
+        </div>
+
+        <div id="workspace-screen" class="hidden space-y-12">
+            
+            <div>
+                <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 rounded-xl font-bold shadow-md text-lg title-font mb-6 flex items-center gap-2">
+                    <span>📚</span> PHẦN 1: CẤP ĐỘ CƠ BẢN (Nhận biết - Thông hiểu)
+                </div>
+                <div class="space-y-6" id="part-1-container"></div>
+            </div>
+
+            <div>
+                <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl font-bold shadow-md text-lg title-font mb-6 flex items-center gap-2">
+                    <span>⚡</span> PHẦN 2: CẤP ĐỘ NÂNG CAO (Biến đổi biểu thức - Tìm x)
+                </div>
+                <div class="space-y-6" id="part-2-container"></div>
+            </div>
+
+            <div>
+                <div class="bg-gradient-to-r from-rose-600 to-pink-500 text-white px-6 py-3 rounded-xl font-bold shadow-md text-lg title-font mb-6 flex items-center gap-2">
+                    <span>🏢</span> PHẦN 3: CẤP ĐỘ VẬN DỤNG (Thực tế - Hình học)
+                </div>
+                <div class="space-y-6" id="part-3-container"></div>
+            </div>
+
+            <div class="bg-white border-2 border-slate-200 p-6 rounded-2xl shadow-lg text-center space-y-4">
+                <h3 class="text-xl font-extrabold text-slate-800 title-font">Gửi Báo Cáo Kết Quả Lên Máy Chủ</h3>
+                <p class="text-sm text-slate-500 max-w-md mx-auto">Sau khi tích chọn hoàn thành các bài toán phía trên, hãy nhấn nút bên dưới để hệ thống tự động khóa điểm và gửi báo cáo học tập về cho Thầy giáo.</p>
+                
+                <div id="submit-box" class="pt-2">
+                    <button onclick="submitReport()" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold rounded-xl shadow-lg transition-all duration-150 transform active:scale-95 inline-flex items-center gap-2">
+                        <span>📤</span> Nộp Báo Cáo Học Tập
+                    </button>
+                </div>
+                <div id="server-msg" class="hidden text-sm font-semibold p-3 rounded-xl max-w-md mx-auto"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs space-y-2">
+        <p class="font-bold text-slate-300">© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</p>
+        <p>Ứng dụng học liệu số tương tác cao cấp dành cho học sinh Trung học cơ sở</p>
+    </footer>
+
+    <script>
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzY7b7h4OwvhXuK5Vs6hl-aD88BPnAiAKbU5lfJobby0D4nzbIJVKT4n0AKCpAGoK0nZA/exec";
+
+        // Mảng 15 bài tập gốc tích hợp phân loại và quản lý trạng thái ngoặc ẩn hiện
+        const exercisesData = [
+            {
+                id: 1, part: 1,
+                title: "Bài 1",
+                question: "Trong các số sau, số nào là số vô tỉ?<br>$\\frac{-16}{3}; \\sqrt{36}; \\sqrt{47}; -2\\pi; \\sqrt{0,01}; 2+\\sqrt{7}$",
+                hint: "Ta có $\\sqrt{36} = 6$ và $\\sqrt{0,01} = 0,1$ là các số hữu tỉ. Số vô tỉ là các số chứa căn bậc hai của số không phải là số chính phương (như $\\sqrt{47}$), các số chứa $\\pi$ (như $-2\\pi$), hoặc tổng của một số hữu tỉ và số vô tỉ (như $2+\\sqrt{7}$).<br><b>Đáp án là:</b> $\\sqrt{47}; -2\\pi; 2+\\sqrt{7}$."
+            },
+            {
+                id: 2, part: 1,
+                title: "Bài 2",
+                question: "Những số nào sau đây có căn bậc hai số học?<br>$0,9;\\ -4;\\ 11;\\ -100;\\ \\frac{4}{5};\\ \\pi$",
+                hint: "Căn bậc hai số học chỉ áp dụng cho các số không âm ($a \\ge 0$). Do đó, các số âm ($-4; -100$) không có căn bậc hai số học.<br><b>Đáp án:</b> $0,9;\\ 11;\\ \\frac{4}{5};\\ \\pi$."
+            },
+            {
+                id: 3, part: 1,
+                title: "Bài 3",
+                question: "Tìm căn bậc hai số học của các số sau: $16;\\ 36;\\ 100;\\ 0,04;\\ 81^2$.",
+                hint: "Để tính $\\sqrt{a}$, ta tìm số $x \\ge 0$ sao cho $x^2 = a$.<br>$\\sqrt{16} = 4$; $\\sqrt{36} = 6$; $\\sqrt{100} = 10$; $\\sqrt{0,04} = 0,2$; $\\sqrt{81^2} = 81$."
+            },
+            {
+                id: 4, part: 1,
+                title: "Bài 4",
+                question: "Tính giá trị của các biểu thức sau:<br>a) $\\sqrt{81}$<br>b) $\\sqrt{225}$<br>c) $\\sqrt{(-11)^2}$",
+                hint: "a) $\\sqrt{81} = 9$<br>b) $\\sqrt{225} = 15$<br>c) Theo tính chất, $\\sqrt{(-11)^2} = \\sqrt{121} = 11$."
+            },
+            {
+                id: 5, part: 1,
+                title: "Bài 5",
+                question: "Hãy so sánh các cặp số sau:<br>a) $\\sqrt{25}$ và $\\sqrt{16}$<br>b) $\\sqrt{0,49}$ và $0,7$",
+                hint: "a) Ta có $\\sqrt{25} = 5$ và $\\sqrt{16} = 4$. Vì $5 > 4$ nên $\\sqrt{25} > \\sqrt{16}$.<br>b) Ta có $\\sqrt{0,49} = 0,7$. Vậy hai số bằng nhau."
+            },
+            {
+                id: 6, part: 2,
+                title: "Bài 6",
+                question: "Tính giá trị các biểu thức sau:<br>a) $\\sqrt{0,04} + \sqrt{0,25} + 2,31$<br>b) $\\sqrt{1,69} + 3 \\cdot \\sqrt{0,01}$",
+                hint: "a) $0,2 + 0,5 + 2,31 = 3,01$.<br>b) $1,3 + 3 \\cdot 0,1 = 1,3 + 0,3 = 1,6$."
+            },
+            {
+                id: 7, part: 2,
+                title: "Bài 7",
+                question: "Tìm $x$, biết:<br>a) $\\sqrt{2x} = 3$<br>b) $\\sqrt{x + 3} = 5$<br>c) $\\sqrt{2x - 3} - 7 = 4$<br>d) $\\sqrt{3x - 2} + 7 = 0$",
+                hint: "Nhắc học sinh bình phương 2 vế để làm mất dấu căn.<br>a) $2x = 3^2 \\Rightarrow 2x = 9 \\Rightarrow x = 4,5$.<br>b) $x + 3 = 5^2 \\Rightarrow x + 3 = 25 \\Rightarrow x = 22$.<br>c) $\\sqrt{2x - 3} = 11 \\Rightarrow 2x - 3 = 121 \\Rightarrow x = 62$.<br>d) $\\sqrt{3x - 2} = -7$. Vì căn bậc hai số học luôn $\\ge 0$ nên phương trình vô nghiệm."
+            },
+            {
+                id: 8, part: 2,
+                title: "Bài 8",
+                question: "Tìm giá trị nhỏ nhất của biểu thức $A = \\sqrt{x + 8} - 7$.",
+                hint: "Vì $\\sqrt{x + 8} \\ge 0$ với mọi $x \\ge -8$, nên $A = \\sqrt{x + 8} - 7 \\ge -7$. Vậy giá trị nhỏ nhất của biểu thức là $-7$ (đạt được khi $x = -8$)."
+            },
+            {
+                id: 9, part: 2,
+                title: "Bài 9",
+                question: "Tìm giá trị lớn nhất của biểu thức $B = 3 - \\sqrt{x - 6}$.",
+                hint: "Vì $\\sqrt{x - 6} \\ge 0 \\Rightarrow -\\sqrt{x - 6} \\le 0 \\Rightarrow 3 - \\sqrt{x - 6} \\le 3$. Vậy giá trị lớn nhất của biểu thức là $3$ (đạt được khi $x = 6$)."
+            },
+            {
+                id: 10, part: 2,
+                title: "Bài 10",
+                question: "Tìm các số tự nhiên $n$ nhỏ hơn 45 sao cho $x = \\frac{\\sqrt{n} - 1}{2}$ là một số nguyên.",
+                hint: "Để $x$ là số nguyên thì $\\sqrt{n} - 1$ phải chia hết cho 2. Suy ra $\\sqrt{n}$ là một số tự nhiên lẻ, nghĩa là $n$ phải là bình phương của một số tự nhiên lẻ. Vì $n < 45$ nên $\\sqrt{n} < \\sqrt{49} = 7$. Do đó, $\\sqrt{n}$ có thể là 1, 3, hoặc 5. Suy ra $n \\in \\{1; 9; 25\\}$."
+            },
+            {
+                id: 11, part: 3,
+                title: "Bài 11",
+                question: "Tính độ dài cạnh của một mảnh đất hình vuông có diện tích là $144\\text{ m}^2$.",
+                hint: "Gọi độ dài cạnh mảnh đất là $a$ (m) ($a > 0$). Vì diện tích hình vuông là $a^2 = 144$ nên $a = \\sqrt{144} = 12\\text{ (m)}.$"
+            },
+            {
+                id: 12, part: 3,
+                title: "Bài 12",
+                question: "Bác Thu thuê thợ lát gạch một cái sân hình vuông hết tất cả là $10.125.000$ đồng. Cho biết chi phí cho $1\\text{m}^2$ (kể cả công thợ và vật liệu) là $125.000$ đồng. Hãy tính chiều dài cạnh của cái sân đó.",
+                hint: "Diện tích của cái sân là: $10.125.000 : 125.000 = 81\\text{ (m}^2)$. Chiều dài cạnh sân là $a = \\sqrt{81} = 9\\text{ (m)}.$"
+            },
+            {
+                id: 13, part: 3,
+                title: "Bài 13",
+                question: "Một màn hình ti vi có độ dài đường chéo 55 inch. Hãy tính độ dài đường chéo của ti vi này theo cm với độ chính xác $d = 0,5$ (Cho biết $1\\text{ inch} \\approx 2,54\\text{ cm}$).",
+                hint: "Độ dài đường chéo tính theo cm là: $55 \\cdot 2,54 = 139,7\\text{ cm}$. Vì độ chính xác $d = 0,5$ (tức là hàng phần mười), ta cần làm tròn số đến hàng lớn hơn liền kề là hàng đơn vị. Kết quả quy tròn là $140\\text{ cm}$."
+            },
+            {
+                id: 14, part: 3,
+                title: "Bài 14",
+                question: "Biết diện tích hình tròn có bán kính $r$ được tính theo công thức: $S = \\pi \\cdot r^2$. Hãy tính bán kính của một hình tròn có diện tích là $9869\\text{ m}^2$ (sử dụng máy tính cầm tay và làm tròn kết quả đến hàng đơn vị).",
+                hint: "Từ công thức, ta có $r^2 = \\frac{S}{\\pi} = \\frac{9869}{\\pi}$. Bấm máy tính: $r = \\sqrt{\\frac{9869}{\\pi}} \\approx 56,048...$ Làm tròn đến hàng đơn vị ta được $r \\approx 56\\text{ (m)}.$"
+            },
+            {
+                id: 15, part: 3,
+                title: "Bài 15",
+                question: "Dùng máy tính cầm tay để tính các căn bậc hai số học sau và làm tròn kết quả đến chữ số thập phân thứ ba:<br>a) $\\sqrt{2250}$<br>b) $\\sqrt{133}$<br>c) $\\sqrt{5}$",
+                hint: "Hướng dẫn học sinh bấm phím căn bậc hai và áp dụng quy tắc làm tròn:<br>a) $\\sqrt{2250} \\approx 47,434$<br>b) $\\sqrt{133} \\approx 11,533$<br>c) $\\sqrt{5} \\approx 2,236$"
+            }
+        ];
+
+        let studentName = "";
+        const userProgress = new Set();
+
+        // Khởi động không gian làm việc sau khi xác thực tên
+        function initWorkspace(event) {
+            event.preventDefault();
+            studentName = document.getElementById("student-name").value.trim();
+            if(!studentName) return;
+
+            document.getElementById("auth-screen").classList.add("hidden");
+            document.getElementById("workspace-screen").classList.remove("hidden");
+            document.getElementById("status-panel").classList.remove("hidden");
+            document.getElementById("user-display").innerText = studentName;
+
+            renderExercises();
+        }
+
+        // Tạo giao diện các bài toán linh hoạt bằng JS DOM
+        function renderExercises() {
+            exercisesData.forEach(ex => {
+                const containerId = `part-${ex.part}-container`;
+                const container = document.getElementById(containerId);
+
+                const card = document.createElement("div");
+                card.className = "bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4 hover:shadow-md transition-all";
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-3 gap-2">
+                        <h4 class="text-base font-extrabold text-slate-800 title-font flex items-center gap-2">
+                            <span class="inline-block w-2 h-6 bg-emerald-500 rounded"></span> ${ex.title}
+                        </h4>
+                        <label class="inline-flex items-center gap-2 cursor-pointer bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 select-none hover:bg-emerald-50 transition-colors">
+                            <input type="checkbox" onchange="toggleTask(${ex.id}, this)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300">
+                            <span class="text-xs font-bold text-slate-600">Đã làm bài này</span>
+                        </label>
+                    </div>
+                    <div class="text-slate-800 font-medium text-base leading-relaxed tracking-wide">${ex.question}</div>
+                    
+                    <div class="pt-2">
+                        <button onclick="toggleHint(${ex.id})" id="btn-hint-${ex.id}" class="text-xs font-bold bg-slate-100 text-slate-700 hover:bg-emerald-100 hover:text-emerald-700 px-3 py-2 rounded-lg transition-all focus:outline-none flex items-center gap-1">
+                            <span>💡</span> Xem gợi ý & lời giải
+                        </button>
+                        <div id="hint-${ex.id}" class="hidden mt-3 p-4 bg-emerald-50/50 border border-emerald-100 rounded-xl text-slate-700 text-sm leading-relaxed tracking-wide shadow-inner">
+                            ${ex.hint}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Yêu cầu MathJax phân tích và hiển thị lại mã Latex
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        }
+
+        // Bật tắt trạng thái ẩn/hiện lời giải
+        function toggleHint(id) {
+            const hintBox = document.getElementById(`hint-${id}`);
+            const btn = document.getElementById(`btn-hint-${id}`);
+            if(hintBox.classList.contains("hidden")) {
+                hintBox.classList.remove("hidden");
+                btn.innerHTML = "<span>🔒</span> Ẩn gợi ý & lời giải";
+                btn.className = "text-xs font-bold bg-amber-100 text-amber-800 px-3 py-2 rounded-lg transition-all focus:outline-none flex items-center gap-1";
+            } else {
+                hintBox.classList.add("hidden");
+                btn.innerHTML = "<span>💡</span> Xem gợi ý & lời giải";
+                btn.className = "text-xs font-bold bg-slate-100 text-slate-700 hover:bg-emerald-100 hover:text-emerald-700 px-3 py-2 rounded-lg transition-all focus:outline-none flex items-center gap-1";
+            }
+        }
+
+        // Ghi nhận số lượng bài học sinh tự giác hoàn thành
+        function toggleTask(id, checkbox) {
+            if(checkbox.checked) {
+                userProgress.add(id);
+            } else {
+                userProgress.delete(id);
+            }
+            document.getElementById("progress-count").innerText = userProgress.size;
+        }
+
+        // Nộp kết quả lên Google App Script của Thầy
+        function submitReport() {
+            const totalScore = userProgress.size * 10; // Giả định mỗi câu 10 điểm
+            const serverMsg = document.getElementById("server-msg");
+            
+            serverMsg.classList.remove("hidden", "bg-red-50", "text-red-700", "bg-green-50", "text-green-700");
+            serverMsg.className = "text-sm font-semibold p-3 rounded-xl max-w-md mx-auto bg-blue-50 text-blue-700";
+            serverMsg.innerHTML = "⏳ Đang đồng bộ và gửi điểm về hệ thống...";
+
+            const payload = {
+                hoTen: studentName,
+                diem: totalScore,
+                thoiGian: new Date().toLocaleString('vi-VN')
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                serverMsg.className = "text-sm font-semibold p-3 rounded-xl max-w-md mx-auto bg-green-50 text-green-700";
+                serverMsg.innerHTML = `✅ Báo cáo thành công! Điểm của <b>${studentName}</b> đã được lưu vào sổ điểm điện tử của Thầy.`;
+            })
+            .catch(err => {
+                serverMsg.className = "text-sm font-semibold p-3 rounded-xl max-w-md mx-auto bg-red-50 text-red-700";
+                serverMsg.innerHTML = "❌ Lỗi kết nối mạng! Em hãy chụp lại màn hình bài tập và gửi cho Thầy nhé.";
+            });
+        }
+    </script>
+</body>
+</html>
