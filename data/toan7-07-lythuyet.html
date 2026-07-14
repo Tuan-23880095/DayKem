@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toán 7 - Buổi 7: Số vô tỉ và Căn bậc hai số học</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-white text-gray-950">
+
+    <header class="bg-white border-b-2 border-gray-100 py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo BDVH" class="h-[14px] object-contain">
+                <div class="h-4 w-px bg-gray-300"></div>
+                <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo HCMUS" class="h-[14px] object-contain">
+                <div class="h-4 w-px bg-gray-300"></div>
+                <span class="text-xs font-bold text-gray-600 tracking-wider">HỌC THUẬT & GIÁO DỤC</span>
+            </div>
+            <div class="text-center sm:text-right">
+                <h1 class="text-sm font-extrabold text-blue-800 uppercase tracking-tight title-font">Chương trình Toán 7 Mới</h1>
+                <p class="text-xs text-gray-500 font-medium">Buổi 7: Số vô tỉ & Căn bậc hai số học</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+        
+        <div class="text-center mb-10 border-b pb-6">
+            <h2 class="text-3xl font-black text-gray-900 title-font mb-2">🎯 BUỔI 7: SỐ VÔ TỈ VÀ CĂN BẬC HAI SỐ HỌC</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto italic text-sm">Hệ thống bài giảng chi tiết phân tách theo 3 cấp độ chuẩn khung năng lực toán học mới.</p>
+        </div>
+
+        <section class="mb-10 bg-slate-50 border border-slate-200 p-6 rounded-xl">
+            <h3 class="text-base font-bold text-amber-800 flex items-center gap-2 mb-3">
+                <span>💡</span> GỢI Ý MÔ HÌNH VÀ HÌNH ẢNH TRỰC QUAN
+            </h3>
+            <ul class="space-y-3 text-sm text-gray-700 list-disc pl-5">
+                <li><strong>Sơ đồ tập hợp số (Venn Diagram):</strong> Hình ảnh các vòng tròn đồng tâm thể hiện tập hợp $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q}$. Bên cạnh tập $\mathbb{Q}$ là một vòng độc lập $\mathbb{I}$ (Số vô tỉ). Tất cả được bao bọc bởi vòng tròn lớn nhất là $\mathbb{R}$ (Số thực).</li>
+                <li><strong>Mô hình hình vuông $\sqrt{2}$:</strong> Ghép từ 2 tam giác vuông cân tạo thành hình vuông có diện tích $2\text{ dm}^2$. Chiều dài cạnh chính là số vô tỉ $\sqrt{2} = 1,4142...$ kéo dài vô tận.</li>
+                <li><strong>Trải nghiệm thực tế:</strong> Học sinh sử dụng phím căn bậc hai ($\sqrt{\ \ }$) trên máy tính Casio để trực tiếp quan sát các chuỗi thập phân vô hạn không tuần hoàn.</li>
+            </ul>
+        </section>
+
+        <div class="space-y-12">
+            <h3 class="text-xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 title-font uppercase">PHẦN 1: LÝ THUYẾT TRỌNG TÂM (3 CẤP ĐỘ)</h3>
+
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full mb-3 uppercase">Cấp độ 1: Cơ bản (Nhận biết & Thông hiểu)</span>
+                
+                <h4 class="text-lg font-bold text-blue-900 mb-2">1. Số vô tỉ là gì?</h4>
+                <p class="text-gray-700 mb-4 pl-4 border-l-2 border-gray-100">
+                    - <strong>Định nghĩa:</strong> Số vô tỉ là số viết được dưới dạng số thập phân vô hạn không tuần hoàn.<br>
+                    - <strong>Kí hiệu:</strong> Tập hợp các số vô tỉ được kí hiệu là $\mathbb{I}$.<br>
+                    - <span class="text-red-600 font-semibold">Lưu ý:</span> Số 0 và các phân số thông thường không phải là số vô tỉ.
+                </p>
+
+                <h4 class="text-lg font-bold text-blue-900 mb-2">2. Căn bậc hai số học</h4>
+                <p class="text-gray-700 mb-4 pl-4 border-l-2 border-gray-100">
+                    - <strong>Khái niệm:</strong> Căn bậc hai số học của một số $a$ không âm là một số $x$ không âm sao cho $x^2 = a$.<br>
+                    - <strong>Kí hiệu:</strong> $\sqrt{a}$ (với $a \ge 0$).<br>
+                    - <strong>Quy ước:</strong> Số âm không có căn bậc hai số học. $\sqrt{0} = 0$.
+                </p>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm text-gray-700">
+                    <strong>Ví dụ mẫu:</strong><br>
+                    • $\sqrt{16} = 4$ vì $4 > 0$ và $4^2 = 16$.<br>
+                    • $\sqrt{0,04} = 0,2$ vì $0,2 > 0$ và $(0,2)^2 = 0,04$.<br>
+                    • Số $\pi = 3,14159265...$ là một số vô tỉ điển hình.
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full mb-3 uppercase">Cấp độ 2: Nâng cao (Phân tích & Tính toán biểu thức)</span>
+                
+                <h4 class="text-lg font-bold text-blue-900 mb-2">1. Tính chất của căn bậc hai số học</h4>
+                <p class="text-gray-700 mb-4 pl-4 border-l-2 border-gray-100">
+                    Với mọi số không âm $a \ge 0$, ta luôn có đẳng thức: $(\sqrt{a})^2 = \sqrt{a^2} = a$.<br>
+                    <span class="text-red-600 font-medium">⚠️ Cảnh báo nhầm lẫn:</span> Phân biệt rõ hai bài toán:
+                    <br>• Tìm $x$ biết $x^2 = 25 \implies x = 5$ hoặc $x = -5$.
+                    <br>• Tính căn bậc hai số học: $\sqrt{25}$ chỉ nhận một giá trị duy nhất là $5$.
+                </p>
+
+                <h4 class="text-lg font-bold text-blue-900 mb-2">2. Mối liên hệ với Số chính phương</h4>
+                <p class="text-gray-700 mb-4 pl-4 border-l-2 border-gray-100">
+                    - Một số nguyên dương $a$ nếu không phải là số chính phương (1, 4, 9, 16, 25...) thì kết quả của $\sqrt{a}$ chắc chắn là một số vô tỉ.
+                </p>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm text-gray-700 space-y-2">
+                    <strong>Ví dụ mẫu:</strong><br>
+                    <strong>Bài toán 1:</strong> Trong các số $\sqrt{36}; \sqrt{47}; \sqrt{0,01}$, số nào là số vô tỉ?
+                    <br><span class="text-gray-600">Lời giải:</span> $\sqrt{36} = 6 \in \mathbb{Q}$, $\sqrt{0,01} = 0,1 \in \mathbb{Q}$. Vì $47$ không là số chính phương nên $\sqrt{47}$ là số vô tỉ.
+                    <br><strong>Bài toán 2:</strong> Tính giá trị biểu thức: $A = (\sqrt{5})^2 - 3\sqrt{49} + \sqrt{(-11)^2}$
+                    <br><span class="text-gray-600">Lời giải:</span> $A = 5 - 3 \cdot 7 + 11 = 5 - 21 + 11 = -5$.
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full mb-3 uppercase">Cấp độ 3: Vận dụng (Hình học & Thực tế)</span>
+                
+                <h4 class="text-lg font-bold text-blue-900 mb-2">1. Ứng dụng trong Hình học thực tế</h4>
+                <p class="text-gray-700 mb-4 pl-4 border-l-2 border-gray-100">
+                    - Độ dài cạnh của hình vuông có diện tích $S$ là: $a = \sqrt{S}$.<br>
+                    - Bán kính hình tròn khi biết diện tích $S$ là: $R = \sqrt{\frac{S}{\pi}}$.
+                </p>
+                <h4 class="text-lg font-bold text-blue-900 mb-2">2. Làm tròn số vô tỉ</h4>
+                <p class="text-gray-700 mb-4 pl-4 border-l-2 border-gray-100">
+                    Khi giải toán thực tế, ta sử dụng máy tính cầm tay để tính toán giá trị căn thức, sau đó tiến hành làm tròn đến chữ số thập phân hoặc hàng đơn vị theo yêu cầu đề bài.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-16 space-y-8">
+            <h3 class="text-xl font-bold text-gray-900 border-l-4 border-orange-500 pl-3 title-font uppercase">PHẦN 2: HỆ THỐNG BÀI TẬP ĐÁNH GIÁ TRỰC TUYẾN</h3>
+            
+            <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Họ và Tên Học Sinh</label>
+                        <input type="text" id="student-name" required placeholder="Ví dụ: Nguyễn Văn A" class="w-full bg-white border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Lớp</label>
+                        <input type="text" id="student-class" required placeholder="Ví dụ: 7A1" class="w-full bg-white border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div class="border rounded-xl p-5 bg-white space-y-3 shadow-sm">
+                    <p class="font-bold text-gray-900">Bài 1. Bác Thu thuê thợ lát gạch một cái sân hình vuông hết tất cả là $10.125.000$ đồng. Cho biết chi phí cho $1\text{m}^2$ là $125.000$ đồng. Hãy tính chiều dài cạnh của cái sân đó.</p>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">Nhập đáp án số (Đơn vị: mét):</label>
+                        <input type="text" id="ans-1" required placeholder="Ví dụ: 5" class="w-full sm:w-48 border rounded-lg px-3 py-2 text-sm font-bold text-blue-600">
+                    </div>
+                    <div>
+                        <button type="button" onclick="toggleHint('hint-1')" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">✨ Xem gợi ý giải</button>
+                        <div id="hint-1" class="hidden mt-2 p-3 bg-slate-50 border rounded-lg text-sm text-gray-600">
+                            <strong>Gợi ý:</strong> Tính diện tích sân bằng cách lấy tổng chi phí chia cho chi phí $1\text{m}^2$. Cạnh sân hình vuông sẽ bằng căn bậc hai số học của diện tích vừa tìm được.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border rounded-xl p-5 bg-white space-y-3 shadow-sm">
+                    <p class="font-bold text-gray-900">Bài 2. Một miếng đất hình tròn có diện tích là $12.996\text{ m}^2$. Tính bán kính của miếng đất (làm tròn đến hàng đơn vị, lấy $\pi \approx 3,14$).</p>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">Nhập đáp án số sau khi làm tròn (Đơn vị: mét):</label>
+                        <input type="text" id="ans-2" required placeholder="Ví dụ: 20" class="w-full sm:w-48 border rounded-lg px-3 py-2 text-sm font-bold text-blue-600">
+                    </div>
+                    <div>
+                        <button type="button" onclick="toggleHint('hint-2')" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">✨ Xem gợi ý giải</button>
+                        <div id="hint-2" class="hidden mt-2 p-3 bg-slate-50 border rounded-lg text-sm text-gray-600">
+                            <strong>Gợi ý:</strong> Áp dụng công thức $R = \sqrt{S : \pi}$. Tính toán bằng máy tính cầm tay rồi thực hiện làm tròn theo quy tắc số thập phân về hàng đơn vị gần nhất.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-4">
+                    <button type="submit" id="btn-submit" class="w-full sm:w-auto px-8 py-3.5 bg-gray-950 text-white hover:bg-gray-800 font-bold rounded-xl text-sm transition shadow-md">
+                        Gửi Kết Quả Lên Hệ Thống 🚀
+                    </button>
+                    <p id="status-msg" class="mt-3 text-xs font-semibold"></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-50 border-t py-4 text-center text-xs text-gray-500 font-medium">
+        <p>© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</p>
+    </footer>
+
+    <script>
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzY7b7h4OwvhXuK5Vs6hl-aD88BPnAiAKbU5lfJobby0D4nzbIJVKT4n0AKCpAGoK0nZA/exec";
+
+        // Hàm ẩn hiện gợi ý lời giải
+        function toggleHint(id) {
+            const hintBox = document.getElementById(id);
+            if (hintBox.classList.contains('hidden')) {
+                hintBox.classList.remove('hidden');
+            } else {
+                hintBox.classList.add('hidden');
+            }
+        }
+
+        // Hàm gửi kết quả về Google Sheet
+        function submitQuiz(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("student-name").value.trim();
+            const studentClass = document.getElementById("student-class").value.trim();
+            const ans1 = document.getElementById("ans-1").value.trim();
+            const ans2 = document.getElementById("ans-2").value.trim();
+
+            const btnSubmit = document.getElementById("btn-submit");
+            const statusMsg = document.getElementById("status-msg");
+
+            btnSubmit.disabled = true;
+            statusMsg.innerText = "⏳ Đang gửi bài làm lên máy chủ...";
+            statusMsg.className = "mt-3 text-xs font-semibold text-blue-600";
+
+            // Tạo chuỗi nội dung câu trả lời
+            const targetScore = `Bài 1: ${ans1}m | Bài 2: ${ans2}m`;
+
+            const payload = {
+                action: "save_toan_pizza", // Kích hoạt hành động lưu dữ liệu
+                hoTen: `${name} (Lớp ${studentClass})`,
+                diem: targetScore,
+                thoiGian: new Date().toLocaleString("vi-VN")
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                statusMsg.innerText = "✅ Bài làm của em đã được gửi thành công!";
+                statusMsg.className = "mt-3 text-xs font-semibold text-green-600";
+                btnSubmit.disabled = false;
+            })
+            .catch(error => {
+                statusMsg.innerText = "❌ Lỗi mạng! Vui lòng chụp màn hình bài làm gửi trực tiếp cho Thầy.";
+                statusMsg.className = "mt-3 text-xs font-semibold text-red-600";
+                btnSubmit.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
