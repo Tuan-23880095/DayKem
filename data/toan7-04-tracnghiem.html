@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đấu Trường Toán 7 - Buổi 4: Thứ tự phép tính, Dấu ngoặc & Chuyển vế</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Cấu hình MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                typeset: false // Tắt tự động render lúc tải trang để gọi qua JS sau khi đổi câu hỏi
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .option-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .option-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header nổi bật, nhiều màu sắc bắt mắt nhưng nền sáng tinh tế -->
+    <header class="bg-white border-b-4 border-orange-400 py-4 px-6 shadow-sm sticky top-0 z-40">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🍕</span>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black title-font text-gray-900 tracking-tight">
+                        ĐẤU TRƯỜNG TOÁN 7 - BUỔI 4
+                    </h1>
+                    <p class="text-xs text-gray-500 font-bold">Thứ tự phép tính • Quy tắc dấu ngoặc • Quy tắc chuyển vế</p>
+                </div>
+            </div>
+            <!-- Bộ đếm giờ và tiến trình -->
+            <div id="stats-header" class="hidden flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
+                <div class="flex items-center gap-1.5 text-sm font-bold text-gray-700">
+                    <span class="text-lg">⏱️</span>
+                    <span id="timer-display">00:00</span>
+                </div>
+                <div class="h-4 w-px bg-gray-300"></div>
+                <div class="flex items-center gap-1.5 text-sm font-bold text-blue-600">
+                    <span>⭐ Điểm:</span>
+                    <span id="score-display">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow container mx-auto p-4 max-w-3xl flex items-center justify-center">
+        
+        <!-- MÀN HÌNH 1: ĐĂNG NHẬP / CHUẨN BỊ -->
+        <div id="start-screen" class="bg-white p-8 rounded-2xl border-2 border-gray-200 shadow-lg w-full max-w-md text-center">
+            <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-4xl">🚀</span>
+            </div>
+            <h2 class="text-2xl font-extrabold title-font text-gray-900 mb-2">Sẵn Sàng Đua Top!</h2>
+            <p class="text-sm text-gray-500 mb-6">Điền thông tin của em để tham gia thi đấu giành giải thưởng Pizza nhé!</p>
+            
+            <form id="start-form" onsubmit="startQuiz(event)" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Họ và Tên Học Sinh <span class="text-red-500">*</span></label>
+                    <input type="text" id="student-name" required placeholder="Ví dụ: Nguyễn Văn A" 
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 text-gray-900 font-medium">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Lớp <span class="text-red-500">*</span></label>
+                    <input type="text" id="student-class" required placeholder="Ví dụ: 7A1" 
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 text-gray-900 font-medium">
+                </div>
+                <button type="submit" class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-lg rounded-xl shadow-md transition-all duration-150 transform active:scale-95 flex items-center justify-center gap-2">
+                    Bắt Đầu Làm Bài 🏁
+                </button>
+            </form>
+        </div>
+
+        <!-- MÀN HÌNH 2: NỘI DUNG THI -->
+        <div id="quiz-screen" class="hidden w-full bg-white p-6 sm:p-8 rounded-2xl border-2 border-gray-200 shadow-md">
+            
+            <!-- Phần chỉ báo Tiến trình (Chia 3 phần thi, mỗi phần 5 câu) -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span id="part-title" class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                        Phần 1: Thực hiện phép tính
+                    </span>
+                    <span id="question-index" class="text-sm font-bold text-gray-500">Câu 1/15</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full w-[6.66%]" style="transition: width 0.3s ease;"></div>
+                </div>
+            </div>
+
+            <!-- Câu hỏi -->
+            <div class="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <div id="question-text" class="text-base sm:text-lg font-bold text-gray-800 leading-relaxed math-expr">
+                    Đang tải câu hỏi...
+                </div>
+            </div>
+
+            <!-- Gợi ý ẩn hiện -->
+            <div class="mb-6">
+                <button onclick="toggleHint()" class="text-xs font-bold text-orange-500 hover:text-orange-600 flex items-center gap-1 focus:outline-none">
+                    💡 Xem gợi ý của Thầy
+                </button>
+                <div id="hint-box" class="hidden mt-2 p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg italic">
+                    Gợi ý ở đây...
+                </div>
+            </div>
+
+            <!-- Danh sách phương án chọn hoặc ô điền khuyết -->
+            <div class="grid grid-cols-1 gap-3.5" id="options-container">
+                <!-- Javascript sẽ tự động thêm các phương án hoặc ô điền khuyết vào đây -->
+            </div>
+
+            <!-- Khu vực thông báo đúng/sai chi tiết -->
+            <div id="feedback-box" class="hidden mt-6 p-4 rounded-xl border">
+                <div class="flex items-center gap-2 mb-2">
+                    <span id="feedback-icon" class="text-xl"></span>
+                    <span id="feedback-title" class="font-bold text-base"></span>
+                </div>
+                <div id="feedback-rationale" class="text-sm leading-relaxed text-gray-700 math-expr"></div>
+            </div>
+
+            <!-- Nút điều hướng -->
+            <div class="mt-8 flex justify-end">
+                <button id="action-btn" onclick="handleAction()" disabled 
+                    class="px-8 py-3 bg-gray-300 text-gray-500 font-extrabold rounded-xl transition-all duration-150 transform active:scale-95 cursor-not-allowed">
+                    Chọn một đáp án
+                </button>
+            </div>
+        </div>
+
+        <!-- MÀN HÌNH 3: BẢO CÁO KẾT QUẢ -->
+        <div id="result-screen" class="hidden w-full bg-white p-8 rounded-2xl border-2 border-gray-200 shadow-lg text-center">
+            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-5xl">🏆</span>
+            </div>
+            <h2 class="text-3xl font-extrabold title-font text-gray-900 mb-2">Chúc Mừng Em Đã Hoàn Thành!</h2>
+            <p class="text-gray-500 text-sm mb-6">Kết quả đấu trường của em đã được ghi nhận thành công.</p>
+
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                    <div class="text-xs text-blue-600 font-bold uppercase mb-1">Học sinh</div>
+                    <div id="final-name" class="text-base font-extrabold text-blue-900 truncate">Nguyễn Văn A</div>
+                </div>
+                <div class="p-4 bg-orange-50 rounded-xl border border-orange-100">
+                    <div class="text-xs text-orange-600 font-bold uppercase mb-1">Điểm số</div>
+                    <div id="final-score" class="text-2xl font-black text-orange-600">0/150</div>
+                </div>
+                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                    <div class="text-xs text-emerald-600 font-bold uppercase mb-1">Thời gian</div>
+                    <div id="final-time" class="text-2xl font-black text-emerald-600">00:00</div>
+                </div>
+            </div>
+
+            <div id="status-msg" class="text-sm font-semibold text-gray-700 mb-6 bg-gray-50 py-3 px-4 rounded-xl border border-gray-200">
+                ⏳ Đang lưu dữ liệu lên bảng vàng...
+            </div>
+
+            <button onclick="restartQuiz()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 text-gray-700 font-bold rounded-xl transition-all duration-150 transform active:scale-95 text-sm">
+                Thi Lại Từ Đầu 🔄
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Custom Modal Cảnh Báo thay cho alert() -->
+    <div id="custom-alert" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl max-w-sm w-full shadow-2xl border-2 border-orange-400 text-center transform scale-95 transition-all duration-200">
+            <span class="text-4xl mb-2 block">⚠️</span>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Thông báo</h3>
+            <p id="alert-message" class="text-sm text-gray-600 mb-5"></p>
+            <button onclick="closeAlert()" class="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl transition-all">Đồng ý</button>
+        </div>
+    </div>
+
+    <!-- Footer nhẹ nhàng -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-3 text-center text-xs text-gray-500 font-semibold">
+        Sản phẩm phục vụ đổi mới sáng tạo học đường • Đấu Trường Toán 7
+    </footer>
+
+    <script>
+        // CẤU HÌNH LIÊN KẾT GOOGLE APP SCRIPT TỪ MẪU GỐC (Dành cho việc lưu Pizza)
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec"; 
+
+        // 15 CÂU HỎI TRẮC NGHIỆM CHIA ĐỀU LÀM 3 PHẦN THI KHÁC NHAU
+        const questionsData = [
+            // ================= PHẦN 1: TRẮC NGHIỆM 4 LỰA CHỌN (CÂU 1 -> 5) =================
+            {
+                type: "multiple_choice",
+                part: "Phần 1: Trắc nghiệm 4 lựa chọn",
+                question: "Tính giá trị biểu thức sau: $12 \\cdot \\left(\\frac{2}{3} - \\frac{5}{6}\\right)^2$",
+                hint: "Hãy thực hiện phép tính trong ngoặc trước, sau đó đến lũy thừa rồi mới thực hiện phép nhân.",
+                options: [
+                    { text: "$\\frac{1}{3}$", rationale: "Chính xác! Ta tính trong ngoặc trước: $\\frac{2}{3} - \\frac{5}{6} = -\\frac{1}{6}$. Sau đó tính lũy thừa: $\\left(-\\frac{1}{6}\\right)^2 = \\frac{1}{36}$. Cuối cùng nhân với 12: $12 \\cdot \\frac{1}{36} = \\frac{1}{3}$.", isCorrect: true },
+                    { text: "$\\frac{1}{6}$", rationale: "Lỗi do tính toán nhầm giá trị của lũy thừa hoặc rút gọn phân số chưa chính xác.", isCorrect: false },
+                    { text: "$-\\frac{1}{3}$", rationale: "Sai dấu! Hãy lưu ý rằng bình phương của một số âm luôn cho kết quả là một số dương.", isCorrect: false },
+                    { text: "$1$", rationale: "Sai do thực hiện sai thứ tự phép tính hoặc tính nhầm hiệu trong ngoặc.", isCorrect: false }
+                ]
+            },
+            {
+                type: "multiple_choice",
+                part: "Phần 1: Trắc nghiệm 4 lựa chọn",
+                question: "Khi bỏ dấu ngoặc trong biểu thức $A = \\frac{3}{5} - \\left(\\frac{2}{3} + \\frac{1}{5}\\right)$, ta thu được biểu thức nào sau đây?",
+                hint: "Trước ngoặc có dấu trừ thì phải đổi dấu toàn bộ các số hạng nằm bên trong ngoặc.",
+                options: [
+                    { text: "$A = \\frac{3}{5} - \\frac{2}{3} - \\frac{1}{5}$", rationale: "Chính xác! Vì trước dấu ngoặc là dấu trừ nên khi phá ngoặc ta phải đổi dấu cả 2 số hạng bên trong ngoặc.", isCorrect: true },
+                    { text: "$A = \\frac{3}{5} - \\frac{2}{3} + \\frac{1}{5}$", rationale: "Bạn quên không đổi dấu số hạng thứ hai bên trong dấu ngoặc rồi.", isCorrect: false },
+                    { text: "$A = \\frac{3}{5} + \\frac{2}{3} - \\frac{1}{5}$", rationale: "Bạn đổi dấu sai số hạng đầu tiên và giữ nguyên dấu số hạng thứ hai là sai quy tắc.", isCorrect: false },
+                    { text: "$A = \\frac{3}{5} + \\frac{2}{3} + \\frac{1}{5}$", rationale: "Bạn giữ nguyên dấu của tất cả các số hạng khi trước ngoặc có dấu trừ là hoàn toàn sai.", isCorrect: false }
+                ]
+            },
+            {
+                type: "multiple_choice",
+                part: "Phần 1: Trắc nghiệm 4 lựa chọn",
+                question: "Tính hợp lí giá trị của biểu thức: $\\left(-\\frac{3}{7}\\right) + \\left(\\frac{5}{6} - \\frac{4}{7}\right)$",
+                hint: "Bỏ dấu ngoặc trước (giữ nguyên dấu vì trước ngoặc là dấu cộng), sau đó nhóm các phân số có cùng mẫu số là 7.",
+                options: [
+                    { text: "$-\\frac{1}{6}$", rationale: "Tuyệt vời! Bỏ ngoặc ta có $-\\frac{3}{7} + \\frac{5}{6} - \\frac{4}{7}$. Nhóm $\\left(-\\frac{3}{7} - \\frac{4}{7}\right) = -1$, sau đó tính $-1 + \\frac{5}{6} = -\\frac{1}{6}$.", isCorrect: true },
+                    { text: "$\\frac{1}{6}$", rationale: "Bạn bị nhầm dấu ở kết quả cuối cùng: $-1 + \\frac{5}{6} = -\\frac{1}{6}$ chứ không phải dương.", isCorrect: false },
+                    { text: "$-\\frac{11}{6}$", rationale: "Sai do xác định sai dấu của phân số khi thực hiện nhóm hợp lý.", isCorrect: false },
+                    { text: "$-\\frac{2}{3}$", rationale: "Kết quả tính toán sai quy tắc cộng trừ các số hữu tỉ.", isCorrect: false }
+                ]
+            },
+            {
+                type: "multiple_choice",
+                part: "Phần 1: Trắc nghiệm 4 lựa chọn",
+                question: "Phát biểu nào sau đây là ĐÚNG về quy tắc thực hiện phép tính đối với biểu thức không có dấu ngoặc?",
+                hint: "Xem lại thứ tự ưu tiên giữa phép lũy thừa, nhân/chia và cộng/trừ.",
+                options: [
+                    { text: "Lũy thừa $\\rightarrow$ Nhân và chia $\\rightarrow$ Cộng và trừ.", rationale: "Chính xác! Đây là thứ tự chuẩn tuyệt đối được quy định trong sách giáo khoa toán cho mọi tập hợp số.", isCorrect: true },
+                    { text: "Thực hiện từ phải sang trái.", rationale: "Đối với các phép tính cùng cấp, ta thực hiện từ trái sang phải chứ không phải từ phải sang trái.", isCorrect: false },
+                    { text: "Thực hiện Cộng và trừ trước, sau đó đến Nhân và chia.", rationale: "Thứ tự này hoàn toàn ngược với quy tắc toán học.", isCorrect: false },
+                    { text: "Thực hiện phép tính tùy ý không cần thứ tự.", rationale: "Không đúng! Nếu không tuân theo thứ tự thực hiện phép tính, kết quả sẽ bị sai lệch.", isCorrect: false }
+                ]
+            },
+            {
+                type: "multiple_choice",
+                part: "Phần 1: Trắc nghiệm 4 lựa chọn",
+                question: "Tính giá trị biểu thức sau: $(0,4)^3 - (0,5)^2 \\cdot 2$",
+                hint: "Tính các lũy thừa trước: $(0,4)^3$ và $(0,5)^2$, sau đó thực hiện phép nhân rồi mới đến phép trừ.",
+                options: [
+                    { text: "$-0,436$", rationale: "Tuyệt vời! Ta có $(0,4)^3 = 0,064$ và $(0,5)^2 \\cdot 2 = 0,25 \\cdot 2 = 0,5$. Thực hiện phép trừ: $0,064 - 0,5 = -0,436$.", isCorrect: true },
+                    { text: "$0,136$", rationale: "Lỗi do tính sai giá trị lũy thừa hoặc trừ sai thứ tự các số hạng.", isCorrect: false },
+                    { text: "$-0,342$", rationale: "Lỗi do tính nhầm $(0,4)^3$ thành một giá trị khác.", isCorrect: false },
+                    { text: "$0,012$", rationale: "Kết quả sai do không thực hiện đúng thứ tự nhân trước trừ sau.", isCorrect: false }
+                ]
+            },
+
+            // ================= PHẦN 2: TRẮC NGHIỆM ĐÚNG / SAI (CÂU 6 -> 10) =================
+            {
+                type: "true_false",
+                part: "Phần 2: Nhận thức Đúng / Sai",
+                question: "Khẳng định sau ĐÚNG hay SAI:\n\"Khi phá ngoặc biểu thức có dấu trừ đằng trước: $x - (y - z + t) = x - y + z - t$.\"",
+                hint: "Áp dụng quy tắc đổi dấu tất cả các số hạng bên trong ngoặc khi đằng trước ngoặc có dấu trừ.",
+                options: [
+                    { text: "Đúng", rationale: "Chính xác! Khi phá ngoặc có dấu trừ đằng trước, ta đổi dấu các hạng tử bên trong: $+y \\rightarrow -y$, $-z \\rightarrow +z$, $+t \\rightarrow -t$.", isCorrect: true },
+                    { text: "Sai", rationale: "Khẳng định này là ĐÚNG vì quy tắc dấu ngoặc yêu cầu ta đảo tất cả các dấu của số hạng trong ngoặc.", isCorrect: false }
+                ]
+            },
+            {
+                type: "true_false",
+                part: "Phần 2: Nhận thức Đúng / Sai",
+                question: "Khẳng định sau ĐÚNG hay SAI:\n\"Khi giải tìm $x$ từ biểu thức $x - \\frac{3}{4} = -\\frac{1}{2}$, áp dụng quy tắc chuyển vế ta viết được: $x = -\\frac{1}{2} - \\frac{3}{4}$.\"",
+                hint: "Chú ý số hạng chuyển từ vế trái sang vế phải là $-\\frac{3}{4}$. Chuyển vế thì phải đổi dấu.",
+                options: [
+                    { text: "Đúng", rationale: "Chưa đúng. Theo quy tắc chuyển vế, số hạng $-\\frac{3}{4}$ khi chuyển sang vế phải bắt buộc phải đổi dấu thành $+\\frac{3}{4}$.", isCorrect: false },
+                    { text: "Sai", rationale: "Chính xác! Phép biến đổi đúng phải là $x = -\\frac{1}{2} + \\frac{3}{4}$. Chuyển $-\\frac{3}{4}$ sang vế phải phải đổi thành dấu cộng.", isCorrect: true }
+                ]
+            },
+            {
+                type: "true_false",
+                part: "Phần 2: Nhận thức Đúng / Sai",
+                question: "Khẳng định sau ĐÚNG hay SAI:\n\"Trong một biểu thức chỉ có phép tính cộng và trừ, ta luôn luôn thực hiện các phép tính theo thứ tự từ trái sang phải.\"",
+                hint: "Xem lại quy tắc thứ tự thực hiện phép tính đối với các phép toán cùng cấp cộng/trừ.",
+                options: [
+                    { text: "Đúng", rationale: "Chính xác! Đối với biểu thức chỉ có phép cộng, trừ hoặc chỉ có phép nhân, chia, ta bắt buộc thực hiện theo đúng thứ tự từ trái sang phải.", isCorrect: true },
+                    { text: "Sai", rationale: "Quy tắc toán học quy định đối với biểu thức chỉ chứa phép cộng trừ là phải làm từ trái sang phải. Nên khẳng định này là Đúng.", isCorrect: false }
+                ]
+            },
+            {
+                type: "true_false",
+                part: "Phần 2: Nhận thức Đúng / Sai",
+                question: "Khẳng định sau ĐÚNG hay SAI:\n\"Kết quả của phép tính chuyển vế tìm $x$ từ đẳng thức $x + 1,25 = 0,5$ là $x = 0,75$.\"",
+                hint: "Chuyển vế $1,25$ sang vế phải thành $-1,25$ rồi thực hiện hiệu $0,5 - 1,25$.",
+                options: [
+                    { text: "Đúng", rationale: "Chưa đúng. Khi chuyển vế ta được $x = 0,5 - 1,25$. Kết quả phải là $-0,75$ chứ không phải dương $0,75$.", isCorrect: false },
+                    { text: "Sai", rationale: "Chính xác! Kết quả đúng của phép tính này là $x = 0,5 - 1,25 = -0,75$. Do đó khẳng định trên là Sai.", isCorrect: true }
+                ]
+            },
+            {
+                type: "true_false",
+                part: "Phần 2: Nhận thức Đúng / Sai",
+                question: "Khẳng định sau ĐÚNG hay SAI:\n\"Đối với biểu thức có các dấu ngoặc, thứ tự thực hiện phép tính đúng luôn là: Ngoặc nhọn $\\{\\} \\rightarrow$ Ngoặc vuông $[] \\rightarrow$ Ngoặc tròn $()$.\"",
+                hint: "Xem lại quy trình bóc tách các ngoặc từ trong ra ngoài hay từ ngoài vào trong.",
+                options: [
+                    { text: "Đúng", rationale: "Chưa đúng rồi. Quy trình chuẩn phải bắt đầu từ trong ra ngoài: Ngoặc tròn $() \\rightarrow$ Ngoặc vuông $[] \\rightarrow$ Ngoặc nhọn $\\{\\}$.", isCorrect: false },
+                    { text: "Sai", rationale: "Hoàn hảo! Thứ tự chuẩn phải là Ngoặc tròn $() \\rightarrow$ Ngoặc vuông $[] \\rightarrow$ Ngoặc nhọn $\\{\\}$. Do đó khẳng định trên là Sai.", isCorrect: true }
+                ]
+            },
+
+            // ================= PHẦN 3: ĐIỀN KHUYẾT (CÂU 11 -> 15) =================
+            {
+                type: "fill_blank",
+                part: "Phần 3: Điền câu trả lời ngắn",
+                question: "Tìm giá trị của số hữu tỉ $x$, biết: $x + \\frac{3}{7} = \\frac{2}{5}$.\n*(Hãy nhập kết quả là một phân số tối giản dạng a/b, ví dụ: -1/2)*",
+                hint: "Chuyển vế $\\frac{3}{7}$ sang vế phải thành $-\\frac{3}{7}$ rồi quy đồng mẫu số chung là 35.",
+                acceptableAnswers: ["-1/35"],
+                rationale: "Giải chi tiết: Áp dụng quy tắc chuyển vế, ta được: $x = \\frac{2}{5} - \\frac{3}{7} = \\frac{14}{35} - \\frac{15}{35} = -\\frac{1}{35}$."
+            },
+            {
+                type: "fill_blank",
+                part: "Phần 3: Điền câu trả lời ngắn",
+                question: "Điền từ thích hợp nhất vào chỗ trống:\n\"Khi chuyển một số hạng từ vế này sang vế kia của một đẳng thức, ta phải __________ dấu số hạng đó.\"",
+                hint: "Câu khẩu quyết nằm lòng được Thầy nhắc liên tục khi giải toán Tìm x.",
+                acceptableAnswers: ["đổi", "doi", "đổi dấu", "doi dau"],
+                rationale: "Từ cần điền chính xác nhất là: 'đổi' hoặc 'đổi dấu'."
+            },
+            {
+                type: "fill_blank",
+                part: "Phần 3: Điền câu trả lời ngắn",
+                question: "Tìm giá trị của $x$, biết: $\\frac{3}{2} - x = \\frac{4}{7}$.\n*(Hãy nhập kết quả dưới dạng phân số tối giản dạng a/b)*",
+                hint: "$x$ đóng vai trò là số trừ. Muốn tìm số trừ ta lấy số bị trừ trừ đi hiệu.",
+                acceptableAnswers: ["13/14"],
+                rationale: "Giải chi tiết: $x = \\frac{3}{2} - \\frac{4}{7} = \\frac{21}{14} - \\frac{8}{14} = \\frac{13}{14}$."
+            },
+            {
+                type: "fill_blank",
+                part: "Phần 3: Điền câu trả lời ngắn",
+                question: "Tính nhanh giá trị của biểu thức sau: $\\left(-\\frac{3}{4}\\right) + \\frac{3}{13} - \\frac{1}{4} + \\frac{10}{13}$.\n*(Hãy nhập kết quả dưới dạng một số nguyên rút gọn)*",
+                hint: "Áp dụng tính chất giao hoán và kết hợp để nhóm các phân số có cùng mẫu số là 4 và mẫu số là 13.",
+                acceptableAnswers: ["0"],
+                rationale: "Giải chi tiết: Nhóm các hạng tử có cùng mẫu: $\\left(-\\frac{3}{4} - \\frac{1}{4}\\right) + \\left(\\frac{3}{13} + \\frac{10}{13}\\right) = -1 + 1 = 0$."
+            },
+            {
+                type: "fill_blank",
+                part: "Phần 3: Điền câu trả lời ngắn",
+                question: "Tìm giá trị của $x$, biết: $2x + \\frac{1}{2} = \\frac{7}{9}$.\n*(Hãy nhập kết quả dưới dạng phân số tối giản dạng a/b)*",
+                hint: "Tính cụm tích $2x$ bằng quy tắc chuyển vế trước, sau đó chia cả hai vế cho 2.",
+                acceptableAnswers: ["5/36"],
+                rationale: "Giải chi tiết: Ta có $2x = \\frac{7}{9} - \\frac{1}{2} = \\frac{14}{18} - \\frac{9}{18} = \\frac{5}{18}$. Khi đó $x = \\frac{5}{18} : 2 = \\frac{5}{36}$."
+            }
+        ];
+
+        // Biến trạng thái ứng dụng
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let studentName = "";
+        let studentClass = "";
+        let timerInterval = null;
+        let timeElapsed = 0; // Đếm giây
+        let selectedOptionIdx = null;
+        let hasChecked = false;
+
+        // Custom Modal Alert
+        function showAlert(msg) {
+            document.getElementById("alert-message").innerText = msg;
+            document.getElementById("custom-alert").classList.remove("hidden");
+        }
+
+        function closeAlert() {
+            document.getElementById("custom-alert").classList.add("hidden");
+        }
+
+        // Bắt đầu làm bài thi
+        function startQuiz(event) {
+            event.preventDefault();
+            studentName = document.getElementById("student-name").value.trim();
+            studentClass = document.getElementById("student-class").value.trim();
+            
+            if (!studentName || !studentClass) {
+                showAlert("Vui lòng điền đầy đủ Họ tên và Lớp học trước khi làm bài nhé!");
+                return;
+            }
+
+            // Chuyển đổi màn hình
+            document.getElementById("start-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            document.getElementById("stats-header").classList.remove("hidden");
+
+            // Reset dữ liệu
+            currentQuestionIdx = 0;
+            score = 0;
+            timeElapsed = 0;
+            document.getElementById("score-display").innerText = score;
+
+            // Khởi chạy đồng hồ tính giờ
+            startTimer();
+
+            // Hiển thị câu hỏi đầu tiên
+            showQuestion();
+        }
+
+        // Quản lý đồng hồ tính giờ
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const mins = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const secs = (timeElapsed % 60).toString().padStart(2, '0');
+                document.getElementById("timer-display").innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        // Hiển thị thông tin câu hỏi
+        function showQuestion() {
+            hasChecked = false;
+            selectedOptionIdx = null;
+
+            const q = questionsData[currentQuestionIdx];
+
+            // Thiết lập thông tin tiêu đề và tiến trình
+            document.getElementById("part-title").innerText = q.part;
+            document.getElementById("question-index").innerText = `Câu ${currentQuestionIdx + 1}/15`;
+            
+            // Cập nhật thanh tiến trình (Progress Bar)
+            const percent = ((currentQuestionIdx + 1) / 15) * 100;
+            document.getElementById("progress-bar").style.width = `${percent}%`;
+
+            // Cập nhật nội dung câu hỏi và gợi ý
+            document.getElementById("question-text").innerHTML = q.question.replace(/\n/g, "<br>");
+            document.getElementById("hint-box").innerHTML = q.hint;
+            document.getElementById("hint-box").classList.add("hidden"); // Mặc định ẩn gợi ý
+
+            // Reset hộp thông báo kết quả chi tiết
+            document.getElementById("feedback-box").classList.add("hidden");
+
+            // Tạo danh sách đáp án / hoặc ô nhập văn bản dựa vào loại câu hỏi
+            const optionsContainer = document.getElementById("options-container");
+            optionsContainer.innerHTML = "";
+
+            if (q.type === "multiple_choice" || q.type === "true_false") {
+                // Thiết lập cấu hình lưới layout tùy dạng câu hỏi (Đúng/Sai nằm ngang)
+                if (q.type === "true_false") {
+                    optionsContainer.className = "grid grid-cols-1 sm:grid-cols-2 gap-4";
+                } else {
+                    optionsContainer.className = "grid grid-cols-1 gap-3.5";
+                }
+
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.onclick = () => selectOption(idx);
+                    btn.className = `option-card w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-orange-300 font-semibold flex items-center justify-between text-gray-800 bg-white`;
+                    btn.id = `opt-${idx}`;
+                    btn.innerHTML = `
+                        <span class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-500 border border-gray-200 option-letter">${String.fromCharCode(65 + idx)}</span>
+                            <span class="math-expr text-sm sm:text-base">${opt.text}</span>
+                        </span>
+                        <span class="check-icon hidden text-lg"></span>
+                    `;
+                    optionsContainer.appendChild(btn);
+                });
+
+                // Vô hiệu hóa nút kiểm tra cho đến khi học sinh chọn đáp án
+                const actionBtn = document.getElementById("action-btn");
+                actionBtn.disabled = true;
+                actionBtn.innerText = "Chọn một đáp án";
+                actionBtn.className = "px-8 py-3 bg-gray-300 text-gray-500 font-extrabold rounded-xl cursor-not-allowed";
+
+            } else if (q.type === "fill_blank") {
+                optionsContainer.className = "grid grid-cols-1 gap-3.5";
+
+                const wrapper = document.createElement("div");
+                wrapper.className = "w-full bg-slate-50 p-6 rounded-2xl border-2 border-dashed border-slate-200 shadow-inner";
+                wrapper.innerHTML = `
+                    <label class="block text-sm font-bold text-gray-600 mb-3 text-center">Nhập kết quả hoặc từ khóa của em vào ô bên dưới:</label>
+                    <input type="text" id="blank-input" oninput="onBlankInput()" 
+                        class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 text-gray-900 font-extrabold text-center text-xl bg-white shadow-md focus:shadow-orange-100 transition-all" 
+                        placeholder="Hãy gõ đáp án tại đây...">
+                `;
+                optionsContainer.appendChild(wrapper);
+
+                // Focus trực tiếp vào ô nhập
+                document.getElementById("blank-input").focus();
+
+                // Nút điều hướng ban đầu chưa cho click
+                const actionBtn = document.getElementById("action-btn");
+                actionBtn.disabled = true;
+                actionBtn.innerText = "Điền đáp án";
+                actionBtn.className = "px-8 py-3 bg-gray-200 text-gray-400 font-extrabold rounded-xl cursor-not-allowed";
+            }
+
+            // Kích hoạt MathJax biên dịch lại công thức toán học vừa nạp
+            MathJax.typesetPromise();
+        }
+
+        // Chọn một lựa chọn cho câu trắc nghiệm
+        function selectOption(idx) {
+            if (hasChecked) return; // Nếu đã kiểm tra đáp án thì không cho chọn lại
+
+            selectedOptionIdx = idx;
+
+            // Reset tất cả giao diện chọn trước đó
+            const options = questionsData[currentQuestionIdx].options;
+            options.forEach((_, i) => {
+                const el = document.getElementById(`opt-${i}`);
+                el.className = `option-card w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-orange-300 font-semibold flex items-center justify-between text-gray-800 bg-white`;
+                el.querySelector(".option-letter").className = "w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-500 border border-gray-200 option-letter";
+            });
+
+            // Tô màu xanh dương nổi bật cho phương án được lựa chọn tạm thời
+            const selectedEl = document.getElementById(`opt-${idx}`);
+            selectedEl.className = `option-card w-full text-left p-4 rounded-xl border-2 border-blue-500 bg-blue-50/50 font-semibold flex items-center justify-between text-blue-900`;
+            selectedEl.querySelector(".option-letter").className = "w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-sm font-bold text-white option-letter";
+
+            // Kích hoạt nút Kiểm tra đáp án
+            const actionBtn = document.getElementById("action-btn");
+            actionBtn.disabled = false;
+            actionBtn.innerText = "Kiểm tra đáp án 🔍";
+            actionBtn.className = "px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-extrabold rounded-xl shadow-md transition-all duration-150 transform active:scale-95 cursor-pointer";
+        }
+
+        // Kiểm tra xem ô điền khuyết có dữ liệu hay chưa để kích hoạt nút kiểm tra
+        function onBlankInput() {
+            if (hasChecked) return;
+            const val = document.getElementById("blank-input").value.trim();
+            const actionBtn = document.getElementById("action-btn");
+            if (val.length > 0) {
+                actionBtn.disabled = false;
+                actionBtn.innerText = "Kiểm tra đáp án 🔍";
+                actionBtn.className = "px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-extrabold rounded-xl shadow-md transition-all duration-150 transform active:scale-95 cursor-pointer";
+            } else {
+                actionBtn.disabled = true;
+                actionBtn.innerText = "Điền đáp án";
+                actionBtn.className = "px-8 py-3 bg-gray-200 text-gray-400 font-extrabold rounded-xl cursor-not-allowed";
+            }
+        }
+
+        // Ẩn hiện gợi ý
+        function toggleHint() {
+            const hintBox = document.getElementById("hint-box");
+            hintBox.classList.toggle("hidden");
+        }
+
+        // Xử lý nút Hành động (Kiểm tra / Tiếp tục)
+        function handleAction() {
+            if (!hasChecked) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        // Kiểm tra đáp án được chọn hoặc điền vào
+        function checkAnswer() {
+            hasChecked = true;
+            const q = questionsData[currentQuestionIdx];
+
+            const feedbackBox = document.getElementById("feedback-box");
+            const feedbackIcon = document.getElementById("feedback-icon");
+            const feedbackTitle = document.getElementById("feedback-title");
+            const feedbackRationale = document.getElementById("feedback-rationale");
+
+            // PHÂN BIỆT 2 DẠNG: TRẮC NGHIỆM / ĐIỀN KHUYẾT
+            if (q.type === "multiple_choice" || q.type === "true_false") {
+                const selectedOpt = q.options[selectedOptionIdx];
+
+                // Vô hiệu hóa click lại trên các ô phương án
+                q.options.forEach((_, i) => {
+                    document.getElementById(`opt-${i}`).style.cursor = "default";
+                });
+
+                // Hiển thị trạng thái Đúng / Sai cho từng ô
+                q.options.forEach((opt, idx) => {
+                    const el = document.getElementById(`opt-${idx}`);
+                    const iconContainer = el.querySelector(".check-icon");
+                    iconContainer.classList.remove("hidden");
+
+                    if (opt.isCorrect) {
+                        el.className = "option-card w-full text-left p-4 rounded-xl border-2 border-green-500 bg-green-50/60 font-semibold flex items-center justify-between text-green-900";
+                        el.querySelector(".option-letter").className = "w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-sm font-bold text-white option-letter";
+                        iconContainer.innerHTML = "✅";
+                    } else if (idx === selectedOptionIdx) {
+                        el.className = "option-card w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-50/60 font-semibold flex items-center justify-between text-red-900";
+                        el.querySelector(".option-letter").className = "w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-sm font-bold text-white option-letter";
+                        iconContainer.innerHTML = "❌";
+                    }
+                });
+
+                // Xử lý điểm số và hiển thị thông tin phản hồi
+                if (selectedOpt.isCorrect) {
+                    score += 10; // Mỗi câu đúng cộng 10 điểm (Tối đa 150 điểm)
+                    document.getElementById("score-display").innerText = score;
+                    
+                    feedbackBox.className = "mt-6 p-4 rounded-xl border border-green-200 bg-green-50/50 text-green-900";
+                    feedbackIcon.innerText = "🎉";
+                    feedbackTitle.innerText = "CHÍNH XÁC! CỰC KỲ XUẤT SẮC!";
+                } else {
+                    feedbackBox.className = "mt-6 p-4 rounded-xl border border-red-200 bg-red-50/50 text-red-900";
+                    feedbackIcon.innerText = "😢";
+                    feedbackTitle.innerText = "ƯỚC GÌ EM ĐÃ CHỌN ĐÁP ÁN KHÁC...";
+                }
+
+                feedbackRationale.innerHTML = selectedOpt.rationale;
+
+            } else if (q.type === "fill_blank") {
+                const blankInput = document.getElementById("blank-input");
+                const valInput = blankInput.value.trim().toLowerCase().replace(/\s+/g, ''); // Xóa khoảng trắng để check
+                blankInput.disabled = true;
+
+                // Kiểm tra xem câu trả lời có trùng khớp với phương án chấp nhận được nào không
+                const isCorrect = q.acceptableAnswers.some(ans => {
+                    return valInput === ans.toLowerCase().replace(/\s+/g, '');
+                });
+
+                if (isCorrect) {
+                    score += 10;
+                    document.getElementById("score-display").innerText = score;
+
+                    blankInput.className = "w-full px-4 py-4 border-2 border-green-500 bg-green-50 text-green-900 font-extrabold text-center text-xl rounded-xl shadow-inner";
+                    feedbackBox.className = "mt-6 p-4 rounded-xl border border-green-200 bg-green-50/50 text-green-900";
+                    feedbackIcon.innerText = "🎉";
+                    feedbackTitle.innerText = "CHÍNH XÁC! HOÀN TOÀN KHÔNG SAI!";
+                } else {
+                    blankInput.className = "w-full px-4 py-4 border-2 border-red-500 bg-red-50 text-red-900 font-extrabold text-center text-xl rounded-xl shadow-inner";
+                    feedbackBox.className = "mt-6 p-4 rounded-xl border border-red-200 bg-red-50/50 text-red-900";
+                    feedbackIcon.innerText = "😢";
+                    feedbackTitle.innerText = `ƯỚC GÌ EM ĐÃ ĐIỀN ĐÁP ÁN: "${q.acceptableAnswers[0]}"`;
+                }
+
+                feedbackRationale.innerHTML = q.rationale;
+            }
+
+            feedbackBox.classList.remove("hidden");
+
+            // Chuyển nút bấm sang trạng thái Tiếp Tục
+            const actionBtn = document.getElementById("action-btn");
+            if (currentQuestionIdx < 14) {
+                actionBtn.innerText = "Câu tiếp theo ➡️";
+            } else {
+                actionBtn.innerText = "Xem kết quả chung cuộc 🏁";
+            }
+            actionBtn.className = "px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl shadow-md transition-all duration-150 transform active:scale-95 cursor-pointer";
+
+            // Cho phép MathJax render lại các công thức toán trong phần giải thích chi tiết
+            MathJax.typesetPromise();
+        }
+
+        // Chuyển tiếp câu hỏi mới hoặc kết thúc
+        function nextQuestion() {
+            if (currentQuestionIdx < 14) {
+                currentQuestionIdx++;
+                showQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        // Hoàn thành và tính kết quả chung cuộc
+        function endQuiz() {
+            clearInterval(timerInterval);
+
+            // Chuyển đổi màn hình hiển thị
+            document.getElementById("quiz-screen").classList.add("hidden");
+            document.getElementById("stats-header").classList.add("hidden");
+            document.getElementById("result-screen").classList.remove("hidden");
+
+            // Điền dữ liệu tổng kết
+            const finalMins = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+            const finalSecs = (timeElapsed % 60).toString().padStart(2, '0');
+            const totalTimeStr = `${finalMins}:${finalSecs}`;
+
+            document.getElementById("final-name").innerText = `${studentName} (${studentClass})`;
+            document.getElementById("final-score").innerText = `${score}/150`;
+            document.getElementById("final-time").innerText = totalTimeStr;
+
+            // Đồng bộ kết quả lên Google Sheet giống như file mẫu toan7-01.html
+            sendDataToSheet(studentName, score, totalTimeStr);
+        }
+
+        // Gửi dữ liệu điểm thông qua Apps Script liên kết
+        function sendDataToSheet(name, finalScore, finalTime) {
+            const statusMsg = document.getElementById("status-msg");
+            statusMsg.innerHTML = "⏳ Đang kết nối máy chủ gửi điểm...";
+            statusMsg.className = "text-sm font-semibold text-blue-700 mb-6 bg-blue-50 py-3 px-4 rounded-xl border border-blue-200";
+
+            const payload = {
+                action: "save_toan_pizza", // Giữ đúng action đồng bộ của hệ thống pizza
+                hoTen: `${name} - Lớp ${studentClass}`,
+                diem: finalScore,
+                thoiGian: finalTime
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", // Hoạt động ở chế độ iframe không dính chặn CORS chéo miền
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                statusMsg.innerHTML = "✅ Kết quả của em đã được khóa trên bảng vàng thi đấu Pizza!";
+                statusMsg.className = "text-sm font-semibold text-green-700 mb-6 bg-green-50 py-3 px-4 rounded-xl border border-green-200";
+            })
+            .catch(error => {
+                statusMsg.innerHTML = "❌ Gửi điểm thất bại do lỗi mạng! Em chụp lại màn hình này gửi Thầy nha!";
+                statusMsg.className = "text-sm font-semibold text-red-700 mb-6 bg-red-50 py-3 px-4 rounded-xl border border-red-200";
+            });
+        }
+
+        // Chạy lại bài từ đầu
+        function restartQuiz() {
+            document.getElementById("result-screen").classList.add("hidden");
+            document.getElementById("start-screen").classList.remove("hidden");
+            document.getElementById("student-name").value = "";
+            document.getElementById("student-class").value = "";
+        }
+    </script>
+</body>
+</html>

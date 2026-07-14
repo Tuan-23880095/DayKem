@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 2: Mệnh đề chứa lượng từ & Khái niệm Tập hợp (Toán 10)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id=\"MathJax-script\" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Cài đặt chung: Nền trắng, chữ đen dựa theo file mẫu */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tiêu đề chính nhiều màu sắc, bắt mắt */
+        h1 {
+            color: #e11d48; /* Đỏ hồng chủ đạo */
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Tiêu đề các phần lớn */
+        h2 {
+            color: #2563eb; /* Xanh dương */
+            border-bottom: 2px solid #ebf8ff;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* Tiêu đề mục nhỏ */
+        h3 {
+            color: #0d9488; /* Xanh ngọc */
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        /* Danh sách định dạng chuẩn */
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Các hộp nhấn mạnh và ghi chú đồng bộ mẫu */
+        .intro-box {
+            background-color: #f0fdf4; /* Xanh lá nhạt nhã nhặn cho lời mở đầu */
+            border-left: 5px solid #16a34a;
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 25px;
+            font-size: 15.5px;
+        }
+
+        .highlight-box {
+            background-color: #fff7ed; /* Cam nhạt */
+            border-left: 5px solid #ea580c;
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 15px 0;
+        }
+
+        .note-box {
+            background-color: #fef2f2; /* Đỏ nhạt */
+            border-left: 5px solid #dc2626;
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 15px 0;
+        }
+
+        .box-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .math-expr {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 17px;
+            background-color: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
+            display: inline-block;
+            min-width: 60%;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        strong {
+            color: #000000;
+            font-weight: 700;
+        }
+        
+        .teacher-advice {
+            background-color: #f3e8ff; /* Tím nhạt cho lời khuyên của thầy */
+            border-left: 5px solid #9333ea;
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 35px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Toán 10 - Buổi 2</h1>
+        <div class="subtitle">Hệ thống lý thuyết trọng tâm: Mệnh đề chứa lượng từ và Tập hợp</div>
+
+        <div class="intro-box">
+            <p><strong>Chào các em!</strong> Tiếp nối kiến thức của buổi học đầu tiên, hôm nay thầy trò chúng ta sẽ bước sang Buổi học thứ 2. Trong buổi này, chúng ta sẽ hoàn thành nốt phần cuối của bài Mệnh đề và làm quen với một khái niệm đóng vai trò nền tảng cho toàn bộ chương trình Toán cấp 3: <strong>Tập hợp</strong>.</p>
+        </div>
+
+        <h2>PHẦN 1: MỆNH ĐỀ CHỨA KÍ HIỆU $\forall$ VÀ $\exists$</h2>
+        <p>Ở buổi 1, các em đã học mệnh đề chứa biến (ví dụ: $P(x): x^2 > 0$). Bản thân mệnh đề chứa biến chưa xác định được tính đúng sai. Tuy nhiên, nếu ta thêm các lượng từ "với mọi" hoặc "tồn tại" vào trước, nó sẽ trở thành một mệnh đề trọn vẹn.</p>
+        
+        <h3>1. Khái niệm và tính đúng sai</h3>
+        <ul>
+            <li>
+                <strong>Kí hiệu $\forall$ (đọc là "với mọi"):</strong> Mệnh đề "$ \forall x \in M, P(x) $" mang ý nghĩa: với mọi giá trị $x$ thuộc tập hợp $M$, tính chất $P(x)$ đều đúng.
+                <div class="note-box">
+                    <div class="box-title">🎯 Tính đúng/sai của lượng từ $\forall$:</div>
+                    <p>Mệnh đề này <strong>chỉ đúng</strong> khi với mọi $x_0 \in M$ nó đều đúng; và <strong>sai</strong> khi chỉ cần chỉ ra được một giá trị $x_0 \in M$ làm cho nó sai.</p>
+                </div>
+            </li>
+            <li>
+                <strong>Kí hiệu $\exists$ (đọc là "tồn tại"):</strong> Mệnh đề "$ \exists x \in M, P(x) $" mang ý nghĩa: có ít nhất một giá trị $x$ thuộc tập hợp $M$ sao cho tính chất $P(x)$ đúng.
+                <div class="note-box">
+                    <div class="box-title">🎯 Tính đúng/sai của lượng từ $\exists$:</div>
+                    <p>Mệnh đề này <strong>đúng</strong> khi chỉ cần tìm được ít nhất một giá trị $x_0 \in M$ làm cho nó đúng; và <strong>sai</strong> khi với mọi $x_0 \in M$ nó đều sai.</p>
+                </div>
+            </li>
+        </ul>
+
+        <h3>2. Phủ định của mệnh đề chứa $\forall, \exists$</h3>
+        <p>Đây là dạng bài tập rất hay gặp trong các bài thi trắc nghiệm. Để phủ định, các em nhớ nguyên tắc <em>"đảo lượng từ và phủ định tính chất"</em>:</p>
+        
+        <div class="highlight-box">
+            <div class="box-title">💡 Quy tắc phủ định nhanh:</div>
+            <ul>
+                <li>Phủ định của mệnh đề "$ \forall x \in M, P(x) $" là mệnh đề: <div class="math-expr">$ \exists x \in M, \overline{P(x)} $</div></li>
+                <li>Phủ định của mệnh đề "$ \exists x \in M, P(x) $" là mệnh đề: <div class="math-expr">$ \forall x \in M, \overline{P(x)} $</div></li>
+            </ul>
+        </div>
+
+        <h2>PHẦN 2: KHÁI NIỆM TẬP HỢP VÀ CÁCH BIỂU DIỄN</h2>
+        
+        <h3>1. Khái niệm tập hợp</h3>
+        <ul>
+            <li><strong>Tập hợp</strong> là một khái niệm cơ bản của toán học, dùng để chỉ một nhóm đối tượng nào đó hoàn toàn xác định. Mỗi đối tượng trong nhóm gọi là một <strong>phần tử</strong> của tập hợp đó.</li>
+            <li>Người ta thường kí hiệu tập hợp bằng các chữ cái in hoa $A, B, C...$ và kí hiệu phần tử bằng các chữ cái in thường $a, b, c...$</li>
+            <li>Để chỉ $a$ là một phần tử của tập hợp $A$, ta viết $a \in A$ (đọc là $a$ thuộc $A$). Để chỉ $a$ không phải là phần tử của tập hợp $A$, ta viết $a \notin A$.</li>
+            <li><strong>Tập rỗng:</strong> Là tập hợp không chứa bất kì phần tử nào, kí hiệu là $\emptyset$.</li>
+        </ul>
+
+        <h3>2. Các cách xác định (biểu diễn) một tập hợp</h3>
+        <p>Để xác định một tập hợp, ta thường dùng 2 cách chính và 1 cách minh họa bằng hình ảnh:</p>
+        
+        <ul>
+            <li>
+                <strong>Cách 1: Liệt kê các phần tử.</strong> 
+                <p>Các phần tử được viết trong dấu ngoặc nhọn $\{ \}$, phân cách nhau bởi dấu chấm phẩy (;).</p>
+                <div class="note-box">
+                    <div class="box-title">⚠️ Lưu ý cực kì quan trọng:</div>
+                    <p>Các phần tử có thể được viết theo thứ tự tuỳ ý, và mỗi phần tử chỉ được liệt kê <strong>đúng một lần</strong>.</p>
+                </div>
+            </li>
+            <li>
+                <strong>Cách 2: Chỉ ra tính chất đặc trưng cho các phần tử.</strong> 
+                <p>Thay vì liệt kê, ta chỉ ra tính chất chung để nhận biết các phần tử thuộc tập hợp đó. Cách này thường dùng cho các tập hợp có số lượng phần tử rất lớn hoặc vô hạn.</p>
+            </li>
+            <li>
+                <strong>Cách 3: Sử dụng biểu đồ Ven.</strong> 
+                <p>Người ta thường minh hoạ một tập hợp trực quan bằng một hình phẳng được bao quanh bởi một đường cong khép kín (như hình tròn, hình bầu dục), gọi là biểu đồ Ven.</p>
+            </li>
+        </ul>
+
+        <h2>PHẦN 3: TẬP HỢP CON VÀ TẬP HỢP BẰNG NHAU</h2>
+        
+        <h3>1. Tập hợp con</h3>
+        <ul>
+            <li>
+                <strong>Định nghĩa:</strong> Nếu mọi phần tử của tập hợp $A$ đều là phần tử của tập hợp $B$ thì ta nói $A$ là một <strong>tập con</strong> của tập $B$, kí hiệu $A \subset B$ (đọc là $A$ chứa trong $B$) hoặc $B \supset A$ (đọc là $B$ chứa $A$).
+            </li>
+            <li>Nếu $A$ không phải là tập con của $B$, ta kí hiệu là $A \not\subset B$.</li>
+            <li>
+                <strong>Hai quy ước hiển nhiên cần nhớ:</strong>
+                <ul>
+                    <li>$A \subset A$ với mọi tập hợp $A$.</li>
+                    <li>$\emptyset \subset A$ với mọi tập hợp $A$ <em>(Tập rỗng là con của mọi tập hợp)</em>.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>2. Hai tập hợp bằng nhau</h3>
+        <ul>
+            <li><strong>Định nghĩa:</strong> Hai tập hợp $A$ và $B$ gọi là bằng nhau, kí hiệu $A = B$, nếu $A \subset B$ và $B \subset A$.</li>
+            <li>Nói một cách đơn giản, hai tập hợp bằng nhau nếu mỗi phần tử của tập hợp này cũng là phần tử của tập hợp kia và ngược lại (chúng có chung chính xác các phần tử).</li>
+        </ul>
+
+        <div class="teacher-advice">
+            <div class="box-title">👨‍🏫 Lời khuyên của thầy:</div>
+            <p>Phần khái niệm Tập hợp nhìn qua có vẻ đơn giản vì các em đã làm quen ở bậc THCS. Tuy nhiên, ở lớp 10, các bài toán tìm tập hợp con hay tìm giao/hợp của các tập hợp (mà chúng ta sẽ học ở bài sau) sẽ kết hợp với việc giải phương trình, bất phương trình bậc cao, đòi hỏi kĩ năng tính toán và tư duy đại số sắc bén hơn rất nhiều. Các em hãy đọc thật kĩ phần lý thuyết này nhé!</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

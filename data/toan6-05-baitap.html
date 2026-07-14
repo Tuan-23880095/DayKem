@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Toán 6 - Buổi 5: Quan hệ chia hết và Dấu hiệu chia hết</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/dist/external/tex-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #16a085;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            background: #ffffff;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 6px solid var(--secondary-color);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-style: italic;
+            margin: 5px 0;
+            font-size: 15px;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            background: #f1f2f6;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border: 1px solid #e4e7eb;
+        }
+
+        .info-field {
+            border-bottom: 1px dotted #7f8c8d;
+            padding-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .level-title {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .level-desc {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            padding-left: 5px;
+            font-size: 14px;
+        }
+
+        .exercise-group {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .question {
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        .sub-question {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        /* Vùng trống giả lập dòng kẻ ly cho học sinh làm bài tự luận */
+        .answer-space {
+            border: 1px solid #dcdde1;
+            height: 100px;
+            border-radius: 4px;
+            margin-top: 12px;
+            margin-bottom: 15px;
+            background-image: linear-gradient(#f8f9fa 96%, #e4e7eb 4%);
+            background-size: 100% 25px;
+        }
+
+        .answer-space.large {
+            height: 150px;
+        }
+
+        .pedagogical-hint {
+            background-color: #fff9db;
+            border-left: 4px solid #f59f00;
+            padding: 15px;
+            margin-top: 40px;
+            border-radius: 0 4px 4px 0;
+            font-size: 14px;
+        }
+
+        .pedagogical-hint strong {
+            color: #f59f00;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #95a5a6;
+            font-size: 13px;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 20px;
+        }
+
+        /* Tối ưu hóa định dạng khi in ra giấy */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 10px;
+                max-width: 100%;
+            }
+            .answer-space {
+                background-image: linear-gradient(#fff 96%, #dcdde1 4%);
+            }
+            .pedagogical-hint {
+                display: none; /* Ẩn gợi ý sư phạm khi in phiếu cho học sinh */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Phiếu Bài Tập Toán Lớp 6</h1>
+        <p>Buổi 5: Quan hệ chia hết và Dấu hiệu chia hết (cho 2, 3, 5, 9)</p>
+        <p><em>Mã tài liệu: toan6-05-baitap</em></p>
+    </div>
+
+    <div class="student-info">
+        <div class="info-field">Họ và tên học sinh: .............................................................</div>
+        <div class="info-field">Lớp: .....................................................................................</div>
+        <div class="info-field">Ngày làm bài: ..................................................................</div>
+        <div class="info-field">Điểm số: .............................................................................</div>
+    </div>
+
+    <div class="level-title">Mức độ 1: Cơ bản (Nhận biết và Áp dụng trực tiếp)</div>
+    <div class="level-desc">Mục tiêu: Ghi nhớ dấu hiệu nhận biết ở chữ số tận cùng và tổng các chữ số, hiểu tính chất chia hết của một tổng.</div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 1: Trong các số sau: $\(324; 248; 2020; 2025\)$:</div>
+        <div class="sub-question">a) Số nào chia hết cho $\(2\$)?</div>
+        <div class="sub-question">b) Số nào chia hết cho \(5\)?</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 2: Trong các số sau: \(117; 3447; 5085; 136\):</div>
+        <div class="sub-question">a) Số nào chia hết cho \(3\)?</div>
+        <div class="sub-question">b) Số nào chia hết cho \(9\)?</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 3: Không thực hiện phép tính, hãy dùng tính chất chia hết của một tổng (hiệu) để xét xem các biểu thức sau có chia hết cho \(6\) không?</div>
+        <div class="sub-question">a) \(42 + 54\)</div>
+        <div class="sub-question">b) \(600 - 15\)</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 4: Điền ký hiệu \(\vdots\) (chia hết) hoặc \(\not\vdots\) (không chia hết) vào chỗ trống:</div>
+        <div class="sub-question">a) \(120 \quad \dots \quad 5\)</div>
+        <div class="sub-question">b) \(423 \quad \dots \quad 2\)</div>
+        <div class="sub-question">c) \((10 + 25 + 34 + 2000) \quad \dots \quad 5\)</div>
+        <div class="sub-question">d) \((135 + 756) \quad \dots \quad 9\)</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 5: Thay dấu \(*\) bởi một chữ số để số \(\overline{345*}\) thỏa mãn:</div>
+        <div class="sub-question">a) Chia hết cho \(2\).</div>
+        <div class="sub-question">b) Chia hết cho \(5\).</div>
+        <div class="answer-space"></div>
+    </div>
+
+
+    <div class="level-title">Mức độ 2: Nâng cao (Tư duy suy luận và Kết hợp dấu hiệu)</div>
+    <div class="level-desc">Mục tiêu: Đòi hỏi kết hợp đồng thời từ 2 đến 3 dấu hiệu chia hết và làm quen với dạng toán chia có dư.</div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 6: Tìm các chữ số \(x, y\) biết rằng số \(\overline{23x5y}\) chia hết cho cả \(2, 5\) và \(9\).</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 7: Dùng cả ba chữ số \(4; 5; 9\) để ghép thành số có ba chữ số (mỗi chữ số chỉ dùng một lần):</div>
+        <div class="sub-question">a) Nhỏ nhất và chia hết cho \(2\).</div>
+        <div class="sub-question">b) Lớn nhất và chia hết cho \(5\).</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 8: Tìm chữ số thích hợp thay cho dấu \(*\) để số \(\overline{5432*}\) thỏa mãn điều kiện:</div>
+        <div class="sub-question">a) Chia hết cho \(3\).</div>
+        <div class="sub-question">b) Chia hết cho \(9\).</div>
+        <div class="sub-question">c) Chia hết cho \(3\) nhưng không chia hết cho \(9\).</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 9: Tìm các chữ số \(a, b\) để số \(\overline{4a5b}\) chia cho \(2\), chia cho \(5\) và chia cho \(9\) đều dư \(1\).</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 10: Cho tổng \(A = 12 + 15 + 21 + x\) với \(x\) là số tự nhiên. Dựa vào tính chất chia hết của một tổng, hãy cho biết:</div>
+        <div class="sub-question">a) Điều kiện của \(x\) để \(A\) chia hết cho \(3\)?</div>
+        <div class="sub-question">b) Điều kiện của \(x\) để \(A\) không chia hết cho \(3\)?</div>
+        <div class="answer-space"></div>
+    </div>
+
+
+    <div class="level-title">Mức độ 3: Vận dụng (Bài toán thực tế)</div>
+    <div class="level-desc">Mục tiêu: Chuyển đổi ngôn ngữ đời sống thực tế thành ngôn ngữ Toán học (quan hệ chia hết), rèn tư duy giải quyết vấn đề.</div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 11: Mật mã của một chiếc két sắt là một số có 3 chữ số có dạng \(\overline{5a6}\). Biết số này chia hết cho \(9\). Em hãy tìm mật mã để mở chiếc két sắt đó.</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 12: Bốn lớp 6A, 6B, 6C, 6D lần lượt có \(35; 36; 39; 40\) học sinh.</div>
+        <div class="sub-question">a) Lớp nào có thể chia thành \(5\) tổ có cùng số tổ viên (không thừa bạn nào)?</div>
+        <div class="sub-question">b) Lớp nào có thể chia tất cả các bạn thành các "đôi bạn học tập" (nhóm 2 người)?</div>
+        <div class="answer-space"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 13: Bà Huệ có \(19\) quả xoài và \(40\) quả quýt. Bà có thể chia số quả này thành \(5\) phần bằng nhau (mỗi phần có cùng số xoài, cùng số quýt) mà không phải cắt quả nào ra được không? Hãy dùng toán học để giải thích cho bà.</div>
+        <div class="answer-space large"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 14: Lớp 6A có \(42\) học sinh. Trong giờ Thể dục, thầy giáo muốn xếp cả lớp thành các hàng có số lượng học sinh bằng nhau. Hỏi thầy giáo có thể xếp lớp thành \(3\) hàng hoặc xếp thành \(5\) hàng được không? Vì sao?</div>
+        <div class="answer-space large"></div>
+    </div>
+
+    <div class="exercise-group">
+        <div class="question">Bài 15: Cô thủ thư thư viện trường có \(135\) quyển vở và \(45\) chiếc bút. Cô muốn chia đều số vở và số bút đó thành \(9\) phần thưởng cho học sinh xuất sắc. Không cần thực hiện phép chia để tính số lượng cụ thể, em hãy vận dụng tính chất chia hết để giải thích xem cô có thể chia đều được không?</div>
+        <div class="answer-space large"></div>
+    </div>
+
+    <div class="pedagogical-hint">
+        <strong>* Gợi ý sư phạm cho giáo viên:</strong> Với các bài ở mức độ 3 (Vận dụng), giáo viên nên yêu cầu học sinh hoạt động nhóm, cùng nhau thảo luận để dịch từ cụm từ thực tế <em>"chia đều / chia thành các phần bằng nhau"</em> sang khái niệm <em>"chia hết"</em> của Toán học trước khi bắt tay vào trình bày lời giải.
+    </div>
+
+    <div class="footer">
+        Chúc các em làm bài tốt! &copy; 2026 - Phiếu bài tập Toán 6 THCS
+    </div>
+</div>
+
+</body>
+</html>

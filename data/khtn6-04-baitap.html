@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập KHTN 6 - Buổi 4</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&family=Roboto:wght=400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Thiết lập chung: Nền trắng, chữ đen chính */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        /* Tiêu đề chính rực rỡ */
+        .header-title {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            color: #0284c7; /* Xanh dương sáng */
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* Khung thông tin học sinh điền */
+        .student-info {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần lớn (Phần I, Phần II) */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 35px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .section-title.homework {
+            background: linear-gradient(135deg, #f59e0b, #d97706); /* Màu cam cho bài tư duy, đố vui */
+        }
+
+        /* Tiêu đề Dạng bài và Phương pháp giải */
+        .exercise-type {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: #0f172a;
+            margin-top: 25px;
+            font-weight: 700;
+            border-left: 4px solid #10b981; /* Vạch xanh lá */
+            padding-left: 10px;
+        }
+
+        .method-box {
+            background-color: #f0fdf4; /* Nền xanh lá nhạt */
+            border: 1px solid #bbf7d0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            font-size: 14.5px;
+            color: #166534;
+        }
+
+        /* Định dạng câu hỏi trắc nghiệm */
+        .question-block {
+            margin-bottom: 20px;
+            padding: 5px 10px;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        /* Định dạng danh sách câu hỏi toán học/đố vui dạng lưới (Grid) */
+        .grid-questions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 30px;
+            margin-bottom: 25px;
+            padding-left: 5px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: baseline;
+            padding: 8px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .question-label {
+            font-weight: bold;
+            color: #475569;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+
+        /* Khung câu hỏi tự luận dài */
+        .essay-block {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Khung ghi chú / Lời khuyên ở cuối */
+        .footer-note {
+            background-color: #fff1f2; /* Nền hồng nhạt */
+            border: 1px solid #fecdd3;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 2px 6px rgba(225, 29, 72, 0.05);
+        }
+
+        .note-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #e11d48;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .note-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Ẩn bớt hiệu ứng đổ bóng khi in ra giấy */
+        @media print {
+            body { padding: 0; }
+            .worksheet-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    
+    <div class="header-title">📋 PHIẾU BÀI TẬP KHOA HỌC TỰ NHIÊN 6 - BUỔI 4</div>
+    <div class="subtitle">Chủ đề: Thực hành đo khối lượng và Đo nhiệt độ</div>
+
+    <div class="student-info">
+        <div>Họ và tên học sinh: ........................................................</div>
+        <div>Lớp: ..................</div>
+    </div>
+
+    <div class="section-title">PHẦN A: TRẮC NGHIỆM NHANH (TRÒ CHƠI "AI NHANH HƠN")</div>
+    <div class="method-box">
+        <strong>Thể lệ:</strong> Đọc kĩ câu hỏi và chọn duy nhất một phương án trả lời đúng nhất. Hãy chạy đua với thời gian xem ai hoàn thành vòng trắc nghiệm nhanh và chính xác nhất!
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 1:</strong> Trên vỏ một hộp bánh có ghi 500g, con số này có ý nghĩa gì?</div>
+        <div class="grid-questions" style="margin-bottom: 0;">
+            <div class="option-item">A. Khối lượng bánh trong hộp.</div>
+            <div class="option-item">B. Khối lượng cả bánh trong hộp và vỏ hộp.</div>
+            <div class="option-item">C. Sức nặng của hộp bánh.</div>
+            <div class="option-item">D. Thể tích của hộp bánh.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 2:</strong> Cho các bước đo nhiệt độ như sau: 
+            <br><em>(1) Thực hiện phép đo nhiệt độ.</em>
+            <br><em>(2) Ước lượng nhiệt độ của vật.</em>
+            <br><em>(3) Hiệu chỉnh nhiệt kế.</em>
+            <br><em>(4) Lựa chọn nhiệt kế phù hợp.</em>
+            <br><em>(5) Đọc và ghi kết quả đo.</em>
+            <br>Sắp xếp nào sau đây là đúng thứ tự các bước đo nhiệt độ?
+        </div>
+        <div class="grid-questions" style="grid-template-columns: 1fr; gap: 5px; margin-bottom: 0;">
+            <div class="option-item">A. (2) $\rightarrow$ (4) $\rightarrow$ (3) $\rightarrow$ (1) $\rightarrow$ (5).</div>
+            <div class="option-item">B. (1) $\rightarrow$ (4) $\rightarrow$ (2) $\rightarrow$ (3) $\rightarrow$ (5).</div>
+            <div class="option-item">C. (1) $\rightarrow$ (2) $\rightarrow$ (3) $\rightarrow$ (4) $\rightarrow$ (5).</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 3:</strong> Nhiệt kế y tế (thủy ngân) không thể đo nhiệt độ nào trong các nhiệt độ sau đây?</div>
+        <div class="grid-questions" style="margin-bottom: 0;">
+            <div class="option-item">A. Nhiệt độ của cơ thể người.</div>
+            <div class="option-item">B. Nhiệt độ của nước ấm.</div>
+            <div class="option-item">C. Nhiệt độ của một lò luyện kim.</div>
+            <div class="option-item">D. Nhiệt độ của trán khi bị sốt.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 4:</strong> Khi cân một túi hoa quả, kết quả đọc được trên màn hình là 14533 g. Theo em, Độ chia nhỏ nhất (ĐCNN) của chiếc cân đã dùng là bao nhiêu?</div>
+        <div class="grid-questions" style="margin-bottom: 0;">
+            <div class="option-item">A. 1 g.</div>
+            <div class="option-item">B. 5 g.</div>
+            <div class="option-item">C. 10 g.</div>
+            <div class="option-item">D. 100 g.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 5:</strong> Đặc điểm nào sau đây <strong>không đúng</strong> khi nói về sự dãn nở vì nhiệt của chất lỏng?</div>
+        <div class="grid-questions" style="grid-template-columns: 1fr; gap: 5px; margin-bottom: 0;">
+            <div class="option-item">A. Chất lỏng nở ra khi nóng lên.</div>
+            <div class="option-item">B. Chất lỏng co lại khi lạnh đi.</div>
+            <div class="option-item">C. Khi nhiệt độ thay đổi thì thể tích chất lỏng thay đổi.</div>
+            <div class="option-item">D. Độ dãn nở vì nhiệt của tất cả các chất lỏng đều giống hệt như nhau.</div>
+        </div>
+    </div>
+
+
+    <div class="section-title homework">PHẦN B: TỰ LUẬN & TÌNH HUỐNG (ĐỐ VUI TƯ DUY)</div>
+
+    <div class="exercise-type">BÀI 6: THỬ TÀI ĐỔI ĐƠN VỊ SIÊU TỐC ⚡</div>
+    <div class="method-box">
+        <strong>Nhiệm vụ:</strong> Áp dụng quy tắc nhân chia lũy thừa cơ số 10 hoặc bảng quy đổi đơn vị đo khối lượng truyền thống để hoàn thành nhanh phần khuyết.
+    </div>
+    <p>Điền số thích hợp vào chỗ trống:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>650 g = ......................... kg</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>5 tấn = ......................... kg</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>2,4 tạ = ......................... kg</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>100 kg = ......................... yến</span>
+        </div>
+    </div>
+
+    <div class="exercise-type">BÀI 7: TÌNH HUỐNG Y TẾ KHẨN CẤP 🩺</div>
+    <div class="essay-block">
+        <p><strong>Tình huống:</strong> Bạn An nói rằng: <em>"Khi mượn nhiệt kế y tế của người khác, để đảm bảo an toàn không lây bệnh, mình cần phải nhúng nhiệt kế thủy ngân này vào nước đang sôi để sát trùng rồi hãy dùng".</em></p>
+        <p>Theo em, bạn An làm như thế có đúng không? Giải thích rõ hiện tượng khoa học gì sẽ xảy ra nếu bạn An làm như vậy.</p>
+        <p><strong>Bài làm:</strong></p>
+        <p style="color: #cbd5e1;">............................................................................................................................................................................</p>
+        <p style="color: #cbd5e1;">............................................................................................................................................................................</p>
+    </div>
+
+    <div class="exercise-type">BÀI 8: ĐỐ VUI CÂN NÃO (NHIỆM VỤ KHÓ) 🧠</div>
+    <div class="essay-block">
+        <p><strong>Thử thách:</strong> Làm thế nào để em có thể lấy ra đúng <strong>1 kg gạo</strong> từ một bao đựng 10 kg gạo, trong khi trên bàn thí nghiệm lúc này chỉ có duy nhất một chiếc <strong>cân đĩa (cân Roberval)</strong> và một quả cân loại <strong>4 kg</strong>?</p>
+        <p><em>Hãy trình bày các bước thực hiện san sớt gạo của em để thuyết phục giáo viên nhé!</em></p>
+        <p><strong>Bài làm:</strong></p>
+        <p style="color: #cbd5e1;">............................................................................................................................................................................</p>
+        <p style="color: #cbd5e1;">............................................................................................................................................................................</p>
+        <p style="color: #cbd5e1;">............................................................................................................................................................................</p>
+    </div>
+
+    <div class="footer-note">
+        <div class="note-title">💡 Ghi chú dành cho học sinh khi làm bài phép đo:</div>
+        <div class="note-content">
+            <ul>
+                <li>Đối với bài tập đọc giá trị trên thang chia: Luôn nhìn mắt <strong>thẳng đứng, vuông góc</strong> với mặt vạch chia, không nhìn chéo để tránh sai số.</li>
+                <li>Mọi phép tính quy đổi đơn vị lớn ra đơn vị nhỏ (Tấn $\rightarrow$ tạ $\rightarrow$ yến $\rightarrow$ kg) ta thực hiện phép nhân, ngược lại từ đơn vị nhỏ ra đơn vị lớn ta thực hiện phép chia cho các bội số số 10 phù hợp.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

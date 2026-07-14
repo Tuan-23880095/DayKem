@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Toán 10 - Buổi 2</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Thiết lập chung: Tối ưu trên mọi thiết bị */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Lời chào mở đầu */
+        .intro-box {
+            background-color: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        /* Tiêu đề chính */
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            color: #0f172a;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section-desc {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 20px;
+            font-size: 14.5px;
+        }
+
+        /* Định dạng câu hỏi */
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .question-title {
+            font-weight: 500;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Grid hiển thị 4 đáp án trắc nghiệm tự động co giãn theo màn hình */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            padding-left: 15px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .option-label {
+            font-weight: 700;
+            color: #2563eb;
+            margin-right: 8px;
+            min-width: 20px;
+        }
+
+        /* Định dạng phần Đúng / Sai */
+        .sub-question-list {
+            list-style-type: none;
+            padding-left: 15px;
+            margin: 5px 0;
+        }
+
+        .sub-question-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            background-color: #f8fafc;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .sub-question-text {
+            flex-grow: 1;
+            padding-right: 15px;
+        }
+
+        .true-false-box {
+            font-weight: 700;
+            font-size: 13px;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: #ffffff;
+            white-space: nowrap;
+        }
+
+        /* Gợi ý nhỏ dưới mỗi câu tự luận */
+        .hint-text {
+            font-size: 13.5px;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Lời khuyên của thầy cuối bài */
+        .footer-note {
+            background-color: #fef3c7;
+            border-left: 5px solid #d97706;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .note-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 6px;
+        }
+
+        .note-content {
+            color: #78350f;
+            text-align: justify;
+        }
+
+        /* Tối ưu riêng cho thiết bị di động cực nhỏ */
+        @media (max-width: 480px) {
+            .worksheet-container {
+                padding: 15px;
+                margin: 5px auto;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .sub-question-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .true-false-box {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="worksheet-container">
+        <h1>Bài Tập Thực Hành Buổi 2: Kí Hiệu $\forall, \exists$ Và Tập Hợp</h1>
+        <div class="subtitle">(Số lượng: 12 bài | Thời gian làm bài dự kiến: 30 phút)</div>
+
+        <div class="intro-box">
+            <strong>Chào các em!</strong> Thầy rất vui vì các em đã nắm vững lý thuyết của Buổi 2: Mệnh đề chứa kí hiệu $\forall, \exists$ và Khái niệm Tập hợp. Như đã hứa, để giúp các em rèn luyện tư duy và phản xạ giải đề, thầy đã biên soạn một hệ thống bài tập thực hành bám sát cấu trúc thi mới nhất. Bài tập hôm nay gồm 12 câu, bao phủ toàn bộ lý thuyết từ lượng từ $\forall, \exists$, cách biểu diễn tập hợp, cho đến tập con và hai tập hợp bằng nhau. Các em hãy lấy giấy bút ra, bấm giờ và bắt đầu làm bài nhé!
+        </div>
+
+        <div class="section-title">PHẦN 1: CÂU TRẮC NGHIỆM TỰ LUẬN NHIỀU LỰA CHỌN</div>
+        <div class="section-desc">Chọn một phương án đúng nhất cho mỗi câu sau:</div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 1.</strong> Mệnh đề “Có một số cộng với 2 bằng 1” được kí hiệu là?</div>
+            <div class="options-grid">
+                <div class="option-item"><span class="option-label">A.</span> $\forall x, x+2=1$.</div>
+                <div class="option-item"><span class="option-label">B.</span> $\exists x, x+2=1$.</div>
+                <div class="option-item"><span class="option-label">C.</span> $\exists x \in \mathbb{R}, x+2=1$.</div>
+                <div class="option-item"><span class="option-label">D.</span> $\forall x \in \mathbb{R}, x+2=1$.</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 2.</strong> Cho tập hợp $A = \{x \in \mathbb{R} \mid x^2 - x - 6 = 0\}$. Tập $A$ được viết dưới dạng liệt kê phần tử là?</div>
+            <div class="options-grid">
+                <div class="option-item"><span class="option-label">A.</span> $A = \{-2; 3\}$.</div>
+                <div class="option-item"><span class="option-label">B.</span> $A = \{-3; 2\}$.</div>
+                <div class="option-item"><span class="option-label">C.</span> $A = \{2; 3\}$.</div>
+                <div class="option-item"><span class="option-label">D.</span> $A = \{-2; -3\}$.</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 3.</strong> Cho tập hợp $A = \{1; 2; 3; 4; 5\}$. Tập hợp nào dưới đây là tập hợp con của tập $A$?</div>
+            <div class="options-grid">
+                <div class="option-item"><span class="option-label">A.</span> $\{0; 1; 2\}$.</div>
+                <div class="option-item"><span class="option-label">B.</span> $\{1; 2; 3\}$.</div>
+                <div class="option-item"><span class="option-label">C.</span> $\{4; 5; 6\}$.</div>
+                <div class="option-item"><span class="option-label">D.</span> $\{1; 3; 5; 7\}$.</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 4.</strong> Cho tập $X = \{1; 2; 3; 4\}$. Tập $X$ có bao nhiêu tập con?</div>
+            <div class="options-grid">
+                <div class="option-item"><span class="option-label">A.</span> 4.</div>
+                <div class="option-item"><span class="option-label">B.</span> 8.</div>
+                <div class="option-item"><span class="option-label">C.</span> 16.</div>
+                <div class="option-item"><span class="option-label">D.</span> 32.</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 5.</strong> Cho hai tập hợp $A = \{1; 2; a\}$ và $B = \{1; a^2\}$. Với giá trị nào của $a$ thì $A = B$?</div>
+            <div class="options-grid">
+                <div class="option-item"><span class="option-label">A.</span> $a = 2$.</div>
+                <div class="option-item"><span class="option-label">B.</span> $a = -2$.</div>
+                <div class="option-item"><span class="option-label">C.</span> $a = \sqrt{2}$.</div>
+                <div class="option-item"><span class="option-label">D.</span> $a = 1$.</div>
+            </div>
+        </div>
+
+
+        <div class="section-title">PHẦN 2: CÂU TRẮC NGHIỆM ĐÚNG/SAI</div>
+        <div class="section-desc">Xét tính đúng (Đ) hoặc sai (S) của các ý a, b, c, d trong mỗi câu sau:</div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 6.</strong> Xét tính đúng sai của các khẳng định sau đối với mệnh đề $P$: "$\forall x \in \mathbb{R}, x^2 + 1 > 0$":</div>
+            <ul class="sub-question-list">
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>a)</strong> Mệnh đề $P$ có thể phát biểu bằng lời là: "Bình phương của mọi số thực cộng với 1 đều lớn hơn 0".</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>b)</strong> Mệnh đề $P$ là một mệnh đề sai.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>c)</strong> Mệnh đề phủ định của $P$ là $\overline{P}$: "$\exists x \in \mathbb{R}, x^2 + 1 \le 0$".</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>d)</strong> Mệnh đề phủ định $\overline{P}$ là một mệnh đề đúng.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 7.</strong> Cho tập hợp $A$ gồm các số chính phương có một chữ số.</div>
+            <ul class="sub-question-list">
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>a)</strong> Tập hợp $A$ có 4 phần tử.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>b)</strong> Nếu liệt kê, ta có $A = \{1; 4; 9\}$.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>c)</strong> Số $0$ là một phần tử thuộc tập $A$ (tức là $0 \in A$).</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>d)</strong> Số $16$ thuộc tập hợp $A$ (tức là $16 \in A$).</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 8.</strong> Cho tập hợp $A = \{x \in \mathbb{N} \mid x < 5\}$. </div>
+            <ul class="sub-question-list">
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>a)</strong> Số phần tử của tập hợp $A$ là 4.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>b)</strong> Viết dưới dạng liệt kê, $A = \{0; 1; 2; 3; 4\}$.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>c)</strong> Số tập hợp con của tập $A$ là 32.</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+                <li class="sub-question-item">
+                    <span class="sub-question-text"><strong>d)</strong> Tập hợp "$\{1; 2\}$" là một tập con của $A$ ($\{1; 2\} \subset A$).</span>
+                    <span class="true-false-box">Đúng / Sai</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="section-title">PHẦN 3: CÂU TỰ LUẬN / TRẢ LỜI NGẮN</div>
+        <div class="section-desc">Đọc kỹ yêu cầu và trình bày đáp án hoặc điền kết quả cuối cùng:</div>
+
+        <div class="question-block">
+            <div class="question-title">
+                <strong>Câu 9.</strong> Dùng kí hiệu $\forall$ hoặc $\exists$ để viết mệnh đề sau và xét tính đúng sai của nó: 
+                <p><em>"Mọi số thực khác 0 nhân với nghịch đảo của nó bằng 1".</em></p>
+                <span class="hint-text">💡 Gợi ý: Nhớ kĩ điều kiện khác 0.</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 10.</strong> Viết tập hợp sau bằng cách chỉ ra tính chất đặc trưng của các phần tử: $A = \{0; 3; 6; 9; 12; \dots\}$.</div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title"><strong>Câu 11.</strong> Cho tập hợp $A = \{x \in \mathbb{Z} \mid 2x^2 - x - 1 = 0\}$. Hãy viết tập hợp $A$ dưới dạng liệt kê các phần tử.</div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">
+                <strong>Câu 12.</strong> Viết tất cả các tập hợp con của tập hợp $A = \{a; b\}$.
+                <span class="hint-text">💡 Chú ý: Đừng quên tập rỗng và chính nó nhé.</span>
+            </div>
+        </div>
+
+
+        <div class="footer-note">
+            <div class="note-title">👨‍🏫 Lời khuyên của thầy:</div>
+            <div class="note-content">
+                Bài tập phần Tập hợp rất dễ bị "sập bẫy" ở các điều kiện của tập số (như $\mathbb{N}, \mathbb{Z}, \mathbb{R}$). Ví dụ ở Câu 11, các em giải phương trình xong nhớ phải đối chiếu xem nghiệm Đúng có thuộc tập số nguyên $\mathbb{Z}$ không nhé! Các em làm bài cẩn thận, làm xong thầy sẽ công bố đáp án chi tiết. Chúc các em làm bài tốt!
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

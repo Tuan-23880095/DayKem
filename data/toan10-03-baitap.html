@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Tập Hợp - Toán 10</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .heading-font {
+            font-family: 'Lexend', sans-serif;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; color: black; }
+            .worksheet-box { border: none; shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between antialiased">
+
+    <header class="bg-white border-b-2 border-sky-600 shadow-sm py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo KHTN" class="h-14 w-auto object-contain">
+                <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo BDVH" class="h-14 w-auto object-contain rounded">
+            </div>
+            <div class="text-center md:text-right">
+                <h1 class="text-xl font-bold heading-font text-sky-800 tracking-tight">TRUNG TÂM BỒI DƯỠNG VĂN HÓA</h1>
+                <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Đại học Khoa học Tự nhiên TP.HCM</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 md:p-8 max-w-4xl">
+        <div class="worksheet-box bg-white p-6 md:p-10 rounded-2xl border border-slate-200 shadow-sm">
+            
+            <div class="text-center border-b pb-6 mb-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold heading-font text-slate-800 uppercase">Chuyên đề: Tập hợp và các phép toán</h2>
+                <p class="text-sm text-slate-500 mt-2 font-medium">Tài liệu học tập dành cho học sinh khối 10 chuyên và nâng cao</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 border border-slate-200 p-4 rounded-xl mb-8 font-medium text-sm text-slate-600">
+                <div>Họ và tên học sinh: ........................................................................</div>
+                <div>Lớp: ........................................................................</div>
+            </div>
+
+            <section class="mb-10">
+                <div class="flex items-center gap-2 bg-gradient-to-r from-sky-700 to-indigo-700 text-white px-4 py-2.5 rounded-lg font-bold shadow-sm">
+                    <span class="text-lg">🎯</span>
+                    <h3 class="heading-font uppercase tracking-wide">Phần 1: Mức độ cơ bản (5 Bài)</h3>
+                </div>
+                <div class="mt-3 p-3 bg-sky-50 border border-sky-100 rounded-lg text-sm text-sky-800 font-semibold">
+                    💡 <strong>Mục tiêu:</strong> Nắm vững các phép toán Giao, Hợp, Hiệu và Phần bù trên các tập hợp liệt kê và trên trục số thực.
+                </div>
+
+                <div class="space-y-6 mt-6">
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-3"><span class="text-sky-600">Câu 1 (Trắc nghiệm):</span> Cho hai tập hợp $A = \{1; 2; 3; 4; 5\}$ và $B = \{1; 3; 5; 7; 9\}$. Tập hợp $A \cap B$ là:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-4 text-slate-700">
+                            <div><strong>A.</strong> $\{1; 3; 5\}$.</div>
+                            <div><strong>B.</strong> $\{1; 2; 3; 4; 5; 7; 9\}$.</div>
+                            <div><strong>C.</strong> $\{2; 4\}$.</div>
+                            <div><strong>D.</strong> $\{7; 9\}$.</div>
+                        </div>
+                        <button onclick="toggleHint('hint-1')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-1" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Gợi ý:</strong> Tập hợp $A \cap B$ gồm những phần tử vừa thuộc $A$, vừa thuộc $B$. Xem xét các số xuất hiện ở cả hai tập hợp. 
+                            <br><span class="font-bold text-emerald-700">Đáp án chính xác: A.</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-3"><span class="text-sky-600">Câu 2 (Trắc nghiệm):</span> Cho hai tập hợp $A = [-4; 3)$ và $B = (-2; +\infty)$. Tập hợp $A \setminus B$ bằng:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-4 text-slate-700">
+                            <div><strong>A.</strong> $[-4; -2)$.</div>
+                            <div><strong>B.</strong> $[-4; -2]$.</div>
+                            <div><strong>C.</strong> $[3; +\infty)$.</div>
+                            <div><strong>D.</strong> $[-4; 3)$.</div>
+                        </div>
+                        <button onclick="toggleHint('hint-2')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-2" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Gợi ý:</strong> Phép hiệu $A \setminus B$ giữ lại các phần tử thuộc $A$ nhưng không thuộc $B$. Vì $B$ lấy từ lớn hơn $-2$, nên những phần tử nhỏ hơn hoặc bằng $-2$ thuộc $A$ sẽ được giữ lại $\rightarrow [-4; -2]$.
+                            <br><span class="font-bold text-emerald-700">Đáp án chính xác: B.</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-sky-600">Câu 3 (Tự luận):</span> Cho các tập hợp $A = \{1; 3; 5; 7; 9\}$, $B = \{1; 2; 3; 4\}$, $C = \{3; 4; 5; 6\}$. Hãy xác định các tập hợp sau:</p>
+                        <p class="pl-4 text-slate-700">a) $A \cap B$.<br>b) $A \cup C$.<br>c) $A \setminus (B \cap C)$.</p>
+                        <button onclick="toggleHint('hint-3')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-3" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Lời giải vắn tắt:</strong><br>
+                            a) $A \cap B = \{1; 3\}$.<br>
+                            b) $A \cup C = \{1; 3; 4; 5; 6; 7; 9\}$.<br>
+                            c) Tìm $B \cap C = \{3; 4\}$, sau đó lấy $A \setminus \{3; 4\} = \{1; 5; 7; 9\}$.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-sky-600">Câu 4 (Tự luận):</span> Xác định các tập hợp sau bằng cách vẽ trên trục số:</p>
+                        <p class="pl-4 text-slate-700">a) $[-3; 5] \cap (2; 7)$.<br>b) $(-\infty; 0] \cup (-1; 2)$.<br>c) $\mathbb{R} \setminus (-\infty; 3)$.</p>
+                        <button onclick="toggleHint('hint-4')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-4" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Kết quả:</strong><br>
+                            a) $(2; 5]$.<br>
+                            b) $(-\infty; 2)$.<br>
+                            c) $[3; +\infty)$.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-3"><span class="text-sky-600">Câu 5 (Trắc nghiệm Đúng/Sai):</span> Cho tập hợp $A = \{x \in \mathbb{R} \mid -2 \le x \le 5\}$ và $B = \{x \in \mathbb{Z} \mid x^2 - x - 6 = 0\}$. Xét tính đúng/sai của các mệnh đề sau:</p>
+                        <div class="space-y-2 pl-4 text-slate-700 text-sm">
+                            <p><strong>a)</strong> Tập hợp $B$ viết dưới dạng liệt kê là $B = \{-2; 3\}$.</p>
+                            <p><strong>b)</strong> $A \cap B = \{-2; 3\}$.</p>
+                            <p><strong>c)</strong> $A \setminus B = (-2; 3)$.</p>
+                            <p><strong>d)</strong> $B \setminus A = \emptyset$.</p>
+                        </div>
+                        <button onclick="toggleHint('hint-5')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-5" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Đáp án:</strong><br>
+                            - Giải phương trình $x^2 - x - 6 = 0$ được $x = -2$ hoặc $x = 3$. Cả hai đều thuộc $\mathbb{Z}$ nên <strong>a) ĐÚNG</strong>.<br>
+                            - Vì cả $-2$ và $3$ đều nằm trong đoạn $A = [-2; 5]$ nên $A \cap B = \{-2; 3\} \rightarrow$ <strong>b) ĐÚNG</strong>.<br>
+                            - Hiệu của một tập số thực trừ đi tập rời rạc không thể ra một khoảng liên tục đơn giản như vậy $\rightarrow$ <strong>c) SAI</strong>.<br>
+                            - Do $B \subset A$ nên $B \setminus A = \emptyset \rightarrow$ <strong>d) ĐÚNG</strong>.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-10">
+                <div class="flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-2.5 rounded-lg font-bold shadow-sm">
+                    <span class="text-lg">⚡</span>
+                    <h3 class="heading-font uppercase tracking-wide">Phần 2: Mức độ nâng cao (4 Bài)</h3>
+                </div>
+                <div class="mt-3 p-3 bg-amber-50 border border-amber-100 rounded-lg text-sm text-amber-800 font-semibold">
+                    💡 <strong>Mục tiêu:</strong> Xử lý các bài toán tập hợp có chứa tham số $m$. Yêu cầu kỹ năng vẽ trục số và biện luận cẩn thận.
+                </div>
+
+                <div class="space-y-6 mt-6">
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-amber-600">Câu 6 (Tự luận):</span> Cho hai tập hợp $A = [-1; 7]$ và $B = (m - 1; m + 5)$ với $m$ là một tham số thực. Tìm $m$ để:</p>
+                        <p class="pl-4 text-slate-700">a) $B \subset A$.<br>b) $A \cap B = \emptyset$.</p>
+                        <button onclick="toggleHint('hint-6')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-6" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            a) $B \subset A \iff \begin{cases} m - 1 \ge -1 \\ m + 5 \le 7 \end{cases} \iff \begin{cases} m \ge 0 \\ m \le 2 \end{cases} \iff 0 \le m \le 2$.<br>
+                            b) $A \cap B = \emptyset \iff m + 5 \le -1$ hoặc $m - 1 \ge 7 \iff m \le -6$ hoặc $m \ge 8$.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-amber-600">Câu 7 (Tự luận):</span> Cho hai tập hợp $A = (-\infty; m + 1)$ và $B = [3; +\infty)$ với $m$ là một tham số thực. Tìm $m$ để:</p>
+                        <p class="pl-4 text-slate-700">a) $A \cup B = \mathbb{R}$.<br>b) $A \cap B$ chứa đúng 5 số nguyên.</p>
+                        <button onclick="toggleHint('hint-7')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-7" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            a) Để phủ hết $\mathbb{R}$ thì hai khoảng phải gối đầu hoặc chạm nhau: $m + 1 \ge 3 \iff m \ge 2$.<br>
+                            b) Giao của hai tập hợp là $[3; m + 1)$. Để chứa đúng 5 số nguyên (đó phải là các số $3, 4, 5, 6, 7$) thì giá trị biên phải thỏa mãn: $7 < m + 1 \le 8 \iff 6 < m \le 7$.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-amber-600">Câu 8 (Tự luận):</span> Cho $A = [m; m + 2]$ và $B = [n; n + 1]$ với $m, n$ là các tham số thực. Tìm điều kiện của các số $m$ và $n$ để tập hợp $A \cap B$ chứa đúng một phần tử.</p>
+                        <button onclick="toggleHint('hint-8')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-8" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            Vì $A$ và $B$ đều là các đoạn đóng, để chúng giao nhau tại duy nhất một điểm thì điểm đầu của đoạn này phải trùng với điểm cuối của đoạn kia.<br>
+                            Trường hợp 1: $m + 2 = n$.<br>
+                            Trường hợp 2: $n + 1 = m$.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-3"><span class="text-amber-600">Câu 9 (Trắc nghiệm):</span> Cho hai tập hợp $A = \{x \in \mathbb{R} \mid x + 3 < 4 + 2x\}$ và $B = \{x \in \mathbb{R} \mid 5x - 3 < 4x - 1\}$. Tất cả các số nguyên thuộc cả hai tập hợp $A$ và $B$ là:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-4 text-slate-700">
+                            <div><strong>A.</strong> 0 và 1.</div>
+                            <div><strong>B.</strong> -1; 0; 1 và 2.</div>
+                            <div><strong>C.</strong> 1 và 2.</div>
+                            <div><strong>D.</strong> 1.</div>
+                        </div>
+                        <button onclick="toggleHint('hint-9')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-9" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn nhanh:</strong><br>
+                            - Giải bất phương trình của $A$: $x + 3 < 4 + 2x \iff x > -1 \implies A = (-1; +\infty)$.<br>
+                            - Giải bất phương trình của $B$: $5x - 3 < 4x - 1 \iff x < 2 \implies B = (-\infty; 2)$.<br>
+                            - Suy ra $A \cap B = (-1; 2)$. Các số nguyên nằm trong khoảng này là $0$ và $1$.<br>
+                            <span class="font-bold text-emerald-700">Đáp án chính xác: A.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <div class="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 py-2.5 rounded-lg font-bold shadow-sm">
+                    <span class="text-lg">📊</span>
+                    <h3 class="heading-font uppercase tracking-wide">Phần 3: Mức độ vận dụng (4 Bài)</h3>
+                </div>
+                <div class="mt-3 p-3 bg-emerald-50 border border-emerald-100 rounded-lg text-sm text-emerald-800 font-semibold">
+                    💡 <strong>Mục tiêu:</strong> Dùng Biểu đồ Ven để giải quyết các bài toán đếm số lượng trong thực tế.
+                </div>
+
+                <div class="space-y-6 mt-6">
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-emerald-600">Câu 10 (Tự luận):</span> Lớp 10A1 có 40 học sinh, trong đó có 20 học sinh thích môn Ngữ Văn, 18 học sinh thích môn Toán, 4 học sinh thích cả hai môn Ngữ Văn và Toán. Hỏi có bao nhiêu học sinh không thích môn nào trong hai môn Ngữ Văn và Toán?</p>
+                        <button onclick="toggleHint('hint-10')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-10" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            Số học sinh thích ít nhất một môn (Văn hoặc Toán) là: $20 + 18 - 4 = 34$ học sinh.<br>
+                            Số học sinh không thích môn nào là: $40 - 34 = 6$ học sinh.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-emerald-600">Câu 11 (Tự luận):</span> Trong một cuộc khảo sát người tiêu dùng, trong 100 người uống cà phê được khảo sát, có 55 người thêm đường, 65 người thêm sữa và 30 người thêm cả đường và sữa. Trong số 100 người đó:</p>
+                        <p class="pl-4 text-slate-700">a) Có bao nhiêu người thêm ít nhất đường hoặc sữa?<br>b) Có bao nhiêu người không thêm đường hoặc sữa?</p>
+                        <button onclick="toggleHint('hint-11')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-11" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            a) Số người thêm ít nhất đường hoặc sữa: $55 + 65 - 30 = 90$ người.<br>
+                            b) Số người không thêm cả hai: $100 - 90 = 10$ người.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-emerald-600">Câu 12 (Tự luận):</span> Bạn An thống kê số ngày có mưa và có nắng tại sân nhà của mình vào khung giờ từ 12 giờ đến 13 giờ trong tháng 8 năm 2024 (tháng 8 có 31 ngày) và được kết quả như sau: 12 ngày có mưa, 24 ngày có nắng, trong đó có 10 ngày vừa có cả mưa và có cả nắng. Trong khoảng thời gian bạn An thống kê, số ngày không có mưa và cũng không có nắng là bao nhiêu?</p>
+                        <button onclick="toggleHint('hint-12')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-12" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            Tổng số ngày có thời tiết đặc biệt (mưa hoặc nắng): $12 + 24 - 10 = 26$ ngày.<br>
+                            Số ngày thời tiết bình thường (không mưa, không nắng): $31 - 26 = 5$ ngày.
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl hover:border-slate-300 transition">
+                        <p class="font-bold text-slate-800 mb-2"><span class="text-emerald-600">Câu 13 (Vận dụng cao):</span> Lớp 10A có 45 học sinh trong đó có 25 em học giỏi môn Toán, 23 em học giỏi môn Lý, 20 em học giỏi môn Hóa, 11 em học giỏi cả môn Toán và môn Lý, 8 em học giỏi cả môn Lý và môn Hóa, 9 em học giỏi cả môn Toán và môn Hóa. Hỏi lớp 10A có bao nhiêu bạn học giỏi cả ba môn Toán, Lý, Hóa? (Biết rằng mỗi học sinh trong lớp học giỏi ít nhất một trong ba môn Toán, Lý, Hóa).</p>
+                        <button onclick="toggleHint('hint-13')" class="no-print mt-4 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 rounded-md transition flex items-center gap-1">💡 Xem gợi ý</button>
+                        <div id="hint-13" class="hidden mt-3 p-3 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg italic">
+                            <strong>Hướng dẫn giải:</strong><br>
+                            Sử dụng công thức đếm phần tử cho 3 tập hợp:<br>
+                            $|T \cup L \cup H| = |T| + |L| + |H| - |T \cap L| - |L \cap H| - |T \cap H| + |T \cap L \cap H|$<br>
+                            Thay số vào: $45 = 25 + 23 + 20 - 11 - 8 - 9 + |T \cap L \cap H|$<br>
+                            $45 = 40 + |T \cap L \cap H| \implies |T \cap L \cap H| = 5$.<br>
+                            Vậy có <strong>5 bạn</strong> học giỏi cả 3 môn.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="mt-12 p-6 bg-gradient-to-br from-rose-50 to-orange-50 border border-rose-200 rounded-2xl shadow-inner">
+                <h4 class="heading-font font-bold text-rose-700 text-base flex items-center gap-2 mb-3">
+                    <span>👨‍🏫</span> Lời dặn của thầy Đinh Quốc Tuấn:
+                </h4>
+                <ul class="list-disc pl-5 text-sm text-slate-700 space-y-2.5 font-medium">
+                    <li>Ở <strong>Phần 2</strong>, khi làm việc với trục số có tham số, các em nhớ chú ý thật kỹ dấu ngoặc vuông <code class="bg-white px-1 border rounded">[ ]</code> và ngoặc tròn <code class="bg-white px-1 border rounded">( )</code> để quyết định xem có lấy dấu "<span class="font-bold text-rose-600">=</span>" hay không nhé. Đây là lỗi sai phổ biến nhất của học sinh lớp 10.</li>
+                    <li>Ở <strong>Phần 3</strong>, các em hãy vẽ các vòng tròn giao nhau (Biểu đồ Ven) ra nháp, điền số liệu từ phần lõi (giao của nhiều tập hợp nhất) ra dần bên ngoài để tránh bị tính trùng lặp.</li>
+                    <li class="text-slate-900 font-semibold">Các em tự giác làm bài, hết thời gian thầy sẽ gửi đáp án chi tiết và giải đáp thắc mắc nhé! Chúc các em làm bài xuất sắc!</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-4 text-center text-xs font-medium border-t border-slate-800">
+        <div>© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</div>
+    </footer>
+
+    <script>
+        function toggleHint(id) {
+            const hintBox = document.getElementById(id);
+            if (hintBox.classList.contains('hidden')) {
+                hintBox.classList.remove('hidden');
+            } else {
+                hintBox.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

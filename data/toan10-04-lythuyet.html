@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyên Đề Tập Số Thực & Phép Toán Trên Trục Số - ThS. Đinh Quốc Tuấn</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#005596',
+                        brandGold: '#F2A900',
+                        brandDark: '#1E293B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                typeset: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        .math-jax-render {
+            font-size: 1.1em;
+        }
+        /* Custom scrollbar for seamless premium look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+            .print-card {
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-950 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- HEADER TRƯỜNG & TRUNG TÂM -->
+    <header class="bg-white border-b border-slate-200 py-6 px-4 md:px-8 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Logos -->
+            <div class="flex items-center gap-4">
+                <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo ĐH KHTN" class="h-16 w-auto object-contain">
+                <div class="h-12 w-px bg-slate-300"></div>
+                <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo BDVH" class="h-14 w-auto object-contain rounded">
+            </div>
+            
+            <!-- Credentials -->
+            <div class="text-center md:text-right">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-widest">ĐẠI HỌC QUỐC GIA TP. HỒ CHÍ MINH</div>
+                <div class="text-base font-bold text-brandBlue">TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN</div>
+                <div class="text-sm font-semibold text-slate-700">TRUNG TÂM BỒI DƯỠNG VĂN HÓA KHTN</div>
+                <div class="text-xs text-rose-600 font-bold mt-1 bg-rose-50 px-2 py-0.5 rounded-full inline-block">Chương trình Đổi mới Giáo dục phổ thông 2018</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- SIDEBAR CHỈ MỤC & NHẬN ĐỊNH SƯ PHẠM (COL 4) -->
+        <aside class="lg:col-span-4 space-y-6 no-print">
+            
+            <!-- GÓC ĐỒNG NGHIỆP - 15 NĂM KINH NGHIỆM -->
+            <div class="bg-gradient-to-br from-indigo-50 to-sky-50 border border-indigo-100 rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-3xl">☕</span>
+                    <div>
+                        <h4 class="font-display font-bold text-indigo-900">Góc Sư Phạm</h4>
+                        <p class="text-xs text-indigo-700">Gửi người đồng nghiệp 15 năm kinh nghiệm</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-700 leading-relaxed italic">
+                    "Bước sang Buổi 4, học sinh sẽ chuyển từ việc tư duy trên các tập hợp rời rạc sang tư duy trên một dải số liên tục (trục số thực). Đây là bước đệm cực kỳ quan trọng để các em giải được bất phương trình sau này..."
+                </p>
+                <div class="mt-4 pt-4 border-t border-indigo-200/60 flex items-center justify-between text-xs text-indigo-800 font-semibold">
+                    <span>Mức độ: Cơ bản $\rightarrow$ Vận dụng cao</span>
+                    <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded">Buổi 4</span>
+                </div>
+            </div>
+
+            <!-- CHỈ MỤC CHUYÊN ĐỀ -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm sticky top-6 space-y-4">
+                <h3 class="font-display font-bold text-slate-900 border-b pb-3 flex items-center gap-2">
+                    <span>📋</span> Mục lục bài giảng
+                </h3>
+                <nav class="space-y-1 text-sm font-medium">
+                    <a href="#phan1" class="flex items-center gap-2.5 p-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-brandBlue transition-all">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        Phần 1: Mức Độ Cơ Bản
+                    </a>
+                    <a href="#phan2" class="flex items-center gap-2.5 p-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-brandBlue transition-all">
+                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                        Phần 2: Mức Độ Nâng Cao
+                    </a>
+                    <a href="#mo-phong" class="flex items-center gap-2.5 p-2.5 rounded-lg text-brandBlue bg-blue-50/50 hover:bg-blue-100/50 transition-all">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                        Mô Phỏng Trực Quan (Tương tác)
+                    </a>
+                    <a href="#phan3" class="flex items-center gap-2.5 p-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-brandBlue transition-all">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        Phần 3: Mức Độ Vận Dụng ($m$)
+                    </a>
+                </nav>
+
+                <div class="pt-4 border-t border-slate-100 flex gap-2">
+                    <button onclick="window.print()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition flex items-center justify-center gap-2">
+                        🖨️ In Phiếu Bài Giảng
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- NỘI DUNG CHÍNH (COL 8) -->
+        <article class="lg:col-span-8 space-y-12">
+            
+            <!-- TIÊU ĐỀ BÀI GIẢNG -->
+            <div class="text-center lg:text-left space-y-2">
+                <div class="text-xs font-bold text-brandBlue tracking-widest uppercase">Toán Học Lớp 10 • Học Phần I</div>
+                <h1 class="font-display font-extrabold text-3xl md:text-4xl text-slate-900 tracking-tight leading-tight">
+                    BUỔI 4: TẬP SỐ THỰC VÀ CÁC PHÉP TOÁN TRÊN TRỤC SỐ
+                </h1>
+                <p class="text-sm md:text-base text-slate-600">
+                    Hệ thống hóa tập hợp số thực $\mathbb{R}$ • Biểu diễn khoảng, đoạn • Các thuật toán Giao ($\cap$), Hợp ($\cup$), Hiệu ($\setminus$) trên trục số liên tục.
+                </p>
+                <div class="h-1 w-20 bg-gradient-to-r from-brandBlue to-sky-500 rounded-full mx-auto lg:mx-0 mt-4"></div>
+            </div>
+
+            <!-- PHẦN 1: MỨC ĐỘ CƠ BẢN -->
+            <section id="phan1" class="scroll-mt-6 space-y-6 print-card">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                    <span class="text-2xl font-bold text-white bg-emerald-500 w-8 h-8 rounded-lg flex items-center justify-center">I</span>
+                    <h2 class="font-display font-extrabold text-xl text-slate-900">PHẦN 1: MỨC ĐỘ CƠ BẢN</h2>
+                </div>
+                <p class="text-sm font-semibold text-emerald-700 bg-emerald-50/50 px-3 py-1.5 rounded-lg inline-block">
+                    🎯 Mục tiêu: Nhớ lại hệ thống tập hợp số và thành thạo biểu diễn Khoảng, Đoạn, Nửa khoảng trên trục số.
+                </p>
+
+                <!-- Mối quan hệ các tập hợp số -->
+                <div class="space-y-4">
+                    <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <span class="text-emerald-500">1.</span> Mối quan hệ giữa các tập hợp số
+                    </h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Ta đã biết cấu trúc các tập hợp số qua các cấp học: Tập số tự nhiên $\mathbb{N}$, tập số nguyên $\mathbb{Z}$, tập số hữu tỉ $\mathbb{Q}$, và tập số thực $\mathbb{R}$. Giữa chúng có mối quan hệ bao hàm chặt chẽ:
+                        $$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$
+                    </p>
+
+                    <!-- Interactive Venn diagram mockup (interactive click below) -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+                        <!-- Left: SVG concentric diagram -->
+                        <div class="w-full md:w-1/2 flex justify-center">
+                            <svg class="w-64 h-64" viewBox="0 0 200 200">
+                                <!-- R Circle -->
+                                <circle cx="100" cy="100" r="95" fill="none" stroke="#2563eb" stroke-width="2" class="cursor-pointer hover:fill-blue-50/30 transition-all" onclick="showVennInfo('R')"/>
+                                <text x="100" y="25" fill="#2563eb" font-family="Quicksand" font-weight="bold" font-size="12" text-anchor="middle">R (Số thực)</text>
+                                
+                                <!-- Q Circle -->
+                                <circle cx="100" cy="110" r="70" fill="none" stroke="#059669" stroke-width="2" class="cursor-pointer hover:fill-emerald-50/30 transition-all" onclick="showVennInfo('Q')"/>
+                                <text x="100" y="55" fill="#059669" font-family="Quicksand" font-weight="bold" font-size="12" text-anchor="middle">Q (Hữu tỉ)</text>
+                                
+                                <!-- Z Circle -->
+                                <circle cx="100" cy="120" r="48" fill="none" stroke="#d97706" stroke-width="2" class="cursor-pointer hover:fill-amber-50/30 transition-all" onclick="showVennInfo('Z')"/>
+                                <text x="100" y="85" fill="#d97706" font-family="Quicksand" font-weight="bold" font-size="12" text-anchor="middle">Z (Nguyên)</text>
+                                
+                                <!-- N Circle -->
+                                <circle cx="100" cy="130" r="28" fill="none" stroke="#dc2626" stroke-width="2" class="cursor-pointer hover:fill-red-50/30 transition-all" onclick="showVennInfo('N')"/>
+                                <text x="100" y="118" fill="#dc2626" font-family="Quicksand" font-weight="bold" font-size="12" text-anchor="middle">N</text>
+                            </svg>
+                        </div>
+                        <!-- Right: Interactive display -->
+                        <div class="w-full md:w-1/2 space-y-3">
+                            <h4 class="font-display font-bold text-slate-900 text-sm tracking-wider uppercase">Bản đồ cấu trúc số thực</h4>
+                            <div id="venn-display-box" class="bg-slate-50 p-4 rounded-xl border border-slate-200 min-h-[120px] flex flex-col justify-center">
+                                <p class="text-xs text-slate-500 italic">Nhấp vào một vòng tròn ở biểu đồ bên cạnh để xem mô tả định nghĩa học thuật chi tiết.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Các tập con thường dùng -->
+                <div class="space-y-4">
+                    <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <span class="text-emerald-500">2.</span> Các tập con thường dùng của $\mathbb{R}$
+                    </h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Khác với tập số nguyên, tập số thực chứa vô số số hữu tỉ và vô tỉ xen kẽ nhau dày đặc. Do đó, ta không thể liệt kê phần tử mà phải dùng ký hiệu đặc biệt (Khoảng, Đoạn, Nửa khoảng) để biểu diễn các tập con liên tục:
+                    </p>
+
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl shadow-sm bg-white">
+                        <table class="w-full border-collapse text-left text-sm text-slate-700">
+                            <thead class="bg-slate-50 text-slate-900 font-bold">
+                                <tr>
+                                    <th class="p-3 border-b">Tên gọi</th>
+                                    <th class="p-3 border-b">Kí hiệu</th>
+                                    <th class="p-3 border-b">Định nghĩa tập hợp</th>
+                                    <th class="p-3 border-b">Hình ảnh trục số</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-3 font-semibold text-slate-900">Khoảng</td>
+                                    <td class="p-3 text-brandBlue font-bold">$(a; b)$</td>
+                                    <td class="p-3">$\{x \in \mathbb{R} \mid a < x < b\}$</td>
+                                    <td class="p-3">
+                                        <svg class="w-36 h-6" viewBox="0 0 150 24">
+                                            <line x1="5" y1="12" x2="145" y2="12" stroke="#cbd5e1" stroke-width="2"/>
+                                            <line x1="40" y1="12" x2="110" y2="12" stroke="#2563eb" stroke-width="3"/>
+                                            <text x="40" y="16" fill="#2563eb" font-family="Inter" font-weight="extrabold" font-size="14" text-anchor="middle">(</text>
+                                            <text x="110" y="16" fill="#2563eb" font-family="Inter" font-weight="extrabold" font-size="14" text-anchor="middle">)</text>
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-slate-900">Đoạn</td>
+                                    <td class="p-3 text-brandBlue font-bold">$[a; b]$</td>
+                                    <td class="p-3">$\{x \in \mathbb{R} \mid a \le x \le b\}$</td>
+                                    <td class="p-3">
+                                        <svg class="w-36 h-6" viewBox="0 0 150 24">
+                                            <line x1="5" y1="12" x2="145" y2="12" stroke="#cbd5e1" stroke-width="2"/>
+                                            <line x1="40" y1="12" x2="110" y2="12" stroke="#059669" stroke-width="3"/>
+                                            <text x="40" y="16" fill="#059669" font-family="Inter" font-weight="extrabold" font-size="14" text-anchor="middle">[</text>
+                                            <text x="110" y="16" fill="#059669" font-family="Inter" font-weight="extrabold" font-size="14" text-anchor="middle">]</text>
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-slate-900">Nửa khoảng</td>
+                                    <td class="p-3 text-brandBlue font-bold">$[a; b)$</td>
+                                    <td class="p-3">$\{x \in \mathbb{R} \mid a \le x < b\}$</td>
+                                    <td class="p-3">
+                                        <svg class="w-36 h-6" viewBox="0 0 150 24">
+                                            <line x1="5" y1="12" x2="145" y2="12" stroke="#cbd5e1" stroke-width="2"/>
+                                            <line x1="40" y1="12" x2="110" y2="12" stroke="#d97706" stroke-width="3"/>
+                                            <text x="40" y="16" fill="#d97706" font-family="Inter" font-weight="extrabold" font-size="14" text-anchor="middle">[</text>
+                                            <text x="110" y="16" fill="#d97706" font-family="Inter" font-weight="extrabold" font-size="14" text-anchor="middle">)</text>
+                                        </svg>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-xl text-amber-900 text-sm">
+                        <strong class="font-bold">⚠️ Quy tắc bắt buộc:</strong> Các kí hiệu vô cực $-\infty$ (âm vô cực) và $+\infty$ (dương vô cực) <strong>luôn luôn</strong> được đóng bởi dấu ngoặc tròn, không bao giờ dùng ngoặc vuông vì vô cực không phải là một số thực xác định để lấy dấu bằng.
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHẦN 2: MỨC ĐỘ NÂNG CAO (GIAO, HỢP, HIỆU) -->
+            <section id="phan2" class="scroll-mt-6 space-y-6 print-card">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                    <span class="text-2xl font-bold text-white bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center">II</span>
+                    <h2 class="font-display font-extrabold text-xl text-slate-900">PHẦN 2: MỨC ĐỘ NÂNG CAO (PHÉP TOÁN TRỤC SỐ)</h2>
+                </div>
+                <p class="text-sm font-semibold text-blue-700 bg-blue-50/50 px-3 py-1.5 rounded-lg inline-block">
+                    ⚡ Trọng tâm: Rèn luyện thuật toán gạch trục số đúng quy luật. Sử dụng quy tắc "lật ngoặc" để giải nhanh phép trừ (hiệu).
+                </p>
+
+                <!-- Phương pháp thực hiện -->
+                <div class="space-y-4">
+                    <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <span class="text-blue-500">1.</span> Phương pháp gạch trục số chung (Nhất quán)
+                    </h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Để tránh nhầm lẫn giữa các phép toán, Thầy Đinh Quốc Tuấn gợi ý thuật toán gạch trục số chuẩn hóa chỉ trên <strong>1 trục số duy nhất</strong>:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Giao -->
+                        <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm space-y-2">
+                            <div class="flex items-center gap-2 font-display font-bold text-slate-900">
+                                <span class="text-blue-600">∩</span> Phép Giao ($A \cap B$)
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <strong>Cách làm:</strong> Biểu diễn tập $A$, gạch bỏ phần không thuộc $A$. Tiếp tục biểu diễn tập $B$ trên chính trục đó, gạch bỏ phần không thuộc $B$. Phần trống còn lại không bị gạch chính là kết quả.
+                            </p>
+                        </div>
+                        <!-- Hợp -->
+                        <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm space-y-2">
+                            <div class="flex items-center gap-2 font-display font-bold text-slate-900">
+                                <span class="text-emerald-600">∪</span> Phép Hợp ($A \cup B$)
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <strong>Cách làm:</strong> Tô đậm hoặc đánh dấu vùng thuộc tập $A$. Tiếp tục đánh dấu vùng thuộc tập $B$. Toàn bộ những phần đã được đánh dấu ít nhất một lần chính là kết quả phép Hợp.
+                            </p>
+                        </div>
+                        <!-- Hiệu -->
+                        <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm space-y-2">
+                            <div class="flex items-center gap-2 font-display font-bold text-slate-900">
+                                <span class="text-rose-600">\</span> Phép Hiệu ($A \setminus B$)
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <strong>Cách làm:</strong> Giữ lại vùng thuộc tập $A$. Gạch bỏ toàn bộ vùng thuộc tập $B$. Phần thuộc $A$ nhưng không bị gạch chính là hiệu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Mẹo Lật ngoặc -->
+                    <div class="bg-blue-900 text-blue-100 p-6 rounded-2xl shadow-md space-y-3">
+                        <h4 class="font-display font-bold text-base flex items-center gap-2">
+                            💡 Bí quyết Sư phạm: Quy tắc "Lật ngoặc" siêu tốc
+                        </h4>
+                        <p class="text-sm leading-relaxed text-blue-200">
+                            Khi thực hiện phép trừ $A \setminus B$, tại điểm ranh giới (đầu mút) của tập $B$, hãy thực hiện phép biến đổi dấu ngoặc ngay lập tức:
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 text-xs font-mono text-center">
+                            <div class="bg-blue-950/60 p-2.5 rounded-lg border border-blue-800">
+                                Ngoặc tròn $($ hoặc $)$ của tập B $\rightarrow$ Biến thành Ngoặc vuông $]$ hoặc $[$
+                            </div>
+                            <div class="bg-blue-950/60 p-2.5 rounded-lg border border-blue-800">
+                                Ngoặc vuông $[$ hoặc $]$ của tập B $\rightarrow$ Biến thành Ngoặc tròn $)$ hoặc $($
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ví dụ minh họa -->
+                <div class="space-y-4">
+                    <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <span class="text-blue-500">2.</span> Ví dụ thực nghiệm minh họa cụ thể
+                    </h3>
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+                        <p class="text-sm font-semibold text-slate-900">
+                            <strong>Đề bài mẫu:</strong> Cho hai tập hợp số thực $A = [-3; 5]$ và $B = (2; 7)$. Tìm các tập hợp $A \cap B$, $A \cup B$ và $A \setminus B$.
+                        </p>
+                        
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-blue-700">a) Tìm $A \cap B$:</strong> Gạch bỏ phần nằm ngoài $[-3; 5]$ và phần nằm ngoài $(2; 7)$. Phần giao còn trống chưa bị gạch là khoảng từ 2 đến 5. Đầu mút tại 2 không lấy vì $B$ không chứa 2. Đầu mút tại 5 có lấy vì cả $A$ và $B$ đều chứa 5. 
+                                <br><span class="font-bold">Kết quả:</span> $A \cap B = (2; 5]$.
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-emerald-700">b) Tìm $A \cup B$:</strong> Lấy liên tục từ điểm cực trái nhất của cả hai tập ($-3$) đến điểm cực phải nhất ($7$). Đầu mút $-3$ lấy ngoặc vuông, đầu mút $7$ lấy ngoặc tròn.
+                                <br><span class="font-bold">Kết quả:</span> $A \cup B = [-3; 7)$.
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-rose-700">c) Tìm $A \setminus B$:</strong> Giữ nguyên vùng $[-3; 5]$, gạch bỏ hoàn toàn phần của $B$ từ $(2; 7)$. Điểm số 2 thuộc $A$ nhưng 2 không thuộc $B$ (do $B$ là ngoặc tròn tại 2). Do đó điểm 2 vẫn được giữ lại trong hiệu. Áp dụng lật ngoặc tròn $)$ của $B$ thành ngoặc vuông $]$ cho kết quả.
+                                <br><span class="font-bold">Kết quả:</span> $A \setminus B = [-3; 2]$.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRẠM TRỰC QUAN TƯƠNG TÁC (APP MÔ PHỎNG SỐ THỰC) -->
+            <section id="mo-phong" class="scroll-mt-6 bg-white border-2 border-brandBlue rounded-3xl p-6 shadow-lg space-y-6 no-print">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="inline-block w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                            <h2 class="font-display font-extrabold text-xl text-slate-900">BÀN THỰC NGHIỆM TƯƠNG TÁC</h2>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-1">Dành cho Giáo viên giảng bài trên lớp và Học sinh tự luyện tập trực quan.</p>
+                    </div>
+                    <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">Interactive App</span>
+                </div>
+
+                <!-- Thiết lập Tập A và Tập B -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-sm">
+                    <!-- Tập A Setup -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-amber-600 flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Tập hợp $A$
+                            </span>
+                            <div class="flex gap-2 text-xs">
+                                <select id="a-left-type" class="bg-white border rounded px-1 py-0.5" onchange="updateSimulation()">
+                                    <option value="[">Ngoặc vuông [</option>
+                                    <option value="(">Ngoặc tròn (</option>
+                                </select>
+                                <select id="a-right-type" class="bg-white border rounded px-1 py-0.5" onchange="updateSimulation()">
+                                    <option value="]">Ngoặc vuông ]</option>
+                                    <option value=")">Ngoặc tròn )</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs text-slate-600">
+                                <span>Giá trị trái: <span id="val-a1" class="font-bold">-3</span></span>
+                                <span>Giá trị phải: <span id="val-a2" class="font-bold">5</span></span>
+                            </div>
+                            <input type="range" id="slider-a1" min="-10" max="10" value="-3" class="w-full accent-amber-500" oninput="adjustRange('A', 1)">
+                            <input type="range" id="slider-a2" min="-10" max="10" value="5" class="w-full accent-amber-500" oninput="adjustRange('A', 2)">
+                        </div>
+                    </div>
+
+                    <!-- Tập B Setup -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-sky-600 flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Tập hợp $B$
+                            </span>
+                            <div class="flex gap-2 text-xs">
+                                <select id="b-left-type" class="bg-white border rounded px-1 py-0.5" onchange="updateSimulation()">
+                                    <option value="(" selected>Ngoặc tròn (</option>
+                                    <option value="[">Ngoặc vuông [</option>
+                                </select>
+                                <select id="b-right-type" class="bg-white border rounded px-1 py-0.5" onchange="updateSimulation()">
+                                    <option value=")" selected>Ngoặc tròn )</option>
+                                    <option value="]">Ngoặc vuông ]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs text-slate-600">
+                                <span>Giá trị trái: <span id="val-b1" class="font-bold">2</span></span>
+                                <span>Giá trị phải: <span id="val-b2" class="font-bold">7</span></span>
+                            </div>
+                            <input type="range" id="slider-b1" min="-10" max="10" value="2" class="w-full accent-sky-500" oninput="adjustRange('B', 1)">
+                            <input type="range" id="slider-b2" min="-10" max="10" value="7" class="w-full accent-sky-500" oninput="adjustRange('B', 2)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lựa chọn phép toán -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button id="btn-op-intersect" onclick="setOperation('intersection')" class="px-4 py-2 bg-brandBlue text-white font-bold rounded-xl text-xs transition">
+                        GIAO (A ∩ B)
+                    </button>
+                    <button id="btn-op-union" onclick="setOperation('union')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+                        HỢP (A ∪ B)
+                    </button>
+                    <button id="btn-op-diff-ab" onclick="setOperation('diff_ab')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+                        HIỆU (A \ B)
+                    </button>
+                    <button id="btn-op-diff-ba" onclick="setOperation('diff_ba')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+                        HIỆU (B \ A)
+                    </button>
+                </div>
+
+                <!-- TRỤC SỐ SVG TƯƠNG TÁC -->
+                <div class="bg-slate-900 rounded-2xl p-6 relative overflow-x-auto">
+                    <div class="min-w-[600px] text-white">
+                        <svg id="interactive-axis-svg" viewBox="0 0 800 240" class="w-full h-auto">
+                            <!-- Background Axis Lines -->
+                            <line x1="50" y1="120" x2="750" y2="120" stroke="#475569" stroke-width="2"/>
+                            <!-- Arrow right -->
+                            <polygon points="755,120 745,115 745,125" fill="#475569" />
+                            <text x="765" y="124" fill="#94a3b8" font-size="12" font-family="Quicksand" font-weight="bold">x</text>
+
+                            <!-- Ticks from -10 to 10 -->
+                            <!-- Javascript will dynamically populate ticks and values here for maximum accuracy -->
+                            <g id="svg-ticks"></g>
+
+                            <!-- Set A representation (top level) -->
+                            <g id="svg-set-a"></g>
+
+                            <!-- Set B representation (mid level) -->
+                            <g id="svg-set-b"></g>
+
+                            <!-- Result representation (bottom level) -->
+                            <g id="svg-result"></g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Live Mathematical Output -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+                    <div class="space-y-1">
+                        <p class="text-slate-500 font-semibold text-xs uppercase tracking-wider">Ký hiệu toán học tương ứng</p>
+                        <div class="font-display font-bold text-slate-900 text-base flex flex-wrap items-center gap-2">
+                            <span>Biểu thức kết quả:</span>
+                            <span id="live-math-expr" class="text-brandBlue bg-white border px-3 py-1 rounded-lg">$\varnothing$</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full font-bold">Cập nhật tự động</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHẦN 3: BÀI TOÁN CHỨA THAM SỐ M -->
+            <section id="phan3" class="scroll-mt-6 space-y-6 print-card">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                    <span class="text-2xl font-bold text-white bg-amber-500 w-8 h-8 rounded-lg flex items-center justify-center">III</span>
+                    <h2 class="font-display font-extrabold text-xl text-slate-900">PHẦN 3: MỨC ĐỘ VẬN DỤNG (BÀI TOÁN THAM SỐ $m$)</h2>
+                </div>
+                <p class="text-sm font-semibold text-amber-700 bg-amber-50/50 px-3 py-1.5 rounded-lg inline-block">
+                    🔥 Đích đến: Phát triển tư duy logic, xử lý chặt chẽ dấu bằng "$=$" tại các điểm biên đầu mút của bất phương trình.
+                </p>
+
+                <div class="space-y-4 text-slate-700 leading-relaxed">
+                    <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <span class="text-amber-500">1.</span> Phương pháp tư duy thực nghiệm bản chất
+                    </h3>
+                    <p>
+                        Dạng toán chứa tham số thường làm học sinh bối rối vì các đầu mút có thể di động tự do trên trục số (ví dụ: $[m; m+2]$).
+                    </p>
+                    <p>
+                        Để hướng dẫn học sinh làm bài tập này, Thầy gợi ý phương pháp <strong>"Hộp cứng và Thanh gỗ trượt"</strong> cực kỳ trực quan:
+                    </p>
+                    
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Bước 1:</strong> Xác định và vẽ cố định tập hợp có số liệu cụ thể làm một "chiếc hộp" (Ví dụ: $B = [-1; 2]$).</li>
+                        <li><strong>Bước 2:</strong> Xem tập hợp chứa tham số $m$ là "thanh gỗ" di động (Ví dụ: $A = [m; m+2]$ luôn có chiều dài không đổi là 2 đơn vị).</li>
+                        <li><strong>Bước 3:</strong> Trượt "thanh gỗ $A$" trên thước đo sao cho thỏa mãn điều kiện đề bài yêu cầu.</li>
+                    </ul>
+                </div>
+
+                <!-- MÔ PHỎNG CHIẾC HỘP VÀ THANH GỖ TRƯỢT (DÀNH RIÊNG CHO VÍ DỤ CHỨA M) -->
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-3xl p-6 space-y-6 no-print">
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900 text-base">🎮 Thử nghiệm trực quan: Thanh gỗ trượt "A lọt lòng B"</h4>
+                        <p class="text-xs text-slate-500 mt-1">Kéo thanh trượt để thay đổi giá trị của $m$ và quan sát xem khi nào "thanh gỗ A" nằm trọn vẹn trong "hộp chứa B".</p>
+                    </div>
+
+                    <!-- Slider m -->
+                    <div class="bg-white p-4 rounded-2xl border border-amber-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-500 font-bold uppercase">Thay đổi tham số $m$</span>
+                            <div class="text-sm font-bold text-slate-900">Giá trị $m$ hiện tại = <span id="m-val-display" class="text-amber-600 font-mono text-lg">-1.5</span></div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <input type="range" id="m-slider" min="-3" max="2" step="0.1" value="-1.5" class="w-full accent-amber-500" oninput="updatePlankSimulation()">
+                        </div>
+                    </div>
+
+                    <!-- SVG Sandbox -->
+                    <div class="bg-slate-950 p-4 rounded-2xl relative">
+                        <svg id="plank-svg" viewBox="0 0 800 180" class="w-full h-auto">
+                            <!-- Axis -->
+                            <line x1="50" y1="100" x2="750" y2="100" stroke="#475569" stroke-width="2"/>
+                            
+                            <!-- Box B representation (Static) -->
+                            <!-- Range [-1, 2] represented visually -->
+                            <!-- Ticks on plank slider -->
+                            <!-- JS will draw ticks, the Box container, and the sliding plank -->
+                        </svg>
+                    </div>
+
+                    <!-- Trạng thái thỏa mãn -->
+                    <div id="plank-status-box" class="p-4 rounded-2xl flex items-center justify-between transition-all duration-300">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Bài giải chi tiết dạng toán mẫu -->
+                <div class="space-y-4">
+                    <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <span class="text-amber-500">2.</span> Ví dụ bài giải học thuật chuẩn mực tuyển sinh
+                    </h3>
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+                        <p class="text-sm font-semibold text-slate-900">
+                            <strong>Ví dụ mẫu:</strong> Cho hai tập hợp số $A = [m; m+2]$ và $B = [-1; 2]$. Tìm tất cả các giá trị thực của tham số $m$ để tập hợp $A \subset B$.
+                        </p>
+
+                        <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                            <p><strong>Lời giải chi tiết:</strong></p>
+                            <p>
+                                Để tập hợp $A$ là con của tập $B$ ($A \subset B$), mọi giá trị thuộc $A$ bắt buộc phải nằm hoàn toàn trong tập $B$. Nhìn trực quan trên trục số, điều này tương đương với việc đầu mút trái của $A$ phải lớn hơn hoặc bằng đầu mút trái của $B$, đồng thời đầu mút phải của $A$ phải bé hơn hoặc bằng đầu mút phải của $B$.
+                            </p>
+                            <p>Do đó, ta có hệ bất phương trình sau:</p>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-center text-base">
+                                $$\begin{cases} m \ge -1 \\ m+2 \le 2 \end{cases} \Leftrightarrow \begin{cases} m \ge -1 \\ m \le 0 \end{cases} \Leftrightarrow -1 \le m \le 0$$
+                            </div>
+                            <p><strong>Biện luận dấu bằng "$=$":</strong></p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Tại đầu mút trái: Nếu $m = -1$, hai điểm biên chạm vào nhau. Vì cả $A$ và $B$ đều là ngoặc vuông $[$, cả hai đều nhận giá trị biên $-1$, suy ra $A \subset B$ vẫn thỏa mãn.</li>
+                                <li>Tại đầu mút phải: Tương tự, nếu $m+2 = 2 \Leftrightarrow m = 0$, cả hai đều là ngoặc vuông nhận giá trị biên $2$, suy ra thỏa mãn.</li>
+                            </ul>
+                            <p class="font-bold text-slate-900">Kết luận: Tập hợp các giá trị cần tìm của $m$ là $m \in [-1; 0]$.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+    </main>
+
+    <!-- FOOTER COPYRIGHT & PHI LỢI NHUẬN -->
+    <footer class="bg-brandDark text-slate-400 py-12 px-6 mt-12 border-t-4 border-brandGold">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="space-y-2">
+                <p class="text-sm font-bold text-white uppercase tracking-wider">CHUYÊN ĐỀ PHÂN TÍCH TOÁN THỰC NGHIỆM LỚP 10</p>
+                <p class="text-xs text-slate-500">Phát triển tư duy hình học hóa đại số trên trục số thực liên tục.</p>
+                <p class="text-xs font-semibold text-brandGold">@ Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</p>
+            </div>
+            
+            <div class="text-xs text-slate-500">
+                <p>Địa điểm giảng dạy chính thức:</p>
+                <p class="text-slate-300 font-medium">Trung tâm Bồi dưỡng Văn hóa KHTN - ĐH KHTN TP.HCM</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // DOM Ready setup
+        window.addEventListener('DOMContentLoaded', () => {
+            showVennInfo('N');
+            updateSimulation();
+            updatePlankSimulation();
+        });
+
+        // 1. Venn Diagram interactive details
+        const vennData = {
+            'N': {
+                title: 'Tập hợp số Tự nhiên $\\mathbb{N}$',
+                def: '$\\mathbb{N} = \\{0, 1, 2, 3, ...\\}$',
+                desc: 'Tập hợp nhỏ nhất nằm ở vùng lõi trung tâm của hệ thống số học cơ bản. Chứa tất cả số nguyên dương và số 0.'
+            },
+            'Z': {
+                title: 'Tập hợp số Nguyên $\\mathbb{Z}$',
+                def: '$\\mathbb{Z} = \\{..., -2, -1, 0, 1, 2, ...\\}$',
+                desc: 'Mở rộng từ số tự nhiên bằng việc bổ sung thêm các số nguyên âm biểu thị các đại lượng đối lập thực tế.'
+            },
+            'Q': {
+                title: 'Tập hợp số Hữu tỉ $\\mathbb{Q}$',
+                def: '$\\mathbb{Q} = \\{ \\frac{a}{b} \\mid a, b \\in \\mathbb{Z}, b \\neq 0 \\}$',
+                desc: 'Chứa tất cả các số có thể biểu diễn dưới dạng phân số, bao gồm số thập phân hữu hạn và vô hạn tuần hoàn.'
+            },
+            'R': {
+                title: 'Tập hợp số Thực $\\mathbb{R}$',
+                def: '$\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{I}$ (Số hữu tỉ hợp Số vô tỉ)',
+                desc: 'Tập hợp tối thượng bao trùm toàn bộ không gian trục số liên tục, lấp đầy mọi khoảng trống li ti trên trục số học.'
+            }
+        };
+
+        function showVennInfo(setKey) {
+            const displayBox = document.getElementById('venn-display-box');
+            const data = vennData[setKey];
+            if (data) {
+                displayBox.innerHTML = `
+                    <h5 class="font-display font-bold text-slate-900 text-sm border-b pb-1 flex justify-between items-center">
+                        <span>${data.title}</span>
+                        <span class="text-xs font-mono text-rose-600 bg-rose-50 px-1.5 rounded">${setKey}</span>
+                    </h5>
+                    <p class="text-xs font-semibold text-slate-700 font-mono mt-2 bg-white px-2 py-1 rounded border inline-block">${data.def}</p>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">${data.desc}</p>
+                `;
+                // Trigger MathJax re-render in the small info box
+                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise([displayBox]);
+                }
+            }
+        }
+
+        // 2. Real Line Simulator State & Operations
+        let currentOperation = 'intersection'; // 'intersection', 'union', 'diff_ab', 'diff_ba'
+
+        function setOperation(op) {
+            currentOperation = op;
+            // Reset colors of operation buttons
+            const buttons = {
+                'intersection': document.getElementById('btn-op-intersect'),
+                'union': document.getElementById('btn-op-union'),
+                'diff_ab': document.getElementById('btn-op-diff-ab'),
+                'diff_ba': document.getElementById('btn-op-diff-ba')
+            };
+
+            for (const [key, btn] of Object.entries(buttons)) {
+                if (key === op) {
+                    btn.className = "px-4 py-2 bg-brandBlue text-white font-bold rounded-xl text-xs shadow-md transition";
+                } else {
+                    btn.className = "px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition";
+                }
+            }
+
+            updateSimulation();
+        }
+
+        function adjustRange(set, index) {
+            const s1 = document.getElementById(`slider-${set.toLowerCase()}1`);
+            const s2 = document.getElementById(`slider-${set.toLowerCase()}2`);
+            let v1 = parseInt(s1.value);
+            let v2 = parseInt(s2.value);
+
+            // Keep range ordered
+            if (v1 > v2) {
+                if (index === 1) {
+                    s2.value = v1;
+                } else {
+                    s1.value = v2;
+                }
+            }
+
+            document.getElementById(`val-${set.toLowerCase()}1`).innerText = s1.value;
+            document.getElementById(`val-${set.toLowerCase()}2`).innerText = s2.value;
+
+            updateSimulation();
+        }
+
+        function valToX(val) {
+            // Mapping range [-10, 10] to coordinates [100, 700] on the SVG
+            const minVal = -10;
+            const maxVal = 10;
+            const minX = 100;
+            const maxX = 700;
+            return minX + ((val - minVal) / (maxVal - minVal)) * (maxX - minX);
+        }
+
+        function updateSimulation() {
+            const a1 = parseInt(document.getElementById('slider-a1').value);
+            const a2 = parseInt(document.getElementById('slider-a2').value);
+            const b1 = parseInt(document.getElementById('slider-b1').value);
+            const b2 = parseInt(document.getElementById('slider-b2').value);
+
+            const aLeftType = document.getElementById('a-left-type').value;
+            const aRightType = document.getElementById('a-right-type').value;
+            const bLeftType = document.getElementById('b-left-type').value;
+            const bRightType = document.getElementById('b-right-type').value;
+
+            // Compute intersections & output strings
+            const results = computeRealAxisOp(a1, a2, aLeftType, aRightType, b1, b2, bLeftType, bRightType, currentOperation);
+
+            // DRAW TICK MARKS IN SVG
+            const ticksGroup = document.getElementById('svg-ticks');
+            ticksGroup.innerHTML = '';
+            for (let i = -10; i <= 10; i++) {
+                const tx = valToX(i);
+                ticksGroup.innerHTML += `
+                    <line x1="${tx}" y1="115" x2="${tx}" y2="125" stroke="#475569" stroke-width="1.5"/>
+                    <text x="${tx}" y="142" fill="#94a3b8" font-size="10" font-family="Quicksand" font-weight="bold" text-anchor="middle">${i}</text>
+                `;
+            }
+
+            // DRAW SET A
+            const svgSetA = document.getElementById('svg-set-a');
+            svgSetA.innerHTML = '';
+            const ax1 = valToX(a1);
+            const ax2 = valToX(a2);
+            svgSetA.innerHTML += `
+                <!-- Background Transparent Highlight for A -->
+                <rect x="${ax1}" y="45" width="${ax2 - ax1}" height="30" fill="#F59E0B" fill-opacity="0.15" />
+                <!-- Brackets for A -->
+                <text x="${ax1}" y="67" fill="#D97706" font-size="28" font-weight="bold" font-family="Inter" text-anchor="middle">${aLeftType}</text>
+                <text x="${ax2}" y="67" fill="#D97706" font-size="28" font-weight="bold" font-family="Inter" text-anchor="middle">${aRightType}</text>
+                <text x="${(ax1 + ax2)/2}" y="63" fill="#B45309" font-size="10" font-family="Quicksand" font-weight="bold" text-anchor="middle">Tập A</text>
+            `;
+
+            // DRAW SET B
+            const svgSetB = document.getElementById('svg-set-b');
+            svgSetB.innerHTML = '';
+            const bx1 = valToX(b1);
+            const bx2 = valToX(b2);
+            svgSetB.innerHTML += `
+                <!-- Background Transparent Highlight for B -->
+                <rect x="${bx1}" y="165" width="${bx2 - bx1}" height="30" fill="#0EA5E9" fill-opacity="0.15" />
+                <!-- Brackets for B -->
+                <text x="${bx1}" y="187" fill="#0284C7" font-size="28" font-weight="bold" font-family="Inter" text-anchor="middle">${bLeftType}</text>
+                <text x="${bx2}" y="187" fill="#0284C7" font-size="28" font-weight="bold" font-family="Inter" text-anchor="middle">${bRightType}</text>
+                <text x="${(bx1 + bx2)/2}" y="183" fill="#0369A1" font-size="10" font-family="Quicksand" font-weight="bold" text-anchor="middle">Tập B</text>
+            `;
+
+            // DRAW RESULT PRECISE BAND
+            const svgResult = document.getElementById('svg-result');
+            svgResult.innerHTML = '';
+            if (results.hasResult) {
+                results.bands.forEach(band => {
+                    const rx1 = valToX(band.start);
+                    const rx2 = valToX(band.end);
+                    svgResult.innerHTML += `
+                        <!-- Result Indicator Line -->
+                        <line x1="${rx1}" y1="120" x2="${rx2}" y2="120" stroke="#10B981" stroke-width="6"/>
+                        <!-- Result Bracket indicators -->
+                        <text x="${rx1}" y="130" fill="#10B981" font-size="28" font-weight="extrabold" font-family="Inter" text-anchor="middle">${band.lBracket}</text>
+                        <text x="${rx2}" y="130" fill="#10B981" font-size="28" font-weight="extrabold" font-family="Inter" text-anchor="middle">${band.rBracket}</text>
+                    `;
+                });
+            } else {
+                // If empty set, we can show null
+            }
+
+            // Update LaTeX Output Block
+            const liveMathExpr = document.getElementById('live-math-expr');
+            liveMathExpr.innerHTML = `$$${results.latexStr}$$`;
+            if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise([liveMathExpr]);
+            }
+        }
+
+        // Logic function processing numerical values to intervals
+        function computeRealAxisOp(a1, a2, aL, aR, b1, b2, bL, bR, op) {
+            let res = { hasResult: false, bands: [], latexStr: '\\varnothing' };
+
+            // Represent sets mathematically as ranges
+            if (op === 'intersection') {
+                // Interval Giao
+                let start = Math.max(a1, b1);
+                let end = Math.min(a2, b2);
+
+                if (start < end) {
+                    res.hasResult = true;
+                    // Determine left boundary bracket
+                    let lBracket = (start === a1) ? aL : bL;
+                    if (a1 === b1) {
+                        lBracket = (aL === '[' && bL === '[') ? '[' : '(';
+                    }
+                    // Determine right boundary bracket
+                    let rBracket = (end === a2) ? aR : bR;
+                    if (a2 === b2) {
+                        rBracket = (aR === ']' && bR === ']') ? ']' : ')';
+                    }
+
+                    res.bands.push({ start, end, lBracket, rBracket });
+                    res.latexStr = `A \\cap B = ${lBracket === '[' ? '[' : '('}${start}; ${end}${rBracket === ']' ? ']' : ')'}`;
+                } else if (start === end) {
+                    // Check if singleton point is shared
+                    let aContainsEdge = (start === a1 && aL === '[') || (start === a2 && aR === ']');
+                    let bContainsEdge = (start === b1 && bL === '[') || (start === b2 && bR === ']');
+                    if (aContainsEdge && bContainsEdge) {
+                        res.hasResult = true;
+                        res.bands.push({ start, end, lBracket: '[', rBracket: ']' });
+                        res.latexStr = `A \\cap B = \\{${start}\\}`;
+                    }
+                }
+            } else if (op === 'union') {
+                // Interval Hợp
+                let overlap = Math.max(a1, b1) < Math.min(a2, b2) || 
+                             (Math.max(a1, b1) === Math.min(a2, b2) && 
+                              (((a1 === b1) || (a2 === b1 && aR === ']' && bL === '['))));
+
+                if (overlap || Math.max(a1, b1) <= Math.min(a2, b2)) {
+                    res.hasResult = true;
+                    let start = Math.min(a1, b1);
+                    let end = Math.max(a2, b2);
+
+                    let lBracket = (start === a1) ? aL : bL;
+                    if (a1 === b1) lBracket = (aL === '[' || bL === '[') ? '[' : '(';
+
+                    let rBracket = (end === a2) ? aR : bR;
+                    if (a2 === b2) rBracket = (aR === ']' || bR === ']') ? ']' : ')';
+
+                    res.bands.push({ start, end, lBracket, rBracket });
+                    res.latexStr = `A \\cup B = ${lBracket === '[' ? '[' : '('}${start}; ${end}${rBracket === ']' ? ']' : ')'}`;
+                } else {
+                    // Disjoint bands
+                    res.hasResult = true;
+                    let first = (a1 < b1) ? {s: a1, e: a2, l: aL, r: aR, label: 'A'} : {s: b1, e: b2, l: bL, r: bR, label: 'B'};
+                    let second = (a1 < b1) ? {s: b1, e: b2, l: bL, r: bR, label: 'B'} : {s: a1, e: a2, l: aL, r: aR, label: 'A'};
+                    
+                    res.bands.push({ start: first.s, end: first.e, lBracket: first.l, rBracket: first.r });
+                    res.bands.push({ start: second.s, end: second.e, lBracket: second.l, rBracket: second.r });
+                    
+                    res.latexStr = `A \\cup B = ${first.l === '[' ? '[' : '('}${first.s}; ${first.e}${first.r === ']' ? ']' : ')'} \\cup ${second.l === '[' ? '[' : '('}${second.s}; ${second.e}${second.r === ']' ? ']' : ')'}`;
+                }
+            } else if (op === 'diff_ab') {
+                // Phép trừ A \ B
+                // Keep things intuitive and robust
+                if (a2 < b1 || b2 < a1) {
+                    // Disjoint: A \ B = A
+                    res.hasResult = true;
+                    res.bands.push({ start: a1, end: a2, lBracket: aL, rBracket: aR });
+                    res.latexStr = `A \\setminus B = A = ${aL === '[' ? '[' : '('}${a1}; ${a2}${aR === ']' ? ']' : ')'}`;
+                } else {
+                    // There is intersection/overlap
+                    let parts = [];
+                    // Check left part
+                    if (a1 < b1) {
+                        let lBracket = aL;
+                        let rBracket = (bL === '[') ? ')' : ']'; // Flip ngoặc
+                        parts.push({ start: a1, end: b1, lBracket, rBracket });
+                    }
+                    // Check right part
+                    if (b2 < a2) {
+                        let lBracket = (bR === ']') ? '(' : '['; // Flip ngoặc
+                        let rBracket = aR;
+                        parts.push({ start: b2, end: a2, lBracket, rBracket });
+                    }
+
+                    if (parts.length > 0) {
+                        res.hasResult = true;
+                        res.bands = parts;
+                        if (parts.length === 1) {
+                            res.latexStr = `A \\setminus B = ${parts[0].lBracket === '[' ? '[' : '('}${parts[0].start}; ${parts[0].end}${parts[0].rBracket === ']' ? ']' : ')'}`;
+                        } else {
+                            res.latexStr = `A \\setminus B = ${parts[0].lBracket === '[' ? '[' : '('}${parts[0].start}; ${parts[0].end}${parts[0].rBracket === ']' ? ']' : ')'} \\cup ${parts[1].lBracket === '[' ? '[' : '('}${parts[1].start}; ${parts[1].end}${parts[1].rBracket === ']' ? ']' : ')'}`;
+                        }
+                    } else {
+                        res.latexStr = `A \\setminus B = \\varnothing`;
+                    }
+                }
+            } else if (op === 'diff_ba') {
+                // Phép trừ B \ A
+                if (b2 < a1 || a2 < b1) {
+                    res.hasResult = true;
+                    res.bands.push({ start: b1, end: b2, lBracket: bL, rBracket: bR });
+                    res.latexStr = `B \\setminus A = B = ${bL === '[' ? '[' : '('}${b1}; ${b2}${bR === ']' ? ']' : ')'}`;
+                } else {
+                    let parts = [];
+                    if (b1 < a1) {
+                        let lBracket = bL;
+                        let rBracket = (aL === '[') ? ')' : ']';
+                        parts.push({ start: b1, end: a1, lBracket, rBracket });
+                    }
+                    if (a2 < b2) {
+                        let lBracket = (aR === ']') ? '(' : '[';
+                        let rBracket = bR;
+                        parts.push({ start: a2, end: b2, lBracket, rBracket });
+                    }
+
+                    if (parts.length > 0) {
+                        res.hasResult = true;
+                        res.bands = parts;
+                        if (parts.length === 1) {
+                            res.latexStr = `B \\setminus A = ${parts[0].lBracket === '[' ? '[' : '('}${parts[0].start}; ${parts[0].end}${parts[0].rBracket === ']' ? ']' : ')'}`;
+                        } else {
+                            res.latexStr = `B \\setminus A = ${parts[0].lBracket === '[' ? '[' : '('}${parts[0].start}; ${parts[0].end}${parts[0].rBracket === ']' ? ']' : ')'} \\cup ${parts[1].lBracket === '[' ? '[' : '('}${parts[1].start}; ${parts[1].end}${parts[1].rBracket === ']' ? ']' : ')'}`;
+                        }
+                    } else {
+                        res.latexStr = `B \\setminus A = \\varnothing`;
+                    }
+                }
+            }
+
+            return res;
+        }
+
+
+        // 3. Slider Simulation: Box and Plank simulation [m, m+2] and [-1, 2]
+        function updatePlankSimulation() {
+            const m = parseFloat(document.getElementById('m-slider').value);
+            document.getElementById('m-val-display').innerText = m.toFixed(1);
+
+            const plankSvg = document.getElementById('plank-svg');
+            plankSvg.innerHTML = '';
+
+            // Draw clean axis line inside sandbox
+            plankSvg.innerHTML += `
+                <line x1="50" y1="100" x2="750" y2="100" stroke="#475569" stroke-width="2"/>
+                <polygon points="755,100 745,95 745,105" fill="#475569" />
+            `;
+
+            // Draw dynamic tick marks
+            const minV = -4;
+            const maxV = 4;
+            const getX = (val) => 100 + ((val - minV) / (maxV - minV)) * 600;
+
+            for (let i = minV; i <= maxV; i++) {
+                const tx = getX(i);
+                plankSvg.innerHTML += `
+                    <line x1="${tx}" y1="95" x2="${tx}" y2="105" stroke="#64748b" stroke-width="1.5"/>
+                    <text x="${tx}" y="120" fill="#64748b" font-size="10" font-family="Quicksand" font-weight="bold" text-anchor="middle">${i}</text>
+                `;
+            }
+
+            // Box B [-1, 2] static container box
+            const bx1 = getX(-1);
+            const bx2 = getX(2);
+            plankSvg.innerHTML += `
+                <!-- Container Highlight (Box B) -->
+                <rect x="${bx1}" y="40" width="${bx2 - bx1}" height="40" fill="#0EA5E9" fill-opacity="0.1" stroke="#0284C7" stroke-width="2" stroke-dasharray="4,4" rx="4"/>
+                <text x="${(bx1+bx2)/2}" y="32" fill="#0369A1" font-size="10" font-family="Quicksand" font-weight="bold" text-anchor="middle">Chiếc Hộp B [-1; 2]</text>
+                <text x="${bx1}" y="112" fill="#0284C7" font-size="20" font-family="Inter" font-weight="extrabold" text-anchor="middle">[</text>
+                <text x="${bx2}" y="112" fill="#0284C7" font-size="20" font-family="Inter" font-weight="extrabold" text-anchor="middle">]</text>
+            `;
+
+            // Plank A [m, m+2] sliding
+            const ax1 = getX(m);
+            const ax2 = getX(m + 2);
+            plankSvg.innerHTML += `
+                <!-- Dynamic Sliding Plank -->
+                <rect x="${ax1}" y="55" width="${ax2 - ax1}" height="15" fill="#F59E0B" fill-opacity="0.8" rx="2" class="transition-all duration-100"/>
+                <text x="${(ax1+ax2)/2}" y="82" fill="#D97706" font-size="10" font-family="Quicksand" font-weight="bold" text-anchor="middle">Thanh gỗ A [m; m+2]</text>
+                <text x="${ax1}" y="112" fill="#D97706" font-size="20" font-family="Inter" font-weight="extrabold" text-anchor="middle" class="transition-all duration-100">[</text>
+                <text x="${ax2}" y="112" fill="#D97706" font-size="20" font-family="Inter" font-weight="extrabold" text-anchor="middle" class="transition-all duration-100">]</text>
+            `;
+
+            // Evaluate if A subset of B
+            const statusBox = document.getElementById('plank-status-box');
+            // Condition for subset: m >= -1 and m+2 <= 2 => m <= 0
+            if (m >= -1.0 && m + 2.0 <= 2.05) { // floating point buffer
+                statusBox.className = "p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 text-emerald-950";
+                statusBox.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">✅</span>
+                        <div>
+                            <p class="font-bold">ĐÚNG! Thỏa mãn $A \\subset B$</p>
+                            <p class="text-xs text-emerald-800">Thanh gỗ $A$ nằm lọt thỏm hoàn toàn bên trong chiếc hộp cố định $B$.</p>
+                        </div>
+                    </div>
+                    <span class="bg-emerald-200/60 text-emerald-900 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-300 font-mono">-1 <= m <= 0</span>
+                `;
+            } else {
+                statusBox.className = "p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 bg-rose-50 border border-rose-200 text-rose-950";
+                statusBox.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">❌</span>
+                        <div>
+                            <p class="font-bold">SAI! Không thỏa mãn $A \\subset B$</p>
+                            <p class="text-xs text-rose-800">Thanh gỗ $A$ bị thò hoặc lệch ra ngoài ranh giới chiếc hộp $B$.</p>
+                        </div>
+                    </div>
+                    <span class="bg-rose-200/60 text-rose-900 text-xs font-bold px-3 py-1.5 rounded-lg border border-rose-300 font-mono">Bị loại</span>
+                `;
+            }
+
+            if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise([statusBox]);
+            }
+        }
+    </script>
+
+</body>
+</html>

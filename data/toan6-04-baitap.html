@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Toán 6 - Buổi 4</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&family=Roboto:wght=400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Thiết lập chung: Nền trắng, chữ đen chính */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        /* Tiêu đề chính rực rỡ */
+        .header-title {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            color: #0284c7; /* Xanh dương sáng */
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* Khung thông tin học sinh điền */
+        .student-info {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần lớn (Phần I, Phần II) */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 35px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .section-title.homework {
+            background: linear-gradient(135deg, #f59e0b, #d97706); /* Màu cam cho thử thách */
+        }
+
+        /* Tiêu đề Dạng bài và Phương pháp giải */
+        .exercise-type {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: #0f172a;
+            margin-top: 25px;
+            font-weight: 700;
+            border-left: 4px solid #10b981; /* Vạch xanh lá */
+            padding-left: 10px;
+        }
+
+        .method-box {
+            background-color: #f0fdf4; /* Nền xanh lá nhạt */
+            border: 1px solid #bbf7d0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            font-size: 14.5px;
+            color: #166534;
+        }
+
+        /* Định dạng danh sách câu hỏi toán học dạng lưới (Grid) */
+        .grid-questions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 30px;
+            margin-bottom: 25px;
+            padding-left: 5px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: baseline;
+            padding: 8px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .question-label {
+            font-weight: bold;
+            color: #475569;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+
+        /* Khung ghi chú / Lời khuyên ở cuối */
+        .footer-note {
+            background-color: #fff1f2; /* Nền hồng nhạt */
+            border: 1px solid #fecdd3;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 2px 6px rgba(225, 29, 72, 0.05);
+        }
+
+        .note-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #e11d48;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .note-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Ẩn bớt hiệu ứng đổ bóng khi in ra giấy */
+        @media print {
+            body { padding: 0; }
+            .worksheet-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    
+    <div class="header-title">📋 PHIẾU BÀI TẬP TOÁN 6 - BUỔI 4</div>
+    <div class="subtitle">Chủ đề: Thực hành Lũy thừa và Thứ tự thực hiện phép tính (45 phút)</div>
+
+    <div class="student-info">
+        <div>Họ và tên học sinh: ........................................................</div>
+        <div>Lớp: ..................</div>
+    </div>
+
+    <div class="section-title">PHẦN I. BÀI TẬP THỰC HÀNH TRÊN LỚP</div>
+
+    <div class="exercise-type">VÒNG 1: KHỞI ĐỘNG NHANH - NHẬN DIỆN LŨY THỪA (10 PHÚT)</div>
+    <div class="method-box">
+        <strong>Mục tiêu & Cách tổ chức:</strong> Phản xạ nhanh với cách viết gọn và giá trị cơ bản của lũy thừa. Tránh lỗi sai lấy cơ số nhân với số mũ. Giáo viên gọi lần lượt từng học sinh lên bảng hoàn thành theo cặp câu.
+    </div>
+    
+    <p><strong>Bài 1 (Viết gọn thành lũy thừa):</strong> Biến đổi các tích sau về dạng lũy thừa:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$4 \cdot 4 \cdot 4 \cdot 4$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$x \cdot x \cdot x \cdot x$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$10 \cdot 10 \cdot 10 \cdot 100$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$2 \cdot 2 \cdot 2 \cdot 2 \cdot 2$</span>
+        </div>
+    </div>
+
+    <p><strong>Bài 2 (Tính giá trị lũy thừa):</strong> Tính giá trị các biểu thức sau (Nhẩm to kết quả):</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$3^3$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$5^2$ <em style="color: #64748b; font-size: 0.9em;">(Lưu ý: $5^2 \neq 10$)</em></span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$2^4$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$4^3$</span>
+        </div>
+    </div>
+
+    <div class="exercise-type">VÒNG 2: RÈN LUYỆN KĨ NĂNG - NHÂN, CHIA HAI LŨY THỪA CÙNG CƠ SỐ (10 PHÚT)</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Thuộc lòng quy tắc "Nhân cộng, Chia trừ" số mũ: $a^m \cdot a^n = a^{m+n}$ và $a^m : a^n = a^{m-n}$. Giữ nguyên cơ số, tuyệt đối không nhân hoặc chia các cơ số với nhau.
+    </div>
+
+    <p><strong>Bài 3.</strong> Viết kết quả các phép tính sau dưới dạng một lũy thừa:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$3^3 \cdot 3^4$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$5^2 \cdot 5^7$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$7^5 : 7^2$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$10^8 : 10^3$</span>
+        </div>
+    </div>
+
+    <p><strong>⚠️ Câu hỏi tình huống (Thảo luận nhóm):</strong> Thực hiện phép tính sau từ trái sang phải: $(2^3 \cdot 2^4) : 2^5$</p>
+
+    <div class="exercise-type">VÒNG 3: TRỌNG TÂM - VƯỢT CHƯỚNG NGẠI VẬT "THỨ TỰ PHÉP TÍNH" (15 PHÚT)</div>
+    <div class="method-box">
+        <strong>Sơ đồ ưu tiên:</strong> Lũy thừa $\rightarrow$ Nhân/Chia $\rightarrow$ Cộng/Trừ. Đối với ngoặc: $( ) \rightarrow [ ] \rightarrow \{ \}$. Nhân/chia hoặc cộng/trừ đứng liền nhau thì làm từ trái sang phải.
+    </div>
+
+    <p><strong>Bài 4 (Mức độ 1 - Không chứa dấu ngoặc):</strong> Thực hiện phép tính:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$5 \cdot 2^2 - 18 : 3$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$8 + 36 : 3 \cdot 2$ <em style="color: #dc2626; font-size: 0.9em;">(Cẩn thận bẫy tính sai thứ tự)</em></span>
+        </div>
+    </div>
+
+    <p><strong>Bài 5 (Mức độ 2 - Có chứa dấu ngoặc):</strong> Áp dụng quy tắc bóc tách từ trong ra ngoài:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$80 - [130 - (12 - 4)^2]$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$120 - [82 - (5 - 1)^2]$</span>
+        </div>
+    </div>
+
+    <div class="section-title homework">PHẦN II. VÒNG 4: THỬ THÁCH TƯ DUY - TÌM X TRÊN SỐ MŨ (10 PHÚT)</div>
+    <div class="method-box">
+        <strong>Gợi ý phương pháp:</strong> Để tìm $x$ nằm ở số mũ, ta cần biến đổi số ở vế còn lại thành một lũy thừa có cùng cơ số với vế chứa $x$. Ví dụ: $a^x = a^n \Rightarrow x = n$.
+    </div>
+    
+    <p><strong>Bài 6.</strong> Tìm số tự nhiên $x$, biết:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$3^x = 9$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$2^x = 16$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$4^x = 64$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$5^x = 125$</span>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <div class="note-title">💡 Lưu ý sư phạm khi trình bày (Dành cho học sinh):</div>
+        <div class="note-content">
+            <ul>
+                <li>Khi làm các bài toán tính giá trị biểu thức, bắt buộc phải trình bày theo <strong>hàng dọc</strong>.</li>
+                <li>Hãy giữ các dấu bằng <strong>" = " thẳng hàng với nhau</strong> qua từng dòng biến đổi.</li>
+                <li>Việc hạ từng dòng tương ứng với một bước tính toán cụ thể sẽ giúp các em kiểm soát lỗi sai và không bị rối khi gặp các biểu thức phức tạp chứa nhiều loại ngoặc.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyên Đề Số Nguyên Tố - Hợp Số - Toán 6</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Cấu hình MathJax cho công thức Toán học -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                typeset: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+        /* Hiệu ứng mượt cho các nút chọn */
+        .option-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* CSS khi in ấn */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-full {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER HỌC THUẬT & LOGO KHTN / BDVH -->
+    <header class="bg-white border-b-4 border-blue-800 shadow-sm sticky top-0 z-50 py-3 px-4 no-print">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Khu vực Logo Trường & Trung tâm -->
+            <div class="flex items-center gap-4">
+                <!-- Logo ĐH Khoa học Tự nhiên -->
+                <div class="flex items-center">
+                    <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" 
+                         alt="Logo HCMUS" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/50x50/1d4ed8/ffffff?text=KHTN'" 
+                         class="h-12 md:h-14 object-contain">
+                </div>
+                <!-- Vạch ngăn cách dọc -->
+                <div class="h-10 w-px bg-slate-300"></div>
+                <!-- Logo Trung tâm BDVH -->
+                <div class="flex items-center">
+                    <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" 
+                         alt="Logo BDVH" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/120x45/1e3a8a/ffffff?text=BDVH'" 
+                         class="h-12 md:h-14 object-contain rounded">
+                </div>
+            </div>
+
+            <!-- Tiêu đề Học tập chính -->
+            <div class="text-center md:text-right">
+                <h1 class="text-xl md:text-2xl font-extrabold title-font text-blue-900 tracking-tight">
+                    PHIẾU HỌC TẬP TƯƠNG TÁC
+                </h1>
+                <p class="text-xs md:text-sm text-slate-500 font-bold uppercase tracking-wider">
+                    Chuyên đề: Số Nguyên Tố • Hợp Số • Thừa Số Nguyên Tố
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- KHUNG ĐIỀN THÔNG TIN HỌC SINH -->
+    <section class="max-w-6xl mx-auto w-full px-4 mt-6 no-print">
+        <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-6 rounded-2xl shadow-md">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                <div>
+                    <h2 class="text-lg md:text-xl font-extrabold title-font">Buổi 6: Toán Học Lớp 6</h2>
+                    <p class="text-xs text-blue-200">Bồi dưỡng Văn hóa & Phát triển tư duy KHTN</p>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-800">
+                    <input type="text" id="student-name" placeholder="Họ và Tên Học Sinh..." 
+                           class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold text-sm">
+                    <input type="text" id="student-class" placeholder="Lớp (Ví dụ: 6A1)..." 
+                           class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold text-sm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD TIẾN ĐỘ & BẢNG ĐIỂM -->
+    <section class="max-w-6xl mx-auto w-full px-4 mt-4 no-print">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-xl font-bold">🎯</div>
+                <div>
+                    <span class="text-xs text-slate-500 block font-bold">Trạng thái hoàn thành bài tập</span>
+                    <span id="score-display" class="text-base font-extrabold text-blue-950">Chưa bắt đầu nộp chấm điểm</span>
+                </div>
+            </div>
+            <!-- Thanh Tiến độ -->
+            <div class="w-full sm:w-1/3 bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-emerald-500 h-full w-0" style="transition: width 0.4s ease;"></div>
+            </div>
+            <!-- Chuyển Tab: Làm bài / Đáp án giáo viên -->
+            <div class="flex gap-2">
+                <button onclick="switchTab('exercise')" id="tab-ex-btn" class="px-4 py-2 bg-blue-800 text-white font-bold rounded-lg text-sm transition-all shadow-sm">
+                    ✍️ Làm Bài Tập
+                </button>
+                <button onclick="switchTab('solution')" id="tab-sol-btn" class="px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 font-bold rounded-lg text-sm transition-all">
+                    💡 Hướng Dẫn Giải (GV)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="flex-grow max-w-6xl mx-auto w-full p-4 print-full">
+
+        <!-- TAB 1: PHẦN LÀM BÀI TẬP TƯƠNG TÁC -->
+        <div id="tab-exercise" class="space-y-8">
+
+            <!-- PHẦN I: MỨC ĐỘ CƠ BẢN -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+                <div class="absolute top-0 left-6 transform -translate-y-1/2 bg-blue-800 text-white px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider title-font shadow-md">
+                    Phần I: Mức Độ Cơ Bản
+                </div>
+                <p class="text-xs text-slate-500 mt-2 italic">Mục tiêu: Phân biệt số nguyên tố, hợp số và thành thạo phân tích ra thừa số nguyên tố.</p>
+
+                <!-- BÀI 1 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 1</span>
+                        <span>Trong các số sau, số nào là số nguyên tố, số nào là hợp số, số nào không thuộc cả hai loại? <br>
+                        Danh sách số: <span class="text-blue-800 font-extrabold text-lg">$2; 9; 27; 31; 0; 83; 91; 97; 1$</span></span>
+                    </p>
+                    
+                    <!-- Grid phân loại tương tác -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <!-- Cột Số nguyên tố -->
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <span class="font-black text-xs text-emerald-800 block mb-3 uppercase tracking-wider">🟢 Số Nguyên Tố</span>
+                            <div class="grid grid-cols-3 gap-2" id="snt-grid">
+                                <!-- Chứa các số được chọn -->
+                            </div>
+                        </div>
+                        <!-- Cột Hợp số -->
+                        <div class="p-4 bg-amber-50 rounded-xl border border-amber-100">
+                            <span class="font-black text-xs text-amber-800 block mb-3 uppercase tracking-wider">🟠 Hợp Số</span>
+                            <div class="grid grid-cols-3 gap-2" id="hs-grid"></div>
+                        </div>
+                        <!-- Không phải cả hai -->
+                        <div class="p-4 bg-slate-100 rounded-xl border border-slate-200">
+                            <span class="font-black text-xs text-slate-700 block mb-3 uppercase tracking-wider">⚪ Không là cả hai</span>
+                            <div class="grid grid-cols-3 gap-2" id="none-grid"></div>
+                        </div>
+                    </div>
+
+                    <!-- Danh sách các nút số để bấm chọn phân loại -->
+                    <p class="text-xs text-slate-500 mt-4 font-bold">Mời em nhấp chuột vào từng số bên dưới để xếp vào cột tương ứng:</p>
+                    <div class="flex flex-wrap gap-2 mt-2" id="number-pool">
+                        <!-- Tạo động bằng JS -->
+                    </div>
+                </div>
+
+                <!-- BÀI 2 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 2</span>
+                        <span>Các khẳng định sau ĐÚNG hay SAI?</span>
+                    </p>
+
+                    <div class="space-y-3 mt-3">
+                        <!-- Câu a -->
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <span class="text-sm font-semibold">a) Số $0$ và số $1$ là số nguyên tố.</span>
+                            <div class="flex gap-2">
+                                <button onclick="selectTrueFalse(2, 'a', 'Đúng')" id="btn-2a-T" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Đúng</button>
+                                <button onclick="selectTrueFalse(2, 'a', 'Sai')" id="btn-2a-F" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Sai</button>
+                            </div>
+                        </div>
+                        <!-- Câu b -->
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <span class="text-sm font-semibold">b) Số $2$ là số nguyên tố chẵn duy nhất.</span>
+                            <div class="flex gap-2">
+                                <button onclick="selectTrueFalse(2, 'b', 'Đúng')" id="btn-2b-T" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Đúng</button>
+                                <button onclick="selectTrueFalse(2, 'b', 'Sai')" id="btn-2b-F" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Sai</button>
+                            </div>
+                        </div>
+                        <!-- Câu c -->
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <span class="text-sm font-semibold">c) Mọi số nguyên tố đều là số lẻ.</span>
+                            <div class="flex gap-2">
+                                <button onclick="selectTrueFalse(2, 'c', 'Đúng')" id="btn-2c-T" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Đúng</button>
+                                <button onclick="selectTrueFalse(2, 'c', 'Sai')" id="btn-2c-F" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Sai</button>
+                            </div>
+                        </div>
+                        <!-- Câu d -->
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <span class="text-sm font-semibold">d) Hợp số là số tự nhiên lớn hơn $1$ và có nhiều hơn hai ước.</span>
+                            <div class="flex gap-2">
+                                <button onclick="selectTrueFalse(2, 'd', 'Đúng')" id="btn-2d-T" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Đúng</button>
+                                <button onclick="selectTrueFalse(2, 'd', 'Sai')" id="btn-2d-F" class="px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Sai</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 3 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 3</span>
+                        <span>Phân tích các số sau ra thừa số nguyên tố (Điền số mũ thích hợp):</span>
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-4">
+                        <!-- Câu a -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="font-bold block text-blue-900 mb-2">a) $120$</span>
+                            <div class="flex items-center justify-center gap-1 font-bold text-base">
+                                <span>$120 = 2$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-3a-exp1" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                                <span>$\cdot 3$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-3a-exp2" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                                <span>$\cdot 5$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-3a-exp3" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                            </div>
+                            <span class="text-xs text-slate-400 block mt-2">(Mẹo: Nếu số mũ bằng 1, em ghi số 1 nhé)</span>
+                        </div>
+                        <!-- Câu b -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="font-bold block text-blue-900 mb-2">b) $300$</span>
+                            <div class="flex items-center justify-center gap-1 font-bold text-base">
+                                <span>$300 = 2$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-3b-exp1" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                                <span>$\cdot 3$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-3b-exp2" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                                <span>$\cdot 5$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-3b-exp3" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                            </div>
+                        </div>
+                        <!-- Câu c -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="font-bold block text-blue-900 mb-2">c) $96$</span>
+                            <div class="flex items-center justify-center gap-1 font-bold text-base">
+                                <span>$96 = 2$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-96-exp1" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                                <span>$\cdot 3$</span>
+                                <sup class="text-blue-600"><input type="number" id="inp-96-exp2" placeholder="?" class="w-10 px-1 py-0.5 border text-center rounded bg-white text-xs font-bold"></sup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 4 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 4</span>
+                        <span>Bạn Nam thực hiện phân tích 2 số ra thừa số nguyên tố:</span>
+                    </p>
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl mt-3 text-sm">
+                        <p class="font-semibold text-amber-900">Kết quả của Nam:</p>
+                        <p class="math-expr font-bold mt-1">1) $120 = 2 \cdot 3 \cdot 4 \cdot 5$</p>
+                        <p class="math-expr font-bold">2) $102 = 2 \cdot 51$</p>
+                    </div>
+
+                    <div class="mt-4 space-y-4">
+                        <div>
+                            <p class="text-sm font-bold text-slate-700">Theo em, bạn Nam phân tích ĐÚNG hay SAI?</p>
+                            <div class="flex gap-2 mt-2">
+                                <button onclick="selectTrueFalse(4, 'nam', 'Đúng')" id="btn-4nam-T" class="px-4 py-2 rounded-xl border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Đúng hoàn toàn</button>
+                                <button onclick="selectTrueFalse(4, 'nam', 'Sai')" id="btn-4nam-F" class="px-4 py-2 rounded-xl border-2 text-xs font-bold option-btn bg-white border-slate-200 hover:border-blue-500 text-slate-700">Sai rồi</button>
+                            </div>
+                        </div>
+
+                        <div id="repair-nam" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                            <p class="text-xs text-red-600 font-bold">Chính xác là bạn Nam đã làm sai. Em hãy điền thừa số nguyên tố đúng để sửa giúp Nam:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <span class="text-xs font-bold block text-slate-600">Sửa lại của $120$:</span>
+                                    <div class="flex items-center gap-1 font-bold text-sm mt-1">
+                                        <span>$120 = 2$</span>
+                                        <sup class="text-blue-600"><input type="number" id="inp-4a-e1" placeholder="?" class="w-8 border text-center rounded bg-white text-xs"></sup>
+                                        <span>$\cdot 3$</span>
+                                        <sup class="text-blue-600"><input type="number" id="inp-4a-e2" placeholder="?" class="w-8 border text-center rounded bg-white text-xs"></sup>
+                                        <span>$\cdot 5$</span>
+                                        <sup class="text-blue-600"><input type="number" id="inp-4a-e3" placeholder="?" class="w-8 border text-center rounded bg-white text-xs"></sup>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold block text-slate-600">Sửa lại của $102$:</span>
+                                    <div class="flex items-center gap-1 font-bold text-sm mt-1">
+                                        <span>$102 = 2 \cdot$</span>
+                                        <input type="number" id="inp-4b-f1" placeholder="?" class="w-12 px-1 border text-center rounded bg-white text-xs">
+                                        <span>$\cdot$</span>
+                                        <input type="number" id="inp-4b-f2" placeholder="?" class="w-12 px-1 border text-center rounded bg-white text-xs">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 5 -->
+                <div class="mt-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 5</span>
+                        <span>Tìm tất cả các ước của các số sau dựa trên kết quả phân tích:</span>
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+                        <!-- Ước của 33 -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="font-extrabold text-blue-900 block text-sm mb-2">a) Số $33$ (Biết $33 = 3 \cdot 11$)</span>
+                            <p class="text-xs text-slate-500 mb-3">Chọn các số là ước của $33$:</p>
+                            <div class="flex flex-wrap gap-2" id="u33-container">
+                                <!-- Tạo danh sách ước chọn lựa tương tác -->
+                            </div>
+                        </div>
+                        <!-- Ước của 45 -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="font-extrabold text-blue-900 block text-sm mb-2">b) Số $45$ (Biết $45 = 3^2 \cdot 5$)</span>
+                            <p class="text-xs text-slate-500 mb-3">Chọn các số là ước của $45$:</p>
+                            <div class="flex flex-wrap gap-2" id="u45-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHẦN II: MỨC ĐỘ NÂNG CAO -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+                <div class="absolute top-0 left-6 transform -translate-y-1/2 bg-amber-600 text-white px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider title-font shadow-md">
+                    Phần II: Mức Độ Nâng Cao
+                </div>
+                <p class="text-xs text-slate-500 mt-2 italic">Mục tiêu: Đòi hỏi tư duy, suy luận, lập luận logic và vận dụng tính chất chia hết.</p>
+
+                <!-- BÀI 6 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 6</span>
+                        <span>Thay dấu $*$ bằng chữ số thích hợp để các số sau là số nguyên tố:</span>
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="font-bold block text-sm text-slate-700 mb-2">a) Số dạng $\overline{7*}$</span>
+                            <p class="text-xs text-slate-500 mb-2">Nhấp chọn các chữ số thích hợp cho $*$:</p>
+                            <div class="flex flex-wrap gap-1.5" id="star-7-container"></div>
+                        </div>
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="font-bold block text-sm text-slate-700 mb-2">b) Số dạng $\overline{12*}$</span>
+                            <p class="text-xs text-slate-500 mb-2">Nhấp chọn các chữ số thích hợp cho $*$:</p>
+                            <div class="flex flex-wrap gap-1.5" id="star-12-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 7 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 7</span>
+                        <span>Không tính kết quả, em hãy xét xem tổng (hiệu) sau là số nguyên tố hay hợp số:</span>
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+                        <!-- Tổng a -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col justify-between">
+                            <div>
+                                <span class="font-bold text-blue-900 block text-sm mb-2">a) $3 \cdot 4 \cdot 5 + 6 \cdot 7$</span>
+                                <p class="text-xs text-slate-500">Biểu thức này là:</p>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <button onclick="selectType(7, 'a', 'SNT')" id="btn-7a-SNT" class="px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white hover:border-blue-500 text-slate-700 w-full">Số nguyên tố</button>
+                                <button onclick="selectType(7, 'a', 'HS')" id="btn-7a-HS" class="px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white hover:border-blue-500 text-slate-700 w-full">Hợp số</button>
+                            </div>
+                        </div>
+                        <!-- Hiệu b -->
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col justify-between">
+                            <div>
+                                <span class="font-bold text-blue-900 block text-sm mb-2">b) $5 \cdot 7 \cdot 9 \cdot 11 - 2 \cdot 3 \cdot 4 \cdot 7$</span>
+                                <p class="text-xs text-slate-500">Biểu thức này là:</p>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <button onclick="selectType(7, 'b', 'SNT')" id="btn-7b-SNT" class="px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white hover:border-blue-500 text-slate-700 w-full">Số nguyên tố</button>
+                                <button onclick="selectType(7, 'b', 'HS')" id="btn-7b-HS" class="px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white hover:border-blue-500 text-slate-700 w-full">Hợp số</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 8 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 8</span>
+                        <span>Tìm hai số nguyên tố, biết rằng tổng của chúng bằng $309$.</span>
+                    </p>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mt-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <span class="text-sm font-semibold">Hai số cần tìm là:</span>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="inp-b8-num1" placeholder="Số bé" class="w-24 px-3 py-1.5 border rounded-xl text-center font-bold">
+                            <span>và</span>
+                            <input type="number" id="inp-b8-num2" placeholder="Số lớn" class="w-24 px-3 py-1.5 border rounded-xl text-center font-bold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 9 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 9</span>
+                        <span>Tổng của ba số nguyên tố là $1012$. Tìm số nguyên tố nhỏ nhất trong ba số đó.</span>
+                    </p>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mt-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <span class="text-sm font-semibold">Số nguyên tố nhỏ nhất là:</span>
+                        <input type="number" id="inp-b9-ans" placeholder="Điền đáp án..." class="w-32 px-3 py-1.5 border rounded-xl text-center font-bold">
+                    </div>
+                </div>
+
+                <!-- BÀI 10 -->
+                <div class="mt-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 10</span>
+                        <span>Tính số lượng ước của một số:</span>
+                    </p>
+                    <div class="bg-slate-100 p-4 border rounded-xl text-xs text-slate-700 mt-2">
+                        <strong>Công thức tính số ước:</strong> Nếu $A = a^x \cdot b^y$ (với $a, b$ là các số nguyên tố) thì số lượng ước của $A$ được tính bằng: $(x+1)(y+1)$.
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mt-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <span class="text-sm font-semibold">Áp dụng công thức, số $54$ (biết $54 = 2^1 \cdot 3^3$) có bao nhiêu ước?</span>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="inp-b10-ans" placeholder="..." class="w-24 px-3 py-1.5 border rounded-xl text-center font-bold">
+                            <span class="text-sm">ước</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHẦN III: MỨC ĐỘ VẬN DỤNG -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+                <div class="absolute top-0 left-6 transform -translate-y-1/2 bg-rose-600 text-white px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider title-font shadow-md">
+                    Phần III: Mức Độ Vận Dụng (Toán Thực Tế)
+                </div>
+                <p class="text-xs text-slate-500 mt-2 italic">Mục tiêu: Áp dụng kiến thức số học giải quyết các bài toán phân chia đội ngũ, xếp hàng trong thực tế.</p>
+
+                <!-- BÀI 11 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 11</span>
+                        <span>Một lớp có $30$ học sinh. Cô giáo muốn chia lớp thành các nhóm để thực hiện các dự án nhỏ. Biết rằng các nhóm đều có số người bằng nhau và có nhiều hơn $1$ người. Hỏi mỗi nhóm có thể có bao nhiêu người?</span>
+                    </p>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mt-4">
+                        <p class="text-xs text-slate-500 mb-3">Chọn tất cả các phương án về số người trong một nhóm có thể thỏa mãn đề bài:</p>
+                        <div class="flex flex-wrap gap-2.5" id="u30-practical">
+                            <!-- JS tạo động checkbox -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 12 -->
+                <div class="mt-6 border-b border-slate-100 pb-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 12</span>
+                        <span>Lớp 6B có $40$ học sinh. Để thực hiện dự án nghiên cứu nhỏ, cô giáo muốn chia lớp thành các nhóm có số người như nhau, biết mỗi nhóm có nhiều hơn $3$ người. Hỏi mỗi nhóm có thể có bao nhiêu người?</span>
+                    </p>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mt-4">
+                        <p class="text-xs text-slate-500 mb-3">Chọn tất cả các phương án về số người trong một nhóm có thể thỏa mãn đề bài:</p>
+                        <div class="flex flex-wrap gap-2.5" id="u40-practical"></div>
+                    </div>
+                </div>
+
+                <!-- BÀI 13 -->
+                <div class="mt-6">
+                    <p class="font-bold text-slate-800 text-base flex gap-1 items-baseline">
+                        <span class="bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs">Bài 13</span>
+                        <span>Lớp của bạn Hoàng có $37$ học sinh. Trong một lần thi đồng diễn thể dục, các bạn lớp Hoàng muốn xếp thành các hàng có cùng số bạn để được một khối hình chữ nhật có ít nhất là hai hàng. Hỏi các bạn có thực hiện được không? Vì sao?</span>
+                    </p>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mt-4 space-y-3">
+                        <div>
+                            <span class="text-xs font-extrabold text-slate-600 block mb-1">Câu trả lời:</span>
+                            <div class="flex gap-2">
+                                <button onclick="selectType(13, 'a', 'CO')" id="btn-13-CO" class="px-5 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white hover:border-blue-500 text-slate-700">Có thể thực hiện được</button>
+                                <button onclick="selectType(13, 'a', 'KHONG')" id="btn-13-KHONG" class="px-5 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white hover:border-blue-500 text-slate-700">Không thể thực hiện được</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KHU VỰC NỘP BÀI TỰ ĐỘNG CHẤM -->
+            <div class="bg-white p-6 rounded-2xl border-2 border-dashed border-blue-300 text-center space-y-4 no-print">
+                <h3 class="text-xl font-extrabold title-font text-blue-900">🔔 ĐÃ HOÀN THÀNH TOÀN BỘ PHIẾU BÀI TẬP?</h3>
+                <p class="text-sm text-slate-500 max-w-lg mx-auto">Em hãy rà soát kỹ lưỡng các câu trả lời ở trên, sau đó bấm nút "Nộp Bài và Chấm Điểm" để xem kết quả đánh giá năng lực của mình.</p>
+                <div class="flex justify-center gap-3">
+                    <button onclick="gradeSheet()" class="px-8 py-3.5 bg-gradient-to-r from-blue-800 to-indigo-900 hover:from-blue-900 hover:to-indigo-950 text-white font-extrabold rounded-xl shadow-lg transform hover:-translate-y-0.5 transition-all text-base">
+                        🎯 NỘP BÀI VÀ CHẤM ĐIỂM
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB 2: PHẦN HƯỚNG DẪN GIẢI CHI TIẾT DÀNH CHO GIÁO VIÊN -->
+        <div id="tab-solution" class="hidden space-y-6">
+            <div class="bg-emerald-50 border border-emerald-200 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-emerald-900 title-font flex items-center gap-2 mb-2">
+                    <span>💡 HƯỚNG DẪN GIẢI & BÀI GIẢNG SƯ PHẠM</span>
+                </h3>
+                <p class="text-sm text-emerald-800 leading-relaxed">Tài liệu tham khảo chuyên sâu bám sát đề bài, lý thuyết trọng tâm dành cho Giáo viên giảng dạy hoặc hỗ trợ học sinh tự học tại nhà hiệu quả.</p>
+            </div>
+
+            <!-- CARD GIẢI BÀI 1 - 5 -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h4 class="font-extrabold text-blue-950 border-b pb-2 mb-4 text-base">🔑 Giải Chi Tiết Phần I: Mức Độ Cơ Bản</h4>
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div>
+                        <strong class="text-blue-800">Bài 1:</strong>
+                        <ul class="list-disc pl-5 mt-1 space-y-1">
+                            <li><span class="font-semibold text-emerald-700">Số nguyên tố:</span> $2; 31; 83; 97$.</li>
+                            <li><span class="font-semibold text-amber-700">Hợp số:</span> $9; 27; 91$.</li>
+                            <li><span class="font-semibold text-slate-500">Không thuộc hai loại trên:</span> $0; 1$ (Số $0$ và số $1$ theo định nghĩa không là số nguyên tố cũng không là hợp số).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 2:</strong>
+                        <ul class="list-disc pl-5 mt-1 space-y-1">
+                            <li>a) <span class="text-red-600 font-bold">Sai.</span> Sửa lại: Số 0 và 1 không phải là số nguyên tố và cũng không là hợp số.</li>
+                            <li>b) <span class="text-green-600 font-bold">Đúng.</span> Số 2 là số nguyên tố duy nhất có tính chất chẵn.</li>
+                            <li>c) <span class="text-red-600 font-bold">Sai.</span> Sửa lại: Hầu hết số nguyên tố đều lẻ, ngoại trừ duy nhất số 2 là chẵn.</li>
+                            <li>d) <span class="text-green-600 font-bold">Đúng.</span> Định nghĩa chuẩn của hợp số.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 3:</strong> Phân tích ra thừa số nguyên tố:
+                        <p class="mt-1">$120 = 2^3 \cdot 3 \cdot 5$ | $300 = 2^2 \cdot 3 \cdot 5^2$ | $96 = 2^5 \cdot 3$</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 4:</strong> Bạn Nam phân tích sai.
+                        <p class="mt-1">Vì $4$ và $51$ không phải các số nguyên tố (Nam chưa phân tích triệt để).</p>
+                        <p><strong>Sửa lại:</strong> $120 = 2^3 \cdot 3 \cdot 5$; $102 = 2 \cdot 3 \cdot 17$.</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 5:</strong> Tìm ước:
+                        <p class="mt-1">a) Ước của $33$: $\{1; 3; 11; 33\}$.</p>
+                        <p>b) Ước của $45$: $\{1; 3; 5; 9; 15; 45\}$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD GIẢI BÀI 6 - 10 -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h4 class="font-extrabold text-blue-950 border-b pb-2 mb-4 text-base">🔑 Giải Chi Tiết Phần II: Mức Độ Nâng Cao</h4>
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div>
+                        <strong class="text-blue-800">Bài 6:</strong> Thay dấu $*$ để được số nguyên tố:
+                        <p class="mt-1">a) $\overline{7*}$ thành SNT khi $* \in \{1; 3; 9\}$. (Ta có các SNT: $71, 73, 79$)</p>
+                        <p>b) $\overline{12*}$ thành SNT khi $* = 7$. (Ta có số $127$ là số nguyên tố)</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 7:</strong> Nhận xét tính chất chia hết để kết luận:
+                        <p class="mt-1">a) Tổng $3 \cdot 4 \cdot 5 + 6 \cdot 7$: Số hạng đầu có thừa số $3$, số hạng thứ hai chứa $6$ chia hết cho $3$, do đó cả 2 số hạng đều chia hết cho $3$. Tổng lớn hơn $3$ và chia hết cho $3$ nên đây là một <strong>Hợp số</strong>.</p>
+                        <p>b) Hiệu $5 \cdot 7 \cdot 9 \cdot 11 - 2 \cdot 3 \cdot 4 \cdot 7$: Cả hai tích đều chứa thừa số $7$. Do đó cả hiệu chia hết cho $7$. Hiệu lớn hơn $7$ và chia hết cho $7$ nên đây là <strong>Hợp số</strong>.</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 8:</strong> Tìm hai số nguyên tố có tổng bằng $309$:
+                        <p class="mt-1">Vì tổng hai số là $309$ (một số lẻ), suy ra một trong hai số nguyên tố phải là số chẵn. Mà số nguyên tố chẵn duy nhất là $2$.</p>
+                        <p>Số còn lại là: $309 - 2 = 307$ (là số nguyên tố lẻ).</p>
+                        <p>Đáp án: $2$ và $307$.</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 9:</strong> Tổng của ba số nguyên tố là $1012$ (số chẵn):
+                        <p class="mt-1">Để tổng ba số nguyên tố là một số chẵn, bắt buộc trong ba số phải chứa ít nhất một số nguyên tố chẵn. Mà số nguyên tố chẵn duy nhất là $2$.</p>
+                        <p>Do đó số nguyên tố nhỏ nhất trong ba số nguyên tố đó chính là $2$.</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 10:</strong> Tính số lượng ước của $54 = 2^1 \cdot 3^3$:
+                        <p class="mt-1">Áp dụng công thức số ước: $(1 + 1)(3 + 1) = 2 \cdot 4 = 8$ ước.</p>
+                        <p>Kiểm chứng thực tế ước của 54: $\{1, 2, 3, 6, 9, 18, 27, 54\}$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD GIẢI BÀI 11 - 13 -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h4 class="font-extrabold text-blue-950 border-b pb-2 mb-4 text-base">🔑 Giải Chi Tiết Phần III: Mức Độ Vận Dụng</h4>
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div>
+                        <strong class="text-blue-800">Bài 11:</strong> Số người trong nhóm phải là Ước của $30$ và lớn hơn $1$:
+                        <p class="mt-1">Tập hợp các ước của $30$ là: $\{1; 2; 3; 5; 6; 10; 15; 30\}$. Do điều kiện nhiều hơn $1$ người, ta có các nhóm có thể có:</p>
+                        <p class="font-bold text-slate-700">$2; 3; 5; 6; 10; 15; 30$ người.</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 12:</strong> Số người mỗi nhóm là Ước của $40$ và nhiều hơn $3$ người:
+                        <p class="mt-1">Tập hợp ước của $40$ là: $\{1; 2; 4; 5; 8; 10; 20; 40\}$. Do điều kiện nhóm có nhiều hơn $3$ người, ta có các nhóm có thể có:</p>
+                        <p class="font-bold text-slate-700">$4; 5; 8; 10; 20; 40$ người.</p>
+                    </div>
+                    <div>
+                        <strong class="text-blue-800">Bài 13:</strong> Lớp của Hoàng có $37$ học sinh:
+                        <p class="mt-1">Số $37$ là số nguyên tố, do đó $37$ chỉ có hai ước tự nhiên duy nhất là $1$ và $37$.</p>
+                        <p>Để xếp thành khối hình chữ nhật có ít nhất là hai hàng thì số hàng phải là một ước của $37$ và lớn hơn $1$ (tức là số hàng có thể là $37$, khi đó mỗi hàng chỉ có $1$ học sinh). Nhưng điều kiện đề bài là "có ít nhất hai hàng", nếu xếp $37$ hàng thì mỗi hàng có $1$ bạn, không thể tạo thành khối đồng diễn thẩm mỹ của khối chữ nhật thông thường hoặc xếp $1$ hàng có $37$ học sinh.</p>
+                        <p>Kết luận: <strong>Không thực hiện được</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER BẢN QUYỀN HỌC THUẬT -->
+    <footer class="bg-blue-950 text-slate-400 py-6 text-center text-xs border-t border-blue-900 mt-10 no-print">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p class="font-extrabold text-white text-sm tracking-wider">TRUNG TÂM BỒI DƯỠNG VĂN HÓA - TRƯỜNG ĐH KHOA HỌC TỰ NHIÊN TP.HCM</p>
+            <p>Địa chỉ: 227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP. Hồ Chí Minh</p>
+            <p>© 2026 Bản quyền tài liệu giảng dạy môn Toán trực thuộc BDVH KHTN. Thiết kế phiếu bài tập tương tác số học nâng cao.</p>
+            <p>© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục tiêu phi lợi nhuận - giáo dục.</p>
+        </div>
+    </footer>
+
+    <!-- CSS / SCRIPT HẬU TRƯỜNG ĐIỀU KHIỂN HOẠT ĐỘNG TƯƠNG TÁC -->
+    <script>
+        // Hệ thống lưu trữ đáp án của học sinh
+        const studentAnswers = {
+            b1: { SNT: [], HS: [], NONE: [] }, // Câu 1 phân loại
+            b2: { a: null, b: null, c: null, d: null }, // Đúng sai bài 2
+            b3: {
+                a: [null, null, null], // Số mũ câu a
+                b: [null, null, null], // Số mũ câu b
+                c: [null, null]        // Số mũ câu c
+            },
+            b4: {
+                status: null, // Đúng hay sai
+                a_exp: [null, null, null], // Exponent sửa lại
+                b_val: [null, null] // Thừa số sửa lại
+            },
+            b5: {
+                u33: [], // Danh sách ước chọn của 33
+                u45: []  // Danh sách ước chọn của 45
+            },
+            b6: {
+                star7: [], // Chữ số * cho 7*
+                star12: [] // Chữ số * cho 12*
+            },
+            b7: { a: null, b: null }, // Đúng sai hoặc SNT/HS bài 7
+            b8: [null, null], // Tìm 2 số SNT tổng 309
+            b9: null, // SNT nhỏ nhất tổng 1012
+            b10: null, // Số lượng ước của 54
+            b11: [], // Ước 30 thực tế
+            b12: [], // Ước 40 thực tế
+            b13: null // Câu trả lời Bài 13
+        };
+
+        // Đáp án chuẩn giáo khoa để đối soát chấm điểm
+        const correctAnswers = {
+            b1: {
+                SNT: [2, 31, 83, 97],
+                HS: [9, 27, 91],
+                NONE: [0, 1]
+            },
+            b2: { a: "Sai", b: "Đúng", c: "Sai", d: "Đúng" },
+            b3: {
+                a: [3, 1, 1], // 120 = 2^3 * 3^1 * 5^1
+                b: [2, 1, 2], // 300 = 2^2 * 3^1 * 5^2
+                c: [5, 1]     // 96 = 2^5 * 3^1
+            },
+            b4: {
+                status: "Sai",
+                a_exp: [3, 1, 1],
+                b_val: [3, 17]
+            },
+            b5: {
+                u33: [1, 3, 11, 33],
+                u45: [1, 3, 5, 9, 15, 45]
+            },
+            b6: {
+                star7: [1, 3, 9],
+                star12: [7]
+            },
+            b7: { a: "HS", b: "HS" },
+            b8: [2, 307],
+            b9: 2,
+            b10: 8,
+            b11: [2, 3, 5, 6, 10, 15, 30],
+            b12: [4, 5, 8, 10, 20, 40],
+            b13: "KHONG"
+        };
+
+        // Danh sách số cho Bài 1
+        const b1Numbers = [2, 9, 27, 31, 0, 83, 91, 97, 1];
+
+        // Khởi động trang web
+        window.onload = function() {
+            initB1Pool();
+            initB5Containers();
+            initB6Containers();
+            initPracticalContainers();
+        };
+
+        // Tab Switch
+        function switchTab(tabName) {
+            const tabEx = document.getElementById('tab-exercise');
+            const tabSol = document.getElementById('tab-solution');
+            const btnEx = document.getElementById('tab-ex-btn');
+            const btnSol = document.getElementById('tab-sol-btn');
+
+            if (tabName === 'exercise') {
+                tabEx.classList.remove('hidden');
+                tabSol.classList.add('hidden');
+                btnEx.className = "px-4 py-2 bg-blue-800 text-white font-bold rounded-lg text-sm transition-all shadow-sm";
+                btnSol.className = "px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 font-bold rounded-lg text-sm transition-all";
+            } else {
+                tabEx.classList.add('hidden');
+                tabSol.classList.remove('hidden');
+                btnEx.className = "px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 font-bold rounded-lg text-sm transition-all";
+                btnSol.className = "px-4 py-2 bg-emerald-700 text-white font-bold rounded-lg text-sm transition-all shadow-sm";
+            }
+            // Gọi MathJax render lại nếu cần thiết
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // BÀI 1: KHỞI TẠO BỂ CHỌN SỐ TƯƠNG TÁC
+        function initB1Pool() {
+            const pool = document.getElementById('number-pool');
+            pool.innerHTML = "";
+            b1Numbers.forEach(num => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.id = `btn-b1-${num}`;
+                btn.onclick = () => showB1SelectionModal(num);
+                btn.className = "w-12 h-12 bg-white hover:bg-slate-100 text-blue-900 border-2 border-slate-300 rounded-xl font-black text-lg shadow-sm transition-all flex items-center justify-center";
+                btn.innerText = num;
+                pool.appendChild(btn);
+            });
+            updateB1Grids();
+        }
+
+        // Hộp phân loại số bài 1 cực nhanh gọn
+        function showB1SelectionModal(num) {
+            // Hiển thị menu nhanh ngay dưới số vừa nhấp chuột
+            const currentClassification = getB1NumCategory(num);
+            
+            let nextCategory = "SNT";
+            if (currentClassification === "SNT") nextCategory = "HS";
+            else if (currentClassification === "HS") nextCategory = "NONE";
+            else if (currentClassification === "NONE") nextCategory = "POOL";
+
+            // Di chuyển số vào cột tương ứng
+            removeNumFromB1All(num);
+            if (nextCategory === "SNT") studentAnswers.b1.SNT.push(num);
+            else if (nextCategory === "HS") studentAnswers.b1.HS.push(num);
+            else if (nextCategory === "NONE") studentAnswers.b1.NONE.push(num);
+
+            updateB1Grids();
+        }
+
+        function getB1NumCategory(num) {
+            if (studentAnswers.b1.SNT.includes(num)) return "SNT";
+            if (studentAnswers.b1.HS.includes(num)) return "HS";
+            if (studentAnswers.b1.NONE.includes(num)) return "NONE";
+            return "POOL";
+        }
+
+        function removeNumFromB1All(num) {
+            studentAnswers.b1.SNT = studentAnswers.b1.SNT.filter(n => n !== num);
+            studentAnswers.b1.HS = studentAnswers.b1.HS.filter(n => n !== num);
+            studentAnswers.b1.NONE = studentAnswers.b1.NONE.filter(n => n !== num);
+        }
+
+        function updateB1Grids() {
+            // Cập nhật giao diện các cột
+            const sntGrid = document.getElementById('snt-grid');
+            const hsGrid = document.getElementById('hs-grid');
+            const noneGrid = document.getElementById('none-grid');
+
+            sntGrid.innerHTML = "";
+            hsGrid.innerHTML = "";
+            noneGrid.innerHTML = "";
+
+            studentAnswers.b1.SNT.forEach(num => sntGrid.appendChild(createB1GridItem(num, 'emerald')));
+            studentAnswers.b1.HS.forEach(num => hsGrid.appendChild(createB1GridItem(num, 'amber')));
+            studentAnswers.b1.NONE.forEach(num => noneGrid.appendChild(createB1GridItem(num, 'slate')));
+
+            // Đổi màu nút pool
+            b1Numbers.forEach(num => {
+                const btn = document.getElementById(`btn-b1-${num}`);
+                if (!btn) return;
+                const cat = getB1NumCategory(num);
+                if (cat === "POOL") {
+                    btn.className = "w-12 h-12 bg-white hover:bg-slate-100 text-blue-900 border-2 border-slate-300 rounded-xl font-black text-lg shadow-sm transition-all flex items-center justify-center";
+                } else if (cat === "SNT") {
+                    btn.className = "w-12 h-12 bg-emerald-500 text-white border-2 border-emerald-600 rounded-xl font-black text-lg shadow-sm transition-all flex items-center justify-center";
+                } else if (cat === "HS") {
+                    btn.className = "w-12 h-12 bg-amber-500 text-white border-2 border-amber-600 rounded-xl font-black text-lg shadow-sm transition-all flex items-center justify-center";
+                } else {
+                    btn.className = "w-12 h-12 bg-slate-500 text-white border-2 border-slate-600 rounded-xl font-black text-lg shadow-sm transition-all flex items-center justify-center";
+                }
+            });
+        }
+
+        function createB1GridItem(num, color) {
+            const div = document.createElement('div');
+            div.className = `p-2 bg-${color}-100 border border-${color}-300 rounded-lg text-center font-extrabold text-${color}-900 cursor-pointer text-sm shadow-sm`;
+            div.innerText = num;
+            div.onclick = () => showB1SelectionModal(num);
+            return div;
+        }
+
+        // BÀI 2 & BÀI 4: CHỌN ĐÚNG / SAI
+        function selectTrueFalse(baiNum, sub, value) {
+            if (baiNum === 2) {
+                studentAnswers.b2[sub] = value;
+                const btnT = document.getElementById(`btn-2${sub}-T`);
+                const btnF = document.getElementById(`btn-2${sub}-F`);
+                if (value === "Đúng") {
+                    btnT.className = "px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-emerald-600 text-white border-emerald-700";
+                    btnF.className = "px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 text-slate-700";
+                } else {
+                    btnT.className = "px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-white border-slate-200 text-slate-700";
+                    btnF.className = "px-4 py-1.5 rounded-lg border-2 text-xs font-bold option-btn bg-rose-600 text-white border-rose-700";
+                }
+            } else if (baiNum === 4) {
+                studentAnswers.b4.status = value;
+                const btnT = document.getElementById('btn-4nam-T');
+                const btnF = document.getElementById('btn-4nam-F');
+                const repairBox = document.getElementById('repair-nam');
+                if (value === "Đúng") {
+                    btnT.className = "px-4 py-2 rounded-xl border-2 text-xs font-bold option-btn bg-emerald-600 text-white border-emerald-700";
+                    btnF.className = "px-4 py-2 rounded-xl border-2 text-xs font-bold option-btn bg-white border-slate-200 text-slate-700";
+                    repairBox.classList.add('hidden');
+                } else {
+                    btnT.className = "px-4 py-2 rounded-xl border-2 text-xs font-bold option-btn bg-white border-slate-200 text-slate-700";
+                    btnF.className = "px-4 py-2 rounded-xl border-2 text-xs font-bold option-btn bg-rose-600 text-white border-rose-700";
+                    repairBox.classList.remove('hidden');
+                }
+            }
+        }
+
+        // BÀI 5: TÌM CÁC ƯỚC CỦA SỐ TƯƠNG TÁC
+        const candidateU33 = [1, 2, 3, 5, 11, 15, 33];
+        const candidateU45 = [1, 2, 3, 5, 9, 11, 15, 25, 45];
+
+        function initB5Containers() {
+            const u33Div = document.getElementById('u33-container');
+            const u45Div = document.getElementById('u45-container');
+
+            u33Div.innerHTML = "";
+            u45Div.innerHTML = "";
+
+            candidateU33.forEach(num => u33Div.appendChild(createB5Checkbox('u33', num)));
+            candidateU45.forEach(num => u45Div.appendChild(createB5Checkbox('u45', num)));
+        }
+
+        function createB5Checkbox(type, num) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.id = `btn-${type}-${num}`;
+            btn.className = "px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold hover:border-blue-500 transition-all";
+            btn.innerText = num;
+            btn.onclick = () => {
+                const arr = studentAnswers.b5[type];
+                if (arr.includes(num)) {
+                    studentAnswers.b5[type] = arr.filter(x => x !== num);
+                    btn.className = "px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold hover:border-blue-500 transition-all";
+                } else {
+                    studentAnswers.b5[type].push(num);
+                    btn.className = "px-3 py-1.5 bg-blue-600 border border-blue-700 text-white rounded-xl text-xs font-extrabold hover:bg-blue-700 transition-all shadow-sm";
+                }
+            };
+            return btn;
+        }
+
+        // BÀI 6: NHẤP CHỌN CHỮ SỐ CHO *
+        function initB6Containers() {
+            const star7Div = document.getElementById('star-7-container');
+            const star12Div = document.getElementById('star-12-container');
+
+            star7Div.innerHTML = "";
+            star12Div.innerHTML = "";
+
+            for (let i = 0; i <= 9; i++) {
+                star7Div.appendChild(createStarBtn('7', i));
+                star12Div.appendChild(createStarBtn('12', i));
+            }
+        }
+
+        function createStarBtn(type, digit) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.id = `btn-star${type}-${digit}`;
+            btn.className = "w-8 h-8 bg-white border border-slate-300 rounded-lg text-xs font-bold hover:border-amber-500 transition-all";
+            btn.innerText = digit;
+            btn.onclick = () => {
+                const key = type === '7' ? 'star7' : 'star12';
+                const arr = studentAnswers.b6[key];
+                if (arr.includes(digit)) {
+                    studentAnswers.b6[key] = arr.filter(x => x !== digit);
+                    btn.className = "w-8 h-8 bg-white border border-slate-300 rounded-lg text-xs font-bold hover:border-amber-500 transition-all";
+                } else {
+                    studentAnswers.b6[key].push(digit);
+                    btn.className = "w-8 h-8 bg-amber-500 text-white border border-amber-600 rounded-lg text-xs font-extrabold transition-all shadow-sm";
+                }
+            };
+            return btn;
+        }
+
+        // BÀI 7 & BÀI 13: PHÂN LOẠI / CHỌN PHƯƠNG ÁN
+        function selectType(baiNum, sub, value) {
+            if (baiNum === 7) {
+                studentAnswers.b7[sub] = value;
+                const btnSNT = document.getElementById(`btn-7${sub}-SNT`);
+                const btnHS = document.getElementById(`btn-7${sub}-HS`);
+                if (value === "SNT") {
+                    btnSNT.className = "px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-blue-700 text-white border-blue-800 w-full";
+                    btnHS.className = "px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white border-slate-200 text-slate-700 w-full";
+                } else {
+                    btnSNT.className = "px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white border-slate-200 text-slate-700 w-full";
+                    btnHS.className = "px-4 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-amber-600 text-white border-amber-700 w-full";
+                }
+            } else if (baiNum === 13) {
+                studentAnswers.b13 = value;
+                const btnCO = document.getElementById('btn-13-CO');
+                const btnKHONG = document.getElementById('btn-13-KHONG');
+                if (value === "CO") {
+                    btnCO.className = "px-5 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-emerald-600 text-white border-emerald-700";
+                    btnKHONG.className = "px-5 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white border-slate-200 text-slate-700";
+                } else {
+                    btnCO.className = "px-5 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-white border-slate-200 text-slate-700";
+                    btnKHONG.className = "px-5 py-2 border-2 rounded-xl text-xs font-bold option-btn bg-rose-600 text-white border-rose-700";
+                }
+            }
+        }
+
+        // BÀI 11 & BÀI 12: KHỞI TẠO CHECKBOX VẬN DỤNG THỰC TẾ
+        const options30 = [2, 3, 4, 5, 6, 8, 10, 12, 15, 30];
+        const options40 = [2, 3, 4, 5, 8, 10, 15, 20, 40];
+
+        function initPracticalContainers() {
+            const u30Div = document.getElementById('u30-practical');
+            const u40Div = document.getElementById('u40-practical');
+
+            u30Div.innerHTML = "";
+            u40Div.innerHTML = "";
+
+            options30.forEach(num => u30Div.appendChild(createPracticalCheckbox('u30', num)));
+            options40.forEach(num => u40Div.appendChild(createPracticalCheckbox('u40', num)));
+        }
+
+        function createPracticalCheckbox(type, num) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.id = `btn-prac-${type}-${num}`;
+            btn.className = "px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold hover:border-rose-500 transition-all";
+            btn.innerText = `${num} người`;
+            btn.onclick = () => {
+                const key = type === 'u30' ? 'b11' : 'b12';
+                const arr = studentAnswers[key];
+                if (arr.includes(num)) {
+                    studentAnswers[key] = arr.filter(x => x !== num);
+                    btn.className = "px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold hover:border-rose-500 transition-all";
+                } else {
+                    studentAnswers[key].push(num);
+                    btn.className = "px-3 py-1.5 bg-rose-600 border border-rose-700 text-white rounded-xl text-xs font-extrabold hover:bg-rose-700 transition-all shadow-sm";
+                }
+            };
+            return btn;
+        }
+
+        // BIÊN DỊCH DỮ LIỆU ĐIỀN CỦA HỌC SINH TỪ INPUTS VÀ TỰ ĐỘNG CHẤM ĐIỂM
+        function gradeSheet() {
+            // Lấy thông tin họ tên học sinh
+            const studentName = document.getElementById('student-name').value.trim();
+            if (!studentName) {
+                alert("Em nhớ điền Họ và Tên của mình ở trên đầu phiếu nhé!");
+                document.getElementById('student-name').focus();
+                return;
+            }
+
+            // Thu thập dữ liệu từ các input dạng số
+            studentAnswers.b3.a[0] = parseInt(document.getElementById('inp-3a-exp1').value) || null;
+            studentAnswers.b3.a[1] = parseInt(document.getElementById('inp-3a-exp2').value) || null;
+            studentAnswers.b3.a[2] = parseInt(document.getElementById('inp-3a-exp3').value) || null;
+
+            studentAnswers.b3.b[0] = parseInt(document.getElementById('inp-3b-exp1').value) || null;
+            studentAnswers.b3.b[1] = parseInt(document.getElementById('inp-3b-exp2').value) || null;
+            studentAnswers.b3.b[2] = parseInt(document.getElementById('inp-3b-exp3').value) || null;
+
+            studentAnswers.b3.c[0] = parseInt(document.getElementById('inp-96-exp1').value) || null;
+            studentAnswers.b3.c[1] = parseInt(document.getElementById('inp-96-exp2').value) || null;
+
+            if (studentAnswers.b4.status === "Sai") {
+                studentAnswers.b4.a_exp[0] = parseInt(document.getElementById('inp-4a-e1').value) || null;
+                studentAnswers.b4.a_exp[1] = parseInt(document.getElementById('inp-4a-e2').value) || null;
+                studentAnswers.b4.a_exp[2] = parseInt(document.getElementById('inp-4a-e3').value) || null;
+
+                studentAnswers.b4.b_val[0] = parseInt(document.getElementById('inp-4b-f1').value) || null;
+                studentAnswers.b4.b_val[1] = parseInt(document.getElementById('inp-4b-f2').value) || null;
+            }
+
+            // Bài 8
+            const b8_n1 = parseInt(document.getElementById('inp-b8-num1').value);
+            const b8_n2 = parseInt(document.getElementById('inp-b8-num2').value);
+            if (!isNaN(b8_n1) && !isNaN(b8_n2)) {
+                studentAnswers.b8 = [b8_n1, b8_n2].sort((x, y) => x - y);
+            } else {
+                studentAnswers.b8 = [null, null];
+            }
+
+            // Bài 9 & 10
+            studentAnswers.b9 = parseInt(document.getElementById('inp-b9-ans').value) || null;
+            studentAnswers.b10 = parseInt(document.getElementById('inp-b10-ans').value) || null;
+
+            // BẮT ĐẦU CHẤM ĐIỂM CHI TIẾT (Tổng điểm 130 điểm - Mỗi bài 10 điểm)
+            let totalScore = 0;
+            const feedbackDetails = [];
+
+            // Chấm Bài 1 (10 điểm)
+            const b1SntCorrect = matchArrayIgnoreOrder(studentAnswers.b1.SNT, correctAnswers.b1.SNT);
+            const b1HsCorrect = matchArrayIgnoreOrder(studentAnswers.b1.HS, correctAnswers.b1.HS);
+            const b1NoneCorrect = matchArrayIgnoreOrder(studentAnswers.b1.NONE, correctAnswers.b1.NONE);
+            if (b1SntCorrect && b1HsCorrect && b1NoneCorrect) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 1: Đúng hoàn toàn! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 1: Sai phân loại một số hoặc phân loại chưa đủ.");
+            }
+
+            // Chấm Bài 2 (10 điểm)
+            const b2_a = studentAnswers.b2.a === correctAnswers.b2.a;
+            const b2_b = studentAnswers.b2.b === correctAnswers.b2.b;
+            const b2_c = studentAnswers.b2.c === correctAnswers.b2.c;
+            const b2_d = studentAnswers.b2.d === correctAnswers.b2.d;
+            if (b2_a && b2_b && b2_c && b2_d) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 2: Trắc nghiệm Đúng/Sai chính xác tuyệt đối! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 2: Có câu Đúng/Sai bị chọn nhầm.");
+            }
+
+            // Chấm Bài 3 (10 điểm)
+            const b3_a_ok = matchArray(studentAnswers.b3.a, correctAnswers.b3.a);
+            const b3_b_ok = matchArray(studentAnswers.b3.b, correctAnswers.b3.b);
+            const b3_c_ok = matchArray(studentAnswers.b3.c, correctAnswers.b3.c);
+            if (b3_a_ok && b3_b_ok && b3_c_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 3: Phân tích số mũ ra TSNT chính xác! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 3: Số mũ phân tích thừa số nguyên tố bị sai ở một số câu.");
+            }
+
+            // Chấm Bài 4 (10 điểm)
+            const b4_status_ok = studentAnswers.b4.status === correctAnswers.b4.status;
+            let b4_repair_ok = false;
+            if (b4_status_ok && studentAnswers.b4.status === "Sai") {
+                const b4_rep_a = matchArray(studentAnswers.b4.a_exp, correctAnswers.b4.a_exp);
+                // Với b4_b_val, cần sắp xếp để xem có trùng không hoặc kiểm tra giá trị [3, 17]
+                const sortedBval = [...studentAnswers.b4.b_val].filter(x => x !== null).sort((x, y) => x - y);
+                const b4_rep_b = matchArray(sortedBval, correctAnswers.b4.b_val);
+                if (b4_rep_a && b4_rep_b) {
+                    b4_repair_ok = true;
+                }
+            }
+            if (b4_status_ok && b4_repair_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 4: Sửa bài cho bạn Nam hoàn toàn chính xác! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 4: Nhận định đúng nhưng phần sửa lại thừa số nguyên tố bị lỗi.");
+            }
+
+            // Chấm Bài 5 (10 điểm)
+            const b5_a_ok = matchArrayIgnoreOrder(studentAnswers.b5.u33, correctAnswers.b5.u33);
+            const b5_b_ok = matchArrayIgnoreOrder(studentAnswers.b5.u45, correctAnswers.b5.u45);
+            if (b5_a_ok && b5_b_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 5: Tìm tất cả ước số dựa trên phân tích cực tốt! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 5: Chọn sai hoặc thiếu ước số của 33 hoặc 45.");
+            }
+
+            // Chấm Bài 6 (10 điểm)
+            const b6_a_ok = matchArrayIgnoreOrder(studentAnswers.b6.star7, correctAnswers.b6.star7);
+            const b6_b_ok = matchArrayIgnoreOrder(studentAnswers.b6.star12, correctAnswers.b6.star12);
+            if (b6_a_ok && b6_b_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 6: Thay thế chữ số để thành SNT rất xuất sắc! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 6: Tìm thiếu chữ số thỏa mãn SNT.");
+            }
+
+            // Chấm Bài 7 (10 điểm)
+            const b7_a_ok = studentAnswers.b7.a === correctAnswers.b7.a;
+            const b7_b_ok = studentAnswers.b7.b === correctAnswers.b7.b;
+            if (b7_a_ok && b7_b_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 7: Phân tích SNT / Hợp số qua tính chia hết đúng! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 7: Nhầm lẫn tính chất hợp số/số nguyên tố ở bài 7.");
+            }
+
+            // Chấm Bài 8 (10 điểm)
+            const b8_ok = matchArray(studentAnswers.b8, correctAnswers.b8);
+            if (b8_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 8: Tìm cặp số nguyên tố hoàn hảo! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 8: Chưa tìm ra cặp SNT có tổng là 309.");
+            }
+
+            // Chấm Bài 9 (10 điểm)
+            if (studentAnswers.b9 === correctAnswers.b9) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 9: Đúng số nguyên tố chẵn nhỏ nhất! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 9: Sai đáp án số nguyên tố nhỏ nhất có tổng 1012.");
+            }
+
+            // Chấm Bài 10 (10 điểm)
+            if (studentAnswers.b10 === correctAnswers.b10) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 10: Tính số ước của 54 hoàn hảo! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 10: Tính sai số ước bằng công thức số mũ.");
+            }
+
+            // Chấm Bài 11 (10 điểm)
+            const b11_ok = matchArrayIgnoreOrder(studentAnswers.b11, correctAnswers.b11);
+            if (b11_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 11: Đúng số người nhóm có thể chia của 30! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 11: Phương án chia nhóm học sinh lớp 30 người bị sai.");
+            }
+
+            // Chấm Bài 12 (10 điểm)
+            const b12_ok = matchArrayIgnoreOrder(studentAnswers.b12, correctAnswers.b12);
+            if (b12_ok) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 12: Đúng các cách chia nhóm của lớp 40 HS! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 12: Phương án chia nhóm học sinh lớp 40 người bị sai.");
+            }
+
+            // Chấm Bài 13 (10 điểm)
+            if (studentAnswers.b13 === correctAnswers.b13) {
+                totalScore += 10;
+                feedbackDetails.push("Bài 13: Lập luận chuẩn về tính không thể chia hàng của 37! (+10 điểm)");
+            } else {
+                feedbackDetails.push("Bài 13: Sai kết luận phân hàng đồng diễn của Hoàng.");
+            }
+
+            // CẬP NHẬT BẢNG ĐIỂM & ĐỒ HỌA
+            const pct = Math.round((totalScore / 130) * 100);
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('score-display').innerHTML = `Học sinh: <span class="text-blue-700 font-extrabold">${studentName}</span> | Kết quả: <span class="text-emerald-600 font-extrabold">${totalScore}/130 điểm</span> (${pct}%)`;
+
+            // Cuộn mượt lên trên cùng đầu trang để xem điểm số ngay lập tức
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+
+            // Hiển thị hộp đánh giá trực quan ở cuối bài tập
+            alert(`🎉 Chúc mừng em ${studentName} đã hoàn thành nộp bài!\nKết quả đạt được: ${totalScore}/130 điểm.\nHọc sinh có thể xem hướng dẫn giải chi tiết bằng cách bấm nút 'Hướng Dẫn Giải (GV)' ở góc trên.`);
+        }
+
+        // Các hàm phụ trợ so sánh mảng
+        function matchArray(arr1, arr2) {
+            if (arr1.length !== arr2.length) return false;
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) return false;
+            }
+            return true;
+        }
+
+        function matchArrayIgnoreOrder(arr1, arr2) {
+            if (arr1.length !== arr2.length) return false;
+            const a1 = [...arr1].sort((x, y) => x - y);
+            const a2 = [...arr2].sort((x, y) => x - y);
+            return matchArray(a1, a2);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHTN 6 - Buổi 6: Sự Chuyển Thể Của Chất</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                typeset: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .math-expr {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- BẢNG ĐẦU TRANG & LOGO CHUYÊN NGHIỆP -->
+    <header class="bg-white border-b-2 border-slate-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Khu vực Logo đại học và trung tâm -->
+            <div class="flex items-center gap-4 flex-wrap justify-center md:justify-start">
+                <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo ĐH KHTN TP.HCM" class="h-16 object-contain">
+                <div class="h-12 w-px bg-slate-300 hidden sm:block"></div>
+                <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo Trung tâm BDVH" class="h-16 object-contain rounded-lg">
+            </div>
+            
+            <!-- Tiêu đề chuyên đề học thuật -->
+            <div class="text-center md:text-right">
+                <h1 class="text-xl sm:text-2xl font-black text-slate-900 title-font tracking-tight uppercase">Sự Chuyển Thể Của Chất</h1>
+                <p class="text-xs sm:text-sm font-bold text-slate-500">Chuyên đề Khoa Học Tự Nhiên lớp 6 • Học phần Lý thuyết & Thí nghiệm</p>
+            </div>
+        </div>
+
+        <!-- Hướng dẫn phân chia cấp độ (Navigation) -->
+        <div class="mt-4 bg-slate-50 rounded-2xl p-1.5 max-w-7xl mx-auto flex flex-wrap gap-1 border border-slate-200">
+            <button onclick="switchTab('basic')" id="tab-basic" class="flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-slate-900 text-white shadow">
+                🟢 Phần 1: Mức độ Cơ bản
+            </button>
+            <button onclick="switchTab('advanced')" id="tab-advanced" class="flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-700 hover:bg-slate-200">
+                🔵 Phần 2: Mức độ Nâng cao
+            </button>
+            <button onclick="switchTab('applied')" id="tab-applied" class="flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-700 hover:bg-slate-200">
+                🟡 Phần 3: Mức độ Vận dụng
+            </button>
+            <button onclick="switchTab('simulator')" id="tab-simulator" class="flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-blue-700 hover:bg-blue-100 bg-blue-50">
+                🔬 Phòng Thí Nghiệm Động
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-purple-700 hover:bg-purple-100 bg-purple-50">
+                📝 Trắc Nghiệm Củng Cố
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTAINER CHÍNH -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- CỘT NỘI DUNG LÝ THUYẾT (Chiếm 3/4 độ rộng) -->
+        <div class="lg:col-span-3 space-y-6">
+
+            <!-- BANNER GIỚI THIỆU CHUYÊN ĐỀ -->
+            <div class="bg-gradient-to-r from-slate-100 to-slate-200/50 p-6 rounded-3xl border border-slate-200 relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-slate-200/50 rounded-full -mr-8 -mt-8"></div>
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 title-font flex items-center gap-2">
+                    <span>🔬</span> Chào mừng em đến với Buổi 6: Sự Chuyển Thể Của Chất
+                </h2>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                    Mọi vật thể xung quanh chúng ta đều được cấu tạo từ các chất. Các chất không chỉ tồn tại ở một trạng thái cố định mà có thể biến đổi linh hoạt qua lại giữa các thể Rắn, Lỏng và Hơi tùy thuộc vào điều kiện nhiệt độ. Hãy cùng các giảng viên BDVH bóc tách sâu sắc bản chất khoa học này nhé!
+                </p>
+            </div>
+
+            <!-- PHẦN 1: MỨC ĐỘ CƠ BẢN -->
+            <div id="section-basic" class="space-y-6">
+                <div class="border-l-4 border-emerald-500 pl-4">
+                    <h3 class="text-xl font-black text-slate-900 title-font uppercase">PHẦN 1: MỨC ĐỘ CƠ BẢN (Nhận biết - Ghi nhớ)</h3>
+                    <p class="text-xs text-slate-500">Nắm vững khái niệm cốt lõi của 5 quá trình chuyển thể và nhận diện qua thí nghiệm trực quan.</p>
+                </div>
+
+                <!-- 1. Nóng chảy và đông đặc -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span class="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg">🕯️</span> 1. Quá trình Nóng chảy và Đông đặc
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-xs font-bold uppercase text-emerald-600">Sự Nóng Chảy</span>
+                            <p class="text-sm text-slate-800 mt-1">Là quá trình chất chuyển từ <strong class="text-slate-900">thể rắn sang thể lỏng</strong> khi thu nhiệt (đun nóng).</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-xs font-bold uppercase text-blue-600">Sự Đông Đặc</span>
+                            <p class="text-sm text-slate-800 mt-1">Là quá trình chất chuyển ngược lại từ <strong class="text-slate-900">thể lỏng sang thể rắn</strong> khi tỏa nhiệt (làm lạnh).</p>
+                        </div>
+                    </div>
+
+                    <!-- Hộp thí nghiệm sáp nến -->
+                    <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-200">
+                        <div class="font-bold text-amber-900 text-sm flex items-center gap-1.5 mb-2">
+                            <span>📝</span> Thí nghiệm thực hành sáp nến:
+                        </div>
+                        <p class="text-sm text-amber-950 leading-relaxed">
+                            Khi ta đun nóng, cục sáp nến rắn sẽ chuyển dần sang thể lỏng, đây chính là hiện tượng <strong>nóng chảy</strong>. Sau đó, tắt đèn cồn và để nguội một thời gian, phần sáp nến lỏng sẽ cứng lại và chuyển về thể rắn, đây là sự <strong>đông đặc</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. Bay hơi và ngưng tụ -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span class="p-1.5 bg-sky-50 text-sky-600 rounded-lg">💧</span> 2. Quá trình Bay hơi và Ngưng tụ
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-xs font-bold uppercase text-sky-600">Sự Bay Hơi</span>
+                            <p class="text-sm text-slate-800 mt-1">Là quá trình chất chuyển từ <strong class="text-slate-900">thể lỏng sang thể hơi (khí)</strong>.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-xs font-bold uppercase text-indigo-600">Sự Ngưng Tụ</span>
+                            <p class="text-sm text-slate-800 mt-1">Là quá trình chất chuyển từ <strong class="text-slate-900">thể hơi (khí) sang thể lỏng</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Thí nghiệm đọng nước cốc nước đá -->
+                    <div class="p-5 bg-sky-50/50 rounded-2xl border border-sky-200">
+                        <div class="font-bold text-sky-900 text-sm flex items-center gap-1.5 mb-2">
+                            <span>🧪</span> Thí nghiệm quan sát hiện tượng đọng nước bên ngoài thành cốc:
+                        </div>
+                        <p class="text-sm text-sky-950 leading-relaxed">
+                            Đặt một cốc chứa đá viên ở ngoài không khí một thời gian, ta thấy mặt ngoài thành cốc đọng các giọt nước li ti. Nguyên nhân là do hơi nước có sẵn trong không khí chuyển động chạm vào thành cốc lạnh đã bị ngưng tụ chuyển từ thể hơi thành những giọt nước lỏng.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3. Quá trình sôi -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span class="p-1.5 bg-rose-50 text-rose-600 rounded-lg">🔥</span> 3. Quá trình Sôi
+                    </h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        <strong class="text-slate-900">Sự sôi</strong> là một sự bay hơi đặc biệt. Trong suốt quá trình đun sôi, nước lỏng vừa bay hơi tạo ra các bọt khí nổi lên và vỡ ra trên mặt thoáng của chất lỏng, vừa đồng thời xảy ra sự bay hơi dữ dội ngay ở bên trong lòng của khối chất lỏng.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PHẦN 2: MỨC ĐỘ NÂNG CAO -->
+            <div id="section-advanced" class="hidden space-y-6">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-xl font-black text-slate-900 title-font uppercase">PHẦN 2: MỨC ĐỘ NÂNG CAO (Hiểu - Phân tích)</h3>
+                    <p class="text-xs text-slate-500">Hiểu sâu đặc điểm nhiệt động lực học và mô hình cấu trúc hạt phân tử.</p>
+                </div>
+
+                <!-- 1. So sánh bay hơi và sôi -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span>📊</span> 1. Phân biệt Sự bay hơi và Sự sôi
+                    </h4>
+                    
+                    <p class="text-sm text-slate-600">Mặc dù đều là hiện tượng chất hữu tỉ lỏng biến đổi sang thể khí, nhưng bản chất vật lý có sự khác biệt lớn:</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left border-collapse border border-slate-200">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200">
+                                    <th class="p-3 font-bold text-slate-900 border-r border-slate-200">Đặc điểm phân biệt</th>
+                                    <th class="p-3 font-bold text-slate-900 border-r border-slate-200">Sự bay hơi</th>
+                                    <th class="p-3 font-bold text-slate-900">Sự sôi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-150">
+                                    <td class="p-3 font-bold text-slate-700 border-r border-slate-200">Vị trí diễn ra</td>
+                                    <td class="p-3 text-slate-700 border-r border-slate-200">Chỉ xảy ra trên <strong class="text-slate-950">bề mặt thoáng</strong> của chất lỏng.</td>
+                                    <td class="p-3 text-slate-700">Diễn ra đồng thời ở <strong class="text-slate-950">mặt thoáng</strong> và cả <strong class="text-slate-950">bên trong lòng</strong> chất lỏng.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-slate-700 border-r border-slate-200">Nhiệt độ hoạt động</td>
+                                    <td class="p-3 text-slate-700 border-r border-slate-200">Có thể diễn ra ở <strong class="text-slate-950">mọi nhiệt độ</strong>.</td>
+                                    <td class="p-3 text-slate-700">Chỉ bắt đầu xảy ra ở một nhiệt độ xác định gọi là <strong class="text-slate-950">Nhiệt độ sôi</strong>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 2. Đặc điểm nhiệt độ -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span>🌡️</span> 2. Đặc điểm nhiệt độ trong quá trình chuyển thể
+                    </h4>
+                    
+                    <ul class="list-disc pl-5 space-y-3 text-sm text-slate-700">
+                        <li>Mỗi chất nguyên chất sẽ nóng chảy và đông đặc ở cùng một nhiệt độ xác định (Ví dụ: Nước nóng chảy và đông đặc ở mức nhiệt <span class="math-expr">$0^\circ C$</span>).</li>
+                        <li class="bg-rose-50 text-rose-950 p-4 rounded-xl border border-rose-200">
+                            <strong>⭐ Lưu ý cực kỳ quan trọng:</strong> Trong suốt thời gian nước đang sôi, hoặc khi chất rắn đang nóng chảy/đông đặc, <strong>mặc dù chúng ta liên tục cung cấp nhiệt lượng nhưng nhiệt độ của chất vẫn giữ nguyên không hề thay đổi</strong>.
+                        </li>
+                    </ul>
+
+                    <!-- Heating curve diagram simulation wrapper -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase block mb-3">Mô phỏng đường cong gia nhiệt của nước (Heating Curve)</span>
+                        <div class="flex items-center gap-4">
+                            <button onclick="runHeatingCurve()" class="px-4 py-2 bg-slate-900 text-white font-bold text-xs rounded-lg hover:bg-slate-800 transition">Chạy mô phỏng gia nhiệt</button>
+                            <span id="curve-temp" class="font-bold text-slate-800 text-sm">Nhiệt độ hiện tại: -10 °C</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2.5 rounded-full mt-4 overflow-hidden relative">
+                            <div id="curve-progress" class="bg-rose-500 h-full w-[10%]" style="transition: width 0.1s linear;"></div>
+                        </div>
+                        <p id="curve-status" class="text-xs text-slate-500 mt-2 italic">Trạng thái: Nước đá ở thể rắn dưới $0^\circ C$</p>
+                    </div>
+                </div>
+
+                <!-- 3. Thuyết hạt phân tử -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span>⚛️</span> 3. Giải thích sự chuyển thể qua cấu trúc hạt
+                    </h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Khi chất chuyển từ thể lỏng sang thể hơi (khí), các hạt cấu tử cấu tạo nên chất hấp thụ động năng lớn, phá vỡ liên kết liên phân tử ban đầu. Từ chỗ ở gần nhau và trượt lên nhau, các phân tử chuyển hẳn sang trạng thái chuyển động tự do hỗn loạn, khoảng cách trung bình giữa các hạt giãn nở ra rất xa nhau.
+                    </p>
+                    <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 text-xs text-indigo-950 space-y-1">
+                        <span class="font-bold text-sm text-indigo-900 block mb-1">💡 Số liệu thực tế:</span>
+                        Động học hạt giải thích tại sao <strong class="text-indigo-900">$1 \text{ ml}$ nước lỏng</strong> khi hóa hơi hoàn toàn có thể chiếm một không gian thể tích lên tới khoảng <strong class="text-indigo-900">$1300 \text{ ml}$ hơi nước</strong> trong không khí ở điều kiện thường!
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHẦN 3: MỨC ĐỘ VẬN DỤNG -->
+            <div id="section-applied" class="hidden space-y-6">
+                <div class="border-l-4 border-amber-500 pl-4">
+                    <h3 class="text-xl font-black text-slate-900 title-font uppercase">PHẦN 3: MỨC ĐỘ VẬN DỤNG (Liên hệ thực tế)</h3>
+                    <p class="text-xs text-slate-500">Áp dụng kiến thức nền tảng giải thích hiện tượng đời sống và tự nhiên.</p>
+                </div>
+
+                <!-- 1. Yếu tố ảnh hưởng bay hơi -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span>🍃</span> 1. Các yếu tố ảnh hưởng đến sự bay hơi của chất lỏng
+                    </h4>
+                    <p class="text-sm text-slate-700">Tốc độ bay hơi của nước hay các chất lỏng khác sẽ diễn ra nhanh hơn khi:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                        <div class="p-3 bg-rose-50 border border-rose-200 rounded-2xl">
+                            <span class="text-xl">🔥</span>
+                            <div class="font-bold text-slate-800 text-sm mt-1">Nhiệt độ cao</div>
+                        </div>
+                        <div class="p-3 bg-sky-50 border border-sky-200 rounded-2xl">
+                            <span class="text-xl">💨</span>
+                            <div class="font-bold text-slate-800 text-sm mt-1">Gió càng mạnh</div>
+                        </div>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl">
+                            <span class="text-xl">📐</span>
+                            <div class="font-bold text-slate-800 text-sm mt-1">Diện tích mặt thoáng lớn</div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <span class="text-xs font-bold text-slate-500 uppercase block">Ứng dụng thực tiễn sản xuất:</span>
+                        <ul class="list-disc pl-5 text-xs text-slate-700 space-y-2">
+                            <li><strong>Phơi quần áo:</strong> Quần áo ướt được căng rộng ra (tăng diện tích mặt thoáng) và phơi ngoài trời nắng, gió để hơi nước bay hơi nhanh chóng.</li>
+                            <li><strong>Sản xuất muối (Làm muối):</strong> Diêm dân dẫn nước biển vào các ruộng cát, ruộng muối rất rộng và nông (tối ưu gió và diện tích bề mặt) dưới ánh nắng gắt để nước biển bốc hơi thật nhanh, giữ lại hạt muối tinh khiết kết tinh trên bề mặt.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. Giải thích hiện tượng ngưng tụ trong đời sống -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span>❄️</span> 2. Hiện tượng ngưng tụ trong đời sống thường nhật
+                    </h4>
+                    
+                    <ul class="space-y-4 text-sm text-slate-700">
+                        <li class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+                            <strong>🍃 Sương đọng sáng sớm:</strong> 
+                            Vào ban đêm, nhiệt độ giảm sâu khiến lá cây, ngọn cỏ lạnh đi. Đến sáng sớm, hơi nước trong không khí di chuyển chạm vào bề mặt lá lạnh sẽ ngưng tụ thành hạt nước nhỏ sáng lấp lánh đọng lại.
+                        </li>
+                        <li class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+                            <strong>🛁 Gương nhà tắm bị mờ:</strong> 
+                            Khi chúng ta tắm bằng nước nóng, lượng hơi nước ấm bốc lên rất nhiều. Hơi nước ấm này gặp bề mặt lạnh của tấm gương kính trong nhà tắm sẽ lập tức bị ngưng tụ bám chặt, làm mờ đi mặt kính.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3. Vòng tuần hoàn nước -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <span>🔄</span> 3. Vòng tuần hoàn vĩ đại của nước trong tự nhiên
+                    </h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Nước trên hành tinh chúng ta liên tục trải qua các quá trình biến đổi trạng thái khép kín tạo nên hiện tượng thời tiết:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="text-2xl">☀️</span>
+                            <div class="font-bold text-xs mt-1">1. Bay hơi</div>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Sông, hồ bay hơi lên cao dưới nhiệt nắng.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="text-2xl">☁️</span>
+                            <div class="font-bold text-xs mt-1">2. Ngưng tụ</div>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Hơi nước gặp lạnh ngưng tụ thành mây.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="text-2xl">🌧️</span>
+                            <div class="font-bold text-xs mt-1">3. Mưa / Đông đặc</div>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Hạt nước quá nặng rơi xuống, hóa đá/tuyết.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                            <span class="text-2xl">🏔️</span>
+                            <div class="font-bold text-xs mt-1">4. Nóng chảy</div>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Băng tuyết tan nóng chảy trở về sông biển.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHÒNG THÍ NGHIỆM ĐỘNG (INTERACTIVE SIMULATOR) -->
+            <div id="section-simulator" class="hidden space-y-6">
+                <div class="border-l-4 border-blue-600 pl-4">
+                    <h3 class="text-xl font-black text-slate-900 title-font uppercase">Phòng Thí Nghiệm Động Học 6</h3>
+                    <p class="text-xs text-slate-500">Trải nghiệm tương tác trực tiếp vật lý để thấu hiểu bản chất sự dịch chuyển trạng thái phân tử.</p>
+                </div>
+
+                <!-- 1. Mô phỏng động học phân tử -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <h4 class="font-bold text-slate-900 text-md flex items-center gap-1.5">
+                            <span>⚛️</span> Thí nghiệm 1: Sự chuyển thể qua cấu trúc hạt phân tử
+                        </h4>
+                        <!-- Trình chọn thể nhanh -->
+                        <div class="flex gap-1.5 bg-slate-100 p-1 rounded-lg">
+                            <button onclick="setParticleState('solid')" id="p-btn-solid" class="px-3 py-1 text-xs font-bold rounded-md bg-slate-900 text-white shadow">Thể Rắn</button>
+                            <button onclick="setParticleState('liquid')" id="p-btn-liquid" class="px-3 py-1 text-xs font-bold rounded-md text-slate-700 hover:bg-slate-200">Thể Lỏng</button>
+                            <button onclick="setParticleState('gas')" id="p-btn-gas" class="px-3 py-1 text-xs font-bold rounded-md text-slate-700 hover:bg-slate-200">Thể Khí</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Khung Canvas giả lập cấu trúc hạt -->
+                        <div class="md:col-span-2 bg-slate-950 rounded-2xl overflow-hidden relative flex flex-col items-center p-4">
+                            <canvas id="particleCanvas" class="w-full h-64 bg-slate-900 rounded-xl max-w-lg"></canvas>
+                            <div class="w-full mt-4 flex items-center gap-3">
+                                <span class="text-xs text-white font-bold whitespace-nowrap">Nhiệt lượng:</span>
+                                <input type="range" id="energySlider" min="1" max="100" value="10" oninput="adjustEnergy(this.value)" class="w-full accent-rose-500">
+                                <span id="energyVal" class="text-xs text-rose-400 font-extrabold w-8">10%</span>
+                            </div>
+                        </div>
+
+                        <!-- Giải thích trực quan -->
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 flex flex-col justify-between">
+                            <div>
+                                <h5 id="p-title" class="font-bold text-slate-900 text-sm">Trạng thái: Thể Rắn (Solid)</h5>
+                                <p id="p-desc" class="text-xs text-slate-600 mt-2 leading-relaxed">
+                                    Các hạt liên kết chặt chẽ với nhau, xếp thành một trật tự xác định. Hạt phân tử không tự do di chuyển mà chỉ rung động nhẹ quanh vị trí cân bằng.
+                                </p>
+                            </div>
+                            <div class="border-t border-slate-200 pt-3">
+                                <span class="text-xs text-slate-400 italic block">Mẹo quan sát:</span>
+                                <p class="text-xs text-slate-600 mt-1">Hãy kéo thanh trượt "Nhiệt lượng" lên mức cao để cung cấp nhiệt năng và xem cấu trúc hạt bứt phá, chuyển từ dạng Rắn sang dạng Lỏng rồi hóa thành Khí!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Mô phỏng các yếu tố ảnh hưởng bay hơi -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 text-md flex items-center gap-1.5">
+                        <span>🧪</span> Thí nghiệm 2: Đo lường tốc độ bay hơi nước
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Bộ điều khiển -->
+                        <div class="space-y-4">
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-slate-700">1. Nhiệt độ bên ngoài</span>
+                                    <span id="control-temp-val" class="text-xs font-extrabold text-rose-600">30 °C</span>
+                                </div>
+                                <input type="range" id="sim-temp" min="10" max="100" value="30" oninput="updateEvaporationRate()" class="w-full accent-rose-500">
+                            </div>
+
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-slate-700">2. Tốc độ gió lưu thông</span>
+                                    <span id="control-wind-val" class="text-xs font-extrabold text-sky-600">Yếu</span>
+                                </div>
+                                <input type="range" id="sim-wind" min="1" max="4" value="1" oninput="updateEvaporationRate()" class="w-full accent-sky-500">
+                            </div>
+
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-slate-700">3. Diện tích mặt thoáng</span>
+                                    <span id="control-area-val" class="text-xs font-extrabold text-emerald-600">Hẹp</span>
+                                </div>
+                                <input type="range" id="sim-area" min="1" max="3" value="1" oninput="updateEvaporationRate()" class="w-full accent-emerald-500">
+                            </div>
+                        </div>
+
+                        <!-- Kết quả mô phỏng trực quan -->
+                        <div class="p-6 bg-slate-900 rounded-3xl border border-slate-800 text-white flex flex-col justify-between">
+                            <div class="text-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tốc độ bay hơi tính toán</span>
+                                <div id="evap-speed" class="text-3xl font-black text-rose-400 mt-2">1.5 ml / phút</div>
+                                <p class="text-xs text-slate-400 mt-1">Điều kiện thời tiết bình thường</p>
+                            </div>
+
+                            <!-- Minh họa mực nước rút -->
+                            <div class="mt-4 bg-slate-800 p-4 rounded-2xl border border-slate-700 relative h-32 flex flex-col justify-end overflow-hidden">
+                                <div id="evap-water-level" class="bg-sky-400 absolute bottom-0 left-0 right-0 h-[80%] transition-all duration-500" style="opacity: 0.85;"></div>
+                                <div class="z-10 text-center w-full pb-2">
+                                    <span class="text-xs font-black text-slate-900 drop-shadow-md">Nước trong dụng cụ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRẮC NGHIỆM CỦNG CỐ -->
+            <div id="section-quiz" class="hidden space-y-6">
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <h3 class="text-xl font-black text-slate-900 title-font uppercase">Bài Tập & Câu Hỏi Củng Cố</h3>
+                    <p class="text-xs text-slate-500">Hệ thống câu hỏi rèn luyện tư duy nhận biết, thông hiểu và vận dụng cao.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                    <!-- Câu 1 -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <span class="px-2.5 py-1 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">Cơ bản</span>
+                        <p class="font-bold text-slate-900 text-sm">Câu 1: Khi một chất đang chuyển từ thể lỏng sang thể rắn, nhiệt độ của chất đó có đặc điểm gì?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <button onclick="answerQuiz(1, 'A', false)" class="q-btn-1 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">A. Tăng dần đều do tỏa năng lượng</button>
+                            <button onclick="answerQuiz(1, 'B', false)" class="q-btn-1 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">B. Giảm liên tục theo nhiệt độ môi trường</button>
+                            <button onclick="answerQuiz(1, 'C', true)" class="q-btn-1 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">C. Không thay đổi trong suốt quá trình chuyển thể</button>
+                            <button onclick="answerQuiz(1, 'D', false)" class="q-btn-1 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">D. Tăng trước rồi giảm sau</button>
+                        </div>
+                        <div id="q-feedback-1" class="hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Câu 2 -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <span class="px-2.5 py-1 text-[10px] font-bold bg-blue-100 text-blue-800 rounded-full">Nâng cao</span>
+                        <p class="font-bold text-slate-900 text-sm">Câu 2: Tại sao khi đun nước, trong suốt thời gian sôi ta có thể thấy bọt khí nổi lên từ đáy và vỡ ra trên mặt thoáng?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <button onclick="answerQuiz(2, 'A', false)" class="q-btn-2 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">A. Chỉ do sự giãn nở không khí hòa tan</button>
+                            <button onclick="answerQuiz(2, 'B', true)" class="q-btn-2 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">B. Nước hóa hơi đồng thời ở cả mặt thoáng và lòng chất lỏng</button>
+                            <button onclick="answerQuiz(2, 'C', false)" class="q-btn-2 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">C. Các phần tử nước phân rã thành khí Oxi và Hidro</button>
+                            <button onclick="answerQuiz(2, 'D', false)" class="q-btn-2 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">D. Do trọng lực của nước bị biến đổi khi nóng</button>
+                        </div>
+                        <div id="q-feedback-2" class="hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Câu 3 -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <span class="px-2.5 py-1 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-full">Vận dụng</span>
+                        <p class="font-bold text-slate-900 text-sm">Câu 3: Vì sao người làm muối (diêm dân) luôn lựa chọn những khu đất cực kỳ bằng phẳng, rộng cạn sát biển để làm ruộng muối?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <button onclick="answerQuiz(3, 'A', false)" class="q-btn-3 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">A. Để muối không bị dính vào các tảng đá gồ ghề</button>
+                            <button onclick="answerQuiz(3, 'B', false)" class="q-btn-3 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">B. Để dễ dàng đóng gói và vận chuyển muối bằng xe đẩy</button>
+                            <button onclick="answerQuiz(3, 'C', true)" class="q-btn-3 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">C. Để tăng diện tích bề mặt thoáng giúp nước biển bay hơi nhanh nhất</button>
+                            <button onclick="answerQuiz(3, 'D', false)" class="q-btn-3 p-3 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 font-bold transition text-left">D. Để tối đa hóa lượng ánh sáng phản chiếu</button>
+                        </div>
+                        <div id="q-feedback-3" class="hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CỘT PHỤ BÊN PHẢI: BẢNG TIỆN ÍCH HỌC TẬP -->
+        <div class="lg:col-span-1 space-y-6">
+            
+            <!-- THƯ VIỆN CHUYỂN THỂ (KHOA HỌC TRỰC QUAN) -->
+            <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <h3 class="font-bold text-slate-900 text-sm mb-3 border-b pb-2 flex items-center gap-1.5 uppercase title-font">
+                    <span>📚</span> Tra cứu Thuật ngữ
+                </h3>
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <span class="font-bold text-emerald-600">Nóng chảy (Melting)</span>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Rắn $\rightarrow$ Lỏng (Ví dụ: Đá tan ở $0^\circ C$)</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-2">
+                        <span class="font-bold text-blue-600">Đông đặc (Freezing)</span>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Lỏng $\rightarrow$ Rắn (Ví dụ: Nước đóng băng ở $0^\circ C$)</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-2">
+                        <span class="font-bold text-sky-600">Bay hơi (Evaporation)</span>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Lỏng $\rightarrow$ Khí (Xảy ra ở mọi nhiệt độ mặt thoáng)</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-2">
+                        <span class="font-bold text-indigo-600">Ngưng tụ (Condensation)</span>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Hơi/Khí $\rightarrow$ Lỏng (Xảy ra khi gặp lạnh)</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-2">
+                        <span class="font-bold text-rose-600">Sôi (Boiling)</span>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Bay hơi đặc biệt (Mặt thoáng + Lòng chất lỏng)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BẢNG GHI CHÚ ĐIỆN TỬ -->
+            <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <h3 class="font-bold text-slate-900 text-sm border-b pb-2 flex items-center gap-1.5 uppercase title-font">
+                    <span>✏️</span> Nháp & Trích lục
+                </h3>
+                <p class="text-[11px] text-slate-500 leading-relaxed">Em có thể lưu nhanh các thông tin quan trọng hoặc bài học cần ôn luyện vào khung dưới này:</p>
+                <textarea id="notebook" rows="6" class="w-full p-2 border border-slate-200 text-xs rounded-xl focus:outline-none focus:border-slate-400 font-mono" placeholder="Gõ ghi chú bài học tại đây..."></textarea>
+                <button onclick="clearNotebook()" class="w-full py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-lg transition">Xóa trắng ghi chú</button>
+            </div>
+
+            <!-- THÔNG TIN TRỢ GIÚP HỌC HÒA HỌC/VẬT LÝ -->
+            <div class="bg-sky-50 border border-sky-200 p-4 rounded-3xl space-y-2">
+                <h4 class="font-bold text-sky-900 text-xs flex items-center gap-1">
+                    <span>ℹ️</span> CÓ THỂ EM CHƯA BIẾT?
+                </h4>
+                <p class="text-[11px] text-sky-850 leading-relaxed">
+                    Nhiều chất rắn khi được nung nóng có thể chuyển trực tiếp từ thể rắn sang thể hơi mà không qua trạng thái lỏng. Hiện tượng đặc biệt này gọi là <strong>Sự thăng hoa</strong> (ví dụ như băng khô, đá khô hoặc băng phiến).
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Hộp thông báo Modal đẹp (Custom popup thay cho alert) -->
+    <div id="alert-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-3xl max-w-sm w-full shadow-2xl border-2 border-slate-900 text-center transform scale-95 transition-all">
+            <span id="modal-icon" class="text-4xl mb-2 block">🔔</span>
+            <h3 id="modal-title" class="text-lg font-black text-slate-900 mb-2 title-font">Thông báo</h3>
+            <p id="modal-message" class="text-sm text-slate-600 mb-5 leading-relaxed"></p>
+            <button onclick="closeModal()" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition shadow">Xác nhận</button>
+        </div>
+    </div>
+
+    <!-- CHÂN TRANG HỌC THUẬT -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 font-semibold space-y-1">
+        <p>© 2026 Hệ thống bài giảng điện tử số hóa • Trung tâm Bồi dưỡng Văn hóa ĐH KHTN TP.HCM</p>
+        <p>@ Bản quyền thuộc ThS.Đinh Quốc Tuấn - Mục đích trang web phi lợi nhuận và giáo dục.
+        <p class="text-[10px] text-slate-400 font-normal">Tài liệu học tập nội bộ hỗ trợ học sinh nâng cao kỹ năng tư duy và thí nghiệm thực nghiệm KHTN lớp 6</p>
+    </footer>
+
+    <!-- LOGIC HOẠT ĐỘNG TOÀN TRANG -->
+    <script>
+        // QUẢN LÝ TAB HOẠT ĐỘNG
+        function switchTab(tabId) {
+            const tabs = ["basic", "advanced", "applied", "simulator", "quiz"];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`section-${t}`);
+                if (sec) sec.classList.add("hidden");
+
+                const btn = document.getElementById(`tab-${t}`);
+                if (btn) {
+                    btn.className = "flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-700 hover:bg-slate-200";
+                }
+            });
+
+            // Active Tab hiện tại
+            const activeSec = document.getElementById(`section-${tabId}`);
+            if (activeSec) activeSec.classList.remove("hidden");
+
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                if (tabId === 'simulator') {
+                    activeBtn.className = "flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-blue-700 bg-blue-100 shadow-sm";
+                } else if (tabId === 'quiz') {
+                    activeBtn.className = "flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-purple-700 bg-purple-100 shadow-sm";
+                } else {
+                    activeBtn.className = "flex-grow sm:flex-none px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-slate-900 text-white shadow";
+                }
+            }
+
+            // Đồng bộ kích hoạt lại MathJax biên dịch lại nếu có công thức ở tab mới
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+
+            // Kích hoạt canvas nếu chuyển sang tab Phòng Thí Nghiệm
+            if (tabId === 'simulator') {
+                initCanvas();
+            }
+        }
+
+        // CUSTOM MODAL ALERTS
+        function showNotification(title, msg, icon = "🔔") {
+            document.getElementById("modal-icon").innerText = icon;
+            document.getElementById("modal-title").innerText = title;
+            document.getElementById("modal-message").innerText = msg;
+            document.getElementById("alert-modal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("alert-modal").classList.add("hidden");
+        }
+
+        // MÔ PHỎNG GIA NHIỆT (HEATING CURVE)
+        let heatingInterval = null;
+        function runHeatingCurve() {
+            if (heatingInterval) clearInterval(heatingInterval);
+            
+            let temp = -10;
+            const progress = document.getElementById("curve-progress");
+            const tempText = document.getElementById("curve-temp");
+            const statusText = document.getElementById("curve-status");
+
+            progress.style.width = "0%";
+
+            heatingInterval = setInterval(() => {
+                if (temp < 120) {
+                    // Mô phỏng hiện tượng đứng nhiệt độ tại 0 độ và 100 độ
+                    if (temp === 0) {
+                        statusText.innerHTML = "⚠️ <strong>Đang Nóng Chảy:</strong> Chất rắn đang hóa lỏng tại $0^\\circ C$. Nhiệt độ được giữ nguyên!";
+                        temp += 0.5; // tăng chậm hơn để tạo hiệu ứng dừng nhiệt
+                    } else if (Math.floor(temp) === 100) {
+                        statusText.innerHTML = "⚠️ <strong>Đang sôi:</strong> Chất lỏng đang hóa hơi mạnh mẽ tại $100^\\circ C$. Nhiệt độ không thay đổi!";
+                        temp += 0.5;
+                    } else {
+                        temp += 2;
+                        if (temp < 0) {
+                            statusText.innerText = "Trạng thái: Nước đá ở thể rắn dưới 0 °C";
+                        } else if (temp > 0 && temp < 100) {
+                            statusText.innerText = "Trạng thái: Nước lỏng ở khoảng nhiệt độ từ 0 °C đến 100 °C";
+                        } else if (temp > 100) {
+                            statusText.innerText = "Trạng thái: Hơi nước siêu nhiệt trên 100 °C";
+                        }
+                    }
+
+                    // Cập nhật giao diện
+                    tempText.innerText = `Nhiệt độ hiện tại: ${Math.floor(temp)} °C`;
+                    const percent = ((temp + 10) / 130) * 100;
+                    progress.style.width = `${Math.min(percent, 100)}%`;
+                } else {
+                    clearInterval(heatingInterval);
+                    showNotification("Hoàn thành", "Gia trình nhiệt đã hoàn tất! Em có thể thấy nhiệt độ đứng yên tại 0°C và 100°C rất sinh động.", "🔥");
+                }
+            }, 80);
+        }
+
+        // PHÒNG THÍ NGHIỆM ĐỘNG: ĐỘNG HỌC HẠT PHÂN TỬ (CANVAS)
+        let canvas, ctx;
+        let particles = [];
+        let currentState = 'solid'; // solid, liquid, gas
+        let energyFactor = 1.0; 
+        let animationFrameId = null;
+
+        function initCanvas() {
+            canvas = document.getElementById("particleCanvas");
+            if (!canvas) return;
+            ctx = canvas.getContext("2d");
+
+            // Đặt kích thước thực cho canvas tương thích
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+
+            // Tạo các phân tử hạt
+            createParticles();
+
+            // Khởi động vòng lặp render
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animateParticles();
+        }
+
+        class Particle {
+            constructor(x, y, state) {
+                this.originX = x;
+                this.originY = y;
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.radius = 8;
+                this.color = '#38bdf8'; // sky blue
+            }
+
+            update(state, energy) {
+                if (state === 'solid') {
+                    this.color = '#38bdf8';
+                    // Thể rắn: các hạt dao động nhẹ quanh vị trí cân bằng
+                    const range = 2 * (energy / 10);
+                    this.x = this.originX + (Math.random() - 0.5) * range;
+                    this.y = this.originY + (Math.random() - 0.5) * range;
+                } else if (state === 'liquid') {
+                    this.color = '#10b981'; // emerald
+                    // Thể lỏng: di chuyển tự do hơn nhưng bám sát nhau trong cốc
+                    this.x += this.vx * (energy / 15);
+                    this.y += this.vy * (energy / 15);
+
+                    // Giới hạn trong bể chứa chất lỏng (nửa dưới của cốc)
+                    if (this.x < 15 || this.x > canvas.width - 15) this.vx *= -1;
+                    if (this.y < canvas.height / 2 || this.y > canvas.height - 15) this.vy *= -1;
+
+                    // Giữ hạt trong vùng hợp lý
+                    this.x = Math.max(15, Math.min(canvas.width - 15, this.x));
+                    this.y = Math.max(canvas.height / 2, Math.min(canvas.height - 15, this.y));
+                } else if (state === 'gas') {
+                    this.color = '#f43f5e'; // rose red
+                    // Thể khí: di chuyển tự do tốc độ cao toàn bộ thể tích
+                    this.x += this.vx * (energy / 8);
+                    this.y += this.vy * (energy / 8);
+
+                    // Va chạm thành hộp
+                    if (this.x < 15 || this.x > canvas.width - 15) this.vx *= -1;
+                    if (this.y < 15 || this.y > canvas.height - 15) this.vy *= -1;
+
+                    this.x = Math.max(15, Math.min(canvas.width - 15, this.x));
+                    this.y = Math.max(15, Math.min(canvas.height - 15, this.y));
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            const cols = 10;
+            const rows = 6;
+            const startX = (canvas.width - (cols * 22)) / 2;
+            const startY = (canvas.height - (rows * 22)) / 2;
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const px = startX + c * 22;
+                    const py = startY + r * 22;
+                    particles.push(new Particle(px, py, currentState));
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Vẽ bình chứa giả lập
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+            // Cập nhật và vẽ hạt phân tử
+            particles.forEach(p => {
+                p.update(currentState, energyFactor);
+                p.draw();
+            });
+
+            animationFrameId = requestAnimationFrame(animateParticles);
+        }
+
+        function setParticleState(state) {
+            currentState = state;
+            
+            const btnSolid = document.getElementById("p-btn-solid");
+            const btnLiquid = document.getElementById("p-btn-liquid");
+            const btnGas = document.getElementById("p-btn-gas");
+
+            btnSolid.className = "px-3 py-1 text-xs font-bold rounded-md text-slate-700 hover:bg-slate-200";
+            btnLiquid.className = "px-3 py-1 text-xs font-bold rounded-md text-slate-700 hover:bg-slate-200";
+            btnGas.className = "px-3 py-1 text-xs font-bold rounded-md text-slate-700 hover:bg-slate-200";
+
+            const title = document.getElementById("p-title");
+            const desc = document.getElementById("p-desc");
+
+            if (state === 'solid') {
+                btnSolid.className = "px-3 py-1 text-xs font-bold rounded-md bg-slate-900 text-white shadow";
+                title.innerText = "Trạng thái: Thể Rắn (Solid)";
+                desc.innerText = "Các hạt liên kết chặt chẽ với nhau, xếp thành một trật tự xác định. Các phân tử không tự do di chuyển mà chỉ có hoạt động dao động rung nhẹ quanh vị trí cân bằng.";
+                document.getElementById("energySlider").value = 10;
+                adjustEnergy(10);
+            } else if (state === 'liquid') {
+                btnLiquid.className = "px-3 py-1 text-xs font-bold rounded-md bg-slate-900 text-white shadow";
+                title.innerText = "Trạng thái: Thể Lỏng (Liquid)";
+                desc.innerText = "Các hạt liên kết lỏng lẻo hơn, không còn giữ trật tự cố định mà có thể trượt lên nhau giúp chất lỏng có thể chảy và biến dạng theo hình dạng bình chứa.";
+                document.getElementById("energySlider").value = 35;
+                adjustEnergy(35);
+            } else if (state === 'gas') {
+                btnGas.className = "px-3 py-1 text-xs font-bold rounded-md bg-slate-900 text-white shadow";
+                title.innerText = "Trạng thái: Thể Khí / Hơi (Gas)";
+                desc.innerText = "Các phân tử bứt phá hoàn toàn khỏi liên kết lực giữ hạt, chuyển động tự do hỗn độn không ngừng, lấp đầy toàn bộ thể tích không gian bình chứa của chúng.";
+                document.getElementById("energySlider").value = 80;
+                adjustEnergy(80);
+            }
+
+            createParticles();
+        }
+
+        function adjustEnergy(value) {
+            energyFactor = parseFloat(value);
+            document.getElementById("energyVal").innerText = `${value}%`;
+
+            // Tự động chuyển dịch thể nếu học sinh điều tiết lượng nhiệt quá cao/thấp
+            if (value < 20 && currentState !== 'solid') {
+                setParticleState('solid');
+            } else if (value >= 20 && value < 60 && currentState !== 'liquid') {
+                setParticleState('liquid');
+            } else if (value >= 60 && currentState !== 'gas') {
+                setParticleState('gas');
+            }
+        }
+
+        // THÍ NGHIỆM 2: CÁC YẾU TỐ ẢNH HƯỞNG TỐC ĐỘ BAY HƠI
+        function updateEvaporationRate() {
+            const temp = parseInt(document.getElementById("sim-temp").value);
+            const wind = parseInt(document.getElementById("sim-wind").value);
+            const area = parseInt(document.getElementById("sim-area").value);
+
+            // Cập nhật giá trị hiển thị giao diện
+            document.getElementById("control-temp-val").innerText = `${temp} °C`;
+            
+            const windLabels = ["Không có", "Yếu", "Trung bình", "Mạnh"];
+            document.getElementById("control-wind-val").innerText = windLabels[wind - 1];
+
+            const areaLabels = ["Hẹp", "Vừa phải", "Rất rộng"];
+            document.getElementById("control-area-val").innerText = areaLabels[area - 1];
+
+            // Công thức tính tốc độ bay hơi giả lập dựa trên KHTN 6
+            const rate = (temp * 0.1) * wind * (area * 1.5);
+            document.getElementById("evap-speed").innerText = `${rate.toFixed(1)} ml / phút`;
+
+            // Điều chỉnh mực nước rút ảo trực quan hóa
+            const waterLevel = document.getElementById("evap-water-level");
+            // Tốc độ càng cao, mực nước mô phỏng có xu hướng giảm nhanh hơn
+            const targetHeight = Math.max(5, 100 - (rate * 3));
+            waterLevel.style.height = `${targetHeight}%`;
+        }
+
+        // ĐỐI ĐẦU TRẮC NGHIỆM CỦNG CỐ
+        function answerQuiz(qId, option, isCorrect) {
+            const feedback = document.getElementById(`q-feedback-${qId}`);
+            feedback.classList.remove("hidden");
+
+            // Vô hiệu hóa lựa chọn khác sau khi chọn
+            const btns = document.querySelectorAll(`.q-btn-${qId}`);
+            btns.forEach(b => b.disabled = true);
+
+            if (isCorrect) {
+                feedback.className = "text-xs p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 mt-2 font-semibold";
+                if (qId === 1) {
+                    feedback.innerHTML = "🎉 <strong>CHÍNH XÁC!</strong> Theo đặc điểm chuyển vế và chuyển trạng thái, trong suốt thời gian diễn ra quá trình đông đặc/nóng chảy, nhiệt độ của chất không thay đổi.";
+                } else if (qId === 2) {
+                    feedback.innerHTML = "🎉 <strong>CHÍNH XÁC!</strong> Đây là đặc điểm nổi bật để phân biệt sự sôi và sự bay hơi thông thường.";
+                } else if (qId === 3) {
+                    feedback.innerHTML = "🎉 <strong>CHÍNH XÁC!</strong> Diện tích bề mặt tiếp xúc càng rộng nông thì tốc độ bay hơi nước càng nhanh chóng, thu được muối thô kết tinh.";
+                }
+            } else {
+                feedback.className = "text-xs p-3 rounded-xl bg-rose-50 text-rose-800 border border-rose-200 mt-2 font-semibold";
+                feedback.innerHTML = `😢 <strong>CHƯA ĐÚNG RỒI!</strong> Thử rà soát và xem lại lý thuyết chi tiết để lựa chọn phương án đúng nhất nhé!`;
+            }
+        }
+
+        // BẢNG GHI CHÚ
+        function clearNotebook() {
+            document.getElementById("notebook").value = "";
+        }
+
+        // Tự động khởi chạy khi tải trang
+        window.onload = function() {
+            // Tải tab cơ bản làm mặc định
+            switchTab('basic');
+            updateEvaporationRate();
+        };
+
+        // Lắng nghe thay đổi kích thước màn hình để vẽ lại Canvas
+        window.onresize = function() {
+            if (canvas) {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                createParticles();
+            }
+        };
+    </script>
+</body>
+</html>

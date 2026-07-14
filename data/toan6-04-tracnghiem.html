@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đấu Trường Toán 6 - Lũy Thừa & Thứ Tự Thực Hiện Phép Tính</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+              typeset: false 
+            }
+          };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-gray-100 font-sans h-screen flex flex-col">
+
+    <header class="bg-orange-500 text-white text-center p-4 shadow-md">
+        <h1 class="text-2xl font-bold">🍕 ĐẤU TRƯỜNG TOÁN HỌC - MỤC TIÊU PIZZA TOÁN 6 🍕</h1>
+        <p class="text-sm">Buổi 4: Lũy thừa và Thứ tự thực hiện phép tính</p>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-3xl">
+        
+        <div id="login-screen" class="bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-xl font-bold mb-4">Nhập tên để bắt đầu kiểm tra</h2>
+            <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <button onclick="startQuiz()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full">
+                VÀO PHẦN 1 VÀ TÍNH GIỜ
+            </button>
+        </div>
+
+        <div id="quiz-screen" class="hidden bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <div>
+                    <span class="font-bold text-lg block text-gray-700" id="display-name"></span>
+                    <span class="font-bold text-2xl text-orange-600" id="section-title">PHẦN 1: KHỞI ĐỘNG</span>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-red-500 text-2xl">⏱ <span id="timer">0</span>s</span>
+                </div>
+            </div>
+            
+            <div id="questions-container" class="space-y-6 mt-4"></div>
+
+            <button onclick="submitSection()" class="mt-8 bg-green-500 text-white font-bold py-3 px-6 rounded hover:bg-green-600 transition duration-300 w-full text-lg">
+                NỘP BÀI <span id="btn-submit-text">PHẦN 1</span>
+            </button>
+        </div>
+
+        <div id="break-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-2xl font-bold mb-4 text-blue-600" id="break-title">Hoàn thành Phần 1!</h2>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                <p class="text-lg">Điểm phần này: <span id="section-score" class="font-bold text-xl text-green-600"></span>/70</p>
+                <p class="text-lg">Thời gian chặng: <span id="section-time" class="font-bold text-xl text-red-500"></span> giây</p>
+            </div>
+            <button onclick="nextSection()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full text-lg shadow-md">
+                TIẾP TỤC CHIẾN ĐẤU 🚀
+            </button>
+        </div>
+
+        <div id="result-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10 border-t-8 border-orange-500">
+            <h2 class="text-3xl font-bold mb-4 text-green-600">🎉 ĐÃ HOÀN THÀNH 3 CHẶNG! 🎉</h2>
+            <div class="bg-gray-100 p-4 rounded mb-6 text-left inline-block w-full max-w-sm">
+                <p class="mb-2">🔹 Điểm Phần 1 (Trắc nghiệm): <span id="res-p1" class="font-bold"></span></p>
+                <p class="mb-2">🔹 Điểm Phần 2 (Đúng/Sai): <span id="res-p2" class="font-bold"></span></p>
+                <p class="mb-2 border-b pb-2">🔹 Điểm Phần 3 (Điền khuyết): <span id="res-p3" class="font-bold"></span></p>
+                <p class="text-xl mt-2 text-green-700">🏆 TỔNG ĐIỂM: <span id="final-score" class="font-bold text-2xl"></span>/210</p>
+                <p class="text-xl mt-2 text-red-600">⏱ TỔNG THỜI GIAN: <span id="final-time" class="font-bold text-2xl"></span>s</p>
+            </div>
+            
+            <p class="text-md font-bold text-gray-700 mb-4" id="status-msg">Hệ thống đã ghi nhận bài làm của bạn!</p>
+        </div>
+
+    </main>
+
+    <script>
+        // Đường dẫn Google Apps Script của bạn (Có thể thay thế sau)
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
+
+        // Bộ câu hỏi gồm 21 câu chia đều thành 3 phần (Mỗi phần 7 câu)
+        const questions = [
+          // PHẦN 1: TRẮC NGHIỆM (Câu 1 - 7)
+          {"type": "trac-nghiem", "question": "Câu 1: Thứ tự thực hiện các phép tính đối với biểu thức không có dấu ngoặc là gì?", "options": ["Cộng và trừ $\\rightarrow$ Nhân và chia $\\rightarrow$ Lũy thừa.", "Lũy thừa $\\rightarrow$ Nhân và chia $\\rightarrow$ Cộng và trừ.", "Nhân và chia $\\rightarrow$ Lũy thừa $\\rightarrow$ Cộng và trừ.", "Tính tuỳ ý từ trái sang phải."], "correct": "Lũy thừa $\\rightarrow$ Nhân và chia $\\rightarrow$ Cộng và trừ."},
+          {"type": "trac-nghiem", "question": "Câu 2: Thứ tự thực hiện các phép tính đối với biểu thức có đầy đủ các dấu ngoặc là gì?", "options": ["{ } $\\rightarrow$ [ ] $\\rightarrow$ ( )", "( ) $\\rightarrow$ { } $\\rightarrow$ [ ]", "( ) $\\rightarrow$ [ ] $\\rightarrow$ { }", "[ ] $\\rightarrow$ { } $\\rightarrow$ ( )"], "correct": "( ) $\\rightarrow$ [ ] $\\rightarrow$ { }"},
+          {"type": "trac-nghiem", "question": "Câu 3: Trong biểu thức chỉ có phép tính nhân và chia, ta thực hiện phép tính như thế nào?", "options": ["Tính nhân trước, chia sau.", "Tính chia trước, nhân sau.", "Tính từ phải sang trái.", "Tính từ trái sang phải."], "correct": "Tính từ trái sang phải."},
+          {"type": "trac-nghiem", "question": "Câu 4: Kết quả của phép nhân hai lũy thừa $2^3 \\cdot 2^2$ là:", "options": ["$4^5$", "$2^6$", "$2^5$", "$4^6$"], "correct": "$2^5$"},
+          {"type": "trac-nghiem", "question": "Câu 5: Kết quả của phép tính $5 \\cdot 2^2 - 18 : 3$ là:", "options": ["14", "4", "34", "24"], "correct": "14"},
+          {"type": "trac-nghiem", "question": "Câu 6: Kết quả của phép tính $6 + 2 \\cdot (3 + 2^2)$ là:", "options": ["56", "20", "80", "200"], "correct": "20"},
+          {"type": "trac-nghiem", "question": "Câu 7: Giá trị của số tự nhiên $x$ thỏa mãn $3^x = 9$ là:", "options": ["x = 2", "x = 3", "x = 4", "x = 6"], "correct": "x = 2"},
+          
+          // PHẦN 2: ĐÚNG / SAI (Câu 8 - 14)
+          {"type": "dung-sai", "question": "Câu 8: Lũy thừa $3^2$ có giá trị bằng $6$ (vì $3 \\cdot 2 = 6$).", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 9: Khi chia hai lũy thừa cùng cơ số (khác 0), ta giữ nguyên cơ số và trừ các số mũ cho nhau.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 10: $a^0 = 1$ (với điều kiện $a \\neq 0$).", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 11: Phép tính $5^7 : 5^2$ có kết quả là $5^5$.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 12: Trong biểu thức $100 : 5 \\cdot 2$, ta bắt buộc phải lấy $5 \\cdot 2 = 10$ trước, sau đó lấy $100 : 10$.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 13: Phép tính $2^3 \\cdot 2^4 = 4^7$.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 14: Khi thực hiện phép tính $15 + 2 \\cdot 3^2$, bước đầu tiên cần làm là tính giá trị của $3^2$.", "correct": "Đúng"},
+
+          // PHẦN 3: ĐIỀN KHUYẾT (Câu 15 - 21)
+          // Giáo viên lưu ý dặn học sinh ghi đúng từ/số như hướng dẫn dưới đây
+          {"type": "tra-loi-ngan", "question": "Câu 15: Trong lũy thừa $a^n$, $a$ được gọi là gì? (Gợi ý câu trả lời: co so)", "correct": "cơ số"},
+          {"type": "tra-loi-ngan", "question": "Câu 16: Khi nhân hai lũy thừa cùng cơ số, ta giữ nguyên cơ số và ________ các số mũ. (Điền một từ)", "correct": "cộng"},
+          {"type": "tra-loi-ngan", "question": "Câu 17: Lũy thừa bậc 2 của $a$ (kí hiệu là $a^2$) còn được gọi tên đặc biệt là $a$ ________. (Điền một từ)", "correct": "bình phương"},
+          {"type": "tra-loi-ngan", "question": "Câu 18: Thứ tự thực hiện phép tính không có dấu ngoặc là: ________ $\\rightarrow$ Nhân và chia $\\rightarrow$ Cộng và trừ. (Điền một từ)", "correct": "lũy thừa"},
+          {"type": "tra-loi-ngan", "question": "Câu 19: Giá trị của lũy thừa $2^4$ là bao nhiêu? (Chỉ ghi số)", "correct": "16"},
+          {"type": "tra-loi-ngan", "question": "Câu 20: Nếu biểu thức chỉ có phép cộng và phép trừ, ta thực hiện các phép tính theo thứ tự từ ________ sang phải. (Điền một từ)", "correct": "trái"},
+          {"type": "tra-loi-ngan", "question": "Câu 21: Hoàn thành bước cuối cùng của biểu thức sau: $30 - (5 - 2)^2 = 30 - 3^2 = 30 - 9 = $ ______. (Chỉ ghi số kết quả cuối cùng)", "correct": "21"}
+        ];
+
+        let studentName = "";
+        let currentSection = 1; 
+        let startTime;
+        let timerInterval;
+        
+        let scores = [0, 0, 0];
+        let times = [0, 0, 0];
+
+        function startQuiz() {
+            studentName = document.getElementById("studentName").value.trim();
+            if (!studentName) {
+                alert("Bạn quên nhập tên kìa!");
+                return;
+            }
+            document.getElementById("login-screen").classList.add("hidden");
+            document.getElementById("display-name").innerText = "Học sinh: " + studentName;
+            loadSection(currentSection);
+        }
+
+        function loadSection(sectionNum) {
+            // Cập nhật tên phân đoạn theo đúng chương trình học
+            const titles = ["PHẦN 1: KHỞI ĐỘNG (TRẮC NGHIỆM)", "PHẦN 2: VƯỢT CHƯỚNG NGẠI VẬT (ĐÚNG/SAI)", "PHẦN 3: GIẢI MÃ LÝ THUYẾT (ĐIỀN KHUYẾT)"];
+            document.getElementById("section-title").innerText = titles[sectionNum - 1];
+            document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
+
+            const container = document.getElementById("questions-container");
+            container.innerHTML = ""; 
+
+            const startIndex = (sectionNum - 1) * 7;
+            const endIndex = sectionNum * 7;
+            let allHtml = ""; 
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break; 
+                let q = questions[i];
+                let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
+                
+                if (q.type === "trac-nghiem") {
+                    q.options.forEach(opt => {
+                        html += `<label class="block mb-2 cursor-pointer hover:bg-orange-100 p-2 rounded transition"><input type="radio" name="q${i}" value="${opt}" class="mr-2 w-4 h-4 text-orange-500"> <span class="text-md">${opt}</span></label>`;
+                    });
+                } else if (q.type === "tra-loi-ngan") {
+                    html += `<input type="text" id="q${i}" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-orange-500 outline-none font-bold text-blue-700" placeholder="Nhập từ hoặc số đáp án...">`;
+                } else if (q.type === "dung-sai") {
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-green-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Đúng" class="mr-2 w-4 h-4 text-green-600"> <span class="font-bold text-green-700">Đúng</span></label>`;
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4 text-red-600"> <span class="font-bold text-red-700">Sai</span></label>`;
+                }
+                html += `</div>`;
+                allHtml += html; 
+            }            
+
+            container.innerHTML = allHtml;
+
+            // Render lại MathJax cho các công thức
+            if (window.MathJax) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]).then(() => {
+                    console.log('MathJax rendered successfully!');
+                });
+            }
+
+            document.getElementById("break-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            window.scrollTo(0, 0);
+
+            if(timerInterval) clearInterval(timerInterval); 
+            document.getElementById("timer").innerText = "0";
+            startTime = Date.now();
+            
+            timerInterval = setInterval(() => {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer").innerText = elapsedTime;
+            }, 1000);
+        }
+
+        function submitSection() {
+            if (!confirm(`Bạn có chắc muốn nộp Phần ${currentSection}? Khảo sát kỹ trước khi nộp nhé!`)) return;
+
+            clearInterval(timerInterval);
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            times[currentSection - 1] = timeTaken;
+
+            let score = 0;
+            const startIndex = (currentSection - 1) * 7;
+            const endIndex = sectionNum = currentSection * 7;
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break;
+                let q = questions[i];
+
+                if (q.type === "trac-nghiem" || q.type === "dung-sai") {
+                    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (selected && selected.value.trim().toLowerCase() === q.correct.trim().toLowerCase()) score += 10;
+                } else if (q.type === "tra-loi-ngan") {
+                    const answerInput = document.getElementById(`q${i}`);
+                    if(answerInput) {
+                        // Loại bỏ dấu tiếng Việt cơ bản để chấm điểm linh hoạt hơn cho học sinh
+                        const answer = answerInput.value.trim().toLowerCase().replace(/à|á|ạ|ả|ã|â|ần|ấn|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a").replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e").replace(/ì|í|ị|ỉ|ĩ/g, "i").replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o").replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u").replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y").replace(/đ/g, "d");
+                        const correctAns = q.correct.trim().toLowerCase().replace(/à|á|ạ|ả|ã|â|ần|ấn|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a").replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e").replace(/ì|í|ị|ỉ|ĩ/g, "i").replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o").replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u").replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y").replace(/đ/g, "d");
+                        if (answer === correctAns) score += 10;
+                    }
+                }
+            }
+            scores[currentSection - 1] = score;
+            document.getElementById("quiz-screen").classList.add("hidden");
+
+            if (currentSection < 3) {
+                document.getElementById("break-title").innerText = `Đã hoàn thành Phần ${currentSection}!`;
+                document.getElementById("section-score").innerText = score;
+                document.getElementById("section-time").innerText = timeTaken;
+                document.getElementById("break-screen").classList.remove("hidden");
+            } else {
+                calculateFinalResult();
+            }
+        }
+
+        function nextSection() {
+            currentSection++; 
+            loadSection(currentSection);
+        }
+
+        function calculateFinalResult() {
+            const totalScore = scores.reduce((a, b) => a + b, 0);
+            const totalTime = times.reduce((a, b) => a + b, 0);
+
+            document.getElementById("res-p1").innerText = `${scores[0]}/70 (${times[0]}s)`;
+            document.getElementById("res-p2").innerText = `${scores[1]}/70 (${times[1]}s)`;
+            document.getElementById("res-p3").innerText = `${scores[2]}/70 (${times[2]}s)`;
+            
+            document.getElementById("final-score").innerText = totalScore;
+            document.getElementById("final-time").innerText = totalTime;
+            document.getElementById("result-screen").classList.remove("hidden");
+
+            // Tự động gọi gửi dữ liệu lên Google Sheet nếu cấu hình URL
+            if(!GOOGLE_APP_SCRIPT_URL.includes("YOUR_SCRIPT_ID")) {
+                sendDataToSheet(studentName, totalScore, totalTime);
+            }
+        }
+
+        function sendDataToSheet(name, totalScore, totalTime) {
+            const payload = {
+                action: "save_toan_pizza", 
+                hoTen: name,
+                diem: totalScore,
+                thoiGian: totalTime
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.getElementById("status-msg").innerHTML = "✅ Điểm số đã được lưu thành công trên hệ thống của Thầy!";
+                document.getElementById("status-msg").className = "text-md font-bold text-green-600 mb-4";
+            })
+            .catch(error => {
+                document.getElementById("status-msg").innerText = "❌ Lỗi kết nối! Hãy chụp màn hình kết quả này gửi riêng cho Thầy nhé!";
+                document.getElementById("status-msg").className = "text-md font-bold text-red-600 mb-4";
+            });
+        }
+    </script>
+</body>
+</html>

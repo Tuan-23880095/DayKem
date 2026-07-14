@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đua Top Giải Toán - Giành Pizza Buổi 5</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+              typeset: false 
+            }
+          };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-gray-100 font-sans h-screen flex flex-col">
+
+    <header class="bg-orange-500 text-white text-center p-4 shadow-md">
+        <h1 class="text-2xl font-bold">🍕 ĐẤU TRƯỜNG TOÁN HỌC - MỤC TIÊU PIZZA Toan 7 - BUỔI 5 🍕</h1>
+        <p class="text-sm">Chủ đề: Vận dụng các phép tính số hữu tỉ vào bài toán thực tế</p>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-3xl">
+        
+        <div id="login-screen" class="bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-xl font-bold mb-4">Nhập tên để bắt đầu cuộc đua</h2>
+            <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <button onclick="startQuiz()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full">
+                VÀO PHẦN 1 VÀ TÍNH GIỜ
+            </button>
+        </div>
+
+        <div id="quiz-screen" class="hidden bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <div>
+                    <span class="font-bold text-lg block text-gray-700" id="display-name"></span>
+                    <span class="font-bold text-2xl text-orange-600" id="section-title">PHẦN 1: KHỞI ĐỘNG</span>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-red-500 text-2xl">⏱ <span id="timer">0</span>s</span>
+                </div>
+            </div>
+            
+            <div id="questions-container" class="space-y-6 mt-4"></div>
+
+            <button onclick="submitSection()" class="mt-8 bg-green-500 text-white font-bold py-3 px-6 rounded hover:bg-green-600 transition duration-300 w-full text-lg">
+                NỘP BÀI <span id="btn-submit-text">PHẦN 1</span>
+            </button>
+        </div>
+
+        <div id="break-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-2xl font-bold mb-4 text-blue-600" id="break-title">Hoàn thành Phần 1!</h2>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                <p class="text-lg">Điểm phần này: <span id="section-score" class="font-bold text-xl text-green-600"></span>/70</p>
+                <p class="text-lg">Thời gian chặng: <span id="section-time" class="font-bold text-xl text-red-500"></span> giây</p>
+            </div>
+            <button onclick="nextSection()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full text-lg shadow-md">
+                TIẾP TỤC CHIẾN ĐẤU 🚀
+            </button>
+        </div>
+
+        <div id="result-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10 border-t-8 border-orange-500">
+            <h2 class="text-3xl font-bold mb-4 text-green-600">🎉 ĐÃ HOÀN THÀNH 3 CHẶNG! 🎉</h2>
+            <div class="bg-gray-100 p-4 rounded mb-6 text-left inline-block w-full max-w-sm">
+                <p class="mb-2">🔹 Điểm Phần 1: <span id="res-p1" class="font-bold"></span></p>
+                <p class="mb-2">🔹 Điểm Phần 2: <span id="res-p2" class="font-bold"></span></p>
+                <p class="mb-2 border-b pb-2">🔹 Điểm Phần 3: <span id="res-p3" class="font-bold"></span></p>
+                <p class="text-xl mt-2 text-green-700">🏆 TỔNG ĐIỂM: <span id="final-score" class="font-bold text-2xl"></span>/210</p>
+                <p class="text-xl mt-2 text-red-600">⏱ TỔNG THỜI GIAN: <span id="final-time" class="font-bold text-2xl"></span>s</p>
+            </div>
+            
+            <p class="text-md font-bold text-gray-700 mb-4" id="status-msg">Đang tổng hợp dữ liệu gửi về hệ thống thầy giáo...</p>
+        </div>
+
+    </main>
+
+    <script>
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
+
+        const questions = [
+          // === PHẦN 1: TRẮC NGHIỆM NHIỀU LỰA CHỌN (0 - 6) ===
+          {"type": "trac-nghiem", "question": "Câu 1: Mẹ cho An $100.000$ đồng để mua sách. An dùng $\\frac{1}{2}$ số tiền đó để mua sách toán nâng cao, $\\frac{2}{5}$ số tiền còn lại An mua vở. Hỏi An còn lại bao nhiêu tiền?", "options": ["10.000 đồng", "20.000 đồng", "30.000 đồng", "40.000 đồng"], "correct": "30.000 đồng"},
+          {"type": "trac-nghiem", "question": "Câu 2: Hai đoạn ống nước có chiều dài lần lượt là $0,8m$ và $1,35m$. Người ta nối hai đầu ống để tạo thành một ống nước mới. Chiều dài của phần nối chung là $\\frac{2}{25}m$. Hỏi đoạn ống nước mới dài bao nhiêu mét?", "options": ["2,15m", "2,07m", "2,23m", "1,99m"], "correct": "2,07m"},
+          {"type": "trac-nghiem", "question": "Câu 3: Một nhà máy trong tuần thứ nhất đã thực hiện được $\\frac{4}{15}$ kế hoạch tháng, tuần thứ hai thực hiện được $\\frac{7}{30}$ kế hoạch, tuần thứ ba thực hiện được $\\frac{3}{10}$ kế hoạch. Để hoàn thành kế hoạch thì tuần cuối nhà máy phải thực hiện bao nhiêu phần kế hoạch?", "options": ["\\frac{1}{5}", "\\frac{4}{5}", "\\frac{1}{15}", "\\frac{7}{30}"], "correct": "\\frac{1}{5}"},
+          {"type": "trac-nghiem", "question": "Câu 4: Mua một cây bút giá $3.000$ đồng. Hỏi $5$ cây bút với giá bao nhiêu tiền?", "options": ["10.000 đồng", "15.000 đồng", "20.000 đồng", "25.000 đồng"], "correct": "15.000 đồng"},
+          {"type": "trac-nghiem", "question": "Câu 5: Biết công thức chuyển đổi từ độ F sang độ C là: $T(^\\circ C) = \\frac{5}{9} \\cdot (T(^\\circ F) - 32)$. Nếu nhiệt độ ngoài trời là $35,6^\\circ F$ thì tương ứng với bao nhiêu độ C?", "options": ["0^\\circ C", "2^\\circ C", "3,6^\\circ C", "5^\\circ C"], "correct": "2^\\circ C"},
+          {"type": "trac-nghiem", "question": "Câu 6: Mẹ bạn Minh gửi tiết kiệm $300.000.000$ đồng vào ngân hàng kỳ hạn 1 năm. Hết 1 năm, nhận được cả vốn lẫn lãi là $321.600.000$ đồng. Lãi suất ngân hàng một năm là bao nhiêu?", "options": ["6,5%", "7%", "7,2%", "8%"], "correct": "7,2%"},
+          {"type": "trac-nghiem", "question": "Câu 7: Một cửa hàng sách giảm $10\%$ tổng hóa đơn cho khách có thẻ thành viên. Bạn Lan có thẻ thành viên và mua 3 quyển sách, mỗi quyển $120.000$ đồng. Nếu Lan đưa cô thu ngân $350.000$ đồng thì được trả lại bao nhiêu tiền?", "options": ["26.000 đồng", "36.000 đồng", "24.000 đồng", "16.000 đồng"], "correct": "26.000 đồng"},
+          
+          // === PHẦN 2: TRẮC NGHIỆM ĐÚNG / SAI (7 - 13) ===
+          {"type": "dung-sai", "question": "Câu 8: Khi ghép nối hai đoạn ống nước lại với nhau, chiều dài tổng cộng của ống nước mới sẽ bằng tổng chiều dài hai ống ban đầu trừ đi chiều dài của phần nối chung.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 9: Một cửa hàng giảm giá $20\\%$ cho một sản phẩm, sau đó giảm thêm $10\\%$ trên giá đã giảm. Điều này hoàn toàn giống với việc cửa hàng giảm giá $30\\%$ ngay từ đầu.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 10: Nếu bạn tiêu hết $\\frac{1}{2}$ số tiền mình có, sau đó tiêu tiếp $\\frac{1}{2}$ số tiền còn lại, thì bạn đã tiêu hết sạch số tiền của mình.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 11: Dựa vào công thức chuyển đổi nhiệt độ $T(^\\circ C) = \\frac{5}{9} \\cdot (T(^\\circ F) - 32)$, nếu nhiệt độ là $32^\\circ F$ thì nước sẽ đóng băng (tương đương $0^\\circ C$).", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 12: Một lớp học hoàn thành $\\frac{1}{3}$ công việc vào buổi sáng và $\\frac{1}{4}$ công việc vào buổi chiều. Số phần công việc còn lại phải làm là $\\frac{5}{12}$.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 13: Gửi ngân hàng $10.000.000$ đồng với lãi suất $5\\%$/năm, sau 1 năm số tiền lãi nhận được là $50.000$ đồng.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 14: Phillip đưa cho người bán hàng $100$ USD để thanh toán hóa đơn $58,25$ USD. Số tiền người bán hàng phải trả lại cho Phillip là $41,75$ USD.", "correct": "Đúng"},
+
+          // === PHẦN 3: TRẮC NGHIỆM ĐIỀN KHUYẾT (14 - 20) ===
+          {"type": "tra-loi-ngan", "question": "Câu 15: Vào tháng 6, một chiếc tivi có giá $8.000.000$ đồng. Tháng 9 siêu thị giảm giá $5\\%$. Số tiền được giảm giá (chưa tính giá bán mới) là bao nhiêu đồng? (Chỉ viết phần số hằng)", "correct": "400000"},
+          {"type": "tra-loi-ngan", "question": "Câu 16: Tiếp tục dữ kiện câu 15, sang tháng 10, siêu thị giảm giá tivi thêm một lần nữa khiến giá tivi từ mức giá của tháng 9 giảm xuống chỉ còn $6.840.000$ đồng. Tỉ lệ phần trăm siêu thị đã giảm giá trong tháng 10 (so với tháng 9) là bao nhiêu phần trăm? (Chỉ ghi số)", "correct": "10"},
+          {"type": "tra-loi-ngan", "question": "Câu 17: Nhiệt độ lúc 10 giờ tối là $22,64^\\circ F$. Áp dụng công thức $T(^\\circ C) = \\frac{5}{9} \\cdot (T(^\\circ F) - 32)$, nhiệt độ này tương đương với bao nhiêu $^\\circ C$? (Nhập số thập phân dùng dấu phẩy hoặc dấu chấm gọn)", "correct": "-5.2"},
+          {"type": "tra-loi-ngan", "question": "Câu 18: Phillip mua 3 cái pizza cỡ to (giá $11,5$ USD/cái), 2 cái cỡ trung bình (giá $8,75$ USD/cái) và 1 cái cỡ nhỏ (giá $6,25$ USD/cái). Tổng số tiền bánh mà Phillip phải trả là bao nhiêu USD? (Ghi dạng số thập phân)", "correct": "58.25"},
+          {"type": "tra-loi-ngan", "question": "Câu 19: Bác Thu mua một món hàng giá $125.000$ đồng và được giảm giá $30\\%$. Số tiền bác Thu thực tế phải trả cho món hàng này là bao nhiêu đồng? (Chỉ ghi số)", "correct": "87500"},
+          {"type": "tra-loi-ngan", "question": "Câu 20: Nếu coi toàn bộ khối lượng công việc là $1$ đơn vị. Bạn A đã làm được $\\frac{2}{7}$ công việc, bạn B làm được $\\frac{3}{7}$ công việc. Khối lượng công việc còn lại cần hoàn thành là mấy phần? (Viết dưới dạng phân số tối giản a/b)", "correct": "2/7"},
+          {"type": "tra-loi-ngan", "question": "Câu 21: Một bạn học sinh đi xe đạp mất $\\frac{1}{2}$ giờ để hoàn thành quãng đường, sau đó đi bộ mất $\\frac{3}{4}$ giờ. Tổng thời gian di chuyển tính theo đơn vị giờ (viết dưới dạng số thập phân) là bao nhiêu giờ?", "correct": "1.25"}
+        ];
+
+        let studentName = "";
+        let currentSection = 1; 
+        let startTime;
+        let timerInterval;
+        
+        let scores = [0, 0, 0];
+        let times = [0, 0, 0];
+
+        function startQuiz() {
+            studentName = document.getElementById("studentName").value.trim();
+            if (!studentName) {
+                alert("Em quên nhập tên rồi kìa!");
+                return;
+            }
+
+            document.getElementById("login-screen").classList.add("hidden");
+            document.getElementById("display-name").innerText = "Học sinh: " + studentName;
+            
+            loadSection(currentSection);
+        }
+
+        function loadSection(sectionNum) {
+            document.getElementById("section-title").innerText = `PHẦN ${sectionNum}: ${sectionNum === 1 ? 'TRẮC NGHIỆM BỐN LỰA CHỌN' : (sectionNum === 2 ? 'NHẬN THỨC ĐÚNG / SAI' : 'ĐIỀN ĐÁP ÁN NGẮN')}`;
+            document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
+
+            const container = document.getElementById("questions-container");
+            container.innerHTML = ""; 
+
+            const startIndex = (sectionNum - 1) * 7;
+            const endIndex = sectionNum * 7;
+
+            let allHtml = ""; 
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break; 
+
+                let q = questions[i];
+                let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
+                
+                if (q.type === "trac-nghiem") {
+                    q.options.forEach(opt => {
+                        html += `<label class="block mb-2 cursor-pointer hover:bg-orange-100 p-2 rounded transition"><input type="radio" name="q${i}" value="${opt}" class="mr-2 w-4 h-4 text-orange-500"> <span class="text-md">${opt}</span></label>`;
+                    });
+                } else if (q.type === "tra-loi-ngan") {
+                    html += `<input type="text" id="q${i}" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-orange-500 outline-none font-bold text-blue-700" placeholder="Nhập đáp án số của bạn...">`;
+                } else if (q.type === "dung-sai") {
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-green-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Đúng" class="mr-2 w-4 h-4"> <span class="font-bold text-green-700">Đúng [Đ]</span></label>`;
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4"> <span class="font-bold text-red-700">Sai [S]</span></label>`;
+                }
+                html += `</div>`;
+                
+                allHtml += html; 
+            }            
+
+            container.innerHTML = allHtml;
+
+            if (window.MathJax) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]);
+            }
+
+            document.getElementById("break-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            window.scrollTo(0, 0);
+
+            if(timerInterval) clearInterval(timerInterval); 
+            document.getElementById("timer").innerText = "0";
+            startTime = Date.now();
+            
+            timerInterval = setInterval(() => {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer").innerText = elapsedTime;
+            }, 1000);
+        }
+
+        function submitSection() {
+            if (!confirm(`Em có chắc muốn nộp bài Chặng ${currentSection} không? Hãy soát kĩ các dấu ngoặc và đơn vị nhé!`)) return;
+
+            clearInterval(timerInterval);
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            times[currentSection - 1] = timeTaken;
+
+            let score = 0;
+            const startIndex = (currentSection - 1) * 7;
+            const endIndex = currentSection * 7;
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break;
+                let q = questions[i];
+
+                if (q.type === "trac-nghiem" || q.type === "dung-sai") {
+                    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (selected && selected.value.trim().toLowerCase() === q.correct.trim().toLowerCase()) score += 10;
+                } else if (q.type === "tra-loi-ngan") {
+                    const answerInput = document.getElementById(`q${i}`);
+                    if(answerInput) {
+                        let answer = answerInput.value.trim().toLowerCase().replace(/,/g, '.');
+                        let correctAns = q.correct.toLowerCase().replace(/,/g, '.');
+                        if (answer === correctAns) score += 10;
+                    }
+                }
+            }
+            scores[currentSection - 1] = score;
+
+            document.getElementById("quiz-screen").classList.add("hidden");
+
+            if (currentSection < 3) {
+                document.getElementById("break-title").innerText = `Đã hoàn thành xuất sắc Chặng ${currentSection}!`;
+                document.getElementById("section-score").innerText = score;
+                document.getElementById("section-time").innerText = timeTaken;
+                document.getElementById("break-screen").classList.remove("hidden");
+            } else {
+                calculateFinalResult();
+            }
+        }
+
+        function nextSection() {
+            currentSection++; 
+            loadSection(currentSection);
+        }
+
+        function calculateFinalResult() {
+            const totalScore = scores.reduce((a, b) => a + b, 0);
+            const totalTime = times.reduce((a, b) => a + b, 0);
+
+            document.getElementById("res-p1").innerText = `${scores[0]}/70 (${times[0]}s)`;
+            document.getElementById("res-p2").innerText = `${scores[1]/70} (${times[1]}s)`;
+            document.getElementById("res-p3").innerText = `${scores[2]/70} (${times[2]}s)`;
+            
+            document.getElementById("final-score").innerText = totalScore;
+            document.getElementById("final-time").innerText = totalTime;
+
+            document.getElementById("result-screen").classList.remove("hidden");
+
+            sendDataToSheet(studentName, totalScore, totalTime);
+        }
+
+        function sendDataToSheet(name, totalScore, totalTime) {
+            const payload = {
+                action: "save_toan_pizza", 
+                hoTen: name + " - Buổi 5",
+                diem: totalScore,
+                thoiGian: totalTime
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.getElementById("status-msg").innerHTML = "✅ Điểm thi Buổi 5 đã lưu thành công! Đang chờ Thầy duyệt bảng xếp hạng Pizza.";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-green-600");
+            })
+            .catch(error => {
+                document.getElementById("status-msg").innerText = "❌ Lỗi mạng cục bộ! Em hãy chụp màn hình bảng điểm này gửi ngay cho Thầy nhé!";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-red-600");
+            });
+        }
+    </script>
+</body>
+</html>

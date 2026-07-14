@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 5: Luyện tập tổng hợp và giải toán có lời văn (Số hữu tỉ)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Cài đặt chung: Nền trắng, chữ đen */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tiêu đề chính nhiều màu sắc */
+        h1 {
+            color: #e11d48; /* Đỏ hồng */
+            text-align: center;
+            font-size: 2.2em;
+            border-bottom: 4px dashed #f43f5e;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Tiêu đề các phần */
+        h2 {
+            color: #1d4ed8; /* Xanh dương đậm */
+            background-color: #dbeafe; /* Nền xanh nhạt */
+            padding: 12px 20px;
+            border-left: 6px solid #2563eb;
+            border-radius: 0 8px 8px 0;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #047857; /* Xanh lá đậm */
+            border-bottom: 2px solid #34d399;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        /* Các khối nội dung (Boxes) */
+        .theory-box {
+            background-color: #f0fdf4; /* Xanh lá cực nhạt */
+            border: 2px solid #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .example-box {
+            background-color: #fffbeb; /* Vàng cực nhạt */
+            border: 2px solid #f59e0b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .example-title {
+            font-weight: 800;
+            color: #d97706;
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background-color: #fdf2f8; /* Hồng nhạt */
+            border: 2px solid #ec4899;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.15);
+        }
+
+        /* Cấu trúc danh sách */
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Nhấn mạnh chữ */
+        .highlight {
+            color: #dc2626; /* Đỏ */
+            font-weight: bold;
+        }
+
+        .math-expr {
+            font-size: 1.1em;
+        }
+
+        /* Hình ảnh minh họa */
+        .illustration {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: block;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎯 Buổi 5: Luyện tập tổng hợp và giải toán có lời văn (Ứng dụng thực tế Số hữu tỉ)</h1>
+
+    <img src="https://placehold.co/900x250/dbeafe/1d4ed8?text=Toán+Học+Thực+Tế:+Bứt+Phá+Kĩ+Năng+Giải+Toán+Có+Lời+Văn&font=montserrat" alt="Hình ảnh minh họa Toán học thực tế" class="illustration">
+
+    <h2>Phần 1: PHƯƠNG PHÁP GIẢI BÀI TOÁN CÓ LỜI VĂN 📚</h2>
+
+    <div class="theory-box">
+        <p>Để không bị rối và tránh sai sót khi đối mặt với những bài toán có đề bài dài, nhiều chữ, các em học sinh cần tuân thủ nghiêm ngặt theo quy trình <strong>4 bước chuẩn</strong> sau:</p>
+        
+        <ol>
+            <li><strong>Bước 1: Tóm tắt đề bài.</strong> Học sinh đọc kĩ đề, dùng bút chì <span class="highlight">gạch chân các số liệu quan trọng</span> và xác định chính xác bài toán hỏi gì.</li>
+            <li><strong>Bước 2: Đưa về cùng một định dạng.</strong> Nếu trong đề bài xuất hiện cả số thập phân lẫn phân số, ta cần thực hiện quy đổi tất cả về cùng phân số (hoặc cùng số thập phân) sao cho quá trình tính toán diễn ra thuận lợi nhất.</li>
+            <li><strong>Bước 3: Lập phép tính.</strong> Biểu diễn mối quan hệ toán học giữa các đại lượng thực tế bằng các phép tính cộng, trừ, nhân, chia số hữu tỉ.</li>
+            <li><strong>Bước 4: Tính toán và kết luận.</strong> Thực hiện tính toán cẩn thận theo đúng thứ tự phép tính, tìm ra kết quả cuối cùng, ghi kèm <span class="highlight">đơn vị đo</span> và viết đáp số rõ ràng.</li>
+        </ol>
+    </div>
+
+    <img src="https://placehold.co/900x200/fef3c7/b45309?text=Phần+2:+Các+Dạng+Toán+Trọng+Tâm+và+Ví+Dụ+Minh+Họa&font=montserrat" alt="Minh họa phần bài tập thực tế" class="illustration">
+
+    <h2>Phần 2: CÁC DẠNG TOÁN TRỌNG TÂM & VÍ DỤ MINH HỌA 🚀</h2>
+
+    <h3>Dạng 1: Bài toán đo lường, ghép nối (Phép cộng, trừ số hữu tỉ)</h3>
+    <p><strong>Phương pháp giải:</strong> Áp dụng công thức tính tổng chiều dài, diện tích hoặc khối lượng. Lưu ý đặc biệt: <span class="highlight">Phải trừ đi phần hao hụt hoặc phần diện tích/chiều dài nối chung</span> nếu các vật đè lên nhau.</p>
+
+    <div class="example-box">
+        <div class="example-title">📝 Ví dụ 1 (Bài toán nối ống nước):</div>
+        <p>Hai đoạn ống nước có chiều dài lần lượt là $0,8\text{ m}$ và $1,35\text{ m}$. Người ta nối hai đầu ống để tạo thành một ống nước mới. Chiều dài của phần nối chung là $\frac{2}{25}\text{ m}$. Hỏi đoạn ống nước mới dài bao nhiêu mét?</p>
+        <p><strong>Hướng dẫn giải:</strong></p>
+        <p>Nhận thấy đổi phân số ra số thập phân sẽ tính nhanh hơn: $\frac{2}{25}\text{ m} = 0,08\text{ m}$.</p>
+        <p>Chiều dài của đoạn ống nước mới sau khi ghép nối là:</p>
+        <p class="math-expr">$$0,8 + 1,35 - 0,08 = 2,07\text{ (m)}$$</p>
+        <p><strong>Đáp số:</strong> $2,07\text{ m}$.</p>
+    </div>
+
+    <h3>Dạng 2: Bài toán về "Phần công việc" hoặc "Kế hoạch"</h3>
+    <p><strong>Phương pháp giải:</strong> Quy ước tổng số lượng công việc cần làm, hoặc toàn bộ chỉ tiêu kế hoạch đề ra là <span class="highlight">đơn vị $1$</span> (một đơn vị nguyên vẹn). Số phần việc còn lại chưa hoàn thành sẽ bằng $1$ trừ đi tổng các phần việc đã thực hiện.</p>
+
+    <div class="example-box">
+        <div class="example-title">📝 Ví dụ 2 (Bài toán năng suất nhà máy):</div>
+        <p>Một nhà máy trong tuần thứ nhất đã thực hiện được $\frac{4}{15}$ kế hoạch tháng, trong tuần thứ hai thực hiện được $\frac{7}{30}$ kế hoạch, trong tuần thứ ba thực hiện được $\frac{3}{10}$ kế hoạch. Để hoàn thành kế hoạch của tháng thì trong tuần cuối nhà máy phải thực hiện bao nhiêu phần kế hoạch?</p>
+        <p><strong>Hướng dẫn giải:</strong></p>
+        <p>Coi toàn bộ chỉ tiêu kế hoạch của tháng này là $1$.</p>
+        <p>Tổng số phần kế hoạch mà nhà máy đã xuất sắc thực hiện được trong 3 tuần đầu là:</p>
+        <p class="math-expr">$$\frac{4}{15} + \frac{7}{30} + \frac{3}{10} = \frac{8}{30} + \frac{7}{30} + \frac{9}{30} = \frac{24}{30} = \frac{4}{5}\text{ (kế hoạch)}$$</p>
+        <p>Phần chỉ tiêu kế hoạch còn lại nhà máy bắt buộc phải hoàn thành trong tuần cuối cùng là:</p>
+        <p class="math-expr">$$1 - \frac{4}{5} = \frac{1}{5}\text{ (kế hoạch)}$$</p>
+        <p><strong>Đáp số:</strong> $\frac{1}{5}$ kế hoạch.</p>
+    </div>
+
+    <h3>Dạng 3: Bài toán về chi tiêu, tài chính (Phân số của một số & Giảm giá)</h3>
+    <p><strong>Phương pháp giải:</strong> Muốn tìm giá trị phân số của một số cho trước, ta lấy số đó nhân với phân số. <span class="highlight">Đọc thật kĩ đề bài</span> xem phân số tiếp theo được tính dựa trên "tổng số tiền ban đầu" hay dựa trên "số tiền còn lại".</p>
+
+    <div class="example-box">
+        <div class="example-title">📝 Ví dụ 3 (Bài toán quản lý chi tiêu):</div>
+        <p>Mẹ cho An $100.000$ đồng để mua dụng cụ học tập. An dùng $\frac{1}{2}$ số tiền đó để mua sách toán nâng cao, dùng tiếp $\frac{2}{5}$ <span class="highlight">số tiền còn lại</span> để mua vở. Hỏi An còn lại bao nhiêu tiền?</p>
+        <p><strong>Hướng dẫn giải:</strong></p>
+        <ul>
+            <li>Số tiền An chi ra để mua sách toán nâng cao là:
+                <p class="math-expr">$$100.000 \cdot \frac{1}{2} = 50.000\text{ (đồng)}$$</p>
+            </li>
+            <li>Số tiền An còn giữ lại sau khi thanh toán tiền sách là:
+                <p class="math-expr">$$100.000 - 50.000 = 50.000\text{ (đồng)}$$</p>
+            </li>
+            <li>Số tiền An chi ra để mua vở là (tính trên số tiền còn lại):
+                <p class="math-expr">$$50.000 \cdot \frac{2}{5} = 20.000\text{ (đồng)}$$</p>
+            </li>
+            <li>Số tiền An còn lại cuối cùng là:
+                <p class="math-expr">$$50.000 - 20.000 = 30.000\text{ (đồng)}$$</p>
+            </li>
+        </ul>
+        <p><strong>Đáp số:</strong> $30.000$ đồng.</p>
+    </div>
+
+    <div class="example-box">
+        <div class="example-title">📝 Ví dụ mở rộng (Bài toán giảm giá siêu thị):</div>
+        <p>Vào tháng 6, giá niêm yết của một chiếc ti vi tại siêu thị điện máy là $8.000.000$ đồng. Đến tháng 9, siêu thị tổ chức chương trình khuyến mãi giảm giá $5\%$ cho mỗi chiếc ti vi. Hỏi giá tiền chiếc ti vi sau khi giảm giá là bao nhiêu?</p>
+        <p><strong>Hướng dẫn giải:</strong></p>
+        <p>Coi giá niêm yết ban đầu là $100\%$. Tỷ số phần trăm của giá tiền chiếc ti vi sau khi giảm là:</p>
+        <p class="math-expr">$$100\% - 5\% = 95\%$$</p>
+        <p>Giá tiền thực tế của chiếc ti vi sau khi áp dụng giảm giá là:</p>
+        <p class="math-expr">$$8.000.000 \cdot 95\% = 8.000.000 \cdot \frac{95}{100} = 7.600.000\text{ (đồng)}$$</p>
+        <p><strong>Đáp số:</strong> $7.600.000$ đồng.</p>
+    </div>
+
+    <div class="tip-box">
+        <h3 style="color: #be185d; border-bottom: none; margin-top: 0;">💡 Lời khuyên giảng dạy dành cho Giáo viên:</h3>
+        <ul>
+            <li><strong>Bẫy từ ngữ:</strong> Học sinh khối 7 cực kỳ hay mắc lỗi đọc lướt, dẫn tới bỏ qua các từ khóa chí mạng như <span class="highlight">"số phần còn lại"</span> ở dạng toán chi tiêu (Ví dụ 3). Hãy tập cho học sinh thói quen vẽ sơ đồ đoạn thẳng để tư duy trực quan trực tiếp trên lớp.</li>
+            <li><strong>Linh hoạt tính toán:</strong> Khuyến khích học sinh phân tích xem nên quy đổi ra phân số hay số thập phân. Ví dụ cụ thể như ở bài toán nối ống nước (Ví dụ 1), nếu học sinh đổi ra số thập phân ($0,08$) thì việc tính toán cộng trừ nhẩm diễn ra siêu nhanh, tránh việc phải đi quy đồng mẫu số chung lên tới $25$ gây tốn thời gian.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

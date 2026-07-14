@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Bài Tập Buổi 5: Sự Đa Dạng Và Các Thể Cơ Bản Của Chất</title>
+    <style>
+        /* --- THIẾT LẬP CHUNG (NỀN TRẮNG CHỮ ĐEN) --- */
+        :root {
+            --primary-black: #1a1a1a;
+            --pure-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --border-color: #cccccc;
+            
+            /* Màu sắc minh họa cho các phần */
+            --color-basic: #d9383a;
+            --color-advanced: #e67e22;
+            --color-applied: #2ecc71;
+            --color-teacher: #9b59b6;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--primary-black);
+            background-color: var(--pure-white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- HEADER & LOGO --- */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px double var(--primary-black);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-img {
+            height: 75px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            text-align: right;
+        }
+
+        .header-title h1 {
+            font-size: 18px;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .header-title p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* --- LỜI CHÀO / GIỚI THIỆU --- */
+        .intro-box {
+            background-color: var(--bg-light);
+            border-left: 5px solid var(--primary-black);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* --- ĐỊNH DẠNG CÁC PHẦN BÀI TẬP --- */
+        .section-title {
+            color: var(--pure-white);
+            padding: 10px 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-top: 40px;
+            border-radius: 4px;
+        }
+
+        .bg-basic { background-color: var(--color-basic); }
+        .bg-advanced { background-color: var(--color-advanced); }
+        .bg-applied { background-color: var(--color-applied); }
+
+        .objective {
+            font-weight: bold;
+            margin: 10px 0 20px 0;
+            padding: 5px 10px;
+            background: #eee;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .question {
+            background: var(--pure-white);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question h3 {
+            margin-top: 0;
+            color: var(--primary-black);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .options li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+
+        /* --- ĐỊNH DẠNG BẢNG (TABLE) --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--primary-black);
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--bg-light);
+        }
+
+        /* --- ĐỊNH DẠNG ĐÁP ÁN (ACCORDION THUẦN CSS) --- */
+        .teacher-section {
+            margin-top: 50px;
+            border: 2px solid var(--color-teacher);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .accordion-toggle {
+            display: none;
+        }
+
+        .accordion-label {
+            display: block;
+            background-color: var(--color-teacher);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .accordion-label:hover {
+            opacity: 0.9;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: var(--pure-white);
+            padding: 0 20px;
+        }
+
+        .accordion-toggle:checked ~ .accordion-content {
+            max-height: 2000px;
+            padding: 20px;
+            border-top: 1px solid var(--color-teacher);
+        }
+
+        .ans-section {
+            margin-bottom: 20px;
+        }
+        
+        .ans-section h4 {
+            color: var(--color-teacher);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- KHI IN ẤN (CTRL + P) --- */
+        @media print {
+            body { font-size: 12pt; }
+            .container { max-width: 100%; padding: 0; }
+            .teacher-section, .accordion-label { display: none !important; } /* Ẩn đáp án khi in đề cho học sinh */
+            .question { box-shadow: none; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="logo-container">
+            <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo ĐH Khoa học Tự nhiên" class="logo-img">
+            <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo Trung tâm BĐVH" class="logo-img">
+        </div>
+        <div class="header-title">
+            <h1>Trung Tâm Bồi Dưỡng Văn Hóa</h1>
+            <p>Trường ĐH Khoa học Tự nhiên TP.HCM</p>
+        </div>
+    </header>
+
+    <div class="intro-box">
+        <p>Chào bạn, để giúp 2 em học sinh ôn tập và khắc sâu kiến thức của <strong>Buổi 5: Sự đa dạng và các thể cơ bản của chất</strong>, tôi đã thiết kế một hệ thống bài tập gồm 3 mức độ: Cơ bản, Nâng cao và Vận dụng.</p>
+        <p>💡 <em>Vì lớp chỉ có 2 học sinh, bạn có thể tổ chức các phần này dưới dạng trò chơi thi đấu (tích điểm) hoặc cùng nhau thảo luận để tăng sự hào hứng nhé!</em></p>
+    </div>
+
+    <h2 class="section-title bg-basic">PHẦN 1: BÀI TẬP CƠ BẢN (Nhận biết & Ghi nhớ)</h2>
+    <div class="objective">Mục tiêu: Kiểm tra khả năng nhận diện vật thể, chất và đặc điểm cơ bản của 3 thể.</div>
+
+    <div class="question">
+        <h3>Câu 1: Thử tài phân loại nhanh (Trắc nghiệm)</h3>
+        <p><strong>1.1.</strong> Trong các vật thể: <em>ngôi nhà, con gà, cây lúa, viên gạch, nước biển, xe đạp</em>. Những vật thể do con người tạo ra (vật thể nhân tạo) là:</p>
+        <ul class="options">
+            <li><input type="radio" name="q1_1" id="q1_1a"> <label for="q1_1a">A. ngôi nhà, con gà, xe đạp.</label></li>
+            <li><input type="radio" name="q1_1" id="q1_1b"> <label for="q1_1b">B. con gà, nước biển, xe đạp.</label></li>
+            <li><input type="radio" name="q1_1" id="q1_1c"> <label for="q1_1c">C. ngôi nhà, viên gạch, xe đạp.</label></li>
+        </ul>
+
+        <p><strong>1.2.</strong> Đặc điểm cơ bản để phân biệt vật thể vô sinh và vật thể hữu sinh (vật sống) là:</p>
+        <ul class="options">
+            <li><input type="radio" name="q1_2" id="q1_2a"> <label for="q1_2a">A. Vật thể vô sinh không xuất phát từ cơ thể sống.</label></li>
+            <li><input type="radio" name="q1_2" id="q1_2b"> <label for="q1_2b">B. Vật thể vô sinh không có các đặc điểm như trao đổi chất, lớn lên, sinh sản; còn vật thể hữu sinh có các đặc điểm trên.</label></li>
+            <li><input type="radio" name="q1_2" id="q1_2c"> <label for="q1_2c">C. Vật thể vô sinh là vật thể đã chết.</label></li>
+        </ul>
+    </div>
+
+    <div class="question">
+        <h3>Câu 2: Đâu là Vật thể, đâu là Chất?</h3>
+        <p>Hãy <u>gạch chân</u> dưới từ chỉ vật thể và <span style="border: 1px solid #000; padding: 2px 5px; border-radius: 50%;">khoanh tròn</span> từ chỉ chất trong các câu sau:</p>
+        <p>a) Thân bút chì được làm bằng gỗ (chứa cellulose), ruột bút chì làm bằng than chì (carbon).</p>
+        <p>b) Chiếc ấm đun nước này được làm bằng nhôm.</p>
+        <p>c) Cơ thể người chứa 63% - 68% về khối lượng là nước.</p>
+    </div>
+
+    <div class="question">
+        <h3>Câu 3: Điền khuyết bảng 3 thể của chất</h3>
+        <p>Hai bạn hãy cùng nhau điền các từ: <em>Xác định, Không xác định, Rất khó, Khó, Dễ</em> vào bảng tóm tắt sau:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Đặc điểm</th>
+                    <th>Thể Rắn</th>
+                    <th>Thể Lỏng</th>
+                    <th>Thể Khí (Hơi)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Hình dạng</strong></td>
+                    <td>Cố định</td>
+                    <td>(1).........................</td>
+                    <td>(2).........................</td>
+                </tr>
+                <tr>
+                    <td><strong>Thể tích</strong></td>
+                    <td>(3).........................</td>
+                    <td>(4).........................</td>
+                    <td>Không xác định</td>
+                </tr>
+                <tr>
+                    <td><strong>Khả năng bị nén</strong></td>
+                    <td>(5).........................</td>
+                    <td>(6).........................</td>
+                    <td>(7).........................</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <h2 class="section-title bg-advanced">PHẦN 2: BÀI TẬP NÂNG CAO (Hiểu & Suy luận)</h2>
+    <div class="objective">Mục tiêu: Đòi hỏi học sinh phải hiểu sâu về cấu trúc hạt và giải thích được các đặc điểm của chất.</div>
+
+    <div class="question">
+        <h3>Câu 4: Ai đúng, ai sai?</h3>
+        <p>Đánh dấu [X] vào ô Đúng hoặc Sai cho các phát biểu sau và giải thích ngắn gọn tại sao câu đó sai:</p>
+        <p><input type="checkbox"> Đúng / <input type="checkbox"> Sai | Chất lỏng có hình dạng xác định và thể tích xác định.</p>
+        <p><input type="checkbox"> Đúng / <input type="checkbox"> Sai | Trong chất khí, các hạt chuyển động tự do và cách rất xa nhau.</p>
+        <p><input type="checkbox"> Đúng / <input type="checkbox"> Sai | Không khí xung quanh ta không có hình dạng và thể tích xác định.</p>
+    </div>
+
+    <div class="question">
+        <h3>Câu 5: Bài toán thể tích</h3>
+        <p>Tại sao 1 ml (mililít) nước ở thể lỏng khi bay hơi lên (chuyển sang thể khí) lại có thể phình to ra, chiếm thể tích lên tới khoảng 1300 ml?</p>
+    </div>
+
+    <div class="question">
+        <h3>Câu 6: Trò chơi "Tôi là ai?"</h3>
+        <p>Giáo viên đọc gợi ý, 2 học sinh giành quyền trả lời xem đây là chất ở thể nào (Rắn, Lỏng hay Khí):</p>
+        <blockquote>
+            <p><strong>Gợi ý A:</strong> "Tôi không có hình dạng cố định, bạn đổ tôi vào cái cốc, tôi sẽ mang hình dáng của cái cốc. Nhưng thể tích của tôi thì không thay đổi đâu nhé. Khá khó để nén tôi lại đấy!".</p>
+            <p><strong>Gợi ý B:</strong> "Các hạt cấu tạo nên tôi liên kết với nhau cực kỳ chặt chẽ. Đừng hòng bóp méo hay nén tôi lại một cách dễ dàng!".</p>
+        </blockquote>
+    </div>
+
+
+    <h2 class="section-title bg-applied">PHẦN 3: BÀI TẬP VẬN DỤNG (Liên hệ thực tế)</h2>
+    <div class="objective">Mục tiêu: Vận dụng kiến thức để giải thích các hiện tượng trong đời sống.</div>
+
+    <div class="question">
+        <h3>Câu 7: Hiện tượng mùi hương</h3>
+        <p>Khi mẹ mở một lọ nước hoa ở góc phòng, chỉ một lát sau cả phòng đều ngửi thấy mùi nước hoa thơm phức. Điều này thể hiện tính chất gì của chất ở thể khí?</p>
+    </div>
+
+    <div class="question">
+        <h3>Câu 8: Ứng dụng của sự nén</h3>
+        <p>Khi đi xe đạp, bánh xe của em bị non hơi. Em dùng bơm để bơm thêm không khí vào lốp xe cho tới khi lốp căng cứng lên. Việc ta có thể bơm thêm rất nhiều không khí vào trong một cái lốp xe đã chứng tỏ đặc điểm gì của chất khí?</p>
+    </div>
+
+    <div class="question">
+        <h3>Câu 9: Tình huống rót nước</h3>
+        <p>Có 3 chiếc cốc thủy tinh với hình dáng khác nhau: một chiếc cao ốm, một chiếc lùn phình to, và một chiếc hình tam giác. Cả 3 cốc đều chứa 150ml nước cam.</p>
+        <p>a) Bề mặt nước cam trong 3 cốc có nằm ngang giống nhau không?</p>
+        <p>b) Từ ví dụ này, em rút ra nhận xét gì về "hình dạng" của chất lỏng?</p>
+    </div>
+
+
+    <div class="teacher-section">
+        <input type="checkbox" id="toggle-answers" class="accordion-toggle">
+        <label for="toggle-answers" class="accordion-label">💡 NHẤN VÀO ĐÂY ĐỂ XEM HƯỚNG DẪN CHẤM & ĐÁP ÁN</label>
+        
+        <div class="accordion-content">
+            <div class="ans-section">
+                <h4>Phần 1: Cơ bản</h4>
+                <p><strong>Câu 1:</strong> 1.1 - C ; 1.2 - B</p>
+                <p><strong>Câu 2:</strong><br>
+                - a) Vật thể: <u>thân bút chì</u>, <u>ruột bút chì</u>. Chất: gỗ, cellulose, than chì, carbon.<br>
+                - b) Vật thể: <u>chiếc ấm</u>. Chất: nhôm.<br>
+                - c) Vật thể: <u>cơ thể người</u>. Chất: nước.</p>
+                <p><strong>Câu 3:</strong> (1) Không xác định (mang hình dạng vật chứa); (2) Không xác định; (3) Xác định; (4) Xác định; (5) Rất khó; (6) Khó; (7) Dễ.</p>
+            </div>
+
+            <div class="ans-section">
+                <h4>Phần 2: Nâng cao</h4>
+                <p><strong>Câu 4:</strong><br>
+                - Phát biểu 1: <strong>Sai</strong>. (Chất lỏng có thể tích xác định nhưng không có hình dạng xác định, mang hình dạng vật chứa).<br>
+                - Phát biểu 2: <strong>Đúng</strong>.<br>
+                - Phát biểu 3: <strong>Đúng</strong>.</p>
+                <p><strong>Câu 5:</strong> Vì ở thể hơi (khí), các hạt cấu tạo nên chất chuyển động tự do, khoảng cách giữa các hạt rất xa nhau làm thể tích hơi nước tăng lên rất nhiều so với thể lỏng.</p>
+                <p><strong>Câu 6:</strong> Gợi ý A: Thể lỏng. Gợi ý B: Thể rắn.</p>
+            </div>
+
+            <div class="ans-section">
+                <h4>Phần 3: Vận dụng</h4>
+                <p><strong>Câu 7:</strong> Thể hiện tính chất dễ dàng lan tỏa trong không gian theo mọi hướng của chất khí.</p>
+                <p><strong>Câu 8:</strong> Thể hiện tính chất rất dễ bị nén của chất khí. (Không khí bị nén chặt bên trong lốp xe).</p>
+                <p><strong>Câu 9:</strong><br>
+                - a) Bề mặt nước cam ở 3 cốc đều nằm ngang song song với mặt bàn.<br>
+                - b) Chất lỏng không có hình dạng cố định mà mang hình dạng của phần vật chứa nó.</p>
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align: center; color: #777; font-size: 14px; margin-top: 40px;">Chúc bạn và 2 em học sinh có một buổi học thật sinh động và hiệu quả!</p>
+
+</div>
+
+</body>
+</html>

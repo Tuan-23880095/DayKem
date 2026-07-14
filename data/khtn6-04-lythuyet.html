@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 4: Đo khối lượng và Đo nhiệt độ</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght=400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Cài đặt chung: Nền trắng, chữ đen */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tiêu đề chính nhiều màu sắc */
+        h1 {
+            color: #e11d48; /* Đỏ hồng */
+            text-align: center;
+            font-size: 2.2em;
+            border-bottom: 4px dashed #f43f5e;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Tiêu đề các phần */
+        h2 {
+            color: #1d4ed8; /* Xanh dương đậm */
+            background-color: #dbeafe; /* Nền xanh nhạt */
+            padding: 12px 20px;
+            border-left: 6px solid #2563eb;
+            border-radius: 0 8px 8px 0;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #047857; /* Xanh lá đậm */
+            border-bottom: 2px solid #34d399;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Các khối nội dung (Boxes) */
+        .theory-box {
+            background-color: #f0fdf4; /* Xanh lá cực nhạt */
+            border: 2px solid #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .example-box {
+            background-color: #fffbeb; /* Vàng cực nhạt */
+            border: 2px solid #f59e0b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .example-title {
+            font-weight: 800;
+            color: #d97706;
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background-color: #fdf2f8; /* Hồng nhạt */
+            border: 2px solid #ec4899;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.15);
+        }
+
+        /* Cấu trúc danh sách */
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Nhấn mạnh chữ */
+        .highlight {
+            color: #dc2626; /* Đỏ */
+            font-weight: bold;
+        }
+
+        .math-expr {
+            font-size: 1.1em;
+        }
+
+        /* Hình ảnh minh họa */
+        .illustration {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: block;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎯 Buổi 4: Đo khối lượng và Đo nhiệt độ</h1>
+
+    <img src="https://placehold.co/900x250/dbeafe/1d4ed8?text=Khoa+H%E1%BB%8Dc+T%E1%BB%B1+Nhi%C3%AAn+6:+Ph%C3%A9p+%C4%90o+Trong+D%E1%BB%9Bi+S%E1%BB%91ng&font=montserrat" alt="Hình ảnh minh họa Khoa học tự nhiên" class="illustration">
+
+    <h2>Phần 1: LÝ THUYẾT VỀ ĐO KHỐI LƯỢNG ⚖️</h2>
+
+    <div class="theory-box">
+        <h3>1. Khái niệm và Đơn vị đo khối lượng</h3>
+        <ul>
+            <li><strong>Khái niệm:</strong> Mọi vật đều có khối lượng. Khối lượng là số đo <span class="highlight">lượng chất</span> tạo thành một vật.</li>
+            <li><strong>Đơn vị đo:</strong> Đơn vị đo khối lượng trong hệ thống đo lường chính thức của nước ta là <strong>kilôgam</strong> (kilogram), kí hiệu là <strong>kg</strong>.</li>
+        </ul>
+        
+        <div class="example-box">
+            <div class="example-title">📝 Ví dụ minh họa:</div>
+            <p>Trên vỏ một hộp sữa có ghi <em>"Khối lượng tịnh: 380g"</em>, con số này có ý nghĩa là lượng sữa chứa bên trong hộp nặng đúng 380g.</p>
+        </div>
+
+        <p><strong>Bảng quy đổi các đơn vị đo khối lượng thường gặp:</strong></p>
+        <ul>
+            <li>1 tấn = 1000 kg</li>
+            <li>1 tạ = 100 kg</li>
+            <li>1 yến = 10 kg</li>
+            <li>1 kg = 1000 gam (g)</li>
+            <li>1 g = 1000 miligam (mg)</li>
+        </ul>
+    </div>
+
+    <div class="theory-box">
+        <h3>2. Dụng cụ đo khối lượng</h3>
+        <p>Người ta dùng <strong>cân</strong> để đo khối lượng. Tùy thuộc vào mục đích sử dụng, có rất nhiều loại cân khác nhau trong thực tế đời sống:</p>
+        <ul>
+            <li><strong>Cân đồng hồ:</strong> Thường dùng phổ biến ở chợ, cửa hàng.</li>
+            <li><strong>Cân điện tử:</strong> Cho độ chính xác cao, thường dùng ở siêu thị, phòng thí nghiệm.</li>
+            <li><strong>Cân y tế:</strong> Dùng để theo dõi sức khỏe con người.</li>
+            <li><strong>Cân Roberval (Cân đòn):</strong> Thường thấy trong các phòng thí nghiệm thế hệ trước hoặc hiệu thuốc y học cổ truyền.</li>
+        </ul>
+    </div>
+
+    <div class="theory-box">
+        <h3>3. Quy trình 5 bước để đo khối lượng chuẩn xác</h3>
+        <p>Để thực hiện một phép đo khối lượng chính xác, học sinh cần tuân thủ nghiêm ngặt theo các bước sau:</p>
+        <ol>
+            <li><strong>Bước 1:</strong> Ước lượng khối lượng vật cần đo để chọn dụng cụ phù hợp.</li>
+            <li><strong>Bước 2:</strong> Chọn cân có Giới hạn đo (GHĐ) và Độ chia nhỏ nhất (ĐCNN) phù hợp với vật.</li>
+            <li><strong>Bước 3:</strong> <span class="highlight">Hiệu chỉnh cân</span> đúng cách trước khi đo (ví dụ: vặn ốc điều chỉnh để kim chỉ về đúng vạch số 0).</li>
+            <li><strong>Bước 4:</strong> Đặt vật lên đĩa cân hoặc treo vật vào móc cân một cách cân đối.</li>
+            <li><strong>Bước 5:</strong> Đọc và ghi kết quả mỗi lần đo theo vạch chia gần nhất với vị trí đầu kim (hoặc số hiển thị trên màn hình điện tử) của cân.</li>
+        </ol>
+    </div>
+
+    <img src="https://placehold.co/900x200/fef3c7/b45309?text=Ph%E1%BA%A7n+2:+L%C3%BD+Thuy%E1%BA%BFt+V%E1%BB%81+%C4%90o+Nhi%E1%BB%87t+%C4%90%E1%BB%99&font=montserrat" alt="Minh họa phần Đo nhiệt độ" class="illustration">
+
+    <h2>Phần 2: LÝ THUYẾT VỀ ĐO NHIỆT ĐỘ 🌡️</h2>
+
+    <div class="theory-box">
+        <h3>1. Khái niệm và Đơn vị đo nhiệt độ</h3>
+        <ul>
+            <li><strong>Khái niệm:</strong> Nhiệt độ là số đo độ <span class="highlight">"nóng", "lạnh"</span> của vật. Vật nóng hơn sẽ có nhiệt độ cao hơn, vật lạnh hơn có nhiệt độ thấp hơn.</li>
+            <li><strong>Đơn vị đo:</strong> 
+                <ul>
+                    <li>Đơn vị đo nhiệt độ thường dùng trong đời sống hằng ngày ở Việt Nam là <strong>độ C</strong> (Celsius), kí hiệu là <strong>°C</strong>.</li>
+                    <li><span class="highlight">Mở rộng:</span> Trong hệ đo lường quốc tế SI, đơn vị đo nhiệt độ là <strong>Kelvin</strong>, kí hiệu là <strong>K</strong>.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="theory-box">
+        <h3>2. Dụng cụ và Nguyên tắc hoạt động</h3>
+        <ul>
+            <li><strong>Dụng cụ đo:</strong> Dụng cụ dùng để đo nhiệt độ được gọi là <strong>nhiệt kế</strong>.</li>
+            <li><strong>Phân loại các loại nhiệt kế phổ biến:</strong> Nhiệt kế y tế (thủy ngân), nhiệt kế điện tử, nhiệt kế hồng ngoại, nhiệt kế rượu.</li>
+            <li><strong>Nguyên tắc hoạt động:</strong> Đa số các nhiệt kế thường dùng (chứa chất lỏng) hoạt động dựa trên <span class="highlight">hiện tượng dãn nở vì nhiệt của chất lỏng</span> (chất lỏng sẽ nở ra, dâng lên khi nóng lên và co lại, hạ xuống khi lạnh đi).</li>
+        </ul>
+    </div>
+
+    <div class="theory-box">
+        <h3>3. Quy trình 5 bước để đo nhiệt độ chuẩn xác</h3>
+        <ol>
+            <li><strong>Bước 1:</strong> Ước lượng nhiệt độ của vật cần đo.</li>
+            <li><strong>Bước 2:</strong> Chọn nhiệt kế có thang đo và giới hạn đo phù hợp.</li>
+            <li><strong>Bước 3:</strong> Hiệu chỉnh nhiệt kế đúng cách trước khi tiến hành phép đo.</li>
+            <li><strong>Bước 4:</strong> Thực hiện phép đo (đặt bầu nhiệt kế tiếp xúc trực tiếp và chặt với vật cần đo nhiệt độ).</li>
+            <li><strong>Bước 5:</strong> Đọc và ghi kết quả hiển thị trên nhiệt kế mỗi lần đo.</li>
+        </ol>
+    </div>
+
+    <div class="tip-box">
+        <h3 style="color: #be185d; border-bottom: none; margin-top: 0;">💡 Lời khuyên sư phạm và Lưu ý an toàn khi giảng dạy:</h3>
+        <p>Khi giảng dạy về nội dung đo nhiệt độ, giáo viên cần đặc biệt lưu ý học sinh thao tác với <strong>nhiệt kế y tế thủy ngân</strong>:</p>
+        <ul>
+            <li>Trước khi đo, cần cầm chắc phần thân nhiệt kế và <span class="highlight">vẩy mạnh</span> để cột thủy ngân tụt xuống dưới vạch 35°C.</li>
+            <li>Thủy ngân bên trong nhiệt kế là một kim loại rất độc hại. Giáo viên cần nhắc nhở học sinh tuyệt đối cẩn thận, không làm rơi vỡ nhiệt kế. Nếu chẳng may làm vỡ, phải báo ngay cho người lớn và không được dùng tay không chạm vào các hạt thủy ngân rơi vãi.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

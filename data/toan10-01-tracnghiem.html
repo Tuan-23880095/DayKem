@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toán 10 - Buổi 1: Mệnh đề và Mệnh đề chứa biến</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+              typeset: false 
+            }
+          };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-gray-100 font-sans h-screen flex flex-col">
+
+    <header class="bg-orange-500 text-white text-center p-4 shadow-md">
+        <h1 class="text-2xl font-bold">🍕 ĐẤU TRƯỜNG TOÁN HỌC - Toan 10 - BUỔI 1 🍕</h1>
+        <p class="text-sm">Chủ đề: Mệnh đề toán học. Khái niệm mệnh đề, mệnh đề chứa biến, phủ định của một mệnh đề, mệnh đề kéo theo và mệnh đề tương đương</p>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-3xl">
+        
+        <div id="login-screen" class="bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-xl font-bold mb-4">Nhập tên để bắt đầu cuộc đua</h2>
+            <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <button onclick="startQuiz()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full">
+                VÀO PHẦN 1 VÀ TÍNH GIỜ
+            </button>
+        </div>
+
+        <div id="quiz-screen" class="hidden bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <div>
+                    <span class="font-bold text-lg block text-gray-700" id="display-name"></span>
+                    <span class="font-bold text-2xl text-orange-600" id="section-title">PHẦN 1: KHỞI ĐỘNG</span>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-red-500 text-2xl">⏱ <span id="timer">0</span>s</span>
+                </div>
+            </div>
+            
+            <div id="questions-container" class="space-y-6 mt-4"></div>
+
+            <button onclick="submitSection()" class="mt-8 bg-green-500 text-white font-bold py-3 px-6 rounded hover:bg-green-600 transition duration-300 w-full text-lg">
+                NỘP BÀI <span id="btn-submit-text">PHẦN 1</span>
+            </button>
+        </div>
+
+        <div id="break-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-2xl font-bold mb-4 text-blue-600" id="break-title">Hoàn thành Phần 1!</h2>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                <p class="text-lg">Điểm phần này: <span id="section-score" class="font-bold text-xl text-green-600"></span>/70</p>
+                <p class="text-lg">Thời gian chặng: <span id="section-time" class="font-bold text-xl text-red-500"></span> giây</p>
+            </div>
+            <button onclick="nextSection()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full text-lg shadow-md">
+                TIẾP TỤC CHIẾN ĐẤU 🚀
+            </button>
+        </div>
+
+        <div id="result-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10 border-t-8 border-orange-500">
+            <h2 class="text-3xl font-bold mb-4 text-green-600">🎉 ĐÃ HOÀN THÀNH 3 CHẶNG! 🎉</h2>
+            <div class="bg-gray-100 p-4 rounded mb-6 text-left inline-block w-full max-w-sm">
+                <p class="mb-2">🔹 Điểm Phần 1: <span id="res-p1" class="font-bold"></span></p>
+                <p class="mb-2">🔹 Điểm Phần 2: <span id="res-p2" class="font-bold"></span></p>
+                <p class="mb-2 border-b pb-2">🔹 Điểm Phần 3: <span id="res-p3" class="font-bold"></span></p>
+                <p class="text-xl mt-2 text-green-700">🏆 TỔNG ĐIỂM: <span id="final-score" class="font-bold text-2xl"></span>/210</p>
+                <p class="text-xl mt-2 text-red-600">⏱ TỔNG THỜI GIAN: <span id="final-time" class="font-bold text-2xl"></span>s</p>
+            </div>
+            
+            <p class="text-md font-bold text-gray-700 mb-4" id="status-msg">Đang tổng hợp dữ liệu gửi về hệ thống thầy giáo...</p>
+        </div>
+
+    </main>
+
+    <script>
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
+
+        const questions = [
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 1: Câu nào sau đây là mệnh đề toán học?",
+                "options": [
+                  "$x$ là số nguyên tố.",
+                  "Chủ nhật là ngày nghỉ.",
+                  "Hôm nay có tiết toán không?",
+                  "$3$ là số nguyên tố."
+                ],
+                "correct": "$3$ là số nguyên tố."
+              },
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 2: Câu nào sau đây là mệnh đề chứa biến?",
+                "options": [
+                  "$x + y = 5$.",
+                  "$4$ là số chính phương.",
+                  "Học toán rất khó!",
+                  "Mệnh đề là gì?"
+                ],
+                "correct": "$x + y = 5$."
+              },
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 3: Phủ định của mệnh đề “$\\exists x \\in \\mathbb{R}, 5x-3x^2=1$” là mệnh đề nào sau đây?",
+                "options": [
+                  "$\\exists x \\in \\mathbb{R}, 5x-3x^2 \\neq 1$.",
+                  "$\\forall x \\in \\mathbb{R}, 5x-3x^2 \\neq 1$.",
+                  "$\\forall x \\in \\mathbb{R}, 5x-3x^2=1$.",
+                  "$\\exists x \\in \\mathbb{R}, 5x-3x^2 \\ge 1$."
+                ],
+                "correct": "$\\forall x \\in \\mathbb{R}, 5x-3x^2 \\neq 1$."
+              },
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 4: Cho mệnh đề $P \\Rightarrow Q$ là mệnh đề đúng. Phát biểu nào sau đây không đúng?",
+                "options": [
+                  "$P$ là điều kiện đủ để có $Q$.",
+                  "Nếu $P$ thì $Q$.",
+                  "$P$ là điều kiện cần và đủ để có $Q$.",
+                  "$Q$ là điều kiện cần để có $P$."
+                ],
+                "correct": "$P$ là điều kiện cần và đủ để có $Q$."
+              },
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 5: Cho mệnh đề: \"Nếu một số nguyên chia hết cho 6 thì số nguyên đó chia hết cho 3\". Trong các mệnh đề sau đây, đâu là mệnh đề đảo của mệnh đề trên?",
+                "options": [
+                  "\"Nếu một số nguyên không chia hết cho 6 thì số nguyên đó không chia hết cho 3\".",
+                  "\"Nếu một số nguyên không chia hết cho 3 thì số nguyên đó chia hết cho 6\".",
+                  "\"Nếu một số nguyên chia hết cho 3 thì số nguyên đó chia hết cho 6\".",
+                  "\"Nếu một số nguyên chia hết cho 3 thì số nguyên đó không chia hết cho 6\"."
+                ],
+                "correct": "\"Nếu một số nguyên chia hết cho 3 thì số nguyên đó chia hết cho 6\"."
+              },
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 6: Trong các mệnh đề sau, mệnh đề nào là phát biểu của mệnh đề tương đương $P \\Leftrightarrow Q$?",
+                "options": [
+                  "Nếu một tam giác là tam giác cân thì tam giác đó có hai cạnh bằng nhau.",
+                  "Một tam giác là tam giác cân khi và chỉ khi nó có hai cạnh bằng nhau.",
+                  "Nếu tam giác có hai cạnh bằng nhau thì tam giác đó không là tam giác cân.",
+                  "Tam giác là tam giác cân nếu tam giác đó có hai cạnh bằng nhau."
+                ],
+                "correct": "Một tam giác là tam giác cân khi và chỉ khi nó có hai cạnh bằng nhau."
+              },
+              {
+                "type": "trac-nghiem",
+                "question": "Câu 7: Mệnh đề phủ định của mệnh đề “Phương trình $x^2+3x+2=0$ có nghiệm” là:",
+                "options": [
+                  "Phương trình $x^2+3x+2=0$ có nghiệm.",
+                  "Phương trình $x^2+3x+2=0$ có vô số nghiệm.",
+                  "Phương trình $x^2+3x+2=0$ có hai nghiệm phân biệt.",
+                  "Phương trình $x^2+3x+2=0$ vô nghiệm."
+                ],
+                "correct": "Phương trình $x^2+3x+2=0$ vô nghiệm."
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 8: Nếu $\\pi < 3$ thì $\\pi^2 < 9$.",
+                "correct": "Đúng"
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 9: Nếu $a$ chia hết cho $9$ thì $a$ chia hết cho $3$.",
+                "correct": "Đúng"
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 10: Nếu một tam giác có một góc bằng $60^\\circ$ thì tam giác đó là tam giác đều.",
+                "correct": "Sai"
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 11: Nếu hai số $a$ và $b$ cùng chia hết cho $c$ thì $a+b$ chia hết cho $c$.",
+                "correct": "Đúng"
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 12: Mệnh đề $P$: \"$\\sqrt{2}$ là số chính phương\" có mệnh đề phủ định là $\\overline{P}$: \"$\\sqrt{2}$ không là số chính phương\".",
+                "correct": "Đúng"
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 13: $6$ không là số nguyên tố.",
+                "correct": "Đúng"
+              },
+              {
+                "type": "dung-sai",
+                "question": "Câu 14: $\\sqrt{2}$ là số hữu tỉ.",
+                "correct": "Sai"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 15: Có bao nhiêu số nguyên $x$ để mệnh đề chứa biến $P(x): \"x^2-5x+4=0\"$ là mệnh đề đúng?",
+                "correct": "2"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 16: Cho mệnh đề chứa biến $P(x): \"x^2 - 5x + 6 = 0\"$. Gọi $S$ là tập hợp tất cả các số tự nhiên $x$ làm cho mệnh đề $P(x)$ đúng. Tính tổng tất cả các phần tử của tập hợp $S$.",
+                "correct": "5"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 17: Có bao nhiêu mệnh đề đúng trong các mệnh đề sau?\n- “Phương trình $x^2-3x+2=0$ có nghiệm nguyên”.\n- “Có duy nhất một số nguyên tố chẵn”.\n- “$\\forall x \\in \\mathbb{R}, x^2+1 > 0$”.",
+                "correct": "3"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 18: Có bao nhiêu mệnh đề đúng trong các câu dưới đây?\na) $\\sqrt{2}$ là số lẻ.\nb) Tích của hai số lẻ là một số lẻ.\nc) Có một số thực mà bình phương là số âm.\nd) Mọi số nguyên dương đều có bình phương lớn hơn hoặc bằng $1$.",
+                "correct": "2"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 19: Cho mệnh đề $P$: “Bình phương của một số thực lớn hơn $0$”. Hỏi có bao nhiêu số nguyên thỏa mãn mệnh đề phủ định của mệnh đề $P$?",
+                "correct": "1"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 20: Tính số mệnh đề đúng trong các mệnh đề sau: $2^3 = 8$; $3 < 2$; $15$ chia hết cho $3$.",
+                "correct": "2"
+              },
+              {
+                "type": "tra-loi-ngan",
+                "question": "Câu 21: Có bao nhiêu mệnh đề trong các mệnh đề sau mà mệnh đề đảo của nó là mệnh đề đúng?\nA. Nếu $a$ và $b$ cùng chia hết cho $c$ thì $a+b$ chia hết cho $c$.\nB. Nếu $a > b$ thì $a^2 > b^2$.\nC. Nếu số nguyên chia hết cho $14$ thì chia hết cho cả $2$ và $7$.\nD. Hai tam giác bằng nhau có diện tích bằng nhau.",
+                "correct": "1"
+              }
+            ];
+
+        let studentName = "";
+        let currentSection = 1; 
+        let startTime;
+        let timerInterval;
+        
+        let scores = [0, 0, 0];
+        let times = [0, 0, 0];
+
+        function startQuiz() {
+            studentName = document.getElementById("studentName").value.trim();
+            if (!studentName) {
+                alert("Em quên nhập tên rồi kìa!");
+                return;
+            }
+
+            document.getElementById("login-screen").classList.add("hidden");
+            document.getElementById("display-name").innerText = "Học sinh: " + studentName;
+            
+            loadSection(currentSection);
+        }
+
+        function loadSection(sectionNum) {
+            document.getElementById("section-title").innerText = `PHẦN ${sectionNum}: ${sectionNum === 1 ? 'TRẮC NGHIỆM BỐN LỰA CHỌN' : (sectionNum === 2 ? 'NHẬN THỨC ĐÚNG / SAI' : 'ĐIỀN ĐÁP ÁN NGẮN')}`;
+            document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
+
+            const container = document.getElementById("questions-container");
+            container.innerHTML = ""; 
+
+            const startIndex = (sectionNum - 1) * 7;
+            const endIndex = sectionNum * 7;
+
+            let allHtml = ""; 
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break; 
+
+                let q = questions[i];
+                let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
+                
+                if (q.type === "trac-nghiem") {
+                    q.options.forEach(opt => {
+                        html += `<label class="block mb-2 cursor-pointer hover:bg-orange-100 p-2 rounded transition"><input type="radio" name="q${i}" value="${opt}" class="mr-2 w-4 h-4 text-orange-500"> <span class="text-md">${opt}</span></label>`;
+                    });
+                } else if (q.type === "tra-loi-ngan") {
+                    html += `<input type="text" id="q${i}" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-orange-500 outline-none font-bold text-blue-700" placeholder="Nhập đáp án số của bạn...">`;
+                } else if (q.type === "dung-sai") {
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-green-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Đúng" class="mr-2 w-4 h-4"> <span class="font-bold text-green-700">Đúng [Đ]</span></label>`;
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4"> <span class="font-bold text-red-700">Sai [S]</span></label>`;
+                }
+                html += `</div>`;
+                
+                allHtml += html; 
+            }            
+
+            container.innerHTML = allHtml;
+
+            if (window.MathJax) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]);
+            }
+
+            document.getElementById("break-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            window.scrollTo(0, 0);
+
+            if(timerInterval) clearInterval(timerInterval); 
+            document.getElementById("timer").innerText = "0";
+            startTime = Date.now();
+            
+            timerInterval = setInterval(() => {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer").innerText = elapsedTime;
+            }, 1000);
+        }
+
+        function submitSection() {
+            if (!confirm(`Em có chắc muốn nộp bài Chặng ${currentSection} không? Hãy soát kĩ các dấu ngoặc và đơn vị nhé!`)) return;
+
+            clearInterval(timerInterval);
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            times[currentSection - 1] = timeTaken;
+
+            let score = 0;
+            const startIndex = (currentSection - 1) * 7;
+            const endIndex = currentSection * 7;
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break;
+                let q = questions[i];
+
+                if (q.type === "trac-nghiem" || q.type === "dung-sai") {
+                    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (selected && selected.value.trim().toLowerCase() === q.correct.trim().toLowerCase()) score += 10;
+                } else if (q.type === "tra-loi-ngan") {
+                    const answerInput = document.getElementById(`q${i}`);
+                    if(answerInput) {
+                        let answer = answerInput.value.trim().toLowerCase().replace(/,/g, '.');
+                        let correctAns = q.correct.toLowerCase().replace(/,/g, '.');
+                        if (answer === correctAns) score += 10;
+                    }
+                }
+            }
+            scores[currentSection - 1] = score;
+
+            document.getElementById("quiz-screen").classList.add("hidden");
+
+            if (currentSection < 3) {
+                document.getElementById("break-title").innerText = `Đã hoàn thành xuất sắc Chặng ${currentSection}!`;
+                document.getElementById("section-score").innerText = score;
+                document.getElementById("section-time").innerText = timeTaken;
+                document.getElementById("break-screen").classList.remove("hidden");
+            } else {
+                calculateFinalResult();
+            }
+        }
+
+        function nextSection() {
+            currentSection++; 
+            loadSection(currentSection);
+        }
+
+        function calculateFinalResult() {
+            const totalScore = scores.reduce((a, b) => a + b, 0);
+            const totalTime = times.reduce((a, b) => a + b, 0);
+
+            document.getElementById("res-p1").innerText = `${scores[0]}/70 (${times[0]}s)`;
+            document.getElementById("res-p2").innerText = `${scores[1]/70} (${times[1]}s)`;
+            document.getElementById("res-p3").innerText = `${scores[2]/70} (${times[2]}s)`;
+            
+            document.getElementById("final-score").innerText = totalScore;
+            document.getElementById("final-time").innerText = totalTime;
+
+            document.getElementById("result-screen").classList.remove("hidden");
+
+            sendDataToSheet(studentName, totalScore, totalTime);
+        }
+
+        function sendDataToSheet(name, totalScore, totalTime) {
+            const payload = {
+                action: "save_toan_pizza", 
+                hoTen: name + " - Buổi 5",
+                diem: totalScore,
+                thoiGian: totalTime
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.getElementById("status-msg").innerHTML = "✅ Điểm thi Buổi 5 đã lưu thành công! Đang chờ Thầy duyệt bảng xếp hạng Pizza.";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-green-600");
+            })
+            .catch(error => {
+                document.getElementById("status-msg").innerText = "❌ Lỗi mạng cục bộ! Em hãy chụp màn hình bảng điểm này gửi ngay cho Thầy nhé!";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-red-600");
+            });
+        }
+    </script>
+</body>
+</html>

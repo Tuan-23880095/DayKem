@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài Giảng Buổi 1: Mệnh Đề Toán Học - Toán 10</title>
+  
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/light-4fded0090af0ad58.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/dark-06381ff23d863842.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-primitives-b39ad27f3538ace3.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-tailwind-compatible-b8351ad34be13af4.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/github-eab9c5888b163e42.css" />
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: var(--color-canvas-default);
+      color: var(--color-fg-default);
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* KHẮC PHỤC LỖI PC: Giới hạn độ rộng nội dung và nâng font-size tiêu chuẩn cho PC */
+    .lecture-container {
+      max-width: 840px; /* Độ rộng tối ưu cho mắt đọc trên PC không bị mỏi */
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* Đảm bảo toàn bộ nội dung thừa hưởng tỷ lệ hiển thị bài viết chuẩn của GitHub */
+    .markdown-body {
+      font-size: 16px; /* Kích thước chữ cơ sở chuẩn trên PC */
+      line-height: 1.7;
+    }
+
+    /* Tối ưu hiển thị responsive cho các thiết bị di động nhỏ hơn 767px */
+    @media (max-width: 767px) {
+      .lecture-container {
+        padding: 16px 12px;
+      }
+      .markdown-body {
+        font-size: 15px; /* Giảm nhẹ 1px trên mobile để giao diện gọn gàng */
+      }
+      .h1 { font-size: 24px !important; }
+      .h2 { font-size: 20px !important; }
+    }
+
+    /* Các thành phần bổ trợ cho bài giảng */
+    .timeline-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      background-color: var(--color-accent-subtle);
+      color: var(--color-accent-fg);
+      margin-bottom: 12px;
+    }
+    .math {
+      font-family: "Times New Roman", Times, serif;
+      font-style: italic;
+      font-weight: bold;
+      color: var(--color-danger-fg);
+      padding: 0 4px;
+      font-size: 1.1em; /* Kích cỡ công thức toán lớn hơn chữ thường một chút */
+    }
+    .box-note {
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 24px;
+      background-color: var(--color-canvas-subtle);
+    }
+    .box-core {
+      border-left: 5px solid var(--color-accent-purple);
+      background-color: var(--color-attention-subtle);
+    }
+    .box-break {
+      border: 2px dashed var(--color-success-border);
+      background-color: var(--color-success-subtle);
+      text-align: center;
+      padding: 24px;
+      border-radius: 8px;
+      margin: 32px 0;
+    }
+    .badge-status {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+    .badge-true { background-color: var(--color-success-subtle); color: var(--color-success-fg); }
+    .badge-false { background-color: var(--color-danger-subtle); color: var(--color-danger-fg); }
+    .badge-none { background-color: var(--color-neutral-subtle); color: var(--color-fg-muted); }
+  </style>
+</head>
+
+<body>
+  <div class="lecture-container markdown-body">
+    
+    <header class="pb-3 mb-4 border-bottom text-center">
+      <h1 class="h1 color-fg-accent mb-2" style="font-size: 32px; font-weight: 800;">NỘI DUNG BÀI GIẢNG CHI TIẾT</h1>
+      <p class="color-fg-muted text-italic mb-0">Môn: Toán 10 — Chương I: Mệnh Đề và Tập Hợp</p>
+    </header>
+
+    <main>
+      <section class="mb-5">
+        <div class="timeline-badge">18h00 - 18h40</div>
+        <h2 class="h2 color-fg-default mb-3 border-bottom pb-1">Phần 1: Mệnh đề toán học và Mệnh đề chứa biến</h2>
+        
+        <div class="box-note box-core">
+          <h3 class="h4 mb-2 color-fg-attention" style="margin-top: 0;">💡 Quy tắc cốt lõi:</h3>
+          <p class="mb-0" style="font-size: 17px;">Mỗi mệnh đề toán học phải <strong>hoặc đúng hoặc sai</strong>. Một mệnh đề toán học không thể vừa đúng, vừa sai.</p>
+        </div>
+
+        <h3 class="h4 mb-2">1. Khái niệm mệnh đề toán học là gì?</h3>
+        <p>Một khẳng định đúng gọi là <em>mệnh đề đúng</em>, một khẳng định sai gọi là <em>mệnh đề sai</em>.</p>
+        <p class="color-fg-muted text-italic">⚠️ Chú ý: Những câu cảm thán ("Trời ơi, nóng quá!"), câu hỏi hay câu mệnh lệnh sẽ không phải là mệnh đề vì chúng không xác định được tính đúng sai.</p>
+
+        <div class="box-note">
+          <h4 class="h5 mb-3 color-fg-success" style="margin-top: 0;">📌 Ví dụ trực quan cho học sinh:</h4>
+          <ul class="pl-3 mb-0" style="list-style-type: square;">
+            <li class="mb-2"><strong>Câu A:</strong> "Số 15 chia hết cho 2" <span class="badge-status badge-false">Mệnh đề SAI</span></li>
+            <li class="mb-2"><strong>Câu B:</strong> "Hà Nội là thủ đô của Việt Nam" <span class="badge-status badge-true">Mệnh đề ĐÚNG</span></li>
+            <li class="mb-0"><strong>Câu C:</strong> "Bạn đã làm bài tập chưa?" <span class="badge-status badge-none">KHÔNG PHẢI mệnh đề</span></li>
+          </ul>
+        </div>
+
+        <h3 class="h4 mb-2">2. Mệnh đề chứa biến</h3>
+        <p>Đôi khi các em sẽ gặp những câu khẳng định mà tính đúng sai của nó phụ thuộc vào một biến số.</p>
+        <p><strong>Ví dụ:</strong> Xét câu "n chia hết cho 5" (với <span class="math">n</span> là số tự nhiên). Bản thân câu này chưa thể biết đúng hay sai.</p>
+        <ul class="pl-3 mb-3">
+          <li class="mb-1">Nếu thay <span class="math">n = 10</span>, ta được câu "10 chia hết cho 5" → <span class="badge-status badge-true">Mệnh đề ĐÚNG</span></li>
+          <li class="mb-0">Nếu thay <span class="math">n = 11</span>, ta được câu "11 chia hết cho 5" → <span class="badge-status badge-false">Mệnh đề SAI</span></li>
+        </ul>
+        <p class="Box-body border-left-3 color-border-accent pl-3 text-italic bg-canvas-subtle p-2" style="border-radius: 0 6px 6px 0;">
+          <strong>Kết luận:</strong> Mệnh đề chứa biến chưa phải là mệnh đề, nhưng khi thay biến bởi một giá trị cụ thể thì nó trở thành một mệnh đề.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <div class="timeline-badge">18h40 - 19h10</div>
+        <h2 class="h2 color-fg-default mb-3 border-bottom pb-1">Phần 2: Phủ định của một mệnh đề</h2>
+        <p>Để phủ định một mệnh đề <span class="math">P</span>, ta thường thêm (hoặc bớt) từ "không" hoặc "không phải" vào trước vị ngữ của mệnh đề đó. Mệnh đề phủ định của <span class="math">P</span> được kí hiệu là <span class="math">P̄</span>.</p>
+        
+        <div class="box-note box-core">
+          <h3 class="h4 mb-2 color-fg-severe" style="margin-top: 0;">⚖️ Tính đúng sai:</h3>
+          <p class="mb-0">Mệnh đề <span class="math">P̄</span> đúng khi <span class="math">P</span> sai, và <span class="math">P̄</span> sai khi <span class="math">P</span> đúng. Hai mệnh đề này có tính đúng sai trái ngược nhau.</p>
+        </div>
+
+        <div class="box-note">
+          <h4 class="h5 mb-2" style="margin-top: 0;">📌 Ví dụ minh họa:</h4>
+          <p class="mb-2"><strong>Cặp ví dụ 1:</strong></p>
+          <ul class="pl-3 mb-3">
+            <li class="mb-1">Mệnh đề <span class="math">P</span>: "Trái Đất là trung tâm của hệ Mặt Trời" <span class="badge-status badge-false">Mệnh đề SAI</span></li>
+            <li>Mệnh đề phủ định <span class="math">P̄</span>: "Trái Đất không phải là trung tâm của hệ Mặt Trời" <span class="badge-status badge-true">Mệnh đề ĐÚNG</span></li>
+          </ul>
+          
+          <p class="mb-2"><strong>Cặp ví dụ 2:</strong></p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">Mệnh đề <span class="math">Q</span>: "2<sup>2</sup> + 2<sup>3</sup> = 2<sup>2+3</sup>"</li>
+            <li>Mệnh đề phủ định <span class="math">Q̄</span>: "2<sup>2</sup> + 2<sup>3</sup> ≠ 2<sup>2+3</sup>"</li>
+          </ul>
+        </div>
+        <p class="text-italic color-fg-accent font-semibold bg-accent-subtle p-2 pl-3" style="border-radius: 6px;">👨‍🏫 [Lời thoại lớp học]: Lúc này thầy sẽ gọi 2-3 bạn đứng lên lấy ví dụ về mệnh đề phủ định để đảm bảo lớp hiểu bài trước khi nghỉ giải lao.</p>
+      </section>
+
+      <div class="box-break">
+        <h3 class="h3 color-fg-success m-0" style="font-size: 22px; font-weight: 700;">🍉 19h10 - 19h25: NGHỈ GIẢI LAO 🍉</h3>
+        <p class="mb-0 text-small color-fg-muted mt-2">Các em thư giãn, uống nước rồi quay lại chiến đấu với phần quan trọng nhất nhé!</p>
+      </div>
+
+      <section class="mb-5">
+        <div class="timeline-badge">19h25 - 20h15</div>
+        <h2 class="h2 color-fg-default mb-3 border-bottom pb-1">Phần 3: Mệnh đề kéo theo và Mệnh đề tương đương</h2>
+        <p class="flash flash-error mb-3 p-2">🔥 <strong>Lưu ý từ thầy:</strong> Đây là phần lý thuyết xương sống của chương trình, các em tập trung cao độ nhé!</p>
+
+        <h3 class="h4 mb-2">1. Mệnh đề kéo theo</h3>
+        <p>Mệnh đề có dạng "Nếu <span class="math">P</span> thì <span class="math">Q</span>" được gọi là mệnh đề kéo theo, kí hiệu là <span class="math">P ⇒ Q</span>.</p>
+        <p><strong>Tính đúng sai:</strong> Mệnh đề <span class="math">P ⇒ Q</span> chỉ <strong>SAI</strong> trong trường hợp duy nhất: <span class="math">P</span> đúng và <span class="math">Q</span> sai. Các trường hợp còn lại mệnh đề đều đúng.</p>
+        
+        <div class="box-note box-core">
+          <h4 class="h5 mb-2 color-fg-attention" style="margin-top: 0;">⚡ Thuật ngữ quan trọng khi làm bài tập (Định lí <span class="math">P ⇒ Q</span>):</h4>
+          <ul class="pl-3 mb-2">
+            <li class="mb-1"><span class="math">P</span> là <strong>giả thiết</strong>, <span class="math">Q</span> là <strong>kết luận</strong>.</li>
+            <li class="mb-1"><span class="math">P</span> là <strong>điều kiện đủ</strong> để có <span class="math">Q</span>.</li>
+            <li class="mb-0"><span class="math">Q</span> là <strong>điều kiện cần</strong> để có <span class="math">P</span>.</li>
+          </ul>
+          <p class="mb-0 text-italic color-fg-purple font-semibold mt-2 pt-2 border-top">💡 Mẹo nhớ nhanh: Nếu có P thì ĐỦ để suy ra Q; nhưng để có P thì trước hết CẦN phải thỏa mãn Q.</p>
+        </div>
+
+        <h3 class="h4 mb-2">2. Mệnh đề đảo và Mệnh đề tương đương</h3>
+        <p>Mệnh đề <span class="math">Q ⇒ P</span> được gọi là <strong>mệnh đề đảo</strong> của mệnh đề <span class="math">P ⇒ Q</span>.</p>
+        <p>Nếu cả hai mệnh đề <span class="math">P ⇒ Q</span> và <span class="math">Q ⇒ P</span> đều đúng thì ta nói <span class="math">P</span> và <span class="math">Q</span> là hai <strong>mệnh đề tương đương</strong>, kí hiệu là <span class="math">P ⇔ Q</span>.</p>
+        <p><strong>Khi đó ta phát biểu:</strong> "P tương đương Q", hoặc "P khi và chỉ khi Q", hoặc "P là điều kiện cần và đủ để có Q".</p>
+
+        <div class="box-note">
+          <p class="mb-2"><strong>Ví dụ điển hình:</strong> Cho tam giác ABC.</p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">Mệnh đề <span class="math">P</span>: "Tam giác ABC là tam giác đều".</li>
+            <li>Mệnh đề <span class="math">Q</span>: "Tam giác ABC có 3 góc bằng 60°".</li>
+          </ul>
+          <p class="mt-2 mb-0 text-success font-semibold border-top pt-2">Rõ ràng P ⇒ Q đúng và Q ⇒ P cũng đúng. Ta viết gọn: <span class="math">P ⇔ Q</span>.</p>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <div class="timeline-badge">20h15 - 20h40</div>
+        <h2 class="h2 color-fg-default mb-3 border-bottom pb-1">Phần 4: Luyện tập tổng hợp</h2>
+        <p class="color-fg-muted text-italic mb-3">Thầy cho lớp làm nhanh các bài tập trắc nghiệm và tự luận ngắn để kiểm tra độ hiểu bài:</p>
+
+        <div class="Box mb-3 p-3">
+          <h4 class="h5 mb-2 color-fg-accent" style="margin-top: 0;">Bài 1: Câu nào sau đây là mệnh đề?</h4>
+          <p class="mb-1">a) <span class="math">2 + 2 = 5</span>.</p>
+          <p class="mb-2">b) "Bạn đã làm bài tập chưa?".</p>
+          <p class="mb-0 text-small color-fg-success font-semibold">🔑 Đáp án: Khẳng định a là mệnh đề (và là mệnh đề sai), câu b không phải mệnh đề.</p>
+        </div>
+
+        <div class="Box mb-3 p-3">
+          <h4 class="h5 mb-2 color-fg-accent" style="margin-top: 0;">Bài 2: Xét tính đúng sai và lập mệnh đề phủ định của mệnh đề:</h4>
+          <p class="mb-2">Mệnh đề <span class="math">P</span>: "Số 2025 chia hết cho 15".</p>
+          <div class="p-2 text-left bg-canvas-subtle border-left-3 color-border-success" style="border-radius: 0 4px 4px 0;">
+            <p class="mb-1"><strong>Hướng dẫn học sinh làm:</strong></p>
+            <ul class="pl-3 mb-0 text-small">
+              <li><span class="math">P</span> là mệnh đề <span class="badge-status badge-true">ĐÚNG</span>.</li>
+              <li>Mệnh đề phủ định <span class="math">P̄</span>: "Số 2025 không chia hết cho 15" và <span class="math">P̄</span> là mệnh đề <span class="badge-status badge-false">SAI</span>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="Box mb-3 p-3">
+          <h4 class="h5 mb-2 color-fg-accent" style="margin-top: 0;">Bài 3: Sử dụng thuật ngữ "điều kiện cần" hoặc "điều kiện đủ" để phát biểu lại:</h4>
+          <p class="mb-2">"Nếu một tứ giác là hình vuông thì tứ giác đó có 4 góc vuông".</p>
+          <p class="mb-0 text-small color-fg-attention font-semibold">💡 Gợi ý làm bài: Tứ giác là hình vuông là điều kiện đủ để tứ giác đó có 4 góc vuông.</p>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <div class="timeline-badge">20h40 - 20h50</div>
+        <h2 class="h2 color-fg-default mb-3 border-bottom pb-1">Phần 5: Tổng kết và giao bài tập</h2>
+        
+        <div class="Box p-3 bg-canvas-subtle mb-3">
+          <h4 class="h5 mb-2 text-uppercase color-fg-danger" style="margin-top: 0;">📌 Tổng kết lý thuyết:</h4>
+          <p class="mb-0 text-small">Hôm nay chúng ta đã bước một chân vào thế giới Toán 10. Các em cần ghi nhớ kĩ sự khác biệt giữa <strong>"điều kiện cần"</strong> và <strong>"điều kiện đủ"</strong>, cũng như cách xác định tính đúng sai của mệnh đề kéo theo.</p>
+        </div>
+
+        <div class="Box p-3 border-color-attention bg-attention-subtle">
+          <h4 class="h5 mb-2 color-fg-attention" style="margin-top: 0;">📝 Bài tập về nhà:</h4>
+          <p class="mb-0 text-small">Thầy sẽ phát phiếu bài tập, yêu cầu các em viết các mệnh đề phủ định, xét tính đúng sai và làm quen trước với kí hiệu <span class="math">∀</span> (với mọi), <span class="math">∃</span> (tồn tại) để chuẩn bị thật tốt cho buổi học số 2 nhé.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="text-center pt-3 mt-5 border-top text-small color-fg-muted">
+      <p>© 2026 Lớp Toán Thầy Tuấn — Ho Chi Minh City University of Science (HCMUS)</p>
+    </footer>
+
+  </div>
+</body>
+</html>

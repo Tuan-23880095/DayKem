@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Toán 7 - Buổi 5</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Thiết lập chung: Nền trắng, chữ đen chính */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        /* Tiêu đề chính rực rỡ */
+        .header-title {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            color: #0284c7; /* Xanh dương sáng */
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* Khung thông tin học sinh điền */
+        .student-info {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần lớn (Phần I, Phần II) */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 35px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .section-title.homework {
+            background: linear-gradient(135deg, #f59e0b, #d97706); /* Màu cam cho bài về nhà */
+        }
+
+        /* Tiêu đề Dạng bài và Phương pháp giải */
+        .exercise-type {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: #0f172a;
+            margin-top: 25px;
+            font-weight: 700;
+            border-left: 4px solid #10b981; /* Vạch xanh lá */
+            padding-left: 10px;
+        }
+
+        .method-box {
+            background-color: #f0fdf4; /* Nền xanh lá nhạt */
+            border: 1px solid #bbf7d0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            font-size: 14.5px;
+            color: #166534;
+        }
+
+        /* Định dạng danh sách câu hỏi dạng lưới (Grid) cho các câu hỏi phụ */
+        .grid-questions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 30px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: baseline;
+            padding: 8px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .question-label {
+            font-weight: bold;
+            color: #475569;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+
+        /* Khung ghi chú / Lời khuyên ở cuối */
+        .footer-note {
+            background-color: #fff1f2; /* Nền hồng nhạt */
+            border: 1px solid #fecdd3;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 2px 6px rgba(225, 29, 72, 0.05);
+        }
+
+        .note-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #e11d48;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .note-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Cải tiến khoảng cách dòng cho đề bài tự luận dài */
+        p.problem-text {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Ẩn bớt hiệu ứng đổ bóng khi in ra giấy */
+        @media print {
+            body { padding: 0; }
+            .worksheet-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    
+    <div class="header-title">📋 PHIẾU BÀI TẬP TOÁN 7 - BUỔI 5</div>
+    <div class="subtitle">Chủ đề: Vận dụng các phép tính số hữu tỉ vào bài toán thực tế</div>
+
+    <div class="student-info">
+        <div>Họ và tên học sinh: ........................................................</div>
+        <div>Lớp: ..................</div>
+    </div>
+
+    <div class="section-title">PHẦN I. BÀI TẬP TRÊN LỚP</div>
+
+    <div class="exercise-type">DẠNG 1: BÀI TOÁN ĐO LƯỜNG, NHIỆT ĐỘ (PHÉP CỘNG, TRỪ SỐ HỮU TỈ)</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Đưa các số liệu về cùng một định dạng (phân số hoặc số thập phân) rồi áp dụng các quy tắc cộng, trừ, nhân, chia cơ bản để giải quyết yêu cầu bài toán.
+    </div>
+    
+    <p class="problem-text"><strong>Bài 1 (Bài toán ghép nối).</strong> Hai đoạn ống nước có chiều dài lần lượt là $0,8\text{m}$ và $1,35\text{m}$. Người ta nối hai đầu ống để tạo thành một ống nước mới. Chiều dài của phần nối chung là $\frac{2}{25}\text{m}$. Hỏi đoạn ống nước mới dài bao nhiêu mét?</p>
+    
+    <p class="problem-text"><strong>Bài 2 (Bài toán nhiệt độ).</strong> Nhiệt độ ngoài trời đo được vào một ngày mùa đông tại New York (Mĩ) lúc 5 giờ chiều là $35,6^\circ\text{F}$, lúc 10 giờ tối cùng ngày là $22,64^\circ\text{F}$. Biết công thức chuyển đổi từ độ F sang độ C là: $T(^\circ\text{C}) = \frac{5}{9} \cdot (T(^\circ\text{F}) - 32)$.</p>
+    
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>Hãy chuyển đổi các số đo nhiệt độ theo độ F nêu ở trên sang độ C.</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>Tính độ chênh lệch nhiệt độ từ 5 giờ chiều đến 10 giờ tối (theo đơn vị độ C).</span>
+        </div>
+    </div>
+
+    <div class="exercise-type">DẠNG 2: BÀI TOÁN "PHẦN CÔNG VIỆC / KẾ HOẠCH" (COI TỔNG LÀ 1 ĐƠN VỊ)</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Coi tổng số lượng công việc hoặc toàn bộ mục tiêu kế hoạch đề ra là $1$. Khối lượng công việc còn lại sẽ bằng $1$ trừ đi tổng các phần đã hoàn thành.
+    </div>
+
+    <p class="problem-text"><strong>Bài 3.</strong> Một nhà máy trong tuần thứ nhất đã thực hiện được $\frac{4}{15}$ kế hoạch tháng, trong tuần thứ hai thực hiện được $\frac{7}{30}$ kế hoạch, trong tuần thứ ba thực hiện được $\frac{3}{10}$ kế hoạch. Để hoàn thành kế hoạch của tháng thì trong tuần cuối nhà máy phải thực hiện bao nhiêu phần kế hoạch?</p>
+
+    <div class="exercise-type">DẠNG 3: BÀI TOÁN CHI TIÊU, GIẢM GIÁ (PHAN SỐ CỦA MỘT SỐ - LÃI SUẤT)</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Cần đọc thật kĩ đề bài xem tỉ lệ phần trăm hoặc phân số được tính dựa trên "tổng số ban đầu" hay trên "số tiền còn lại". Đối với bài toán giảm giá kép từ 2 lần trở lên, thực hiện tính toán tuần tự theo từng bước.
+    </div>
+
+    <p class="problem-text"><strong>Bài 4 (Bài toán chi tiêu lặp).</strong> Mẹ cho An $100.000$ đồng để mua sách. An dùng $\frac{1}{2}$ số tiền đó để mua sách toán nâng cao, dùng $\frac{2}{5}$ số tiền còn lại để An mua vở. Hỏi An còn lại bao nhiêu tiền?</p>
+
+    <p class="problem-text"><strong>Bài 5 (Bài toán giảm giá kép).</strong> Nhân ngày 30/4, một cửa hàng thời trang giảm giá $20\%$ cho tất cả các sản phẩm. Đặc biệt, nếu khách hàng nào có thẻ khách hàng thân thiết của cửa hàng thì sẽ được giảm giá thêm $10\%$ trên giá đã giảm.</p>
+    
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>Chị Thanh là khách hàng thân thiết, chị mua một chiếc váy giá niêm yết $800.000$ đồng. Hỏi chị phải trả bao nhiêu tiền?</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>Cô Minh cũng có thẻ thân thiết, cô mua một chiếc túi xách và phải trả $864.000$ đồng. Hỏi giá ban đầu của túi xách là bao nhiêu?</span>
+        </div>
+    </div>
+
+    <p class="problem-text"><strong>Bài 6 (Bài toán lãi suất ngân hàng).</strong> Mẹ bạn Minh gửi tiết kiệm $300.000.000$ đồng vào một ngân hàng theo thể thức kì hạn 1 năm. Hết thời hạn 1 năm, mẹ bạn Minh nhận được tất cả vốn lẫn lãi là $321.600.000$ đồng. Tính lãi suất ngân hàng theo thể thức gửi tiết kiệm này.</p>
+
+    <div class="section-title homework">PHẦN II. BÀI TẬP VỀ NHÀ (TỰ LUYỆN)</div>
+    
+    <p class="problem-text"><strong>Bài 7 (Bài toán tổng hợp mua sắm).</strong> Bác Thu mua ba món hàng ở một siêu thị. Món hàng thứ nhất giá $125.000$ đồng và được giảm giá $30\%$; món hàng thứ hai giá $300.000$ đồng và được giảm giá $15\%$; món hàng thứ ba được siêu thị giảm giá $40\%$. Biết tổng số tiền bác Thu phải thanh toán cho cả ba món hàng sau khi giảm giá là $692.500$ đồng. Hỏi giá tiền món hàng thứ ba lúc chưa giảm giá là bao nhiêu?</p>
+
+    <div class="footer-note">
+        <div class="note-title">💡 Gợi ý tổ chức lớp học và lưu ý dành cho Giáo viên:</div>
+        <div class="note-content">
+            <ul>
+                <li><strong>Hỗ trợ Bài 2 & Bài 5b:</strong> Học sinh dễ gặp khó khăn do số thập phân phức tạp hoặc thuật toán tính ngược. Hãy gọi học sinh lên bảng phân tích đề (Ví dụ bài 5b: Hướng dẫn đặt giá ban đầu là $x$, ta lập hệ thức phương trình: $x \cdot (100\% - 20\%) \cdot (100\% - 10\%) = 864.000$).</li>
+                <li><strong>Cảnh báo Bài 4:</strong> Hãy nhắc các em dùng bút chì gạch chân thật đậm từ khóa <span style="color: #e11d48; font-weight: bold;">"còn lại"</span> trong đề bài, tránh lỗi sai kinh điển là lấy trực tiếp $100.000 \cdot \frac{2}{5}$ ở bước tính thứ hai.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

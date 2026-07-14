@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Bài Tập Toán 7 - Buổi 4</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Thiết lập chung: Nền trắng, chữ đen chính */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        /* Tiêu đề chính rực rỡ */
+        .header-title {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            color: #0284c7; /* Xanh dương sáng */
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* Khung thông tin học sinh điền */
+        .student-info {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần lớn (Phần I, Phần II) */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 35px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .section-title.homework {
+            background: linear-gradient(135deg, #f59e0b, #d97706); /* Màu cam cho bài về nhà */
+        }
+
+        /* Tiêu đề Dạng bài và Phương pháp giải */
+        .exercise-type {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: #0f172a;
+            margin-top: 25px;
+            font-weight: 700;
+            border-left: 4px solid #10b981; /* Vạch xanh lá */
+            padding-left: 10px;
+        }
+
+        .method-box {
+            background-color: #f0fdf4; /* Nền xanh lá nhạt */
+            border: 1px solid #bbf7d0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            font-size: 14.5px;
+            color: #166534;
+        }
+
+        /* Định dạng danh sách câu hỏi toán học dạng lưới (Grid) */
+        .grid-questions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 30px;
+            margin-bottom: 25px;
+            padding-left: 5px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: baseline;
+            padding: 8px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .question-label {
+            font-weight: bold;
+            color: #475569;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+
+        /* Khung ghi chú / Lời khuyên ở cuối */
+        .footer-note {
+            background-color: #fff1f2; /* Nền hồng nhạt */
+            border: 1px solid #fecdd3;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 2px 6px rgba(225, 29, 72, 0.05);
+        }
+
+        .note-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #e11d48;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .note-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Ẩn bớt hiệu ứng đổ bóng khi in ra giấy */
+        @media print {
+            body { padding: 0; }
+            .worksheet-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    
+    <div class="header-title">📋 PHIẾU BÀI TẬP TOÁN 7 - BUỔI 4</div>
+    <div class="subtitle">Chủ đề: Thứ tự thực hiện phép tính, Quy tắc dấu ngoặc và Quy tắc chuyển vế</div>
+
+    <div class="student-info">
+        <div>Họ và tên học sinh: ........................................................</div>
+        <div>Lớp: ..................</div>
+    </div>
+
+    <div class="section-title">PHẦN I. BÀI TẬP TRÊN LỚP</div>
+
+    <div class="exercise-type">DẠNG 1: THỰC HIỆN PHÉP TÍNH (BỎ DẤU NGOẶC VÀ TÍNH HỢP LÍ)</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Dùng quy tắc bỏ dấu ngoặc (trước ngoặc có dấu "-" thì đổi dấu toàn bộ số hạng bên trong, trước ngoặc có dấu "+" thì giữ nguyên). Sau đó nhóm các phân số có cùng mẫu số để tính nhanh.
+    </div>
+    
+    <p><strong>Bài 1.</strong> Bỏ dấu ngoặc rồi tính hợp lí (nếu có thể):</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$\left(-\frac{3}{7}\right) + \left(\frac{5}{6} - \frac{4}{7}\right)$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$\frac{3}{5} - \left(\frac{2}{3} + \frac{1}{5}\right)$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$\left[ \left(-\frac{1}{3}\right) + 1 \right] - \left( \frac{2}{3} - \frac{1}{5} \right)$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$A = \left( 8 - \frac{2}{3} + \frac{1}{2} \right) - \left( 5 - \frac{7}{3} - \frac{3}{2} \right) - \left( \frac{5}{3} + \frac{5}{2} + 4 \right)$</span>
+        </div>
+    </div>
+
+    <p><strong>Bài 2.</strong> Tuân thủ đúng thứ tự thực hiện phép tính (Lũy thừa $\rightarrow$ Nhân/Chia $\rightarrow$ Cộng/Trừ):</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$12 \cdot \left(\frac{2}{3} - \frac{5}{6}\right)^2$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$(0,4)^3 - (0,5)^2 \cdot 2 + 30,936$</span>
+        </div>
+    </div>
+
+    <div class="exercise-type">DẠNG 2: TÌM X CƠ BẢN</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Sử dụng quy tắc chuyển vế: Khi chuyển một số hạng từ vế này sang vế kia của một đẳng thức, ta phải đổi dấu số hạng đó.
+    </div>
+
+    <p><strong>Bài 3.</strong> Tìm $x$, biết:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$x + \frac{3}{7} = \frac{2}{5}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$x + 1,25 = 0,5$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$\frac{3}{2} - x = \frac{4}{7}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$x - \frac{2}{5} = \frac{5}{7}$</span>
+        </div>
+    </div>
+
+    <div class="exercise-type">DẠNG 3: TÌM X NÂNG CAO</div>
+    <div class="method-box">
+        <strong>Phương pháp:</strong> Cụm chứa $x$ đặt trong ngoặc hoặc gắn liền với phép nhân/chia được xem như một "ẩn số lớn". Hãy thu gọn các vế không chứa $x$ trước, sau đó bóc tách từng lớp từ ngoài vào trong.
+    </div>
+
+    <p><strong>Bài 4.</strong> Tìm $x$, biết:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$\frac{5}{9} - \frac{1}{3}x = \frac{2}{3}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$\frac{2}{9} : x + \frac{5}{6} = 0,5$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$\frac{3}{4} - \left( x - \frac{2}{3} \right) = 1\frac{1}{3}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$\frac{3}{10}x - 1\frac{1}{2} = \left(-\frac{2}{7}\right) : \frac{5}{14}$</span>
+        </div>
+    </div>
+
+    <div class="section-title homework">PHẦN II. BÀI TẬP VỀ NHÀ (TỰ LUYỆN)</div>
+    
+    <p><strong>Bài 5.</strong> Thực hiện phép tính (tính nhanh nếu có thể):</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$\left(-\frac{3}{4}\right) + \frac{3}{13} - \frac{1}{4} + \frac{10}{13}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$0,75 - \left( 1,5 - \frac{2}{3} \right)^2$</span>
+        </div>
+    </div>
+
+    <p><strong>Bài 6.</strong> Tìm $x$, biết:</p>
+    <div class="grid-questions">
+        <div class="question-item">
+            <span class="question-label">a)</span>
+            <span>$x + \frac{1}{3} = \frac{3}{4}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">b)</span>
+            <span>$x + 0,25 = \frac{1}{2}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">c)</span>
+            <span>$2x + \frac{1;}{2} = \frac{7}{9}$</span>
+        </div>
+        <div class="question-item">
+            <span class="question-label">d)</span>
+            <span>$x - \left(\frac{5}{4} - \frac{7}{5}\right) = \frac{9}{20}$</span>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <div class="note-title">💡 Ghi chú dành cho học sinh:</div>
+        <div class="note-content">
+            <ul>
+                <li>Nhớ kĩ câu thần chú nằm lòng: <strong>"Chuyển vế thì phải đổi dấu"</strong>.</li>
+                <li>Khi đứng trước dấu trừ <strong>"( - )"</strong> trước dấu ngoặc, các em phải <strong>đổi dấu toàn bộ</strong> các số hạng nằm ở bên trong ngoặc khi phá ngoặc ra nhé!</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

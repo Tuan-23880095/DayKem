@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phiếu Bài Tập Thực Chiến Buổi 1: Mệnh Đề — Toán 10</title>
+  
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/light-4fded0090af0ad58.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/dark-06381ff23d863842.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-primitives-b39ad27f3538ace3.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-tailwind-compatible-b8351ad34be13af4.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/github-eab9c5888b163e42.css" />
+  <script>
+      window.MathJax = {
+          tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+      };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: var(--color-canvas-default);
+      color: var(--color-fg-default);
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Thiết lập Khung bọc Responsive tối ưu cho cả PC & Điện thoại */
+    .exercise-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* Kích hoạt font-size tiêu chuẩn cho PC bài viết của GitHub không bị nhỏ */
+    .markdown-body {
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* Tối ưu hóa hiển thị khi chuyển sang Mobile dưới 768px */
+    @media (max-width: 767px) {
+      .exercise-container {
+        padding: 16px 14px;
+      }
+      .markdown-body {
+        font-size: 15px; /* Giảm nhẹ để phù hợp màn hình bé */
+      }
+      .h1 { font-size: 24px !important; }
+      .h2 { font-size: 18px !important; }
+      .stage-header { padding: 12px !important; }
+    }
+
+    /* Định dạng công thức toán học */
+    .math {
+      font-family: "Times New Roman", Times, serif;
+      font-style: italic;
+      font-weight: bold;
+      color: var(--color-danger-fg);
+      padding: 0 3px;
+      font-size: 1.15em;
+    }
+
+    /* Khối lời thoại của Thầy */
+    .teacher-box {
+      border-left: 5px solid var(--color-accent-fg);
+      background-color: var(--color-accent-subtle);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 32px;
+    }
+
+    /* Thiết kế Header cho từng Chặng */
+    .stage-header {
+      background: var(--color-canvas-subtle);
+      border: 1px solid var(--color-border-default);
+      border-left: 6px solid var(--color-attention-fg);
+      padding: 16px;
+      border-radius: 4px;
+      margin-top: 36px;
+      margin-bottom: 20px;
+    }
+
+    .stage-time {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      background-color: var(--color-attention-subtle);
+      color: var(--color-attention-fg);
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* Danh sách các phương án Trắc nghiệm trơn tru */
+    .quiz-options {
+      list-style-type: none;
+      padding-left: 10px;
+      margin: 8px 0;
+    }
+    .quiz-options li {
+      margin-bottom: 6px;
+    }
+
+    /* Bảng Đúng/Sai định dạng mới */
+    .tf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .tf-table th, .tf-table td {
+      border: 1px solid var(--color-border-default);
+      padding: 10px;
+      text-align: left;
+    }
+    .tf-table th {
+      background-color: var(--color-canvas-subtle);
+    }
+    .tf-select {
+      font-size: 13px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-default);
+      background: var(--color-canvas-default);
+      color: var(--color-fg-default);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="exercise-container markdown-body">
+    
+    <header class="pb-3 mb-4 border-bottom text-center">
+      <h1 class="h1 color-fg-accent mb-2" style="font-size: 30px; font-weight: 800;">PHIẾU BÀI TẬP THỰC CHIẾN (150 PHÚT)</h1>
+      <p class="color-fg-muted text-italic mb-0">Môn: Toán 10 — Buổi 1: Mệnh Đề Toán Học & Mệnh Đề Chứa Biến</p>
+    </header>
+
+    <main>
+      <div class="teacher-box">
+        <h3 class="h4 mb-2" style="margin-top: 0; color: var(--color-accent-fg);">👋 Chào các em học sinh thân mến!</h3>
+        <p class="mb-2">Tiếp nối buổi học lý thuyết hôm trước, hôm nay thầy trò chúng ta sẽ bước vào <strong>Buổi thực hành 150 phút đầu tiên</strong>. Thầy đã có 15 năm kinh nghiệm rèn luyện cho các anh chị khóa trước, thầy nhận thấy bài tập phần Mệnh đề tuy không phải tính toán phức tạp như cấp 2, nhưng lại đòi hỏi tư duy logic và lập luận cực kỳ chặt chẽ.</p>
+        <p class="mb-0 text-italic font-semibold color-fg-severe">⚠️ Quy tắc: Các em hãy cất hết sách vở lý thuyết, chúng ta sẽ làm bài tập theo quy tắc "Thực chiến". Thầy đã chia 150 phút này thành 4 chặng. Các em hãy căn thời gian để làm bài nhé!</p>
+      </div>
+
+      <section>
+        <div class="stage-header">
+          <h2 class="h3 color-fg-default m-0" style="font-size: 20px;">CHẶNG 1: KHỞI ĐỘNG - NHẬN DIỆN MỆNH ĐỀ & MỆNH ĐỀ CHỨA BIẾN</h2>
+          <div class="stage-time">⏱️ Thời gian: 30 Phút</div>
+          <p class="mb-0 mt-2 text-small color-fg-muted"><strong>Mục tiêu:</strong> Phân biệt rõ ràng đâu là mệnh đề, đâu không phải là mệnh đề và đâu là mệnh đề chứa biến.</p>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 1 (Tự luận ngắn):</h4>
+          <p class="mb-2">Trong các câu sau, câu nào là mệnh đề? Câu nào không là mệnh đề? Xác định tính đúng sai của các mệnh đề.</p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">a) Hình vuông có hai đường chéo vuông góc với nhau.</li>
+            <li class="mb-1">b) Sông Hương chảy ngang qua thành phố Huế.</li>
+            <li class="mb-1">c) Năm 2022 không phải là năm nhuận.</li>
+            <li class="mb-0">d) Hôm nay trời đẹp quá!</li>
+          </ul>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 2 (Tự luận ngắn):</h4>
+          <p class="mb-2">Trong các câu sau, câu nào là mệnh đề, câu nào là mệnh đề chứa biến?</p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">a) Số <span class="math">2^{1000}</span> có 50 chữ số khi viết trong hệ thập phân.</li>
+            <li class="mb-1">b) 0,0001 là số rất bé.</li>
+            <li class="mb-1">c) <span class="math">x > x^2</span>.</li>
+            <li class="mb-1">d) <span class="math">(x+y)^2 > 0</span>.</li>
+            <li class="mb-0">e) Virus SARS-CoV-2 rất nguy hiểm, đúng không?</li>
+          </ul>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 3 (Trắc nghiệm):</h4>
+          <p class="mb-2">Trong các câu sau, câu nào không phải là mệnh đề?</p>
+          <ul class="quiz-options">
+            <li><strong>A.</strong> <span class="math">4</span> là số chính phương.</li>
+            <li><strong>B.</strong> <span class="math">5</span> là hợp số.</li>
+            <li><strong>C.</strong> Mấy giờ rồi?.</li>
+            <li><strong>D.</strong> <span class="math">\sqrt{2}</span> là số vô tỉ.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="stage-header" style="border-left-color: var(--color-danger-fg);">
+          <h2 class="h3 color-fg-default m-0" style="font-size: 20px;">CHẶNG 2: TĂNG TỐC - MỆNH ĐỀ PHỦ ĐỊNH</h2>
+          <div class="stage-time" style="background-color: var(--color-danger-subtle); color: var(--color-danger-fg);">⏱️ Thời gian: 40 Phút</div>
+          <p class="mb-0 mt-2 text-small color-fg-muted"><strong>Mục tiêu:</strong> Nắm vững quy tắc "Thêm/Bớt" từ để phủ định và xét tính đúng/sai trái ngược của mệnh đề.</p>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 4 (Tự luận):</h4>
+          <p class="mb-2">Nêu mệnh đề phủ định của mỗi mệnh đề sau và xét tính đúng sai của mỗi mệnh đề phủ định đó:</p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">a) <span class="math">A</span>: "<span class="math">\frac{12}{3}</span> là một phân số".</li>
+            <li class="mb-1">b) <span class="math">B</span>: "Phương trình <span class="math">x^2 + x + 1 = 0</span> có nghiệm".</li>
+            <li class="mb-1">c) <span class="math">C</span>: "<span class="math">22 + 23 = 2^{2+3}</span>".</li>
+            <li class="mb-0">d) <span class="math">D</span>: "Số 2025 chia hết cho 15".</li>
+          </ul>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 5 (Tự luận):</h4>
+          <p class="mb-2">Phát biểu mệnh đề phủ định của các mệnh đề sau đây và xét tính đúng sai của các mệnh đề phủ định đó.</p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">a) <span class="math">P</span>: "Năm 2020 là năm nhuận".</li>
+            <li class="mb-1">b) <span class="math">Q</span>: "<span class="math">\pi</span> không phải là số vô tỉ".</li>
+            <li class="mb-0">c) <span class="math">R</span>: "Phương trình <span class="math">x^2 - 3x + 2 = 0</span> có nghiệm".</li>
+          </ul>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 6 (Trắc nghiệm):</h4>
+          <p class="mb-2">Mệnh đề phủ định của mệnh đề “Phương trình <span class="math">x^2 + bx + c = 0</span> có nghiệm” là:</p>
+          <ul class="quiz-options">
+            <li><strong>A.</strong> Phương trình <span class="math">x^2 + bx + c = 0</span> có nghiệm.</li>
+            <li><strong>B.</strong> Phương trình <span class="math">x^2 + bx + c = 0</span> có vô số nghiệm.</li>
+            <li><strong>C.</strong> Phương trình <span class="math">x^2 + bx + c = 0</span> có hai nghiệm phân biệt.</li>
+            <li><strong>D.</strong> Phương trình <span class="math">x^2 + bx + c = 0</span> vô nghiệm.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="stage-header" style="border-left-color: var(--color-success-fg);">
+          <h2 class="h3 color-fg-default m-0" style="font-size: 20px;">CHẶNG 3: VƯỢT CHƯỚNG NGẠI VẬT - MỆNH ĐỀ KÉO THEO & TƯƠNG ĐƯƠNG</h2>
+          <div class="stage-time" style="background-color: var(--color-success-subtle); color: var(--color-success-fg);">⏱️ Thời gian: 50 Phút</div>
+          <p class="mb-0 mt-2 text-small color-fg-muted"><strong>Mục tiêu:</strong> Đây là phần dễ mất điểm nhất. Các em cần phân biệt rõ "Điều kiện cần" và "Điều kiện đủ".</p>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 7 (Tự luận):</h4>
+          <p class="mb-2">Trong mỗi cặp mệnh đề <span class="math">P</span> và <span class="math">Q</span> sau đây, hãy phát biểu mệnh đề <span class="math">P \Rightarrow Q</span> và xét tính đúng sai của nó. <span class="math">P</span> có phải là điều kiện đủ để có <span class="math">Q</span> không?</p>
+          <ul class="pl-3 mb-0" style="list-style-type: circle;">
+            <li class="mb-2">a) <span class="math">P</span>: "<span class="math">a</span> và <span class="math">b</span> là hai số chẵn", <span class="math">Q</span>: "<span class="math">a + b</span> là số chẵn" (<span class="math">a, b</span> là hai số tự nhiên).</li>
+            <li class="mb-0">b) <span class="math">P</span>: "Tứ giác <span class="math">ABCD</span> có bốn cạnh bằng nhau", <span class="math">Q</span>: "Tứ giác <span class="math">ABCD</span> là một hình vuông".</li>
+          </ul>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 8 (Tự luận):</h4>
+          <p class="mb-2">Phát biểu mệnh đề đảo của các mệnh đề sau và xét tính đúng sai của mệnh đề đảo đó.</p>
+          <ul class="pl-3 mb-0">
+            <li class="mb-1">a) Nếu một số chia hết cho 6 thì nó chia hết cho 3.</li>
+            <li class="mb-1">b) Nếu tam giác <span class="math">ABC</span> có <span class="math">AB = AC</span> thì tam giác <span class="math">ABC</span> cân.</li>
+            <li class="mb-0">c) Nếu tam giác <span class="math">ABC</span> có hai góc bằng 60° thì tam giác <span class="math">ABC</span> đều.</li>
+          </ul>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-2" style="margin-top: 0;">Bài 9 (Tự luận tổng hợp):</h4>
+          <p class="mb-2">Cho tứ giác <span class="math">ABCD</span>, xét hai mệnh đề:</p>
+          <p class="mb-1">&nbsp;&nbsp;&nbsp;&nbsp;• <span class="math">P</span>: "Tứ giác <span class="math">ABCD</span> có tổng hai góc đối bằng 180°".</p>
+          <p class="mb-2">&nbsp;&nbsp;&nbsp;&nbsp;• <span class="math">Q</span>: "Tứ giác <span class="math">ABCD</span> là tứ giác nội tiếp".</p>
+          <ul class="pl-3 mb-0" style="list-style-type: none;">
+            <li class="mb-1"><strong>a)</strong> Phát biểu mệnh đề <span class="math">P \Rightarrow Q</span> và xét tính đúng sai của nó.</li>
+            <li class="mb-1"><strong>b)</strong> Phát biểu mệnh đề đảo của mệnh đề <span class="math">P \Rightarrow Q</span> và xét tính đúng sai của mệnh đề đảo đó.</li>
+            <li class="mb-0"><strong>c)</strong> Mệnh đề <span class="math">P</span> là điều kiện gì của mệnh đề <span class="math">Q</span>?</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="stage-header" style="border-left-color: var(--color-done-purple);">
+          <h2 class="h3 color-fg-default m-0" style="font-size: 20px;">CHẶNG 4: VỀ ĐÍCH - TRẮC NGHIỆM ĐÚNG/SAI ĐỊNH DẠNG MỚI</h2>
+          <div class="stage-time" style="background-color: var(--color-done-subtle); color: var(--color-done-purple);">⏱️ Thời gian: 30 Phút</div>
+          <p class="mb-0 mt-2 text-small color-fg-muted"><strong>Mục tiêu:</strong> Làm quen với cấu trúc đề thi trắc nghiệm Đúng/Sai của Bộ Giáo dục (mỗi ý a, b, c, d các em phải chọn Đúng hoặc Sai).</p>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-1" style="margin-top: 0;">Bài 10: Xét tính đúng sai của các mệnh đề sau:</h4>
+          <table class="tf-table text-small">
+            <thead>
+              <tr>
+                <th>Nội dung câu hỏi khẳng định</th>
+                <th style="width: 110px; text-align: center;">Học sinh chọn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>a) Nếu <span class="math">a > b</span> thì <span class="math">a^2 > b^2</span>.</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td>b) Nếu <span class="math">a</span> chia hết cho <span class="math">9</span> thì <span class="math">a</span> chia hết cho <span class="math">3</span>.</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td>c) Nếu một tam giác có một góc bằng <span class="math">60^\circ</span> thì tam giác đó là tam giác đều.</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td>d) Nếu hai số <span class="math">a</span> và <span class="math">b</span> cùng chia hết cho <span class="math">c</span> thì <span class="math">a + b</span> chia hết cho <span class="math">c</span>.</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="Box p-3 mb-3">
+          <h4 class="h5 color-fg-accent mb-1" style="margin-top: 0;">Bài 11: Các khẳng định sau đúng hay sai?</h4>
+          <table class="tf-table text-small">
+            <thead>
+              <tr>
+                <th>Nội dung phát biểu về cặp phủ định</th>
+                <th style="width: 110px; text-align: center;">Học sinh chọn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>a) <span class="math">P</span>: "<span class="math">n</span> là số chính phương" có mệnh đề phủ định là <span class="math">\bar{P}</span>: "<span class="math">n</span> không là số chính phương".</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td>b) <span class="math">P</span>: "Tam giác <span class="math">ABC</span> là tam giác cân" có mệnh đề phủ định là <span class="math">\bar{P}</span>: "Tam giác <span class="math">ABC</span> là tam giác vuông".</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td>c) <span class="math">P</span>: "<span class="math">n</span> là số nguyên tố" có mệnh đề phủ định là <span class="math">\bar{P}</span>: "<span class="math">n</span> không là số nguyên tố".</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td>d) <span class="math">P</span>: "<span class="math">x</span> là số vô tỉ" có mệnh đề phủ định là <span class="math">\bar{P}</span>: "<span class="math">x</span> là số hữu tỉ".</td>
+                <td style="text-align: center;">
+                  <select class="tf-select"><option>-- Chọn --</option><option>Đúng</option><option>Sai</option></select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="Box p-3 bg-canvas-subtle border-color-attention mt-4">
+        <h4 class="h5 mb-2 color-fg-attention" style="margin-top: 0;">💡 Lời khuyên cuối giờ của thầy:</h4>
+        <p class="mb-2 text-small">150 phút cho 11 bài tập này là một khoảng thời gian vừa đủ để các em vừa suy nghĩ sâu, vừa trình bày cẩn thận. Với bài tập tự luận (Chặng 2 và 3), các em nhớ viết rõ ràng câu chữ, đặc biệt là khi dùng các cụm từ <em>"Nếu... thì..."</em>, <em>"khi và chỉ khi"</em>, <em>"điều kiện cần"</em>, <em>"điều kiện đủ"</em>.</p>
+        <p class="mb-0 text-small text-bold color-fg-accent">Các em bắt đầu làm bài nhé. Sau 150 phút, thầy sẽ đi vòng quanh lớp thu vở bài tập và sửa những câu các em hay mắc bẫy nhất! Chúc các em tập trung thật tốt! 🎯</p>
+      </div>
+    </main>
+
+    <footer class="text-center pt-3 mt-5 border-top text-small color-fg-muted">
+      <p>© 2026 Hệ thống Lớp Toán Thực Chiến Thầy Tuấn — Đại học Khoa học Tự nhiên VNU-HCM</p>
+    </footer>
+
+  </div>
+</body>
+</html>

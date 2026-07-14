@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập: Sự Chuyển Thể Của Chất - KHTN 6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-slate-200 shadow-sm px-4 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo ĐH KHTN" class="h-14 object-contain">
+                <div class="h-10 w-px bg-slate-300 hidden md:block"></div>
+                <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo Trung tâm BDVH" class="h-12 object-contain rounded">
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-xs font-bold text-blue-700 tracking-wider uppercase">Trường Đại học Khoa học Tự nhiên TP.HCM</p>
+                <p class="text-sm font-extrabold text-slate-800 title-font">Trung Tâm Bồi Dưỡng Văn Hóa</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-10 px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-blue-500/30 text-blue-100 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-blue-400/30">Khoa học tự nhiên 6</span>
+            <h1 class="text-2xl md:text-4xl font-black title-font mt-3 mb-4">BUỔI 6: SỰ CHUYỂN THỂ CỦA CHẤT</h1>
+            <p class="text-slate-100 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                Hệ thống 13 bài tập chuyên sâu phân loại theo 3 mức độ (Cơ bản, Nâng cao, Vận dụng), bám sát các thí nghiệm thực hành đun sáp nến và quan sát cốc nước đá.
+            </p>
+        </div>
+    </div>
+
+    <main class="flex-grow container mx-auto p-4 max-w-4xl my-6">
+        
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl mb-10 text-sm text-amber-900 shadow-sm">
+            <strong>💡 Hướng dẫn dành cho học sinh:</strong> Các em hãy đọc kỹ đề bài, tự suy luận câu trả lời trước khi nhấn nút <span class="font-bold text-amber-700">"Xem đáp án chi tiết"</span> dưới mỗi câu hỏi để đối chiếu kết quả nhé!
+        </div>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6 border-b border-emerald-200 pb-2">
+                <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 text-xl font-bold">I</span>
+                <div>
+                    <h2 class="text-xl font-black text-emerald-700 title-font uppercase tracking-tight">Phần 1: Mức độ cơ bản</h2>
+                    <p class="text-xs text-slate-500 font-medium">Mục tiêu: Nhận biết - Ghi nhớ các hiện tượng trực quan</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Câu 1</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3">Hoàn thành các khái niệm sau về sự chuyển thể của chất:</p>
+                <ul class="space-y-1.5 text-slate-700 pl-4 list-disc text-sm md:text-base">
+                    <li>a) Sự chuyển từ thể rắn sang thể lỏng gọi là sự ...</li>
+                    <li>b) Sự chuyển từ thể lỏng sang thể rắn gọi là sự ...</li>
+                    <li>c) Sự chuyển từ thể lỏng sang thể hơi gọi là sự ...</li>
+                    <li>d) Sự chuyển từ thể hơi sang thể lỏng gọi là sự ...</li>
+                </ul>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans1')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans1" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-emerald-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>a) nóng chảy; &nbsp;&nbsp; b) đông đặc; &nbsp;&nbsp; c) bay hơi; &nbsp;&nbsp; d) ngưng tụ.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Câu 2</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Trong thí nghiệm đun nóng chảy sáp nến, khi ta đun nóng bát sứ đựng nến trên ngọn lửa đèn cồn, nến chuyển từ thể (1)... sang thể (2)... Đây là quá trình (3)... Khi tắt đèn cồn và để nguội, nến chuyển từ thể (4)... sang thể (5)... Đây là quá trình (6)...
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans2')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans2" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-emerald-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>(1) rắn, &nbsp;&nbsp; (2) lỏng, &nbsp;&nbsp; (3) sự nóng chảy, &nbsp;&nbsp; (4) lỏng, &nbsp;&nbsp; (5) rắn, &nbsp;&nbsp; (6) sự đông đặc.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Câu 3</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3">
+                    Khi lấy một cốc nước đá từ trong tủ lạnh ra và để ở nhiệt độ phòng, một lúc sau ta thấy có những giọt nước đọng lại ở mặt ngoài của cốc. Hiện tượng này chứng tỏ quá trình chuyển thể nào đã xảy ra?
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm pl-2 mb-3">
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>A.</strong> Nước ở trong cốc thấm ra ngoài.</div>
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>B.</strong> Sự ngưng tụ của hơi nước trong không khí.</div>
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>C.</strong> Sự nóng chảy của cốc thủy tinh.</div>
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>D.</strong> Sự bay hơi của nước trong cốc.</div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans3')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans3" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-emerald-700 block mb-1">Đáp án chính xác: B</strong>
+                        <p><strong>Giải thích:</strong> Hơi nước có sẵn trong không khí xung quanh khi va chạm vào thành cốc lỏng gặp nhiệt độ lạnh đã ngưng tụ, tạo thành các giọt nước lỏng bám bên ngoài thành cốc.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Câu 4</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3">
+                    Hiện tượng nào sau đây xảy ra tại một nhiệt độ xác định đối với mỗi chất?
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm pl-2 mb-3">
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>A.</strong> Ngưng tụ</div>
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>B.</strong> Sôi</div>
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>C.</strong> Bay hơi</div>
+                    <div class="p-2 border border-slate-100 rounded-lg bg-slate-50"><strong>D.</strong> Cả B và C</div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans4')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans4" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-emerald-700 block mb-1">Đáp án chính xác: B</strong>
+                        <p><strong>Giải thích:</strong> Sự sôi chỉ diễn ra ở một nhiệt độ xác định duy nhất (gọi là nhiệt độ sôi) tùy vào bản chất mỗi chất, trong khi quá trình bay hơi thông thường có thể xảy ra ở bất kỳ nhiệt độ nào.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Câu 5</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Người ta đúc các bức tượng đồng bằng cách nấu chảy đồng phế liệu cho chuyển thành thể lỏng rồi đổ vào khuôn, chờ nguội sẽ thu được sản phẩm. Em hãy chỉ ra các quá trình chuyển thể đã diễn ra.
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans5')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans5" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-emerald-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li><strong>Quá trình 1:</strong> Nấu chảy đồng phế liệu từ thể rắn chuyển thành thể lỏng $\rightarrow$ Đây là <strong>sự nóng chảy</strong>.</li>
+                            <li><strong>Quá trình 2:</strong> Đổ đồng lỏng vào khuôn rồi chờ nguội để hóa rắn thành bức tượng $\rightarrow$ Đây là <strong>sự đông đặc</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6 border-b border-orange-200 pb-2">
+                <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-orange-100 text-orange-600 text-xl font-bold">II</span>
+                <div>
+                    <h2 class="text-xl font-black text-orange-700 title-font uppercase tracking-tight">Phần 2: Mức độ nâng cao</h2>
+                    <p class="text-xs text-slate-500 font-medium">Mục tiêu: Hiểu - Phân tích đặc điểm hạt và cấu trúc</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Câu 6</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3">Sự bay hơi và sự sôi có điểm gì giống nhau và khác nhau?</p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans6')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans6" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed space-y-2">
+                        <strong class="text-orange-700 block">Đáp án & Giải thích:</strong>
+                        <p>• <strong>Giống nhau:</strong> Đều là các quá trình biến đổi trạng thái của chất từ thể lỏng sang thể khí (hơi).</p>
+                        <p>• <strong>Khác nhau:</strong></p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><em>Sự bay hơi:</em> Xảy ra ở mọi nhiệt độ và chỉ diễn ra duy nhất ở trên bề mặt thoáng của chất lỏng.</li>
+                            <li><em>Sự sôi:</em> Là một dạng bay hơi đặc biệt, chỉ xảy ra tại một nhiệt độ xác định (nhiệt độ sôi) và diễn ra đồng thời cả trong lòng chất lỏng (tạo ra các bọt khí nổi lên) lẫn trên bề mặt thoáng.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Câu 7</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Trong thí nghiệm đun nước sôi, một học sinh ghi lại nhiệt độ của nước theo thời gian. Khi nước đã đạt $100^\circ\text{C}$ và đang sôi bùng lên, nếu tiếp tục đun thêm 5 phút nữa thì nhiệt độ của nước trong cốc sẽ là bao nhiêu? Giải thích.
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans7')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans7" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-orange-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>Nhiệt độ của nước <strong>vẫn là $100^\circ\text{C}$</strong>.</p>
+                        <p class="mt-1"><strong>Lý do:</strong> Trong suốt thời gian chất lỏng đang sôi, dù ta có tiếp tục cung cấp nhiệt lượng bao nhiêu đi chăng nữa thì nhiệt độ của chất lỏng vẫn không thay đổi mà được giữ ổn định ở nhiệt độ sôi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Câu 8</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Ở nhiệt độ phòng, $1\text{ ml}$ nước lỏng khi bay hơi và chuyển hoàn toàn sang thể khí (hơi nước) sẽ chiếm một thể tích rất lớn, khoảng $1300\text{ ml}$. Dựa vào đặc điểm cấu trúc hạt của chất, em hãy giải thích hiện tượng này.
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans8')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans8" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-orange-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>• Khi ở <strong>thể lỏng</strong>, các hạt cấu tạo nên nước liên kết khá chặt chẽ, nằm sát nhau và chỉ có thể trượt lên nhau.</p>
+                        <p class="mt-1">• Khi nhận nhiệt lượng và chuyển hoàn toàn sang <strong>thể khí</strong>, lực liên kết giữa các hạt trở nên rất yếu, chúng chuyển động hoàn toàn tự do và khoảng cách giữa các hạt tăng lên rất lớn, dẫn đến thể tích tổng thể của khối khí tăng mạnh (gấp khoảng 1300 lần).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Câu 9</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Biết nhiệt độ nóng chảy của sáp nến (parafin) là khoảng $37^\circ\text{C}$ và của lưu huỳnh (sulfur) là $113^\circ\text{C}$. Nếu em cho sáp nến vào cốc 1 và lưu huỳnh vào cốc 2, sau đó thả cả hai cốc này nổi trên một nồi nước đang sôi. Hiện tượng gì sẽ xảy ra ở 2 cốc?
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans9')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans9" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-orange-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>Nồi nước đang sôi ở nhiệt độ ổn định là $100^\circ\text{C}$ ở điều kiện tiêu chuẩn.</p>
+                        <ul class="list-disc pl-4 mt-1 space-y-1">
+                            <li><strong>Cốc 1 (Sáp nến):</strong> Có nhiệt độ nóng chảy là $37^\circ\text{C} < 100^\circ\text{C}$ nên sáp nến sẽ hấp thụ nhiệt từ nước sôi, <strong>nóng chảy hoàn toàn sang thể lỏng</strong>.</li>
+                            <li><strong>Cốc 2 (Lưu huỳnh):</strong> Có nhiệt độ nóng chảy tận $113^\circ\text{C} > 100^\circ\text{C}$, nhiệt độ nước sôi không đủ đạt mức này nên lưu huỳnh <strong>vẫn giữ nguyên ở thể rắn</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6 border-b border-rose-200 pb-2">
+                <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-rose-100 text-rose-600 text-xl font-bold">III</span>
+                <div>
+                    <h2 class="text-xl font-black text-rose-700 title-font uppercase tracking-tight">Phần 3: Mức độ vận dụng</h2>
+                    <p class="text-xs text-slate-500 font-medium">Mục tiêu: Liên hệ thực tế - Giải thích hiện tượng tự nhiên</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Câu 10</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Vào mùa đông hoặc những ngày thời tiết lạnh, khi ta tắm bằng nước nóng trong phòng tắm kín, bề mặt của tấm gương soi thường bị mờ đi. Hãy giải thích tại sao.
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans10')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans10" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-rose-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>Khi tắm bằng nước nóng, nước lỏng bốc hơi tạo ra một lượng lớn hơi nước ấm trong không gian phòng tắm kín. Khi luồng hơi nước này di chuyển chạm vào bề mặt mát, lạnh của tấm gương soi, nó lập tức bị giảm nhiệt độ đột ngột và <strong>ngưng tụ</strong> thành các hạt nước lỏng nhỏ li ti bám dày đặc trên mặt kính, tạo ra hiện tượng mờ gương.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Câu 11</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Một bạn học sinh lấy một viên đá lạnh nhỏ ở trong tủ lạnh rồi bỏ lên chiếc đĩa. Khoảng một giờ sau, bạn ấy không thấy viên đá lạnh đâu nữa mà thấy nước trải đều trên mặt đĩa. Đến trưa, bạn ấy đến lấy chiếc đĩa ra để rửa thì chiếc đĩa đã khô cong và không còn thấy nước. Hãy chỉ ra các quá trình chuyển thể đã xảy ra.
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans11')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans11" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-rose-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <ul class="list-disc pl-4 space-y-1.5">
+                            <li><strong>Quá trình 1:</strong> Viên đá từ thể rắn ban đầu hấp thụ nhiệt từ môi trường phòng biến thành nước ở thể lỏng $\rightarrow$ Đây là <strong>sự nóng chảy</strong>.</li>
+                            <li><strong>Quá trình 2:</strong> Nước lỏng trên bề mặt đĩa sau một thời gian biến mất hoàn toàn, do các phân tử nước đã chuyển động thoát khỏi bề mặt sang thể hơi và bay vào không khí $\rightarrow$ Đây là <strong>sự bay hơi</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Câu 12</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Để làm muối từ nước biển, diêm dân (người làm muối) thường dẫn nước biển vào các ruộng muối rộng, cạn và tiến hành phơi dưới ánh nắng Mặt Trời. Quá trình này ứng dụng hiện tượng chuyển thể nào? Sự chuyển thể này diễn ra nhanh hơn khi thời tiết như thế nào?
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans12')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans12" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-rose-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>• Phương pháp này ứng dụng trực tiếp <strong>sự bay hơi</strong> của nước (nước lỏng bốc hơi biến mất, để lại muối rắn kết tinh không bay hơi tụ lại trên ruộng).</p>
+                        <p class="mt-1">• Quá trình bay hơi nước này sẽ diễn ra nhanh hơn nhiều khi thời tiết có <strong>nhiệt độ cao (nắng gắt)</strong>, có <strong>gió thổi mạnh</strong> và <strong>diện tích mặt thoáng lớn</strong> (đây là lý do các ruộng muối luôn được thiết kế rất rộng và nông).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-slate-300 transition">
+                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Câu 13</span>
+                <p class="font-semibold text-slate-800 mt-2 mb-3 leading-relaxed">
+                    Vòng tuần hoàn của nước trong tự nhiên là một chuỗi các sự chuyển thể của chất. Em hãy điền các từ (sôi, bay hơi, ngưng tụ, nóng chảy, đông đặc) vào các hiện tượng tương ứng dưới đây:
+                </p>
+                <ul class="space-y-1.5 text-slate-700 pl-4 list-disc text-sm md:text-base">
+                    <li>a) Nước từ sông, hồ, đại dương bốc lên bầu trời: Quá trình ...(1)...</li>
+                    <li>b) Hơi nước trên cao gặp lạnh tạo thành những đám mây: Quá trình ...(2)...</li>
+                    <li>c) Ở những vùng có khí hậu âm độ, nước trên mặt hồ tạo thành lớp băng tuyết dày: Quá trình ...(3)...</li>
+                    <li>d) Vào mùa xuân, lớp băng tuyết trên núi tan ra tạo thành những dòng suối: Quá trình ...(4)...</li>
+                </ul>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <button onclick="toggleAnswer('ans13')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 w-fit focus:outline-none">
+                        🔑 Xem đáp án chi tiết
+                    </button>
+                    <div id="ans13" class="hidden mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm leading-relaxed">
+                        <strong class="text-rose-700 block mb-1">Đáp án & Giải thích:</strong>
+                        <p>(1) bay hơi; &nbsp;&nbsp; (2) ngưng tụ; &nbsp;&nbsp; (3) đông đặc; &nbsp;&nbsp; (4) nóng chảy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-6 px-4 border-t border-slate-800 text-center text-xs md:text-sm">
+        <div class="max-w-4xl mx-auto space-y-2">
+            <p class="font-bold text-slate-200 title-font">TRUNG TÂM BỒI DƯỠNG VĂN HÓA - ĐẠI HỌC KHOA HỌC TỰ NHIÊN TP.HCM</p>
+            <p>Tài liệu giảng dạy môn Khoa học tự nhiên lớp 6 • Hệ thống bài tập bổ trợ trực tuyến</p>
+            <p class="text-slate-500 text-[11px] pt-2 border-t border-slate-800/60">&copy; 2026 Bản quyền thuộc về Trung tâm BDVH - ĐH KHTN. Thiết kế phục vụ đổi mới giáo dục.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

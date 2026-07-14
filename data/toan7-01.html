@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đua Top Giải Toán - Giành Pizza</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+              typeset: false // Tắt tự động render lúc mới tải trang để tự gọi bằng JS
+            }
+          };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-gray-100 font-sans h-screen flex flex-col">
+
+    <header class="bg-orange-500 text-white text-center p-4 shadow-md">
+        <h1 class="text-2xl font-bold">🍕 ĐẤU TRƯỜNG TOÁN HỌC - MỤC TIÊU PIZZA Toan 7🍕</h1>
+        <p class="text-sm">Quỹ Pizza: 300.000 VNĐ - Xếp hạng quyết định số tiền bạn phải đóng!</p>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-3xl">
+        
+        <div id="login-screen" class="bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-xl font-bold mb-4">Nhập tên để bắt đầu</h2>
+            <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <button onclick="startQuiz()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full">
+                VÀO PHẦN 1 VÀ TÍNH GIỜ
+            </button>
+        </div>
+
+        <div id="quiz-screen" class="hidden bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <div>
+                    <span class="font-bold text-lg block text-gray-700" id="display-name"></span>
+                    <span class="font-bold text-2xl text-orange-600" id="section-title">PHẦN 1: KHỞI ĐỘNG</span>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-red-500 text-2xl">⏱ <span id="timer">0</span>s</span>
+                </div>
+            </div>
+            
+            <div id="questions-container" class="space-y-6 mt-4">
+                </div>
+
+            <button onclick="submitSection()" class="mt-8 bg-green-500 text-white font-bold py-3 px-6 rounded hover:bg-green-600 transition duration-300 w-full text-lg">
+                NỘP BÀI <span id="btn-submit-text">PHẦN 1</span>
+            </button>
+        </div>
+
+        <div id="break-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-2xl font-bold mb-4 text-blue-600" id="break-title">Hoàn thành Phần 1!</h2>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                <p class="text-lg">Điểm phần này: <span id="section-score" class="font-bold text-xl text-green-600"></span>/200</p>
+                <p class="text-lg">Thời gian chặng: <span id="section-time" class="font-bold text-xl text-red-500"></span> giây</p>
+            </div>
+            <button onclick="nextSection()" class="bg-orange-500 text-white font-bold py-3 px-6 rounded hover:bg-orange-600 transition duration-300 w-full text-lg shadow-md">
+                TIẾP TỤC CHIẾN ĐẤU 🚀
+            </button>
+        </div>
+
+        <div id="result-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10 border-t-8 border-orange-500">
+            <h2 class="text-3xl font-bold mb-4 text-green-600">🎉 ĐÃ HOÀN THÀNH 3 CHẶNG! 🎉</h2>
+            <div class="bg-gray-100 p-4 rounded mb-6 text-left inline-block w-full max-w-sm">
+                <p class="mb-2">🔹 Điểm Phần 1: <span id="res-p1" class="font-bold"></span></p>
+                <p class="mb-2">🔹 Điểm Phần 2: <span id="res-p2" class="font-bold"></span></p>
+                <p class="mb-2 border-b pb-2">🔹 Điểm Phần 3: <span id="res-p3" class="font-bold"></span></p>
+                <p class="text-xl mt-2 text-green-700">🏆 TỔNG ĐIỂM: <span id="final-score" class="font-bold text-2xl"></span>/600</p>
+                <p class="text-xl mt-2 text-red-600">⏱ TỔNG THỜI GIAN: <span id="final-time" class="font-bold text-2xl"></span>s</p>
+            </div>
+            
+            <p class="text-md font-bold text-gray-700 mb-4" id="status-msg">Đang tổng hợp dữ liệu gửi về hệ thống thầy giáo...</p>
+        </div>
+
+    </main>
+
+    <script>
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
+
+        const questions = [
+          {"type": "trac-nghiem", "question": "Câu 1: Tìm x trong tỉ lệ thức $\\frac{x}{8} = \\frac{9}{3}$:", "options": ["48", "22", "25", "24"], "correct": "24"},
+          {"type": "trac-nghiem", "question": "Câu 2: Tìm x trong tỉ lệ thức $\\frac{x}{6} = \\frac{15}{5}$:", "options": ["36", "18", "19", "16"], "correct": "18"},
+          {"type": "trac-nghiem", "question": "Câu 3: Tìm x trong tỉ lệ thức $\\frac{x}{10} = \\frac{4}{2}$:", "options": ["21", "18", "20", "40"], "correct": "20"},
+          {"type": "trac-nghiem", "question": "Câu 4: Tìm x trong tỉ lệ thức $\\frac{x}{10} = \\frac{10}{5}$:", "options": ["40", "18", "21", "20"], "correct": "20"},
+          {"type": "trac-nghiem", "question": "Câu 5: Tìm x trong tỉ lệ thức $\\frac{x}{6} = \\frac{6}{3}$:", "options": ["10", "13", "12", "24"], "correct": "12"},
+          {"type": "trac-nghiem", "question": "Câu 6: Bậc của đa thức $P(x) = 2x^{5} - 2x^2 + 5$ là:", "options": ["5", "2", "2", "5"], "correct": "5"},
+          {"type": "trac-nghiem", "question": "Câu 7: Bậc của đa thức $P(x) = 2x^{6} - 2x^2 + 5$ là:", "options": ["5", "2", "2", "6"], "correct": "6"},
+          {"type": "trac-nghiem", "question": "Câu 8: Bậc của đa thức $P(x) = 5x^{3} - 2x^2 + 5$ là:", "options": ["2", "5", "3", "5"], "correct": "3"},
+          {"type": "trac-nghiem", "question": "Câu 9: Bậc của đa thức $P(x) = 2x^{3} - 2x^2 + 5$ là:", "options": ["2", "2", "5", "3"], "correct": "3"},
+          {"type": "trac-nghiem", "question": "Câu 10: Bậc của đa thức $P(x) = 7x^{3} - 2x^2 + 5$ là:", "options": ["5", "3", "7", "2"], "correct": "3"},
+          {"type": "trac-nghiem", "question": "Câu 11: Giao điểm của ba đường trung tuyến trong một tam giác được gọi là:", "options": ["Trực tâm", "Trọng tâm", "Tâm đường tròn nội tiếp", "Tâm đường tròn ngoại tiếp"], "correct": "Trọng tâm"},
+          {"type": "trac-nghiem", "question": "Câu 12: Giao điểm của ba đường cao trong một tam giác được gọi là:", "options": ["Trọng tâm", "Tâm đường tròn ngoại tiếp", "Trực tâm", "Tâm đường tròn nội tiếp"], "correct": "Trực tâm"},
+          {"type": "trac-nghiem", "question": "Câu 13: Bộ ba đoạn thẳng nào sau đây có thể là độ dài ba cạnh của một tam giác?", "options": ["3cm, 3cm, 7cm", "3cm, 4cm, 5cm", "2cm, 3cm, 6cm", "1cm, 2cm, 3cm"], "correct": "3cm, 4cm, 5cm"},
+          {"type": "trac-nghiem", "question": "Câu 14: Trong một tam giác vuông, cạnh lớn nhất là:", "options": ["Đường cao", "Cạnh góc vuông lớn", "Cạnh huyền", "Cạnh góc vuông nhỏ"], "correct": "Cạnh huyền"},
+          {"type": "trac-nghiem", "question": "Câu 15: Tam giác ABC cân tại A, biết $\\angle B = 50^\\circ$. Số đo $\\angle A$ là:", "options": ["$100^\\circ$", "$130^\\circ$", "$50^\\circ$", "$80^\\circ$"], "correct": "$80^\\circ$"},
+          {"type": "trac-nghiem", "question": "Câu 16: Gieo một con xúc xắc cân đối. Xác suất để xuất hiện mặt có số chấm chẵn là:", "options": ["1", "$\\frac{1}{3}$", "$\\frac{1}{2}$", "$\\frac{1}{6}$"], "correct": "$\\frac{1}{2}$"},
+          {"type": "trac-nghiem", "question": "Câu 17: Trong hộp có 3 bi xanh và 2 bi đỏ. Rút ngẫu nhiên 1 bi. Xác suất rút được bi đỏ là:", "options": ["$\\frac{1}{2}$", "$\\frac{2}{5}$", "$\\frac{3}{5}$", "$\\frac{2}{3}$"], "correct": "$\\frac{2}{5}$"},
+          {"type": "trac-nghiem", "question": "Câu 18: Chọn ngẫu nhiên một số từ tập hợp {1; 2; 3; 4; 5}. Xác suất chọn được số nguyên tố là:", "options": ["$\\frac{1}{5}$", "$\\frac{2}{5}$", "$\\frac{3}{5}$", "$\\frac{4}{5}$"], "correct": "$\\frac{3}{5}$"},
+          {"type": "trac-nghiem", "question": "Câu 19: Biến cố 'Mặt trời mọc ở hướng Đông' là biến cố:", "options": ["Không thể", "Ngẫu nhiên", "Chắc chắn", "Độc lập"], "correct": "Chắc chắn"},
+          {"type": "trac-nghiem", "question": "Câu 20: Biến cố 'Tháng 2 năm nhuận có 30 ngày' là biến cố:", "options": ["Ngẫu nhiên", "Xác suất cao", "Không thể", "Chắc chắn"], "correct": "Không thể"},
+          {"type": "tra-loi-ngan", "question": "Câu 21: Cho biết hai đại lượng x và y tỉ lệ thuận với nhau. Khi x = 4 thì y = 20. Hệ số tỉ lệ k của y đối với x là bao nhiêu? (Chỉ ghi số)", "correct": "5"},
+          {"type": "tra-loi-ngan", "question": "Câu 22: Cho biết hai đại lượng x và y tỉ lệ thuận với nhau. Khi x = 7 thì y = 14. Hệ số tỉ lệ k của y đối với x là bao nhiêu? (Chỉ ghi số)", "correct": "2"},
+          {"type": "tra-loi-ngan", "question": "Câu 23: Cho biết hai đại lượng x và y tỉ lệ thuận với nhau. Khi x = 7 thì y = 14. Hệ số tỉ lệ k của y đối với x là bao nhiêu? (Chỉ ghi số)", "correct": "2"},
+          {"type": "tra-loi-ngan", "question": "Câu 24: Cho biết hai đại lượng x và y tỉ lệ thuận với nhau. Khi x = 8 thì y = 16. Hệ số tỉ lệ k của y đối với x là bao nhiêu? (Chỉ ghi số)", "correct": "2"},
+          {"type": "tra-loi-ngan", "question": "Câu 25: Cho biết x và y là hai đại lượng tỉ lệ nghịch. Khi x = 3 thì y = 10. Hệ số tỉ lệ a là bao nhiêu? (Chỉ ghi số)", "correct": "30"},
+          {"type": "tra-loi-ngan", "question": "Câu 26: Cho biết x và y là hai đại lượng tỉ lệ nghịch. Khi x = 4 thì y = 7. Hệ số tỉ lệ a là bao nhiêu? (Chỉ ghi số)", "correct": "28"},
+          {"type": "tra-loi-ngan", "question": "Câu 27: Cho biết x và y là hai đại lượng tỉ lệ nghịch. Khi x = 2 thì y = 8. Hệ số tỉ lệ a là bao nhiêu? (Chỉ ghi số)", "correct": "16"},
+          {"type": "tra-loi-ngan", "question": "Câu 28: Tính giá trị của đa thức $P(x) = 4x - 5$ tại x = 2. (Chỉ ghi số)", "correct": "3"},
+          {"type": "tra-loi-ngan", "question": "Câu 29: Tính giá trị của đa thức $P(x) = 5x - 2$ tại x = 2. (Chỉ ghi số)", "correct": "8"},
+          {"type": "tra-loi-ngan", "question": "Câu 30: Tính giá trị của đa thức $P(x) = 5x - 1$ tại x = 2. (Chỉ ghi số)", "correct": "9"},
+          {"type": "tra-loi-ngan", "question": "Câu 31: Tính giá trị của đa thức $P(x) = 4x - 5$ tại x = 2. (Chỉ ghi số)", "correct": "3"},
+          {"type": "tra-loi-ngan", "question": "Câu 32: Tìm nghiệm của đa thức $M(x) = x - (9)$. (Chỉ ghi số)", "correct": "9"},
+          {"type": "tra-loi-ngan", "question": "Câu 33: Tìm nghiệm của đa thức $M(x) = x - (-10)$. (Chỉ ghi số)", "correct": "-10"},
+          {"type": "tra-loi-ngan", "question": "Câu 34: Tìm nghiệm của đa thức $M(x) = x - (4)$. (Chỉ ghi số)", "correct": "4"},
+          {"type": "tra-loi-ngan", "question": "Câu 35: Tìm nghiệm của đa thức $M(x) = x - (6)$. (Chỉ ghi số)", "correct": "6"},
+          {"type": "tra-loi-ngan", "question": "Câu 36: Cho tam giác ABC có góc A = 74 độ, góc B = 33 độ. Tính số đo góc C theo độ. (Chỉ ghi số)", "correct": "73"},
+          {"type": "tra-loi-ngan", "question": "Câu 37: Cho tam giác ABC có góc A = 48 độ, góc B = 49 độ. Tính số đo góc C theo độ. (Chỉ ghi số)", "correct": "83"},
+          {"type": "tra-loi-ngan", "question": "Câu 38: Cho tam giác ABC có góc A = 40 độ, góc B = 56 độ. Tính số đo góc C theo độ. (Chỉ ghi số)", "correct": "84"},
+          {"type": "tra-loi-ngan", "question": "Câu 39: Cho tam giác ABC có góc A = 58 độ, góc B = 38 độ. Tính số đo góc C theo độ. (Chỉ ghi số)", "correct": "84"},
+          {"type": "tra-loi-ngan", "question": "Câu 40: Cho tam giác ABC có góc A = 40 độ, góc B = 44 độ. Tính số đo góc C theo độ. (Chỉ ghi số)", "correct": "96"},
+          {"type": "dung-sai", "question": "Câu 41: Đa thức $P(x) = x^2 + 1$ không có nghiệm trong tập hợp số thực.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 42: Hai đại lượng $x$ và $y$ tỉ lệ nghịch thì tích $x.y$ luôn là một hằng số không đổi.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 43: Nếu $x$ và $y$ tỉ lệ thuận thì hệ số tỉ lệ là $\\frac{x}{y}$.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 44: Đa thức bậc nhất chỉ có duy nhất một nghiệm.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 45: Hệ số tự do của đa thức $P(x) = 3x^3 - 2x + 7$ là $-2$.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 46: Tổng của hai đa thức bậc 3 luôn là một đa thức bậc 3.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 47: Từ tỉ lệ thức $\\frac{a}{b} = \\frac{c}{d}$ suy ra $a.c = b.d$.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 48: Giao điểm ba đường trung trực của tam giác cách đều 3 đỉnh của tam giác đó.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 49: Trong tam giác cân, đường trung tuyến xuất phát từ đỉnh cũng là đường cao.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 50: Khoảng cách từ trọng tâm đến mỗi đỉnh của tam giác bằng $\\frac{1}{3}$ độ dài đường trung tuyến đi qua đỉnh đó.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 51: Trong một tam giác, đối diện với cạnh nhỏ nhất là góc tù.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 52: Mọi tam giác đều có ba đường cao nằm hoàn toàn bên trong tam giác.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 53: Tam giác vuông có trực tâm trùng với đỉnh góc vuông.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 54: Đường trung trực của đoạn thẳng là đường thẳng vuông góc với đoạn thẳng đó tại trung điểm của nó.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 55: Ba đoạn thẳng có độ dài 2cm, 4cm, 6cm tạo thành một tam giác.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 56: Giao điểm ba đường phân giác của tam giác cách đều ba cạnh của tam giác đó.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 57: Xác suất của một biến cố không thể lớn hơn 1.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 58: Khi tung một đồng xu cân đối, biến cố 'Xuất hiện mặt sấp' là biến cố chắc chắn.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 59: Tung một con xúc xắc, biến cố 'Xuất hiện mặt có số chấm lớn hơn 6' là biến cố không thể.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 60: Xác suất của biến cố chắc chắn bằng 0.", "correct": "Sai"}
+          ];
+
+        // Biến hệ thống quản lý luồng game
+        let studentName = "";
+        let currentSection = 1; // Từ 1 đến 3
+        let startTime;
+        let timerInterval;
+        
+        // Mảng lưu trữ Điểm và Thời gian riêng biệt của 3 phần (Index 0, 1, 2 tương ứng Phần 1, 2, 3)
+        let scores = [0, 0, 0];
+        let times = [0, 0, 0];
+
+        function startQuiz() {
+            studentName = document.getElementById("studentName").value.trim();
+            if (!studentName) {
+                alert("Bạn quên nhập tên kìa!");
+                return;
+            }
+
+            document.getElementById("login-screen").classList.add("hidden");
+            document.getElementById("display-name").innerText = "Học sinh: " + studentName;
+            
+            // Khởi động Phần 1
+            loadSection(currentSection);
+        }
+
+        function loadSection(sectionNum) {
+            // 1. Cập nhật Tiêu đề
+            document.getElementById("section-title").innerText = `PHẦN ${sectionNum}: ${sectionNum === 1 ? 'KHỞI ĐỘNG' : (sectionNum === 2 ? 'VƯỢT CHƯỚNG NGẠI VẬT' : 'GIẢI MÃ HÌNH HỌC')}`;
+            document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
+
+            const container = document.getElementById("questions-container");
+            container.innerHTML = ""; // Xóa dữ liệu cũ
+
+            const startIndex = (sectionNum - 1) * 20;
+            const endIndex = sectionNum * 20;
+
+            let allHtml = ""; // Biến để tích luỹ toàn bộ HTML của 20 câu hỏi
+
+            // 2. Vòng lặp chỉ dùng để tạo HTML câu hỏi
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break; // Phòng hờ nếu mảng không đủ 60 câu
+
+                let q = questions[i];
+                let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
+                
+                if (q.type === "trac-nghiem") {
+                    q.options.forEach(opt => {
+                        html += `<label class="block mb-2 cursor-pointer hover:bg-orange-100 p-2 rounded transition"><input type="radio" name="q${i}" value="${opt}" class="mr-2 w-4 h-4 text-orange-500"> <span class="text-md">${opt}</span></label>`;
+                    });
+                } else if (q.type === "tra-loi-ngan") {
+                    html += `<input type="text" id="q${i}" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-orange-500 outline-none font-bold text-blue-700" placeholder="Nhập đáp án của bạn...">`;
+                } else if (q.type === "dung-sai") {
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-green-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Đúng" class="mr-2 w-4 h-4"> <span class="font-bold text-green-700">Đúng</span></label>`;
+                    html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4"> <span class="font-bold text-red-700">Sai</span></label>`;
+                }
+                html += `</div>`;
+                
+                allHtml += html; // Gộp HTML của câu hỏi này vào biến tổng
+            }            
+
+            // 3. Đổ toàn bộ HTML vào DOM (chỉ 1 lần duy nhất)
+            container.innerHTML = allHtml;
+
+            // 4. Gọi MathJax render SAU KHI HTML đã nằm trong DOM
+            if (window.MathJax) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]).then(() => {
+                    console.log('Đã render xong công thức toán học!');
+                });
+            }
+
+            // 5. Chuyển đổi màn hình
+            document.getElementById("break-screen").classList.add("hidden");
+            document.getElementById("lobby-screen")?.classList.add("hidden"); 
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            window.scrollTo(0, 0);
+
+            // 6. Xử lý Timer đếm giờ
+            if(timerInterval) clearInterval(timerInterval); // Xóa bộ đếm cũ nếu có
+            document.getElementById("timer").innerText = "0";
+            startTime = Date.now();
+            
+            timerInterval = setInterval(() => {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer").innerText = elapsedTime;
+            }, 1000);
+        }
+
+        function submitSection() {
+            if (!confirm(`Bạn có chắc muốn nộp Phần ${currentSection}? Vẫn còn thời gian để kiểm tra lại đó!`)) return;
+
+            // Chốt thời gian phần này
+            clearInterval(timerInterval);
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            times[currentSection - 1] = timeTaken;
+
+            // Chấm điểm 20 câu của phần này
+            let score = 0;
+            const startIndex = (currentSection - 1) * 20;
+            const endIndex = currentSection * 20;
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break;
+                let q = questions[i];
+
+                if (q.type === "trac-nghiem" || q.type === "dung-sai") {
+                    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (selected && selected.value.trim() === q.correct) score += 10;
+                } else if (q.type === "tra-loi-ngan") {
+                    const answerInput = document.getElementById(`q${i}`);
+                    if(answerInput) {
+                        const answer = answerInput.value.trim().toLowerCase();
+                        if (answer === q.correct.toLowerCase()) score += 10;
+                    }
+                }
+            }
+            scores[currentSection - 1] = score;
+
+            document.getElementById("quiz-screen").classList.add("hidden");
+
+            // Kiểm tra xem đã là phần cuối chưa?
+            if (currentSection < 3) {
+                // Nếu chưa, hiện Trạm dừng chân
+                document.getElementById("break-title").innerText = `Đã nộp xong Phần ${currentSection}!`;
+                document.getElementById("section-score").innerText = score;
+                document.getElementById("section-time").innerText = timeTaken;
+                document.getElementById("break-screen").classList.remove("hidden");
+            } else {
+                // Nếu đã xong Phần 3, tính tổng và hiển thị Kết quả cuối
+                calculateFinalResult();
+            }
+        }
+
+        function nextSection() {
+            currentSection++; // Tăng phần lên 2 hoặc 3
+            loadSection(currentSection);
+        }
+
+        function calculateFinalResult() {
+            // Cộng dồn 3 mảng
+            const totalScore = scores.reduce((a, b) => a + b, 0);
+            const totalTime = times.reduce((a, b) => a + b, 0);
+
+            document.getElementById("res-p1").innerText = `${scores[0]}/200 (${times[0]}s)`;
+            document.getElementById("res-p2").innerText = `${scores[1]}/200 (${times[1]}s)`;
+            document.getElementById("res-p3").innerText = `${scores[2]}/200 (${times[2]}s)`;
+            
+            document.getElementById("final-score").innerText = totalScore;
+            document.getElementById("final-time").innerText = totalTime;
+
+            document.getElementById("result-screen").classList.remove("hidden");
+
+            // Gửi dữ liệu TỔNG về hệ thống
+            sendDataToSheet(studentName, totalScore, totalTime);
+        }
+
+        function sendDataToSheet(name, totalScore, totalTime) {
+            const payload = {
+                action: "save_toan_pizza", // Kích hoạt đúng Case 11 trên Apps Script
+                hoTen: name,
+                diem: totalScore,
+                thoiGian: totalTime
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.getElementById("status-msg").innerHTML = "✅ Dữ liệu đã được khóa. Hãy chờ Thầy tổng hợp bảng xếp hạng Pizza!";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-green-600");
+            })
+            .catch(error => {
+                document.getElementById("status-msg").innerText = "❌ Lỗi mạng! Chụp ngay màn hình này gửi cho thầy nhé!";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-red-600");
+            });
+        }
+    </script>
+</body>
+</html>

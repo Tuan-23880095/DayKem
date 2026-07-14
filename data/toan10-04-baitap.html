@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toán 10 - Buổi 4: Tập Hợp Số & Phép Toán Trên Trục Số</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+        }
+        .heading-font {
+            font-family: 'Lexend', sans-serif;
+        }
+        .math-expr {
+            font-size: 1.05em;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <header class="bg-white border-b border-gray-200 py-6 px-4 sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/90">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo KHTN" class="h-16 w-auto object-contain">
+                <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" alt="Logo BDVH" class="h-16 w-auto object-contain rounded-md">
+            </div>
+            <div class="text-center md:text-right">
+                <h1 class="text-xl md:text-2xl font-black heading-font text-blue-600 tracking-tight uppercase">
+                    Bài Tập Thực Hành Toán 10
+                </h1>
+                <p class="text-xs md:text-sm font-semibold text-gray-500 mt-1">
+                    Buổi 4: Các tập hợp số • Các khoảng, đoạn và phép toán trên trục số
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+        
+        <div class="mb-10 p-6 bg-gray-50 rounded-2xl border border-gray-200">
+            <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                Chào bạn, dựa trên kho dữ liệu phong phú từ các bộ sách giáo khoa và sách bài tập Toán 10 mới, dưới đây là bộ <strong>12 bài tập</strong> dành riêng cho nội dung khóa học. Bộ bài tập được thiết kế theo <strong>3 mức độ</strong> (Cơ bản, Nâng cao, Vận dụng) với đa dạng các thể loại (Trắc nghiệm, Đúng/Sai, Trả lời ngắn/Tự luận) để giúp học sinh rèn luyện kỹ năng một cách toàn diện.
+            </p>
+        </div>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="px-3 py-1.5 bg-green-100 text-green-700 font-bold rounded-lg text-xs uppercase tracking-wider heading-font">Mức độ 1</span>
+                <h2 class="text-xl font-bold heading-font text-gray-900">PHẦN 1: MỨC ĐỘ CƠ BẢN (5 BÀI)</h2>
+            </div>
+            <p class="text-xs font-semibold text-gray-500 mb-4 uppercase tracking-wide bg-slate-100 p-2.5 rounded-lg border-l-4 border-green-500">🎯 Mục tiêu: Nhận diện các khoảng, đoạn, nửa khoảng và thực hiện thành thạo phép Giao, Hợp, Hiệu trên trục số với các con số cụ thể.</p>
+
+            <div class="space-y-6">
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-3"><span class="text-green-600">Câu 1 (Trắc nghiệm):</span> Cho tập hợp $A = \{x \in \mathbb{R} \mid -3 \le x < 2\}$. Tập hợp $A$ là tập hợp nào sau đây?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4 mb-4 font-medium text-gray-700">
+                        <div>A. $(-3; 2)$.</div>
+                        <div>B. $[-3; -2; -1; 0; 1]$.</div>
+                        <div>C. $[-3; 2)$.</div>
+                        <div>D. $[-3; 2]$.</div>
+                    </div>
+                    <button onclick="toggleHint('hint-1')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & đáp án</button>
+                    <div id="hint-1" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp án chính xác: C.</strong><br>
+                        <em>Gợi ý:</em> Kí hiệu $\le$ tương ứng với ngoặc vuông $[$ và kí hiệu $<$ tương ứng với ngoặc tròn $)$. Do đó, $A = [-3; 2)$. Chú ý tập hợp được xét trên tập số thực $\mathbb{R}$ nên phương án B sai vì đó là tập số nguyên.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-3"><span class="text-green-600">Câu 2 (Trắc nghiệm):</span> Cho hai tập hợp $A = [-4; 3)$ và $B = (-2; +\infty)$. Tập hợp $A \setminus B$ bằng:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4 mb-4 font-medium text-gray-700">
+                        <div>A. $[-4; -2)$.</div>
+                        <div>B. $[-4; -2]$.</div>
+                        <div>C. $[3; +\infty)$.</div>
+                        <div>D. $[-4; 3)$.</div>
+                    </div>
+                    <button onclick="toggleHint('hint-2')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & đáp án</button>
+                    <div id="hint-2" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp án chính xác: B.</strong><br>
+                        <em>Gợi ý:</em> Phép hiệu $A \setminus B$ lấy các phần tử thuộc $A$ nhưng không thuộc $B$. Biểu diễn trên trục số, phần thuộc $A$ mà nằm ngoài $B$ chính là đoạn $[-4; -2]$. Điểm $-2 \notin B$ nên $-2 \in (A \setminus B)$, vì vậy tại vị trí $-2$ ta lấy dấu ngoặc vuông.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-3"><span class="text-green-600">Câu 3 (Trắc nghiệm):</span> Biểu diễn tập hợp $\mathbb{R} \setminus (-\infty; 3)$ trên trục số, ta được kết quả là tập hợp nào?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4 mb-4 font-medium text-gray-700">
+                        <div>A. $(3; +\infty)$.</div>
+                        <div>B. $[3; +\infty)$.</div>
+                        <div>C. $(-\infty; 3]$.</div>
+                        <div>D. $(-\infty; 3)$.</div>
+                    </div>
+                    <button onclick="toggleHint('hint-3')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & đáp án</button>
+                    <div id="hint-3" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp án chính xác: B.</strong><br>
+                        <em>Gợi ý:</em> Tập hợp $\mathbb{R} \setminus (-\infty; 3)$ chính là phần bù của khoảng $(-\infty; 3)$ trong $\mathbb{R}$. Khi bỏ đi phần nhỏ hơn $3$, ta giữ lại các phần tử lớn hơn hoặc bằng $3$, tức là nửa khoảng $[3; +\infty)$.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-3"><span class="text-green-600">Câu 4 (Đúng/Sai):</span> Cho hai tập hợp $A = (-\infty; 1]$ và $B = (1; +\infty)$. Xét tính đúng/sai của các mệnh đề sau:</p>
+                    <div class="space-y-2 pl-4 mb-4 text-sm font-medium text-gray-700">
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>a) $A \cup B = \mathbb{R}$.</span> <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Đúng</span></div>
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>b) $A \cap B = \{1\}$.</span> <span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded">Sai</span></div>
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>c) $A \setminus B = \emptyset$.</span> <span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded">Sai</span></div>
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>d) Phần bù của $A$ trong $\mathbb{R}$ chính là tập hợp $B$.</span> <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Đúng</span></div>
+                    </div>
+                    <button onclick="toggleHint('hint-4')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem lời giải chi tiết</button>
+                    <div id="hint-4" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Lời giải chi tiết:</strong><br>
+                        - a) <strong>Đúng</strong> vì hai tập hợp nối tiếp nhau tại điểm 1 và phủ hết trục số.<br>
+                        - b) <strong>Sai</strong> vì $1 \in A$ nhưng $1 \notin B$, do đó $A \cap B = \emptyset$.<br>
+                        - c) <strong>Sai</strong> vì $A \setminus B = A = (-\infty; 1] \neq \emptyset$.<br>
+                        - d) <strong>Đúng</strong> theo định nghĩa phần bù $C_{\mathbb{R}}A = \mathbb{R} \setminus (-\infty; 1] = (1; +\infty) = B$.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-2"><span class="text-green-600">Câu 5 (Tự luận ngắn):</span> Xác định các tập hợp sau bằng cách vẽ trên trục số:</p>
+                    <p class="pl-4 font-medium text-gray-800">a) $[-3; 5] \cap (2; 7)$.</p>
+                    <p class="pl-4 font-medium text-gray-800 mb-4">b) $(-\infty; 0] \cup (-1; 2)$.</p>
+                    <button onclick="toggleHint('hint-5')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem kết quả đáp số</button>
+                    <div id="hint-5" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Kết quả:</strong><br>
+                        a) $[-3; 5] \cap (2; 7) = (2; 5]$. (Lấy phần giao nhau từ điểm 2 đến điểm 5).<br>
+                        b) $(-\infty; 0] \cup (-1; 2) = (-\infty; 2)$. (Hợp hai tập hợp lại tạo thành một khoảng liên tục từ âm vô cùng tới 2).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="px-3 py-1.5 bg-orange-100 text-orange-700 font-bold rounded-lg text-xs uppercase tracking-wider heading-font">Mức độ 2</span>
+                <h2 class="text-xl font-bold heading-font text-gray-900">PHẦN 2: MỨC ĐỘ NÂNG CAO (4 BÀI)</h2>
+            </div>
+            <p class="text-xs font-semibold text-gray-500 mb-4 uppercase tracking-wide bg-slate-100 p-2.5 rounded-lg border-l-4 border-orange-500">🎯 Mục tiêu: Học sinh bắt đầu làm quen với các tập hợp có chứa tham số $m$. Yêu cầu vẽ trục số và biện luận vị trí tương đối giữa hai tập hợp.</p>
+
+            <div class="space-y-6">
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-3"><span class="text-orange-600">Câu 6 (Trắc nghiệm):</span> Cho hai tập hợp $A = (-3; 5]$ và $B = (m; m+5)$. Có bao nhiêu giá trị nguyên của tham số $m$ để $A \cap B \neq \emptyset$?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4 mb-4 font-medium text-gray-700">
+                        <div>A. 13.</div>
+                        <div>B. 12.</div>
+                        <div>C. 14.</div>
+                        <div>D. Vô số.</div>
+                    </div>
+                    <button onclick="toggleHint('hint-6')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & đáp án</button>
+                    <div id="hint-6" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp án chính xác: B.</strong><br>
+                        <em>Gợi ý cách giải:</em> Tìm điều kiện để $A \cap B = \emptyset$, sau đó lấy phần bù. <br>
+                        $A \cap B = \emptyset \Leftrightarrow m+5 \le -3$ hoặc $m \ge 5 \Leftrightarrow m \le -8$ hoặc $m \ge 5$.<br>
+                        Suy ra để giao khác rỗng: $-8 < m < 5$. Do $m \in \mathbb{Z}$ nên $m \in \{-7; -6; ...; 4\}$. Số lượng giá trị nguyên là: $4 - (-7) + 1 = 12$.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-3"><span class="text-orange-600">Câu 7 (Đúng/Sai):</span> Cho hai tập hợp $A = [m; m+2]$ và $B = [1; 3]$ với $m$ là tham số thực. Các khẳng định sau đây đúng hay sai?</p>
+                    <div class="space-y-2 pl-4 mb-4 text-sm font-medium text-gray-700">
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>a) Độ dài của đoạn $A$ luôn bằng 2 với mọi $m$.</span> <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Đúng</span></div>
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>b) Để $A \cap B \neq \emptyset$ thì điều kiện cần và đủ là $-1 \le m \le 3$.</span> <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Đúng</span></div>
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>c) Để $A \subset B$ thì $m = 1$.</span> <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Đúng</span></div>
+                        <div class="flex justify-between items-center border-b border-gray-100 py-1"><span>d) Để $A \cap B = \emptyset$ thì cần điều kiện $m > 3$ hoặc $m < -1$.</span> <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Đúng</span></div>
+                    </div>
+                    <button onclick="toggleHint('hint-7')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem lời giải chi tiết</button>
+                    <div id="hint-7" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Lời giải chi tiết:</strong> Tất cả các khẳng định trên đều <strong>ĐÚNG</strong>.<br>
+                        - a) Lấy $(m+2) - m = 2$ (Đúng).<br>
+                        - b) $A \cap B \neq \emptyset \Leftrightarrow \begin{cases} m \le 3 \\ m+2 \ge 1 \end{cases} \Leftrightarrow -1 \le m \le 3$ (Đúng).<br>
+                        - c) $A \subset B \Leftrightarrow \begin{cases} m \ge 1 \\ m+2 \le 3 \end{cases} \Leftrightarrow m = 1$ (Đúng).<br>
+                        - d) Là mệnh đề đảo ngược của ý (b) nên hoàn toàn chính xác.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-2"><span class="text-orange-600">Câu 8 (Tự luận):</span> Cho hai tập hợp $A = [m; m+2]$ và $B = [-1; 2]$ với $m$ là tham số thực. Tìm tất cả các giá trị nguyên của $m$ để tập hợp $A$ là tập con của tập hợp $B$ ($A \subset B$).</p>
+                    <button onclick="toggleHint('hint-8')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & đáp số</button>
+                    <div id="hint-8" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp số: $m = -1$ hoặc $m = 0$.</strong><br>
+                        <em>Giải chi tiết:</em> Để $A \subset B \Leftrightarrow \begin{cases} m \ge -1 \\ m+2 \le 2 \end{cases} \Leftrightarrow \begin{cases} m \ge -1 \\ m \le 0 \end{cases} \Leftrightarrow -1 \le m \le 0$. <br>
+                        Vì $m$ là giá trị nguyên nên $m \in \{-1; 0\}$.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-2"><span class="text-orange-600">Câu 9 (Tự luận):</span> Cho hai tập hợp $A = (1; 3)$ và $B = [m - 1; m + 5]$ với $m$ là một tham số thực. Tìm $m$ để $A \subset B$.</p>
+                    <button onclick="toggleHint('hint-9')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & đáp số</button>
+                    <div id="hint-9" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp số: $-2 \le m \le 2$.</strong><br>
+                        <em>Giải chi tiết:</em> Điều kiện để khoảng $A$ nằm trọn vẹn trong đoạn $B$ là đầu mút trái của $B$ nhỏ hơn hoặc bằng đầu mút trái của $A$, và đầu mút phải của $B$ lớn hơn hoặc bằng đầu mút phải của $A$. <br>
+                        $\Leftrightarrow \begin{cases} m-1 \le 1 \\ m+5 \ge 3 \end{cases} \Leftrightarrow \begin{cases} m \le 2 \\ m \ge -2 \end{cases} \Leftrightarrow -2 \le m \le 2$. (Dấu bằng xảy ra được vì đoạn chứa khoảng).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="px-3 py-1.5 bg-red-100 text-red-700 font-bold rounded-lg text-xs uppercase tracking-wider heading-font">Mức độ 3</span>
+                <h2 class="text-xl font-bold heading-font text-gray-900">PHẦN 3: MỨC ĐỘ VẬN DỤNG (3 BÀI)</h2>
+            </div>
+            <p class="text-xs font-semibold text-gray-500 mb-4 uppercase tracking-wide bg-slate-100 p-2.5 rounded-lg border-l-4 border-red-500">🎯 Mục tiêu: Đòi hỏi tư duy sâu hơn về biện luận tham số $m$, kết hợp đếm số lượng số nguyên thỏa mãn điều kiện hoặc các bài toán ranh giới (chạm mút).</p>
+
+            <div class="space-y-6">
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-2"><span class="text-red-600">Câu 10 (Trả lời ngắn):</span> Cho hai tập hợp $A = (-\infty; m + 1)$ và $B = [3; +\infty)$ với $m$ là một tham số thực. Tìm $m$ để $A \cup B = \mathbb{R}$.</p>
+                    <p class="text-xs text-gray-400 italic mb-4">*(Nhập kết quả dưới dạng điều kiện của m, ví dụ: m >= 2)*</p>
+                    <button onclick="toggleHint('hint-10')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem đáp án ngắn</button>
+                    <div id="hint-10" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp số: $m \ge 2$.</strong><br>
+                        <em>Giải thích:</em> Để hai tập hợp khi hợp lại không để lại khoảng trống nào trên trục số thì đầu mút của tập hợp $A$ phải chạm tới hoặc vượt qua đầu mút của tập hợp $B$. Tức là: $m + 1 \ge 3 \Leftrightarrow m \ge 2$.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-2"><span class="text-red-600">Câu 11 (Tự luận):</span> Vẫn sử dụng hai tập hợp $A = (-\infty; m + 1)$ và $B = [3; +\infty)$ như ở Câu 10. Hãy tìm các giá trị của tham số thực $m$ để giao của hai tập hợp ($A \cap B$) chứa đúng 5 số nguyên.</p>
+                    <button onclick="toggleHint('hint-11')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem gợi ý & lời giải</button>
+                    <div id="hint-11" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Đáp số: $7 < m \le 8$.</strong><br>
+                        <em>Giải chi tiết:</em> Ta có $A \cap B = [3; m+1)$. Để tập hợp này chứa đúng 5 số nguyên thì các số nguyên đó bắt buộc phải là: $3, 4, 5, 6, 7$. <br>
+                        Do đó, số nguyên tiếp theo là $8$ không được phép thuộc vào tập hợp giao này. <br>
+                        Suy ra ranh giới điều kiện của mút tròn là: $7 < m + 1 \le 8 \Leftrightarrow 6 < m \le 7$. 
+                        <br><span class="text-red-600 font-bold">Sửa lỗi tư duy chặn mút:</span> Tập hợp chứa đúng 5 giá trị $\{3,4,5,6,7\} \Rightarrow 7 < m+1 \le 8 \Leftrightarrow 6 < m \le 7$.
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <p class="font-bold text-gray-900 mb-2"><span class="text-red-600">Câu 12 (Tự luận/Vận dụng cao):</span> Cho hai tập hợp $A = [m; m+2]$ và $B = [n; n+1]$ với $m$ và $n$ là các tham số thực. Hãy biện luận để tìm điều kiện của $m$ và $n$ sao cho tập hợp giao $A \cap B$ chỉ chứa đúng một phần tử duy nhất.</p>
+                    <button onclick="toggleHint('hint-12')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">💡 Xem lời giải biện luận</button>
+                    <div id="hint-12" class="hidden mt-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-gray-700 leading-relaxed">
+                        <strong>Kết quả biện luận: $n = m + 2$ hoặc $m = n + 1$.</strong><br>
+                        <em>Giải thích chi tiết:</em> Vì cả $A$ và $B$ đều là các đoạn đóng (chứa cả 2 đầu mút), để chúng chỉ giao nhau tại đúng 1 điểm duy nhất thì 2 đoạn này phải tiếp xúc ngoài với nhau.<br>
+                        - Trường hợp 1: Đoạn $A$ nằm trước đoạn $B$ và dính nhau tại mút: $m + 2 = n$.<br>
+                        - Trường hợp 2: Đoạn $B$ nằm trước đoạn $A$ và dính nhau tại mút: $n + 1 = m$.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-2xl">
+            <h3 class="text-base font-bold text-amber-900 heading-font mb-2 flex items-center gap-1">💡 Gợi ý phương pháp học tập & sư phạm:</h3>
+            <p class="text-sm text-amber-800 leading-relaxed">
+                Đối với Phần 2 và Phần 3, học sinh nên chuẩn bị sẵn <strong>bút chì và thước kẻ</strong>. Khi giải các bài toán có chứa tham số $m$, hãy áp dụng phương pháp trực quan: vẽ tập hợp cố định (chứa số cụ thể) lên trục số trước, sau đó dùng tay hoặc một mẩu giấy nhỏ cắt sẵn đại diện cho tập hợp chứa tham số $m$ trượt tịnh tiến từ trái qua phải. Hành động này giúp xác định chính xác các vị trí tương đối (cắt nhau, bao hàm nhau, rời nhau). <strong>Đặc biệt lưu ý:</strong> Luôn luôn phải kiểm tra lại điều kiện cực hạn tại các ranh giới dấu đẳng thức "$=$" để không bị thiếu hoặc thừa nghiệm.
+            </p>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 px-4 text-center text-xs md:text-sm border-t border-gray-800">
+        <div class="max-w-5xl mx-auto space-y-1">
+            <p class="font-semibold text-white">© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</p>
+            <p class="text-gray-500 text-xs">Phát triển hạ tầng bài tập số hóa chuyên nghiệp phục vụ đổi mới sáng tạo học đường.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleHint(id) {
+            const hintBox = document.getElementById(id);
+            if (hintBox.classList.contains('hidden')) {
+                hintBox.classList.remove('hidden');
+                // Gọi MathJax render lại nội dung công thức khi được mở ra (đảm bảo hiển thị chuẩn)
+                if (window.MathJax) {
+                    MathJax.typesetPromise([hintBox]);
+                }
+            } else {
+                hintBox.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

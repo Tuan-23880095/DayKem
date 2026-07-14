@@ -1,0 +1,867 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phiếu Bài Tập Toán 7 - Buổi 6 | Trung Tâm Bồi Dưỡng Văn Hóa HCMUS</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- MathJax Configuration for LaTeX formatting -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'no-mathjax',
+        processHtmlClass: 'mathjax'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Style custom print-friendly layout */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-full-width {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen selection:bg-indigo-100 mathjax">
+
+  <!-- TOP HEADER & BRANDING (No-Print) -->
+  <header class="no-print bg-white border-b border-slate-200 sticky top-0 z-50 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-4">
+      
+      <!-- Logos Section -->
+      <div class="flex items-center gap-3 sm:gap-5">
+        <!-- Logo KHTN -->
+        <div class="h-12 w-auto flex items-center bg-white p-1 rounded border border-slate-100 shadow-sm">
+          <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" 
+               alt="Logo Trường Đại học Khoa học Tự nhiên TP.HCM" 
+               class="h-10 object-contain"
+               onerror="this.src='https://via.placeholder.com/100x40?text=HCMUS'">
+        </div>
+        
+        <!-- Divider -->
+        <div class="h-8 w-px bg-slate-200 hidden sm:block"></div>
+        
+        <!-- Logo Trung tâm -->
+        <div class="h-12 w-auto flex items-center bg-white p-1 rounded border border-slate-100 shadow-sm">
+          <img src="https://bdvh.hcmus.edu.vn/images/logo2_bdvh.jpg" 
+               alt="Logo Trung tâm Bồi dưỡng Văn hóa" 
+               class="h-10 object-contain"
+               onerror="this.src='https://via.placeholder.com/100x40?text=BDVH'">
+        </div>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTeacherMode()" id="teacherBtn" class="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-sm font-semibold transition-colors">
+          <i data-lucide="eye" class="w-4 h-4"></i>
+          <span>Xem Đáp Án / Gợi Ý</span>
+        </button>
+        <button onclick="window.print()" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 rounded-lg text-sm font-semibold transition-all shadow-md shadow-slate-200">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>In Phiếu Bài Tập</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- WORKSPACE GRID CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- LEFT COLUMN: THE OFFICIAL WORKSHEET (Will print beautifully) -->
+      <section class="lg:col-span-8 bg-white border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-10 print-full-width" id="worksheet-panel">
+        
+        <!-- Academic Header (Standard school format) -->
+        <div class="flex flex-col items-center text-center border-b-2 border-double border-slate-300 pb-6 mb-8">
+          <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Đại Học Quốc Gia TP. Hồ Chí Minh</span>
+          <span class="text-sm font-semibold uppercase tracking-wide text-slate-700 mt-1">Trường Đại học Khoa học Tự nhiên • Trung tâm Bồi dưỡng Văn hóa</span>
+          
+          <div class="my-6">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">PHIẾU BÀI TẬP TOÁN 7 - BUỔI 6</h1>
+            <p class="text-md font-medium text-indigo-600 mt-2">Chủ đề: Biểu diễn số thập phân, Quy tắc làm tròn số và Ước lượng kết quả</p>
+          </div>
+          
+          <!-- Student Bio Fields -->
+          <div class="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+            <div class="flex items-center gap-2 border-b border-dashed border-slate-400 pb-1">
+              <span class="text-sm font-semibold text-slate-600 whitespace-nowrap">Họ và tên học sinh:</span>
+              <input type="text" placeholder="........................................................" class="w-full bg-transparent focus:outline-none text-sm text-indigo-900 font-medium">
+            </div>
+            <div class="flex items-center gap-2 border-b border-dashed border-slate-400 pb-1">
+              <span class="text-sm font-semibold text-slate-600 whitespace-nowrap">Lớp:</span>
+              <input type="text" placeholder="........." class="w-full bg-transparent focus:outline-none text-sm text-indigo-900 font-medium">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Concept Visual Graphic (Illustrations block) -->
+        <div class="no-print mb-8 p-5 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl border border-indigo-100 flex flex-col md:flex-row items-center gap-6">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <!-- Colorful Dynamic Illustration (Vibrant SVG for decimals) -->
+            <svg viewBox="0 0 200 200" class="w-40 h-40 drop-shadow-md">
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <!-- Background Circle Grid -->
+              <circle cx="100" cy="100" r="85" fill="none" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="4" />
+              <!-- Number line scale representation -->
+              <line x1="30" y1="130" x2="170" y2="130" stroke="#475569" stroke-width="2.5" stroke-linecap="round" />
+              <!-- Ticks -->
+              <line x1="50" y1="125" x2="50" y2="135" stroke="#475569" stroke-width="2" />
+              <line x1="100" y1="120" x2="100" y2="140" stroke="#475569" stroke-width="3" />
+              <line x1="150" y1="125" x2="150" y2="135" stroke="#475569" stroke-width="2" />
+              <!-- Highlighted rounding arc -->
+              <path d="M 125,130 A 25,25 0 0,0 100,130" fill="none" stroke="url(#grad2)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2" />
+              <!-- Modern decorative graphic geometric items representing decimals -->
+              <rect x="35" y="55" width="40" height="40" rx="8" fill="url(#grad1)" opacity="0.9" />
+              <circle cx="140" cy="65" r="28" fill="url(#grad2)" opacity="0.85" />
+              <!-- Text element on visual -->
+              <text x="55" y="80" fill="#ffffff" font-family="sans-serif" font-weight="bold" font-size="14">$1,333...$</text>
+              <text x="123" y="70" fill="#ffffff" font-family="sans-serif" font-weight="bold" font-size="14">$\approx 3,14$</text>
+            </svg>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-md font-bold text-slate-800 flex items-center gap-2">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-white text-xs font-bold">i</span>
+              Ghi chú phương pháp học tập mới
+            </h3>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+              Phiếu học tập này áp dụng tiến trình sư phạm phát triển năng lực toán học. Các bài tập được phân bổ theo 4 dạng cốt lõi: từ biểu diễn số, quy nạp quy tắc làm tròn nâng cao cho đến các ứng dụng thực tiễn toàn cầu chuẩn PISA.
+            </p>
+          </div>
+        </div>
+
+        <!-- PART I: CLASSROOM EXERCISES -->
+        <div class="space-y-10">
+          <div class="border-b border-indigo-100 pb-2 flex items-center justify-between">
+            <h2 class="text-lg font-bold uppercase tracking-wider text-indigo-800 flex items-center gap-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-indigo-600"></i>
+              PHẦN I. BÀI TẬP TRÊN LỚP
+            </h2>
+            <span class="text-xs bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-semibold no-print">Thực hành trên lớp</span>
+          </div>
+
+          <!-- DẠNG 1 -->
+          <div class="space-y-6">
+            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-indigo-600">
+              <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
+                DẠNG 1: BIỂU DIỄN SỐ HỮU TỈ DƯỚI DẠNG SỐ THẬP PHÂN
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed italic">
+                <strong>Phương pháp:</strong> Thực hiện phép chia tử số cho mẫu số. Nếu phép chia dừng lại (phần dư bằng 0) thì ta được số thập phân hữu hạn. Nếu phép chia không bao giờ chấm dứt và xuất hiện một cụm chữ số lặp lại thì ta được số thập phân vô hạn tuần hoàn.
+              </p>
+            </div>
+
+            <!-- Bài 1 -->
+            <div class="pl-4 border-l border-slate-200 space-y-3">
+              <p class="font-semibold text-slate-950 flex items-start gap-2">
+                <span class="text-indigo-600">Bài 1.</span>
+                <span>Hãy biểu diễn các số hữu tỉ sau đây dưới dạng số thập phân và phân loại chúng thành số thập phân hữu hạn hay số thập phân vô hạn tuần hoàn:</span>
+              </p>
+              
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 py-2 pl-4">
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-center shadow-sm">
+                  a) $\frac{12}{25}$
+                </div>
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-center shadow-sm">
+                  b) $\frac{27}{2}$
+                </div>
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-center shadow-sm">
+                  c) $\frac{10}{9}$
+                </div>
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-center shadow-sm">
+                  d) $\frac{-35}{111}$
+                </div>
+              </div>
+
+              <!-- Answer Block for Bài 1 -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Đáp án Bài 1:
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>a) $\frac{12}{25} = 12 : 25 = 0,48$ &rarr; Số thập phân hữu hạn</li>
+                  <li>b) $\frac{27}{2} = 27 : 2 = 13,5$ &rarr; Số thập phân hữu hạn</li>
+                  <li>c) $\frac{10}{9} = 10 : 9 = 1,1111... = 1,(1)$ &rarr; Số thập phân vô hạn tuần hoàn với chu kì $(1)$</li>
+                  <li>d) $\frac{-35}{111} = -35 : 111 = -0,315315... = -0,(315)$ &rarr; Số thập phân vô hạn tuần hoàn với chu kì $(315)$</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Bài 2 -->
+            <div class="pl-4 border-l border-slate-200 space-y-3">
+              <p class="font-semibold text-slate-950 flex items-start gap-2">
+                <span class="text-indigo-600">Bài 2.</span>
+                <span>Hoàn thành các phát biểu sau đây để hiểu rõ chu kì của số thập phân:</span>
+              </p>
+              
+              <div class="space-y-3 pl-4">
+                <p class="text-sm">a) Số $a = 5,123$ là một số thập phân hữu hạn nên $a$ là một số <span class="no-print text-indigo-600 font-semibold">[...................................]</span> <span class="hidden print:inline">...................................</span></p>
+                <p class="text-sm">b) Số $b = 6,15555... = 6,1(5)$ là một số thập phân vô hạn tuần hoàn nên $b$ là số <span class="no-print text-indigo-600 font-semibold">[...................................]</span> <span class="hidden print:inline">...................................</span></p>
+                <p class="text-sm">c) Số $\pi = 3,14159265...$ là một số thập phân vô hạn không tuần hoàn, vậy $\pi$ là số <span class="no-print text-indigo-600 font-semibold">[...................................]</span> <span class="hidden print:inline">...................................</span></p>
+              </div>
+
+              <!-- Answer Block for Bài 2 -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Đáp án Bài 2:
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>a) ...nên $a$ là một số <strong>thập phân hữu hạn</strong> (hoặc số hữu tỉ).</li>
+                  <li>b) ...nên $b$ là số <strong>thập phân vô hạn tuần hoàn chu kì (5)</strong>.</li>
+                  <li>c) ...vậy $\pi$ là số <strong>vô tỉ</strong> (số thập phân vô hạn không tuần hoàn).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- DẠNG 2 -->
+          <div class="space-y-6">
+            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-indigo-600">
+              <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
+                DẠNG 2: LÀM TRÒN SỐ (THEO HÀNG VÀ THEO ĐỘ CHÍNH XÁC $d$)
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed italic">
+                <strong>Phương pháp:</strong><br>
+                - Nếu làm tròn theo độ chính xác $d$ là số chục ($d=50$), ta làm tròn đến hàng trăm.<br>
+                - Nếu độ chính xác $d$ là số phần nghìn ($d=0,005$ hoặc $d=0,006$), ta làm tròn đến hàng phần trăm (hàng làm tròn lớn hơn độ chính xác $d$ một bậc).
+              </p>
+            </div>
+
+            <!-- Bài 3 -->
+            <div class="pl-4 border-l border-slate-200 space-y-3">
+              <p class="font-semibold text-slate-950 flex items-start gap-2">
+                <span class="text-indigo-600">Bài 3.</span>
+                <span>Làm tròn các số sau theo yêu cầu:</span>
+              </p>
+              
+              <ul class="list-disc pl-6 space-y-2 text-sm text-slate-800">
+                <li>a) Làm tròn số $3,1415$ và số $\pi$ đến hàng phần mười.</li>
+                <li>b) Làm tròn số $-12,3456$ đến hàng phần trăm.</li>
+              </ul>
+
+              <!-- Answer Block for Bài 3 -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Đáp án Bài 3:
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>a) Làm tròn số $3,1415 \approx 3,1$ (chữ số bỏ đi ngay sau hàng phần mười là 4 < 5). Đối với $\pi \approx 3,14159... \approx 3,1$.</li>
+                  <li>b) Làm tròn số $-12,3456$ đến hàng phần trăm: Chữ số sau hàng làm tròn (phần trăm - số 4) là số 5. Vì $5 \geq 5$ nên ta cộng thêm 1 đơn vị vào hàng làm tròn &rarr; kết quả: $-12,35$.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Bài 4 -->
+            <div class="pl-4 border-l border-slate-200 space-y-3">
+              <p class="font-semibold text-slate-950 flex items-start gap-2">
+                <span class="text-indigo-600">Bài 4.</span>
+                <span>Làm tròn số căn cứ vào độ chính xác $d$ cho trước:</span>
+              </p>
+              
+              <ul class="list-disc pl-6 space-y-2 text-sm text-slate-800">
+                <li>a) Làm tròn số $-4,3456$ với độ chính xác $d = 0,006$.</li>
+                <li>b) Làm tròn số $12.735.590$ với độ chính xác $d = 500$.</li>
+                <li>c) Hãy quy tròn số $x = \sqrt{10} = 3,741657...$ với độ chính xác $d = 0,005$.</li>
+              </ul>
+
+              <!-- Answer Block for Bài 4 -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Đáp án Bài 4:
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li><strong>Quy tắc nhớ nhanh:</strong> Hàng làm tròn luôn ở hàng lớn hơn $d$ một bậc.</li>
+                  <li>a) $d = 0,006$ (hàng phần nghìn) &rarr; Làm tròn đến hàng phần trăm (hàng chục lần của $0.01$). Kết quả: $-4,35$.</li>
+                  <li>b) $d = 500$ (hàng trăm) &rarr; Làm tròn đến hàng nghìn. Chữ số sau hàng nghìn (hàng trăm) là 5. Do đó cộng thêm 1 vào hàng nghìn &rarr; Kết quả: $12.736.000$.</li>
+                  <li>c) $d = 0,005$ (hàng phần nghìn) &rarr; Làm tròn đến hàng phần trăm. Số sau hàng làm tròn là 1 < 5 &rarr; Kết quả: $3,74$.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- DẠNG 3 -->
+          <div class="space-y-6">
+            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-indigo-600">
+              <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
+                DẠNG 3: ƯỚC LƯỢNG KẾT QUẢ PHÉP TÍNH
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed italic">
+                <strong>Phương pháp:</strong> Làm tròn các số đến chữ số ở hàng cao nhất của mỗi số, sau đó mới thực hiện phép tính để dự đoán nhanh kết quả.
+              </p>
+            </div>
+
+            <!-- Bài 5 -->
+            <div class="pl-4 border-l border-slate-200 space-y-3">
+              <p class="font-semibold text-slate-950 flex items-start gap-2">
+                <span class="text-indigo-600">Bài 5.</span>
+                <span>Hãy ước lượng kết quả của các phép tính sau:</span>
+              </p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pl-4 py-1">
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-slate-800 text-sm">
+                  <strong>a)</strong> $7148 \cdot 593$
+                </div>
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-slate-800 text-sm">
+                  <strong>b)</strong> $(-11,032) \cdot (-24,3)$
+                </div>
+                <div class="p-3 bg-white border border-slate-200 rounded-lg text-slate-800 text-sm">
+                  <strong>c)</strong> $5999 \cdot 101$
+                </div>
+              </div>
+
+              <!-- Answer Block for Bài 5 -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Đáp án Bài 5:
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>a) Làm tròn đến chữ số cao nhất: $7148 \approx 7000$ ; $593 \approx 600$. <br>&rArr; Tích ước lượng: $7000 \cdot 600 = 4.200.000$ (kết quả thật: $4.238.764$).</li>
+                  <li>b) Làm tròn: $-11,032 \approx -11$ (hoặc $-10$) ; $-24,3 \approx -24$ (hoặc $-20$). <br>&rArr; Ước lượng chuẩn: $(-11) \cdot (-24) = 264$ hoặc $(-10) \cdot (-20) = 200$.</li>
+                  <li>c) Làm tròn: $5999 \approx 6000$ ; $101 \approx 100$. <br>&rArr; Ước lượng: $6000 \cdot 100 = 600.000$.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- DẠNG 4 -->
+          <div class="space-y-6">
+            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-indigo-600">
+              <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
+                DẠNG 4: BÀI TOÁN THỰC TẾ
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed italic">
+                <strong>Ghi chú:</strong> Áp dụng toán học giải quyết các bài toán đời sống (Dân số học, Quy đổi đo lường hệ Anh-Mỹ, Quy định hàng hải và hàng không quốc tế).
+              </p>
+            </div>
+
+            <!-- Bài 6 -->
+            <div class="pl-4 border-l border-slate-200 space-y-2">
+              <p class="font-semibold text-slate-950 flex items-start gap-2 text-sm sm:text-base">
+                <span class="text-indigo-600">Bài 6.</span>
+                <span>Dân số của Việt Nam tính đến ngày 20/01/2021 là $97.800.744$ người. Hãy làm tròn số này đến hàng triệu.</span>
+              </p>
+              <!-- Answer Block -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold mb-1">Đáp án:</p>
+                Hàng làm tròn là hàng triệu (chữ số 7). Chữ số sau hàng làm tròn là 8 (lớn hơn 5) nên ta tăng chữ số hàng làm tròn thêm 1 đơn vị và chuyển toàn bộ phần phía sau về chữ số 0.<br>
+                Kết quả: $97.800.744 \approx 98.000.000$ (người).
+              </div>
+            </div>
+
+            <!-- Bài 7 -->
+            <div class="pl-4 border-l border-slate-200 space-y-2">
+              <p class="font-semibold text-slate-950 flex items-start gap-2 text-sm sm:text-base">
+                <span class="text-indigo-600">Bài 7.</span>
+                <span>Cho biết $1 \text{ inch} \approx 2,54 \text{ cm}$. Tính độ dài đường chéo bằng đơn vị cm của một màn hình tivi $32 \text{ inch}$ và làm tròn kết quả đến hàng phần mười.</span>
+              </p>
+              <!-- Answer Block -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold mb-1">Đáp án:</p>
+                Độ dài đường chéo của tivi là: $32 \cdot 2,54 = 81,28 \text{ cm}$.<br>
+                Làm tròn $81,28$ đến hàng phần mười (chữ số 2), chữ số ngay sau nó là 8 &ge; 5 &rarr; kết quả: $81,3 \text{ cm}$.
+              </div>
+            </div>
+
+            <!-- Bài 8 -->
+            <div class="pl-4 border-l border-slate-200 space-y-2">
+              <p class="font-semibold text-slate-950 flex items-start gap-2 text-sm sm:text-base">
+                <span class="text-indigo-600">Bài 8.</span>
+                <span>Một hãng hàng không quốc tế quy định mỗi hành khách được mang hai va li không tính cước; mỗi va li cân nặng không vượt quá $23 \text{ kg}$. Hỏi một va li cân nặng $50,99 \text{ pound}$ sau khi quy đổi sang kilôgam và làm tròn đến hàng đơn vị thì có vượt quá quy định về khối lượng không? (Cho biết $1 \text{ pound} \approx 0,45359237 \text{ kg}$).</span>
+              </p>
+              <!-- Answer Block -->
+              <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+                <p class="font-bold mb-1">Đáp án:</p>
+                Khối lượng quy đổi của va li là: $50,99 \cdot 0,45359237 \approx 23,12867 \text{ kg}$.<br>
+                Làm tròn kết quả đến hàng đơn vị: chữ số ngay sau hàng đơn vị (chữ số 3) là 1 < 5 &rarr; Kết quả làm tròn: $23 \text{ kg}$.<br>
+                <strong>Kết luận:</strong> Trọng lượng sau khi làm tròn đến hàng đơn vị đạt đúng chuẩn quy định $23 \text{ kg}$, do đó <strong>không vượt quá</strong> quy chuẩn hàng không quốc tế.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-break my-10"></div>
+
+        <!-- PART II: HOMEWORK -->
+        <div class="space-y-10">
+          <div class="border-b border-indigo-100 pb-2 flex items-center justify-between">
+            <h2 class="text-lg font-bold uppercase tracking-wider text-indigo-800 flex items-center gap-2">
+              <i data-lucide="home" class="w-5 h-5 text-indigo-600"></i>
+              PHẦN II. BÀI TẬP VỀ NHÀ (TỰ LUYỆN)
+            </h2>
+            <span class="text-xs bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-semibold no-print">Tự rèn luyện</span>
+          </div>
+
+          <!-- Bài 9 -->
+          <div class="pl-4 border-l border-slate-200 space-y-2">
+            <p class="font-semibold text-slate-950 flex items-start gap-2 text-sm sm:text-base">
+              <span class="text-indigo-600">Bài 9.</span>
+              <span>Viết các phân số sau dưới dạng số thập phân (chỉ rõ chu kì nếu là số vô hạn tuần hoàn):</span>
+            </p>
+            <div class="grid grid-cols-4 gap-3 max-w-lg py-2 pl-4">
+              <div class="p-2 border border-slate-200 rounded text-center text-sm font-semibold">$\frac{5}{16}$</div>
+              <div class="p-2 border border-slate-200 rounded text-center text-sm font-semibold">$\frac{7}{50}$</div>
+              <div class="p-2 border border-slate-200 rounded text-center text-sm font-semibold">$\frac{11}{40}$</div>
+              <div class="p-2 border border-slate-200 rounded text-center text-sm font-semibold">$\frac{9}{200}$</div>
+            </div>
+            <!-- Answer Block -->
+            <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+              <p class="font-bold mb-1">Đáp án:</p>
+              Tất cả các số này đều có mẫu chỉ chứa các thừa số nguyên tố 2 và 5, nên chúng là các số thập phân hữu hạn:<br>
+              - $\frac{5}{16} = 0,3125$<br>
+              - $\frac{7}{50} = 0,14$<br>
+              - $\frac{11}{40} = 0,275$<br>
+              - $\frac{9}{200} = 0,045$
+            </div>
+          </div>
+
+          <!-- Bài 10 -->
+          <div class="pl-4 border-l border-slate-200 space-y-2">
+            <p class="font-semibold text-slate-950 flex items-start gap-2 text-sm sm:text-base">
+              <span class="text-indigo-600">Bài 10.</span>
+              <span>Tính chung 9 tháng đầu năm 2019, tổng lượng khách du lịch quốc tế đến Việt Nam đạt $12.870.506$ lượt khách. Hãy làm tròn số này đến hàng trăm.</span>
+            </p>
+            <!-- Answer Block -->
+            <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+              <p class="font-bold mb-1">Đáp án:</p>
+              Hàng làm tròn là hàng trăm (chữ số 5). Chữ số ngay sau nó là 0 < 5. Do đó ta giữ nguyên hàng làm tròn và chuyển các số tiếp theo về 0.<br>
+              Kết quả: $12.870.506 \approx 12.870.500$ (lượt khách).
+            </div>
+          </div>
+
+          <!-- Bài 11 -->
+          <div class="pl-4 border-l border-slate-200 space-y-2">
+            <p class="font-semibold text-slate-950 flex items-start gap-2 text-sm sm:text-base">
+              <span class="text-indigo-600">Bài 11.</span>
+              <span>Ước lượng kết quả các phép tính sau rồi so sánh với kết quả tìm được bằng máy tính cầm tay:</span>
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pl-4 py-1">
+              <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-800">
+                <strong>a)</strong> $(-35,1) \cdot (-64) : 13$
+              </div>
+              <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-800">
+                <strong>b)</strong> $(-8,8) \cdot (-4,1) : 2,6$
+              </div>
+            </div>
+            <!-- Answer Block -->
+            <div class="teacher-node hidden mt-3 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-sm text-emerald-800">
+              <p class="font-bold mb-1">Đáp án & So sánh:</p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li><strong>a) Ước lượng:</strong> Làm tròn $-35,1 \approx -35$ ; $-64 \approx -60$ ; $13 \approx 10$. Kết quả ước lượng: $(-35) \cdot (-60) : 10 = 2100 : 10 = 210$. <br><strong>Thực tế bằng máy tính:</strong> $(-35,1) \cdot (-64) : 13 = 2246,4 : 13 \approx 172,8$.</li>
+                <li><strong>b) Ước lượng:</strong> Làm tròn $-8,8 \approx -9$ ; $-4,1 \approx -4$ ; $2,6 \approx 3$. Kết quả ước lượng: $(-9) \cdot (-4) : 3 = 36 : 3 = 12$. <br><strong>Thực tế bằng máy tính:</strong> $(-8,8) \cdot (-4,1) : 2,6 = 36,08 : 2,6 \approx 13,88$.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TEACHER HINTS FOOTER (No-Print) -->
+        <div class="teacher-node hidden mt-12 p-6 bg-slate-900 text-slate-200 rounded-xl border border-slate-800 no-print">
+          <h3 class="text-md font-bold text-amber-400 flex items-center gap-2 mb-4">
+            <i data-lucide="lightbulb" class="w-5 h-5"></i>
+            💡 Gợi ý tổ chức lớp học & Đáp án nhanh cho giáo viên:
+          </h3>
+          <ul class="space-y-3 text-sm leading-relaxed">
+            <li>
+              <span class="text-amber-300 font-bold">• Lưu ý ở Dạng 2 (Độ chính xác $d$):</span> Học sinh rất dễ nhầm lẫn yêu cầu làm tròn theo $d$. Bạn cần nhắc các em: <strong>"Hàng làm tròn luôn lớn hơn độ chính xác $d$ một bậc"</strong>.
+              <ul class="list-disc pl-5 mt-1 text-slate-300">
+                <li><em>Ví dụ Bài 4a:</em> $d = 0,006$ (hàng phần nghìn) &rarr; phải làm tròn đến hàng phần trăm. Kết quả: $-4,35$.</li>
+                <li><em>Ví dụ Bài 4b:</em> $d = 500$ (hàng trăm) &rarr; phải làm tròn đến hàng nghìn. Kết quả: $12.736.000$.</li>
+              </ul>
+            </li>
+            <li>
+              <span class="text-amber-300 font-bold">• Với Bài 5 (Ước lượng):</span> Nhắc học sinh làm tròn tới chữ số cao nhất.
+              <ul class="list-disc pl-5 mt-1 text-slate-300">
+                <li><em>Ví dụ Bài 5a:</em> $7148 \approx 7000$; $593 \approx 600$. Tích ước lượng là $7000 \cdot 600 = 4.200.000$.</li>
+              </ul>
+            </li>
+            <li>
+              <span class="text-amber-300 font-bold">• Với Bài 8:</span> Học sinh cần thực hiện phép nhân $50,99 \cdot 0,45359237$ trước, ra kết quả khoảng $23,128...$, sau đó làm tròn đến hàng đơn vị là $23 \text{ kg}$. Do đó, va li này <strong>không</strong> vượt quá quy định. Đây là một bài toán tính ứng dụng rất thực tế, truyền cảm hứng tích cực cho học sinh.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: INTERACTIVE TOOLKIT (Highly Visual & Practical - Hidden on print) -->
+      <aside class="lg:col-span-4 space-y-6 no-print">
+        
+        <!-- Live Mathematical Sandbox Widget (Multicolor UI) -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 overflow-hidden relative">
+          <!-- Colorful Decor Background -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-400 to-indigo-500 rounded-full blur-3xl opacity-25"></div>
+          
+          <h2 class="text-base font-bold text-slate-950 flex items-center gap-2 mb-4 relative z-10">
+            <i data-lucide="cpu" class="w-5 h-5 text-indigo-600"></i>
+            Hộp Cát Toán Học Trực Quan
+          </h2>
+          <p class="text-xs text-slate-500 mb-6">
+            Công cụ tương tác thời gian thực hỗ trợ học sinh thực nghiệm tự quy đổi phân số và làm tròn số.
+          </p>
+
+          <!-- Tab Selector -->
+          <div class="flex gap-2 mb-4 bg-slate-100 p-1 rounded-lg">
+            <button onclick="switchTab('tab-convert')" id="btn-tab-convert" class="flex-1 text-xs font-semibold py-2 px-3 rounded-md bg-white text-indigo-700 shadow-sm transition-all">
+              Quy đổi Phân số
+            </button>
+            <button onclick="switchTab('tab-round')" id="btn-tab-round" class="flex-1 text-xs font-semibold py-2 px-3 rounded-md text-slate-600 hover:text-slate-900 transition-all">
+              Thực Hành Làm Tròn
+            </button>
+          </div>
+
+          <!-- Tab content: Fraction converter -->
+          <div id="tab-convert" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Nhập Phân Số</label>
+              <div class="flex items-center gap-2">
+                <input type="number" id="num-p" value="10" class="w-full border border-slate-300 rounded-lg p-2 text-center text-sm font-semibold focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Tử">
+                <span class="text-slate-400 font-bold">/</span>
+                <input type="number" id="num-q" value="9" class="w-full border border-slate-300 rounded-lg p-2 text-center text-sm font-semibold focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Mẫu">
+              </div>
+            </div>
+
+            <button onclick="calculateFraction()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1">
+              <span>Tính toán phân tích</span>
+              <i data-lucide="arrow-right-left" class="w-3.5 h-3.5"></i>
+            </button>
+
+            <!-- Result representation -->
+            <div id="fraction-result-box" class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 hidden">
+              <span class="text-xs font-bold text-slate-500 block uppercase mb-1">Kết quả biểu diễn:</span>
+              <p class="text-lg font-black text-slate-900" id="result-decimal-val"></p>
+              
+              <div class="mt-3 flex items-center gap-2">
+                <span id="result-badge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab content: Rounder simulator -->
+          <div id="tab-round" class="space-y-4 hidden">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nhập Số Thập Phân</label>
+              <input type="number" step="any" id="round-val" value="3.141592" class="w-full border border-slate-300 rounded-lg p-2 text-sm font-semibold focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ví dụ: 3.1415">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Kiểu làm tròn</label>
+                <select id="round-type" onchange="toggleRoundType()" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                  <option value="place">Chữ số thập phân</option>
+                  <option value="precision">Độ chính xác d</option>
+                </select>
+              </div>
+              <div id="place-selector-container">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Số chữ số</label>
+                <select id="round-places" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                  <option value="0">0 (Hàng đơn vị)</option>
+                  <option value="1">1 (Phần mười)</option>
+                  <option value="2" selected>2 (Phần trăm)</option>
+                  <option value="3">3 (Phần nghìn)</option>
+                  <option value="4">4 (Chục nghìn)</option>
+                </select>
+              </div>
+              <div id="precision-selector-container" class="hidden">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Giá trị d</label>
+                <select id="round-precision" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                  <option value="50">d = 50</option>
+                  <option value="5">d = 5</option>
+                  <option value="0.05">d = 0,05</option>
+                  <option value="0.005" selected>d = 0,005</option>
+                  <option value="0.0005">d = 0,0005</option>
+                </select>
+              </div>
+            </div>
+
+            <button onclick="executeRounding()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1">
+              <span>Thực hiện làm tròn</span>
+              <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+            </button>
+
+            <!-- Rounding Result Output -->
+            <div id="rounding-result-box" class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 hidden">
+              <span class="text-xs font-bold text-slate-500 block uppercase mb-1">Kết quả quy tròn:</span>
+              <p class="text-lg font-black text-emerald-900" id="result-rounded-val"></p>
+              <p class="text-[11px] text-slate-600 mt-2 leading-relaxed" id="result-rounded-explanation"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Helper Widget -->
+        <div class="bg-slate-900 text-slate-100 rounded-2xl shadow-xl p-6 relative overflow-hidden">
+          <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-amber-400 rounded-full blur-3xl opacity-20"></div>
+          
+          <h3 class="text-base font-bold text-amber-300 flex items-center gap-2 mb-3">
+            <i data-lucide="award" class="w-5 h-5"></i>
+            Cẩm Nang Sống Còn
+          </h3>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">
+            Bí kíp học nhanh giúp chinh phục mọi bài kiểm tra học kì về Số hữu tỉ & Làm tròn số thập phân.
+          </p>
+
+          <div class="space-y-3">
+            <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-amber-400">
+              <h4 class="text-xs font-bold text-white uppercase">Phân loại nhanh mẫu số</h4>
+              <p class="text-[11px] text-slate-300 mt-1">
+                Tối giản phân số &rArr; Nếu mẫu số chỉ có ước nguyên tố là $2$ hoặc $5$ &rArr; Số hữu tỉ đó viết được dưới dạng thập phân <strong>Hữu Hạn</strong>. Ngược lại &rArr; <strong>Vô hạn tuần hoàn</strong>.
+              </p>
+            </div>
+            <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-indigo-400">
+              <h4 class="text-xs font-bold text-white uppercase">Mẹo ghi nhớ độ chính xác</h4>
+              <p class="text-[11px] text-slate-300 mt-1">
+                Làm tròn với độ chính xác $d$ có nghĩa là bạn phải làm tròn số đến hàng có giá trị gấp 10 lần chữ số có nghĩa đầu tiên của $d$.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Quality Badge -->
+        <div class="p-5 bg-white border border-slate-200 rounded-2xl text-center">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-800 mb-2">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </span>
+          <h4 class="text-xs font-bold text-slate-800 uppercase">Tài liệu chuẩn sư phạm</h4>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Được thẩm định và phát hành bởi hội đồng chuyên môn Trung tâm Bồi dưỡng Văn hóa - ĐHKHTN TP.HCM.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 mt-16 py-8 no-print">
+    <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-xs space-y-2">
+      <p class="font-semibold text-slate-700">© 2026 TRUNG TÂM BỒI DƯỠNG VĂN HÓA - ĐẠI HỌC KHOA HỌC TỰ NHIÊN TP.HCM</p>
+      <p>Phát triển chuyên đề Học tập tích cực nâng cao năng lực Sáng tạo & Tư duy Toán học 7.</p>
+      <p class="text-[10px] text-slate-400">Hỗ trợ hiển thị mượt mà trên iPad, Điện thoại di động, Máy tính cá nhân & Chế độ Print chuyên dụng.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Initializing Lucide Icons
+    lucide.createIcons();
+
+    // Teacher mode switch state
+    let isTeacherMode = false;
+
+    function toggleTeacherMode() {
+      isTeacherMode = !isTeacherMode;
+      const elements = document.querySelectorAll('.teacher-node');
+      const btn = document.getElementById('teacherBtn');
+
+      elements.forEach(el => {
+        if (isTeacherMode) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      if (isTeacherMode) {
+        btn.classList.remove('bg-indigo-50', 'text-indigo-700');
+        btn.classList.add('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
+        btn.querySelector('span').innerText = "Ẩn Đáp Án / Gợi Ý";
+      } else {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
+        btn.classList.add('bg-indigo-50', 'text-indigo-700', 'hover:bg-indigo-100');
+        btn.querySelector('span').innerText = "Xem Đáp Án / Gợi Ý";
+      }
+    }
+
+    // Interactive Sidebar Sandbox Tab Switcher
+    function switchTab(tabId) {
+      document.getElementById('tab-convert').classList.add('hidden');
+      document.getElementById('tab-round').classList.add('hidden');
+      
+      document.getElementById('btn-tab-convert').className = "flex-1 text-xs font-semibold py-2 px-3 rounded-md text-slate-600 hover:text-slate-900 transition-all";
+      document.getElementById('btn-tab-round').className = "flex-1 text-xs font-semibold py-2 px-3 rounded-md text-slate-600 hover:text-slate-900 transition-all";
+
+      document.getElementById(tabId).classList.remove('hidden');
+      document.getElementById('btn-' + tabId).className = "flex-1 text-xs font-semibold py-2 px-3 rounded-md bg-white text-indigo-700 shadow-sm transition-all";
+    }
+
+    // Toggle Round type form elements
+    function toggleRoundType() {
+      const type = document.getElementById('round-type').value;
+      if (type === 'place') {
+        document.getElementById('place-selector-container').classList.remove('hidden');
+        document.getElementById('precision-selector-container').classList.add('hidden');
+      } else {
+        document.getElementById('place-selector-container').classList.add('hidden');
+        document.getElementById('precision-selector-container').classList.remove('hidden');
+      }
+    }
+
+    // Sandbox Core Algorithmic Functions
+    // 1. Fraction Conversion & Cycle Analyzer
+    function calculateFraction() {
+      const p = parseInt(document.getElementById('num-p').value);
+      const q = parseInt(document.getElementById('num-q').value);
+      
+      const resultBox = document.getElementById('fraction-result-box');
+      const valText = document.getElementById('result-decimal-val');
+      const badge = document.getElementById('result-badge');
+
+      if (isNaN(p) || isNaN(q) || q === 0) {
+        alert("Vui lòng nhập tử số và mẫu số hợp lệ (Mẫu khác 0).");
+        return;
+      }
+
+      resultBox.classList.remove('hidden');
+      
+      const decimal = p / q;
+      // Core check: prime factorization of denominator in simplified form
+      const gcd = (a, b) => b ? gcd(b, a % b) : a;
+      const divisor = Math.abs(gcd(p, q));
+      const simpQ = Math.abs(q) / divisor;
+
+      let tempQ = simpQ;
+      while (tempQ % 2 === 0) tempQ /= 2;
+      while (tempQ % 5 === 0) tempQ /= 5;
+
+      const isFiniteVal = (tempQ === 1);
+
+      if (isFiniteVal) {
+        valText.innerText = `${p}/${q} = ${decimal.toLocaleString('vi-VN', { maximumFractionDigits: 10 })}`;
+        badge.innerText = "Thập phân hữu hạn";
+        badge.className = "text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800";
+      } else {
+        // Simple period calculator simulation
+        let remainderMap = new Map();
+        let rem = p % q;
+        let resString = Math.floor(p / q) + ",";
+        let decIndex = resString.length;
+        
+        while (rem !== 0 && !remainderMap.has(rem)) {
+          remainderMap.set(rem, resString.length);
+          rem *= 10;
+          resString += Math.floor(rem / q);
+          rem %= q;
+        }
+
+        if (rem !== 0) {
+          const startIdx = remainderMap.get(rem);
+          const nonPeriod = resString.substring(0, startIdx);
+          const period = resString.substring(startIdx);
+          valText.innerText = `${p}/${q} = ${nonPeriod}(${period})`;
+          badge.innerText = `Thập phân vô hạn tuần hoàn (Chu kì: ${period})`;
+        } else {
+          valText.innerText = `${p}/${q} = ${decimal}`;
+        }
+        badge.className = "text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-100 text-amber-800";
+      }
+    }
+
+    // 2. Custom Advanced Rounder Engine
+    function executeRounding() {
+      const num = parseFloat(document.getElementById('round-val').value);
+      const type = document.getElementById('round-type').value;
+      
+      const resultBox = document.getElementById('rounding-result-box');
+      const valText = document.getElementById('result-rounded-val');
+      const explanationText = document.getElementById('result-rounded-explanation');
+
+      if (isNaN(num)) {
+        alert("Vui lòng nhập một số thập phân hợp lệ.");
+        return;
+      }
+
+      resultBox.classList.remove('hidden');
+
+      if (type === 'place') {
+        const places = parseInt(document.getElementById('round-places').value);
+        const rounded = num.toFixed(places);
+        
+        valText.innerText = `${parseFloat(rounded).toLocaleString('vi-VN')}`;
+        
+        // Explain logic
+        const numStr = num.toString();
+        const dotIdx = numStr.indexOf('.');
+        let checkDigit = "N/A";
+        if (dotIdx !== -1 && (dotIdx + 1 + places) < numStr.length) {
+          checkDigit = numStr[dotIdx + 1 + places];
+        } else {
+          checkDigit = "0";
+        }
+        const digitVal = parseInt(checkDigit);
+        
+        explanationText.innerHTML = `Làm tròn đến hàng phần mười thứ <strong>${places}</strong>.<br>Chữ số đầu tiên bị loại bỏ là <strong>${checkDigit}</strong>. ` +
+          (digitVal >= 5 ? `Vì ${digitVal} &ge; 5, ta tăng chữ số cuối cùng lên 1 đơn vị.` : `Vì ${digitVal} < 5, ta giữ nguyên chữ số hàng làm tròn.`);
+
+      } else {
+        const d = parseFloat(document.getElementById('round-precision').value);
+        let rounded = 0;
+        let explanation = "";
+
+        if (d === 50) {
+          // Round to hundreds
+          rounded = Math.round(num / 100) * 100;
+          explanation = "Độ chính xác d = 50 (hàng chục) &rarr; Thực hiện làm tròn đến hàng trăm. Chữ số hàng chục quy định tăng hoặc giữ nguyên hàng trăm.";
+        } else if (d === 5) {
+          // Round to tens
+          rounded = Math.round(num / 10) * 10;
+          explanation = "Độ chính xác d = 5 (hàng đơn vị) &rarr; Thực hiện làm tròn đến hàng chục. Chữ số hàng đơn vị quy định tăng hoặc giữ nguyên hàng chục.";
+        } else if (d === 0.05) {
+          // Round to tenths (1 decimal place)
+          rounded = Math.round(num * 10) / 10;
+          explanation = "Độ chính xác d = 0,05 (hàng phần trăm) &rarr; Thực hiện làm tròn đến hàng phần mười. Chữ số hàng phần trăm quy định tăng hoặc giữ nguyên.";
+        } else if (d === 0.005) {
+          // Round to hundredths (2 decimal places)
+          rounded = Math.round(num * 100) / 100;
+          explanation = "Độ chính xác d = 0,005 (hàng phần nghìn) &rarr; Thực hiện làm tròn đến hàng phần trăm. Chữ số hàng phần nghìn quy định làm tròn.";
+        } else if (d === 0.0005) {
+          // Round to thousandths (3 decimal places)
+          rounded = Math.round(num * 1000) / 1000;
+          explanation = "Độ chính xác d = 0,0005 (hàng phần chục nghìn) &rarr; Thực hiện làm tròn đến hàng phần nghìn.";
+        }
+
+        valText.innerText = `${rounded.toLocaleString('vi-VN')}`;
+        explanationText.innerHTML = explanation;
+      }
+    }
+  </script>
+</body>
+</html>

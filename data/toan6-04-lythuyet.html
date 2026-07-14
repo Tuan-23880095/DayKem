@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 4: Lũy thừa với số mũ tự nhiên. Thứ tự thực hiện phép tính</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght=400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Cài đặt chung: Nền trắng, chữ đen */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tiêu đề chính nhiều màu sắc */
+        h1 {
+            color: #e11d48; /* Đỏ hồng */
+            text-align: center;
+            font-size: 2.2em;
+            border-bottom: 4px dashed #f43f5e;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Tiêu đề các phần */
+        h2 {
+            color: #1d4ed8; /* Xanh dương đậm */
+            background-color: #dbeafe; /* Nền xanh nhạt */
+            padding: 12px 20px;
+            border-left: 6px solid #2563eb;
+            border-radius: 0 8px 8px 0;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #047857; /* Xanh lá đậm */
+            border-bottom: 2px solid #34d399;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Các khối nội dung (Boxes) */
+        .theory-box {
+            background-color: #f0fdf4; /* Xanh lá cực nhạt */
+            border: 2px solid #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .example-box {
+            background-color: #fffbeb; /* Vàng cực nhạt */
+            border: 2px solid #f59e0b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .example-title {
+            font-weight: 800;
+            color: #d97706;
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background-color: #fdf2f8; /* Hồng nhạt */
+            border: 2px solid #ec4899;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.15);
+        }
+
+        /* Cấu trúc danh sách */
+        ul {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Nhấn mạnh chữ */
+        .highlight {
+            color: #dc2626; /* Đỏ */
+            font-weight: bold;
+        }
+
+        .math-expr {
+            font-size: 1.1em;
+        }
+
+        /* Hình ảnh minh họa */
+        .illustration {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: block;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎯 Buổi 4: Lũy thừa với số mũ tự nhiên. Thứ tự thực hiện phép tính</h1>
+
+    <img src="https://placehold.co/900x250/dbeafe/1d4ed8?text=To%C3%A1n+6:+Chinh+Ph%E1%BB%A5c+L%C5%A9y+Th%E1%BB%ABa+%26+Th%E1%BB%A9+T%E1%BB%B1+Ph%C3%A9p+T%C3%ADnh&font=montserrat" alt="Hình ảnh minh họa Toán học 6" class="illustration">
+
+    <h2>Phần 1: LÝ THUYẾT TRỌNG TÂM (40 PHÚT) 📚</h2>
+
+    <div class="theory-box">
+        <h3>1. Khái niệm Lũy thừa với số mũ tự nhiên (15 phút)</h3>
+        
+        <p><strong>a) Dẫn dắt và Định nghĩa:</strong></p>
+        <ul>
+            <li>Ta đã biết phép nhân là cách viết gọn của một tổng nhiều số hạng giống nhau:
+                <br><span class="math-expr">$4 + 4 + 4 + 4 + 4 = 4 \times 5$</span>
+            </li>
+            <li>Để viết gọn một <strong>tích của nhiều thừa số giống nhau</strong>, ta sử dụng phép nâng lên lũy thừa:
+                <br><span class="math-expr">$4 \times 4 \times 4 \times 4 \times 4 = 4^5$</span>
+            </li>
+        </ul>
+
+        <p><strong>b) Công thức tổng quát:</strong></p>
+        <blockquote>
+            Lũy thừa bậc $n$ của $a$, kí hiệu là $a^n$, là tích của $n$ thừa số $a$ bằng nhau.
+            <br>
+            <center class="math-expr" style="margin: 10px 0; font-weight: bold; font-size: 1.2em;">
+                $a^n = \underbrace{a \cdot a \cdot \dots \cdot a}_{n \text{ thừa số } a}$ ($n \in \mathbb{N}^*$)
+            </center>
+        </blockquote>
+        <ul>
+            <li>$a$ được gọi là <strong>cơ số</strong>.</li>
+            <li>$n$ được gọi là <strong>số mũ</strong>.</li>
+        </ul>
+
+        <p><strong>c) Cách đọc và các trường hợp đặc biệt:</strong></p>
+        <ul>
+            <li>Biểu thức $a^n$ có 3 cách đọc: <em>"$a$ mũ $n$"</em>, <em>"$a$ lũy thừa $n$"</em>, hoặc <em>"lũy thừa bậc $n$ của $a$"</em>.</li>
+            <li><span class="highlight">Trường hợp đặc biệt:</span>
+                <ul>
+                    <li>$a^2$ còn được gọi là <strong>$a$ bình phương</strong> (hay bình phương của $a$).</li>
+                    <li>$a^3$ còn được gọi là <strong>$a$ lập phương</strong> (hay lập phương của $a$).</li>
+                    <li>Quy ước: $a^1 = a$.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="theory-box">
+        <h3>2. Nhân và Chia hai lũy thừa cùng cơ số (10 phút)</h3>
+        
+        <p><strong>a) Quy tắc Nhân hai lũy thừa cùng cơ số:</strong></p>
+        <p>Khi nhân hai lũy thừa cùng cơ số, ta <span class="highlight">giữ nguyên cơ số</span> và <span class="highlight">cộng các số mũ</span>.</p>
+        <p class="math-expr" style="text-align: center; font-weight: bold;">$a^m \cdot a^n = a^{m+n}$</p>
+        
+        <p><strong>b) Quy tắc Chia hai lũy thừa cùng cơ số:</strong></p>
+        <p>Khi chia hai lũy thừa cùng cơ số (khác 0), ta <span class="highlight">giữ nguyên cơ số</span> và <span class="highlight">trừ các số mũ</span>.</p>
+        <p class="math-expr" style="text-align: center; font-weight: bold;">$a^m : a^n = a^{m-n}$ (với $a \neq 0$ và $m \ge n$)</p>
+        
+        <p><strong>* Quy ước quan trọng:</strong> Từ phép chia hai lũy thừa bằng nhau $a^m : a^m = a^0$, mà một số khác 0 chia cho chính nó luôn bằng 1, ta quy ước: <span class="highlight">$a^0 = 1$</span> (với $a \neq 0$).</p>
+    </div>
+
+    <div class="tip-box" style="margin-top: 20px; margin-bottom: 25px;">
+        <h3 style="color: #be185d; border-bottom: none; margin-top: 0;">⚠️ Cảnh báo sai lầm thường gặp (Dành cho nhóm 4 học sinh)</h3>
+        <ul>
+            <li><span class="highlight">Lỗi số 1 (Nhầm lũy thừa với phép nhân):</span> Rất nhiều học sinh tính nhầm $2^3 = 2 \times 3 = 6$. Hãy nhớ đúng định nghĩa: $2^3 = 2 \times 2 \times 2 = 8$.</li>
+            <li><span class="highlight">Lỗi số 2 (Nhân cả cơ số):</span> Khi thực hiện phép tính $2^3 \times 2^2$, học sinh dễ viết thành $4^5$. Hãy nhấn mạnh: <strong>Phải giữ nguyên cơ số</strong>, đáp án đúng là $2^5$.</li>
+        </ul>
+    </div>
+
+    <div class="theory-box">
+        <h3>3. Thứ tự thực hiện phép tính (15 phút)</h3>
+        
+        <p><strong>a) Đối với biểu thức không có dấu ngoặc:</strong></p>
+        <p>Thứ tự thực hiện chuẩn xác là:</p>
+        <p style="text-align: center; font-weight: bold; color: #1d4ed8;">
+            Lũy thừa $\rightarrow$ Nhân và Chia $\rightarrow$ Cộng và Trừ
+        </p>
+        <p><em>* Lưu ý: Nếu biểu thức chỉ có phép cộng, trừ hoặc chỉ có phép nhân, chia, ta thực hiện tính từ <span class="highlight">trái sang phải</span>.</em></p>
+
+        <p><strong>b) Đối với biểu thức có dấu ngoặc:</strong></p>
+        <p>Ta thực hiện các phép tính trong ngoặc trước, ngoài ngoặc sau theo thứ tự ưu tiên:</p>
+        <p style="text-align: center; font-weight: bold; color: #047857;">
+            Ngoặc tròn ( ) $\rightarrow$ Ngoặc vuông [ ] $\rightarrow$ Ngoặc nhọn { }
+        </p>
+    </div>
+
+    <img src="https://placehold.co/900x200/fef3c7/b45309?text=Ph%E1%BA%A7n+2:+V%C3%AD+D%E1%BB%A5+Minh+H%E1%BB%8Da+%C3%81p+D%E1%BB%A5ng&font=montserrat" alt="Minh họa phần ví dụ" class="illustration">
+
+    <h2>Phần 2: VÍ DỤ MINH HỌA ÁP DỤNG 🚀</h2>
+
+    <div class="example-box">
+        <div class="example-title">📝 Ví dụ 1 (Biểu thức không chứa dấu ngoặc):</div>
+        <p>Tính giá trị biểu thức: $A = 11 \cdot 3^2 - 45$</p>
+        <p><strong>Giải:</strong></p>
+        <p>Theo thứ tự ưu tiên, ta thực hiện phép tính lũy thừa trước:</p>
+        <p class="math-expr">$3^2 = 9$</p>
+        <p>Thay vào biểu thức, thực hiện tiếp phép nhân rồi đến phép trừ:</p>
+        <p class="math-expr">$A = 11 \cdot 9 - 45$</p>
+        <p class="math-expr">$A = 99 - 45$</p>
+        <p class="math-expr">$A = 54$</p>
+    </div>
+
+    <div class="example-box">
+        <div class="example-title">📝 Ví dụ 2 (Biểu thức có chứa các dấu ngoặc):</div>
+        <p>Tính giá trị biểu thức: $B = 100 : \{ 2 \cdot [ 50 - ( 10 - 5 )^2 ] \}$</p>
+        <p><strong>Giải:</strong></p>
+        <p>Ta bóc tách thứ tự thực hiện từ trong ra ngoài:</p>
+        <ul>
+            <li><strong>Bước 1:</strong> Tính trong ngoặc tròn $(10 - 5) = 5$. Biểu thức trở thành:
+                <br><span class="math-expr">$B = 100 : \{ 2 \cdot [ 50 - 5^2 ] \}$</span>
+            </li>
+            <li><strong>Bước 2:</strong> Xử lý lũy thừa trong ngoặc vuông $5^2 = 25$. Biểu thức trở thành:
+                <br><span class="math-expr">$B = 100 : \{ 2 \cdot [ 50 - 25 ] \}$</span>
+            </li>
+            <li><strong>Bước 3:</strong> Tính giá trị trong ngoặc vuông $[50 - 25] = 25$. Biểu thức trở thành:
+                <br><span class="math-expr">$B = 100 : \{ 2 \cdot 25 \}$</span>
+            </li>
+            <li><strong>Bước 4:</strong> Tính giá trị trong ngoặc nhọn $\{2 \cdot 25\} = 50$. Biểu thức trở thành:
+                <br><span class="math-expr">$B = 100 : 50$</span>
+            </li>
+            <li><strong>Bước 5:</strong> Thực hiện phép chia cuối cùng:
+                <br><span class="math-expr">$B = 2$</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tip-box">
+        <h3 style="color: #be185d; border-bottom: none; margin-top: 0;">💡 Lời khuyên giảng dạy (Dành cho Giáo viên):</h3>
+        <p>Lên cấp 2, khái niệm lũy thừa hoàn toàn mới khiến các em dễ bị quá tải. Với nhóm nhỏ 4 học sinh, giáo viên hãy đi thật chậm ở 15 phút đầu. Liên tục chỉ vào bảng và bắt các em <strong>đọc thật to theo nhóm và cá nhân</strong> các cách phát âm lũy thừa để quen miệng.</p>
+        <p>Khi giảng bài toán phối hợp nhiều dấu ngoặc như Ví dụ 2, hãy chỉ quy tắc <em>"bóc hành tây"</em> từ trong ra ngoài để học sinh không bị rối loạn trước ma trận phép tính.</p>
+    </div>
+
+</div>
+
+</body>
+</html>

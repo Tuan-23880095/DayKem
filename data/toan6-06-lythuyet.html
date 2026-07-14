@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toán 6 - Buổi 6: Số Nguyên Tố & Hợp Số</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                typeset: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8fafc;
+        }
+        .title-font {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #ffffff transparent;
+            display: block;
+            width: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl sm:text-4xl animate-bounce">💎</span>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold title-font tracking-tight">TOÁN 6 • BUỔI 6</h1>
+                    <p class="text-xs sm:text-sm font-semibold opacity-90">Những viên gạch nền móng: Số nguyên tố & Phân tích số</p>
+                </div>
+            </div>
+            
+            <!-- Bộ điều khiển trạng thái (Học sinh / Giáo viên) -->
+            <div class="flex items-center gap-2 bg-white/20 p-1.5 rounded-full backdrop-blur-md">
+                <button onclick="toggleRole('student')" id="btn-role-student" 
+                    class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 bg-white text-indigo-900 shadow">
+                    👨‍🎓 Học Sinh
+                </button>
+                <button onclick="toggleRole('teacher')" id="btn-role-teacher" 
+                    class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 text-white hover:bg-white/10">
+                    👩‍🏫 Giáo Viên (Mẹo dạy)
+                </button>
+            </div>
+        </div>
+        
+        <!-- Timeline 40 Phút Phân Bổ Bài Học -->
+        <div class="bg-indigo-950/60 py-2 border-t border-white/10">
+            <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-indigo-200">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm">⏱️</span>
+                    <span>TIẾN TRÌNH 40 PHÚT:</span>
+                </div>
+                <div class="flex items-center gap-3 sm:gap-6">
+                    <button onclick="switchTab('part1')" id="nav-part1" class="flex items-center gap-1.5 text-white border-b-2 border-pink-400 pb-0.5">
+                        <span>1. Khái niệm (15p)</span>
+                    </button>
+                    <button onclick="switchTab('part2')" id="nav-part2" class="flex items-center gap-1.5 hover:text-white pb-0.5">
+                        <span>2. Sơ đồ cây (10p)</span>
+                    </button>
+                    <button onclick="switchTab('part3')" id="nav-part3" class="flex items-center gap-1.5 hover:text-white pb-0.5">
+                        <span>3. Sơ đồ cột (15p)</span>
+                    </button>
+                    <button onclick="switchTab('summary')" id="nav-summary" class="flex items-center gap-1.5 hover:text-white pb-0.5 bg-pink-500/30 px-2 py-0.5 rounded">
+                        <span>🚀 Trạm Ôn Tập</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- Cột Nội Dung Chính (3/4 chiều rộng trên desktop) -->
+        <div class="lg:col-span-3 space-y-6">
+
+            <!-- BANNER GIỚI THIỆU CHUNG -->
+            <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-full -mr-6 -mt-6"></div>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-800 title-font flex items-center gap-2">
+                    <span>🧱</span> Khám Phá Khái Niệm Mới
+                </h2>
+                <p class="text-slate-600 mt-2 leading-relaxed">
+                    Chào các em học sinh! Để tiếp nối mạch kiến thức về <strong class="text-indigo-600">Dấu hiệu chia hết</strong> của buổi trước, Buổi 6 sẽ là một buổi học rất thú vị vì các em sẽ làm quen với "những viên gạch nền móng" cấu tạo nên mọi số tự nhiên: <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded font-bold">Số nguyên tố</span>.
+                </p>
+                
+                <!-- Giao diện Giáo viên: Bối cảnh lớp học -->
+                <div class="teacher-tip hidden mt-4 p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-xl">
+                    <p class="font-extrabold text-purple-900 flex items-center gap-1.5">
+                        <span>👩‍🏫 KỊCH BẢN DÀNH CHO GIÁO VIÊN (Lớp 4 học sinh)</span>
+                    </p>
+                    <p class="text-sm text-purple-800 mt-1">
+                        Sử dụng trò chơi phát 4 thẻ số cho 4 bạn: <strong>Bạn A (số 5)</strong>, <strong>Bạn B (số 6)</strong>, <strong>Bạn C (số 7)</strong>, <strong>Bạn D (số 8)</strong> để tạo sự tò mò. Hãy cho các con tự tương tác với các thẻ dưới đây để tìm ra điểm khác biệt.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 1: KHÁI NIỆM SỐ NGUYÊN TỐ & HỢP SỐ -->
+            <div id="tab-content-part1" class="space-y-6">
+                
+                <!-- TIỂU ĐỀ PHẦN -->
+                <div class="bg-gradient-to-r from-pink-500 to-rose-500 text-white p-4 rounded-2xl shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">⚡</span>
+                        <div>
+                            <h3 class="font-black text-lg title-font">1. KHÁI NIỆM SỐ NGUYÊN TỐ & HỢP SỐ</h3>
+                            <p class="text-xs opacity-90">Thời gian lý tưởng: 15 phút</p>
+                        </div>
+                    </div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold">Phần 1/3</span>
+                </div>
+
+                <!-- HOẠT ĐỘNG TƯƠNG TÁC: TRÒ CHƠI KHÁM PHÁ -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                        <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                            <span class="p-1 bg-pink-100 text-pink-600 rounded-lg">🎮</span> 1.1. Trò Chơi Khám Phá Thẻ Số
+                        </h4>
+                        <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-1 rounded-full">Tương tác trực quan</span>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Giáo viên giao thẻ cho 4 bạn <strong>A, B, C, D</strong>. Hãy click vào từng bạn để giúp các bạn tìm ra <strong>tất cả các ước số</strong> nhé!
+                    </p>
+
+                    <!-- Danh sách thẻ 4 học sinh -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <!-- Học sinh A -->
+                        <div onclick="revealCard('A')" id="card-A" class="bg-slate-50 hover:bg-slate-100/80 p-4 rounded-2xl border-2 border-slate-200 cursor-pointer text-center transition-all duration-300 hover:shadow">
+                            <span class="text-3xl">👦</span>
+                            <div class="font-bold text-slate-700 mt-1 text-sm">Bạn A</div>
+                            <div class="text-2xl font-black text-indigo-600 my-1">Số 5</div>
+                            <div id="uoc-A" class="text-xs text-slate-400 italic">Click tìm ước...</div>
+                        </div>
+                        <!-- Học sinh B -->
+                        <div onclick="revealCard('B')" id="card-B" class="bg-slate-50 hover:bg-slate-100/80 p-4 rounded-2xl border-2 border-slate-200 cursor-pointer text-center transition-all duration-300 hover:shadow">
+                            <span class="text-3xl">👧</span>
+                            <div class="font-bold text-slate-700 mt-1 text-sm">Bạn B</div>
+                            <div class="text-2xl font-black text-indigo-600 my-1">Số 6</div>
+                            <div id="uoc-B" class="text-xs text-slate-400 italic">Click tìm ước...</div>
+                        </div>
+                        <!-- Học sinh C -->
+                        <div onclick="revealCard('C')" id="card-C" class="bg-slate-50 hover:bg-slate-100/80 p-4 rounded-2xl border-2 border-slate-200 cursor-pointer text-center transition-all duration-300 hover:shadow">
+                            <span class="text-3xl">👦</span>
+                            <div class="font-bold text-slate-700 mt-1 text-sm">Bạn C</div>
+                            <div class="text-2xl font-black text-indigo-600 my-1">Số 7</div>
+                            <div id="uoc-C" class="text-xs text-slate-400 italic">Click tìm ước...</div>
+                        </div>
+                        <!-- Học sinh D -->
+                        <div onclick="revealCard('D')" id="card-D" class="bg-slate-50 hover:bg-slate-100/80 p-4 rounded-2xl border-2 border-slate-200 cursor-pointer text-center transition-all duration-300 hover:shadow">
+                            <span class="text-3xl">👧</span>
+                            <div class="font-bold text-slate-700 mt-1 text-sm">Bạn D</div>
+                            <div class="text-2xl font-black text-indigo-600 my-1">Số 8</div>
+                            <div id="uoc-D" class="text-xs text-slate-400 italic">Click tìm ước...</div>
+                        </div>
+                    </div>
+
+                    <!-- Bảng Phân Loại Ước Số -->
+                    <div id="sorting-zone" class="hidden space-y-4 border-t border-slate-100 pt-6">
+                        <div class="text-center text-sm font-bold text-indigo-600 mb-2">💡 THỰC HÀNH PHÂN LOẠI</div>
+                        <p class="text-xs text-slate-500 text-center">Các em hãy click phân loại 4 số trên vào đúng 2 chiếc rổ dưới đây:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Rổ 1: Có đúng 2 ước -->
+                            <div id="basket-prime" class="border-2 border-dashed border-emerald-400 bg-emerald-50/50 p-4 rounded-2xl min-h-[120px] flex flex-col items-center justify-start text-center">
+                                <div class="font-bold text-emerald-800 text-sm mb-2">📥 Nhóm 1: Chỉ có 2 ước (1 & chính nó)</div>
+                                <div class="flex flex-wrap gap-2 justify-center" id="basket-prime-items">
+                                    <!-- Nơi chứa số 5 và 7 khi click phân loại -->
+                                </div>
+                            </div>
+                            <!-- Rổ 2: Có nhiều hơn 2 ước -->
+                            <div id="basket-composite" class="border-2 border-dashed border-amber-400 bg-amber-50/50 p-4 rounded-2xl min-h-[120px] flex flex-col items-center justify-start text-center">
+                                <div class="font-bold text-amber-800 text-sm mb-2">📥 Nhóm 2: Có nhiều hơn 2 ước</div>
+                                <div class="flex flex-wrap gap-2 justify-center" id="basket-composite-items">
+                                    <!-- Nơi chứa số 6 và 8 khi click phân loại -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Các nút tương tác phân loại mẫu nhanh -->
+                        <div class="flex justify-center gap-3 mt-4" id="classify-controls">
+                            <button onclick="autoClassify()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+                                ⚡ Phân nhóm tự động để xem định nghĩa
+                            </button>
+                            <button onclick="resetClassify()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-xl transition-all">
+                                Đặt lại
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bảng Định Nghĩa Chuẩn Sách Giáo Khoa (Xuất hiện sau khi hoàn thành game) -->
+                    <div id="definition-box" class="hidden mt-6 bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                                <span class="text-xs font-bold text-emerald-700 uppercase bg-emerald-100 px-2 py-0.5 rounded">Khái Niệm 1</span>
+                                <h5 class="font-black text-emerald-900 mt-1 text-md">Số Nguyên Tố là gì?</h5>
+                                <p class="text-sm text-emerald-800 mt-1 leading-relaxed">
+                                    Là số tự nhiên <span class="underline decoration-wavy decoration-emerald-500 font-bold">lớn hơn 1</span>, <strong>chỉ có 2 ước</strong> là $1$ và chính nó.
+                                </p>
+                                <p class="text-xs text-emerald-600 mt-2">Ví dụ: $2, 3, 5, 7, 11, 13, 17, 19...$</p>
+                            </div>
+                            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                                <span class="text-xs font-bold text-amber-700 uppercase bg-amber-100 px-2 py-0.5 rounded">Khái Niệm 2</span>
+                                <h5 class="font-black text-amber-900 mt-1 text-md">Hợp Số là gì?</h5>
+                                <p class="text-sm text-amber-800 mt-1 leading-relaxed">
+                                    Là số tự nhiên <span class="underline decoration-wavy decoration-amber-500 font-bold">lớn hơn 1</span>, có <strong>nhiều hơn 2 ước</strong>.
+                                </p>
+                                <p class="text-xs text-amber-600 mt-2">Ví dụ: $4, 6, 8, 9, 10, 12, 14, 15...$</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CẢNH BÁO: NHỮNG CON SỐ ĐẶC BIỆT DỄ SAI SÓT -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-rose-500"></div>
+                    <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                        <span class="text-xl">⚠️</span> 1.2. Những Con Số "Đặc Biệt" Cần Bút Đỏ Ghi Nhớ
+                    </h4>
+                    <p class="text-sm text-slate-500 mt-1">Các câu hỏi trắc nghiệm cực kì hay đánh lừa các em ở điểm này:</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-3">
+                            <span class="text-2xl">🚫</span>
+                            <div>
+                                <h5 class="font-extrabold text-slate-800 text-sm">Số 0 và Số 1</h5>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Không phải là số nguyên tố, cũng không phải là hợp số (vì định nghĩa bắt buộc phải lớn hơn $1$).
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-start gap-3">
+                            <span class="text-2xl">⚡</span>
+                            <div>
+                                <h5 class="font-extrabold text-indigo-950 text-sm">Số 2 là Số Vô Địch</h5>
+                                <p class="text-xs text-indigo-900 mt-1">
+                                    Là số nguyên tố <strong>nhỏ nhất</strong>, và cũng là số nguyên tố <strong>chẵn duy nhất</strong>. Tất cả các số nguyên tố còn lại đều là số lẻ.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TRẮC NGHIỆM PHẢN BIỆN NHANH -->
+                    <div class="mt-6 bg-amber-50/70 p-4 rounded-2xl border border-amber-200">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">🤔</span>
+                            <span class="font-bold text-amber-900 text-sm">Đố vui phản biện: "Mọi số nguyên tố đều là số lẻ, đúng hay sai?"</span>
+                        </div>
+                        <div class="flex gap-4 mt-3">
+                            <button onclick="checkDebateQuiz(true)" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow transition-all">
+                                ĐÚNG 👍
+                            </button>
+                            <button onclick="checkDebateQuiz(false)" class="px-6 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm rounded-xl shadow transition-all">
+                                SAI 👎
+                            </button>
+                        </div>
+                        <div id="debate-result" class="hidden mt-3 text-sm font-semibold p-2.5 rounded bg-white border"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: SƠ ĐỒ CÂY -->
+            <div id="tab-content-part2" class="hidden space-y-6">
+                <!-- TIỂU ĐỀ PHẦN -->
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-4 rounded-2xl shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🌱</span>
+                        <div>
+                            <h3 class="font-black text-lg title-font">2. PHÂN TÍCH RA THỪA SỐ NGUYÊN TỐ (SƠ ĐỒ CÂY)</h3>
+                            <p class="text-xs opacity-90">Thời gian lý tưởng: 10 phút</p>
+                        </div>
+                    </div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold">Phần 2/3</span>
+                </div>
+
+                <!-- ĐỊNH NGHĨA PHÂN TÍCH -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2 mb-3">
+                        <span>💡</span> 2.1. Thế Nào Là Phân Tích Ra Thừa SỐ NGUYÊN TỐ?
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Phân tích một số tự nhiên lớn hơn $1$ ra thừa số nguyên tố là viết số đó dưới dạng một <strong class="text-indigo-600">tích của nhiều thừa số</strong>, trong đó mỗi thừa số đều là một số nguyên tố.
+                    </p>
+                    <div class="bg-amber-50 p-4 rounded-2xl border-l-4 border-amber-500 text-amber-900 text-sm space-y-2">
+                        <p>🌟 <strong>Nguyên tắc VÀNG:</strong> Dù phân tích bằng cách nào đi nữa thì kết quả thu được cuối cùng cũng chỉ có <span class="font-bold underline">một kết quả duy nhất</span>.</p>
+                        <p>✍️ <strong>Cách viết:</strong> Viết các thừa số theo thứ tự từ bé đến lớn và gom gọn lại bằng <strong>Lũy thừa</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- TRÌNH DIỄN SƠ ĐỒ CÂY TƯƠNG TÁC (Số 24) -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2 mb-1">
+                        <span>🌳</span> 2.2. Phương Pháp "Sơ Đồ Cây"
+                    </h4>
+                    <p class="text-xs text-slate-400 mb-4">(Phù hợp nhất khi các em mới làm quen bài học)</p>
+
+                    <!-- Widget Sơ đồ cây 24 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center relative">
+                        <div class="text-sm font-bold text-indigo-900 mb-4">Mô phỏng bóc tách số $24$</div>
+                        
+                        <div class="flex flex-col items-center justify-center space-y-6">
+                            <!-- Gốc 24 -->
+                            <div class="w-16 h-16 rounded-full bg-indigo-600 text-white font-extrabold flex items-center justify-center shadow text-xl">24</div>
+                            
+                            <!-- Nhánh 1: 4 & 6 -->
+                            <div class="flex justify-center gap-16 md:gap-32 relative w-full">
+                                <div class="absolute top-[-24px] left-1/2 w-0.5 h-6 bg-slate-300 -translate-x-1/2"></div>
+                                
+                                <div class="flex flex-col items-center">
+                                    <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-900 font-bold flex items-center justify-center border-2 border-indigo-300">4</div>
+                                    <div class="text-xs text-slate-500 mt-1 italic">Chưa là số NT</div>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-900 font-bold flex items-center justify-center border-2 border-indigo-300">6</div>
+                                    <div class="text-xs text-slate-500 mt-1 italic">Chưa là số NT</div>
+                                </div>
+                            </div>
+
+                            <!-- Nhánh 2: 2, 2, 2, 3 -->
+                            <div class="flex justify-between w-full max-w-md pt-2">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center shadow">2</div>
+                                    <span class="text-[10px] text-emerald-600 font-bold mt-1">Số NT (Dừng)</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center shadow">2</div>
+                                    <span class="text-[10px] text-emerald-600 font-bold mt-1">Số NT (Dừng)</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center shadow">2</div>
+                                    <span class="text-[10px] text-emerald-600 font-bold mt-1">Số NT (Dừng)</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center shadow">3</div>
+                                    <span class="text-[10px] text-emerald-600 font-bold mt-1">Số NT (Dừng)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chốt kết quả -->
+                        <div class="mt-8 p-4 bg-white rounded-xl border border-slate-200 inline-block">
+                            <span class="font-bold text-slate-700">Kết quả phân tích:</span>
+                            <span class="text-xl font-black text-emerald-600 ml-2">$24 = 2 \cdot 2 \cdot 2 \cdot 3 = 2^3 \cdot 3$</span>
+                        </div>
+                    </div>
+
+                    <!-- THỰC HÀNH LỚP HỌC (Dành cho Học sinh 1 và Học sinh 2) -->
+                    <div class="mt-6 border-t border-slate-100 pt-6 space-y-4">
+                        <div class="bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100">
+                            <div class="font-bold text-indigo-900 text-sm flex items-center gap-1">
+                                <span>✍️</span> Thực hành nhanh: Phân tích số $18$ và $30$ ra thừa số nguyên tố
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                                <div class="bg-white p-3 rounded-xl border">
+                                    <label class="block text-xs font-bold text-slate-500">Phân tích số 18:</label>
+                                    <input type="text" id="practice-18" placeholder="Nhập đáp án dạng lũy thừa, ví dụ: 2 . 3^2" 
+                                        class="w-full mt-1 p-2 border rounded focus:ring-1 focus:ring-indigo-400 font-mono text-sm text-center">
+                                    <button onclick="checkPracticeTree(18)" class="mt-2 w-full py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-bold rounded">Kiểm tra kết quả 18</button>
+                                    <div id="res-practice-18" class="text-xs mt-1 hidden font-bold"></div>
+                                </div>
+                                
+                                <div class="bg-white p-3 rounded-xl border">
+                                    <label class="block text-xs font-bold text-slate-500">Phân tích số 30:</label>
+                                    <input type="text" id="practice-30" placeholder="Nhập dạng tích: 2 . 3 . 5" 
+                                        class="w-full mt-1 p-2 border rounded focus:ring-1 focus:ring-indigo-400 font-mono text-sm text-center">
+                                    <button onclick="checkPracticeTree(30)" class="mt-2 w-full py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-bold rounded">Kiểm tra kết quả 30</button>
+                                    <div id="res-practice-30" class="text-xs mt-1 hidden font-bold"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chế độ giáo viên gợi ý cách điều phối -->
+                        <div class="teacher-tip hidden p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-xl">
+                            <p class="font-extrabold text-purple-900 text-xs flex items-center gap-1.5">
+                                <span>👩‍🏫 ĐIỀU PHỐI TIẾT DẠY SƯ PHẠM:</span>
+                            </p>
+                            <p class="text-xs text-purple-800 mt-1">
+                                Hãy chỉ định <strong>Bạn A (18)</strong> và <strong>Bạn B (30)</strong> lên bảng phụ/bảng con vẽ sơ đồ cây để so sánh tốc độ làm bài. Nhắc nhở các bạn luôn đi theo con đường bóc tách nhỏ nhất có thể.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: SƠ ĐỒ CỘT -->
+            <div id="tab-content-part3" class="hidden space-y-6">
+                <!-- TIỂU ĐỀ PHẦN -->
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-4 rounded-2xl shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">📊</span>
+                        <div>
+                            <h3 class="font-black text-lg title-font">3. PHƯƠNG PHÁP SƠ ĐỒ CỘT DỌC</h3>
+                            <p class="text-xs opacity-90">Thời gian lý tưởng: 15 phút</p>
+                        </div>
+                    </div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold">Phần 3/3</span>
+                </div>
+
+                <!-- HƯỚNG DẪN QUY TẮC CỘT DỌC -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2 mb-2">
+                        <span>⚖️</span> 3.1. Tại sao dùng Sơ đồ Cột dọc?
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Sơ đồ cây rất trực quan nhưng nếu gặp số lớn (như $280, 500, 1000...$), vẽ cây sẽ vô cùng cồng kềnh. Do đó ở cấp THCS, chúng ta ưu tiên sử dụng <strong>Sơ đồ Cột dọc</strong>.
+                    </p>
+                    
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 text-emerald-900 text-sm mt-4">
+                        <span class="font-bold">📋 Quy tắc chia cột dọc:</span>
+                        <ul class="list-decimal pl-5 space-y-1.5 mt-2">
+                            <li>Kẻ một vạch thẳng đứng ở giữa.</li>
+                            <li>Lần lượt thực hiện chia số đó cho các số nguyên tố từ nhỏ tới lớn: $2, 3, 5, 7, 11, 13...$</li>
+                            <li>Viết thương thu được xuống phía dưới bên trái, số chia (số nguyên tố) ở bên phải.</li>
+                            <li>Cứ lặp lại quy trình chia cho tới khi thương đạt kết quả bằng <strong class="text-emerald-700">1</strong> thì dừng lại.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GIẢ LẬP ĐỒ HỌA TƯƠNG TÁC SƠ ĐỒ CỘT SỐ 60 -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                        <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                            <span>🧪</span> 3.2. Giả Lập Chia Cột Dọc Số 60
+                        </h4>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-1 rounded-full">Bấm từng bước để học</span>
+                    </div>
+
+                    <!-- Khu vực Giả lập -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 max-w-sm mx-auto">
+                        <div class="flex justify-center font-mono text-lg font-bold gap-8 relative">
+                            <!-- Cột Trái: Số ban đầu và thương -->
+                            <div class="text-right space-y-2 w-20" id="col-left">
+                                <div class="text-slate-700">60</div>
+                            </div>
+                            <!-- Vạch dọc chia tách -->
+                            <div class="w-1 bg-slate-300 absolute left-1/2 top-0 bottom-0 -translate-x-1/2 rounded-full"></div>
+                            <!-- Cột Phải: Các số nguyên tố chia -->
+                            <div class="text-left space-y-2 w-20" id="col-right">
+                                <!-- Chờ click -->
+                            </div>
+                        </div>
+
+                        <!-- Điều phối bước -->
+                        <div class="mt-6 flex justify-center gap-2">
+                            <button onclick="nextStepCol()" id="btn-next-col" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-lg shadow">
+                                Thực hiện bước tiếp theo ➡️
+                            </button>
+                            <button onclick="resetCol()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs rounded-lg">
+                                Đặt lại từ đầu
+                            </button>
+                        </div>
+                        
+                        <!-- Kết quả giải thuật hiển thị động -->
+                        <div id="col-formula-res" class="hidden text-center mt-4 p-2 bg-white rounded border text-sm font-extrabold text-emerald-700 animate-pulse">
+                            $60 = 2^2 \cdot 3 \cdot 5$
+                        </div>
+                    </div>
+
+                    <!-- THỰC HÀNH LỚP HỌC SƠ ĐỒ CỘT (Dành cho Học sinh C và Học sinh D) -->
+                    <div class="mt-6 border-t border-slate-100 pt-6 space-y-4">
+                        <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
+                            <div class="font-bold text-emerald-900 text-sm flex items-center gap-1">
+                                <span>✍️</span> Thực hành nhanh: Phân tích số $84$ và $120$ ra cột dọc
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                                <div class="bg-white p-3 rounded-xl border">
+                                    <label class="block text-xs font-bold text-slate-500">Phân tích số 84:</label>
+                                    <input type="text" id="practice-84" placeholder="Ví dụ: 2^2 . 3 . 7" 
+                                        class="w-full mt-1 p-2 border rounded focus:ring-1 focus:ring-emerald-400 font-mono text-sm text-center">
+                                    <button onclick="checkPracticeCol(84)" class="mt-2 w-full py-1 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded">Kiểm tra kết quả 84</button>
+                                    <div id="res-practice-84" class="text-xs mt-1 hidden font-bold"></div>
+                                </div>
+                                
+                                <div class="bg-white p-3 rounded-xl border">
+                                    <label class="block text-xs font-bold text-slate-500">Phân tích số 120:</label>
+                                    <input type="text" id="practice-120" placeholder="Ví dụ: 2^3 . 3 . 5" 
+                                        class="w-full mt-1 p-2 border rounded focus:ring-1 focus:ring-emerald-400 font-mono text-sm text-center">
+                                    <button onclick="checkPracticeCol(120)" class="mt-2 w-full py-1 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded">Kiểm tra kết quả 120</button>
+                                    <div id="res-practice-120" class="text-xs mt-1 hidden font-bold"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chế độ giáo viên gợi ý mẹo sư phạm -->
+                        <div class="teacher-tip hidden p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-xl">
+                            <p class="font-extrabold text-purple-900 text-xs flex items-center gap-1.5">
+                                <span>💡 MẸO SƯ PHẠM DẠY CHIA CỘT DỌC:</span>
+                            </p>
+                            <p class="text-xs text-purple-800 mt-1">
+                                Chỉ định <strong>Bạn C (84)</strong> và <strong>Bạn D (120)</strong> thực hiện. Hãy liên hệ với kiến thức <strong>Dấu hiệu chia hết (Buổi 5)</strong> để nhẩm xem số đó chia hết cho 2, 3 hay 5 trước khi chia để tiết kiệm thời gian nhé!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: TRẠM ÔN TẬP CỦNG CỐ -->
+            <div id="tab-content-summary" class="hidden space-y-6">
+                <!-- TIỂU ĐỀ PHẦN -->
+                <div class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white p-4 rounded-2xl shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🏆</span>
+                        <div>
+                            <h3 class="font-black text-lg title-font">TRẠM ÔN TẬP: CHINH PHỤC PIZZA</h3>
+                            <p class="text-xs opacity-90">Hoàn thành nhanh 3 câu hỏi trắc nghiệm phản biện!</p>
+                        </div>
+                    </div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold">Củng Cố</span>
+                </div>
+
+                <!-- TRẮC NGHIỆM TƯƠNG TÁC -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="text-sm font-semibold text-slate-500">Hãy khoanh tròn hoặc click đáp án đúng nhất để kiểm tra độ hiểu bài nhé:</div>
+                    
+                    <!-- Câu hỏi 1 -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-3">
+                        <span class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full">Câu Hỏi 1</span>
+                        <p class="font-bold text-slate-800 text-sm">Trong các số sau đây, số nào là hợp số?</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button onclick="checkMiniQuiz(1, '23', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">A. $23$</button>
+                            <button onclick="checkMiniQuiz(1, '29', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">B. $29$</button>
+                            <button onclick="checkMiniQuiz(1, '15', true)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">C. $15$</button>
+                            <button onclick="checkMiniQuiz(1, '2', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">D. $2$</button>
+                        </div>
+                        <div id="quiz-res-1" class="text-xs font-bold hidden"></div>
+                    </div>
+
+                    <!-- Câu hỏi 2 -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-3">
+                        <span class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full">Câu Hỏi 2</span>
+                        <p class="font-bold text-slate-800 text-sm">Số nào sau đây không phải số nguyên tố cũng không phải hợp số?</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button onclick="checkMiniQuiz(2, '2', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">A. Số $2$</button>
+                            <button onclick="checkMiniQuiz(2, '0', true)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">B. Số $0$</button>
+                            <button onclick="checkMiniQuiz(2, '3', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">C. Số $3$</button>
+                            <button onclick="checkMiniQuiz(2, '4', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">D. Số $4$</button>
+                        </div>
+                        <div id="quiz-res-2" class="text-xs font-bold hidden"></div>
+                    </div>
+
+                    <!-- Câu hỏi 3 -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-3">
+                        <span class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full">Câu Hỏi 3</span>
+                        <p class="font-bold text-slate-800 text-sm">Đâu là kết quả đúng khi phân tích số $72$ ra thừa số nguyên tố?</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button onclick="checkMiniQuiz(3, 'A', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">A. $72 = 8 \cdot 9$</button>
+                            <button onclick="checkMiniQuiz(3, 'B', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">B. $72 = 2^2 \cdot 3^2$</button>
+                            <button onclick="checkMiniQuiz(3, 'C', true)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">C. $72 = 2^3 \cdot 3^2$</button>
+                            <button onclick="checkMiniQuiz(3, 'D', false)" class="p-3 bg-white hover:bg-slate-100 rounded-xl border-2 border-slate-200 font-semibold transition text-left">D. $72 = 2^3 \cdot 9$</button>
+                        </div>
+                        <div id="quiz-res-3" class="text-xs font-bold hidden"></div>
+                    </div>
+                </div>
+
+                <!-- TỔNG KẾT BÀI HỌC -->
+                <div class="bg-indigo-900 text-white p-6 rounded-3xl shadow-lg relative overflow-hidden">
+                    <h4 class="text-lg font-bold title-font mb-2 flex items-center gap-2">
+                        <span>🌟</span> NHIỆM VỤ HOÀN THÀNH - NGHỈ GIẢI LAO 10 PHÚT!
+                    </h4>
+                    <p class="text-xs text-indigo-200 leading-relaxed">
+                        Thầy chúc mừng cả 4 bạn học sinh đã hoàn thành cực tốt phần lý thuyết trọng tâm của buổi 6 ngày hôm nay. Chúng ta đã bóc tách thành công những viên gạch số nguyên tố để tạo ra mọi số tự nhiên trong vũ trụ số học.
+                    </p>
+                    <p class="text-xs text-amber-300 font-bold mt-3">👉 Các em hãy nghỉ ngơi 10 phút trước khi bắt đầu vào Đấu Trường giải bài tập nhận Pizza nhé!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CỘT PHỤ BÊN PHẢI: BẢNG THÔNG TIN LỚP HỌC & TIỆN ÍCH -->
+        <div class="lg:col-span-1 space-y-6">
+            
+            <!-- BẢNG ĐIỀU PHỐI LỚP 4 HỌC SINH -->
+            <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-extrabold text-slate-800 text-sm mb-3 border-b pb-2 flex items-center gap-1.5">
+                    <span>👥</span> LỚP HỌC TRỰC TUYẾN
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-sm">👦</span>
+                            <span class="text-xs font-bold">Bạn A (Số 5)</span>
+                        </div>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Khởi động</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-sm">👧</span>
+                            <span class="text-xs font-bold">Bạn B (Số 6)</span>
+                        </div>
+                        <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">Hợp số</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-sm">👦</span>
+                            <span class="text-xs font-bold">Bạn C (Số 7)</span>
+                        </div>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Khởi động</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-sm">👧</span>
+                            <span class="text-xs font-bold">Bạn D (Số 8)</span>
+                        </div>
+                        <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">Hợp số</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIỆN ÍCH SCRATCHPAD: BẢNG NHÁP ĐIỆN TỬ -->
+            <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <h3 class="font-extrabold text-slate-800 text-sm border-b pb-2 flex items-center gap-1.5">
+                    <span>✏️</span> BẢNG NHÁP ĐIỆN TỬ
+                </h3>
+                <p class="text-[11px] text-slate-400">Các em học sinh có thể ghi chép nhẩm các ước hoặc phép tính nhẩm ở đây:</p>
+                <textarea id="scratchpad" rows="6" class="w-full p-2 border text-xs rounded-xl focus:ring-1 focus:ring-indigo-400 font-mono" placeholder="Gõ nháp vào đây..."></textarea>
+                <button onclick="clearScratchpad()" class="w-full py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-lg">Xóa bảng nháp</button>
+            </div>
+
+            <!-- TIỆN ÍCH GỢI Ý MẪU NGUYÊN TỐ NHỎ HƠN 100 -->
+            <div class="bg-indigo-50 p-4 rounded-3xl border border-indigo-100 shadow-sm space-y-2">
+                <h3 class="font-extrabold text-indigo-950 text-sm flex items-center gap-1.5">
+                    <span>🔑</span> CẨM NANG HỖ TRỢ
+                </h3>
+                <p class="text-[11px] text-indigo-900 leading-relaxed">
+                    Các số nguyên tố nhỏ hơn $20$: <br>
+                    <strong class="text-indigo-700 text-xs">$2, 3, 5, 7, 11, 13, 17, 19$</strong>
+                </p>
+                <p class="text-[11px] text-indigo-900 leading-relaxed">
+                    Các số nguyên tố nhỏ hơn $100$ có tổng cộng $25$ số.
+                </p>
+            </div>
+            
+        </div>
+
+    </main>
+
+    <!-- Custom Modal Alerts thay thế cho alert() mặc định để trải nghiệm êm ái -->
+    <div id="custom-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-3xl max-w-sm w-full shadow-2xl border-2 border-indigo-400 text-center transform scale-95 transition-all duration-200">
+            <span id="modal-icon" class="text-4xl mb-2 block">🎉</span>
+            <h3 id="modal-title" class="text-lg font-black text-slate-800 mb-2">Thông báo</h3>
+            <p id="modal-message" class="text-sm text-slate-600 mb-5"></p>
+            <button onclick="closeModal()" class="px-6 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl shadow transition-all">Đồng ý</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-4 text-center text-xs text-slate-500 font-semibold">
+        Hệ Thống Số Hóa Giáo Dục Tương Tác • KHTN & Toán Học Học Đường
+    </footer>
+
+    <!-- Logic Điều Khiển Trực Quan -->
+    <script>
+        // MẢNG LƯU TRẠNG THÁI GAME KHÁM PHÁ (Trò chơi Thẻ số)
+        const studentCards = {
+            A: { revealed: false, value: 5, uoc: "Ư(5) = {1; 5}", size: 2, group: "prime" },
+            B: { revealed: false, value: 6, uoc: "Ư(6) = {1; 2; 3; 6}", size: 4, group: "composite" },
+            C: { revealed: false, value: 7, uoc: "Ư(7) = {1; 7}", size: 2, group: "prime" },
+            D: { revealed: false, value: 8, uoc: "Ư(8) = {1; 2; 4; 8}", size: 4, group: "composite" }
+        };
+
+        // Biến lưu trạng thái phân tích cột dọc (Số 60)
+        const colSteps = [
+            { left: "60", right: "2", active: true },
+            { left: "30", right: "2", active: true },
+            { left: "15", right: "3", active: true },
+            { left: "5", right: "5", active: true },
+            { left: "1", right: "", active: true }
+        ];
+        let currentColIdx = 0;
+
+        // Bật thông báo modal đẹp đẽ
+        function showModal(title, msg, icon = "🎉") {
+            document.getElementById("modal-icon").innerText = icon;
+            document.getElementById("modal-title").innerText = title;
+            document.getElementById("modal-message").innerText = msg;
+            document.getElementById("custom-modal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("custom-modal").classList.add("hidden");
+        }
+
+        // Chuyển đổi trạng thái hiển thị Vai Trò (Học sinh / Giáo viên)
+        function toggleRole(role) {
+            const btnSt = document.getElementById("btn-role-student");
+            const btnTc = document.getElementById("btn-role-teacher");
+            const teacherTips = document.querySelectorAll(".teacher-tip");
+
+            if (role === 'student') {
+                btnSt.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 bg-white text-indigo-900 shadow";
+                btnTc.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 text-white hover:bg-white/10";
+                
+                teacherTips.forEach(tip => tip.classList.add("hidden"));
+            } else {
+                btnTc.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 bg-white text-purple-900 shadow";
+                btnSt.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 text-white hover:bg-white/10";
+                
+                teacherTips.forEach(tip => tip.classList.remove("hidden"));
+            }
+        }
+
+        // Chuyển đổi Tab nội dung qua tiến trình 40 phút
+        function switchTab(tabId) {
+            // Danh sách các tab content
+            const tabs = ["part1", "part2", "part3", "summary"];
+            tabs.forEach(t => {
+                const el = document.getElementById(`tab-content-${t}`);
+                if (el) el.classList.add("hidden");
+                
+                const nav = document.getElementById(`nav-${t}`);
+                if (nav) nav.className = "flex items-center gap-1.5 hover:text-white pb-0.5";
+            });
+
+            // Hiện tab được chọn
+            document.getElementById(`tab-content-${tabId}`).classList.remove("hidden");
+            
+            // Highlight nút nav
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                if (tabId === 'summary') {
+                    activeNav.className = "flex items-center gap-1.5 text-white border-b-2 border-purple-400 pb-0.5 bg-pink-600 px-2 py-0.5 rounded";
+                } else {
+                    activeNav.className = "flex items-center gap-1.5 text-white border-b-2 border-pink-400 pb-0.5";
+                }
+            }
+
+            // Đồng bộ Typeset MathJax khi nạp tab mới
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Reveal Thẻ học sinh trong Game Khởi Động
+        function revealCard(studentId) {
+            const card = studentCards[studentId];
+            card.revealed = true;
+            
+            const cardEl = document.getElementById(`card-${studentId}`);
+            const textEl = document.getElementById(`uoc-${studentId}`);
+            
+            cardEl.className = "bg-white p-4 rounded-2xl border-2 border-indigo-400 text-center transition-all duration-300 shadow-md scale-105";
+            textEl.innerHTML = `<strong class="text-indigo-600">${card.uoc}</strong>`;
+            
+            // Kiểm tra xem tất cả đã được lật chưa để mở rộng phân vùng kéo thả/phân loại
+            let allRevealed = true;
+            for (let k in studentCards) {
+                if (!studentCards[k].revealed) allRevealed = false;
+            }
+            
+            if (allRevealed) {
+                document.getElementById("sorting-zone").classList.remove("hidden");
+            }
+        }
+
+        // Tự động phân loại nhanh trong Game
+        function autoClassify() {
+            const primeBasket = document.getElementById("basket-prime-items");
+            const compositeBasket = document.getElementById("basket-composite-items");
+            
+            primeBasket.innerHTML = `
+                <div class="px-3 py-1.5 bg-emerald-100 text-emerald-800 font-extrabold rounded-xl text-sm border border-emerald-300">Bạn A (Số 5)</div>
+                <div class="px-3 py-1.5 bg-emerald-100 text-emerald-800 font-extrabold rounded-xl text-sm border border-emerald-300">Bạn C (Số 7)</div>
+            `;
+            
+            compositeBasket.innerHTML = `
+                <div class="px-3 py-1.5 bg-amber-100 text-amber-800 font-extrabold rounded-xl text-sm border border-amber-300">Bạn B (Số 6)</div>
+                <div class="px-3 py-1.5 bg-amber-100 text-amber-800 font-extrabold rounded-xl text-sm border border-amber-300">Bạn D (Số 8)</div>
+            `;
+            
+            document.getElementById("definition-box").classList.remove("hidden");
+            
+            showModal("Tuyệt Vời!", "Đã chia nhóm xong! Các em quan sát: Số 5 & Số 7 chỉ có 2 ước (gọi là Số nguyên tố), Số 6 & Số 8 có nhiều hơn 2 ước (gọi là Hợp số).", "🧠");
+            
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Reset lại game phân loại
+        function resetClassify() {
+            document.getElementById("basket-prime-items").innerHTML = "";
+            document.getElementById("basket-composite-items").innerHTML = "";
+            document.getElementById("definition-box").classList.add("hidden");
+            
+            for (let k in studentCards) {
+                studentCards[k].revealed = false;
+                const cardEl = document.getElementById(`card-${k}`);
+                const textEl = document.getElementById(`uoc-${k}`);
+                cardEl.className = "bg-slate-50 hover:bg-slate-100/80 p-4 rounded-2xl border-2 border-slate-200 cursor-pointer text-center transition-all duration-300 hover:shadow";
+                textEl.innerText = "Click tìm ước...";
+            }
+            document.getElementById("sorting-zone").classList.add("hidden");
+        }
+
+        // Trắc nghiệm Phản Biện Nhanh: Mọi số nguyên tố đều lẻ?
+        function checkDebateQuiz(isTrue) {
+            const resultBox = document.getElementById("debate-result");
+            resultBox.classList.remove("hidden");
+            
+            if (isTrue) {
+                resultBox.className = "mt-3 text-sm font-semibold p-2.5 rounded bg-rose-50 border border-rose-200 text-rose-800";
+                resultBox.innerHTML = "❌ <strong>CHƯA CHÍNH XÁC!</strong> Rất nhiều bạn bị lừa giống em kìa. Hãy nhớ rằng <strong>Số 2</strong> là số nguyên tố chẵn duy nhất. Nên câu phát biểu trên là <strong>SAI</strong>.";
+            } else {
+                resultBox.className = "mt-3 text-sm font-semibold p-2.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800";
+                resultBox.innerHTML = "🎉 <strong>CHÍNH XÁC! TUYỆT VỜI!</strong> Số 2 là số nguyên tố chẵn duy nhất. Do đó, khẳng định 'mọi số nguyên tố đều lẻ' là SAI!";
+            }
+        }
+
+        // Kiểm tra thực hành Sơ đồ cây (Số 18 và 30)
+        function checkPracticeTree(num) {
+            const inputVal = document.getElementById(`practice-${num}`).value.trim().replace(/\s+/g, '');
+            const feedback = document.getElementById(`res-practice-${num}`);
+            feedback.classList.remove("hidden");
+
+            if (num === 18) {
+                // Nhận dạng 2.3^2 hoặc 2*3^2 hoặc 2.3.3
+                if (inputVal === "2.3^2" || inputVal === "2*3^2" || inputVal === "2.9" || inputVal === "2.3.3") {
+                    feedback.className = "text-xs mt-1 font-bold text-emerald-600";
+                    feedback.innerText = "✅ Chính xác! 18 = 2 . 3^2";
+                } else {
+                    feedback.className = "text-xs mt-1 font-bold text-rose-600";
+                    feedback.innerText = "❌ Sai rồi! Thử lại xem: 18 = 2 . 3 . 3 = 2 . 3^2";
+                }
+            } else if (num === 30) {
+                // Nhận dạng 2.3.5 hoặc 2*3*5
+                if (inputVal === "2.3.5" || inputVal === "2*3*5") {
+                    feedback.className = "text-xs mt-1 font-bold text-emerald-600";
+                    feedback.innerText = "✅ Chính xác! 30 = 2 . 3 . 5";
+                } else {
+                    feedback.className = "text-xs mt-1 font-bold text-rose-600";
+                    feedback.innerText = "❌ Chưa đúng! Nhẩm xem: 30 = 2 . 3 . 5";
+                }
+            }
+        }
+
+        // Từng bước Sơ đồ cột số 60
+        function nextStepCol() {
+            if (currentColIdx >= colSteps.length - 1) {
+                document.getElementById("col-formula-res").classList.remove("hidden");
+                showModal("Hoàn Thành!", "Sơ đồ cột số 60 đã được bóc tách hoàn tất: 60 = 2^2 . 3 . 5", "📊");
+                return;
+            }
+
+            const step = colSteps[currentColIdx];
+            const nextStep = colSteps[currentColIdx + 1];
+
+            const colLeft = document.getElementById("col-left");
+            const colRight = document.getElementById("col-right");
+
+            // Nạp số chia bên phải
+            colRight.innerHTML += `<div class="text-emerald-600 font-extrabold h-7 flex items-center">${step.right}</div>`;
+            // Nạp thương mới bên trái
+            colLeft.innerHTML += `<div class="text-slate-700 h-7 flex items-center justify-end">${nextStep.left}</div>`;
+
+            currentColIdx++;
+            
+            if (currentColIdx === colSteps.length - 1) {
+                document.getElementById("btn-next-col").innerText = "Tổng kết dạng lũy thừa 🎓";
+            }
+        }
+
+        // Reset cột dọc
+        function resetCol() {
+            currentColIdx = 0;
+            document.getElementById("col-left").innerHTML = `<div class="text-slate-700">60</div>`;
+            document.getElementById("col-right").innerHTML = ``;
+            document.getElementById("btn-next-col").innerText = "Thực hiện bước tiếp theo ➡️";
+            document.getElementById("col-formula-res").classList.add("hidden");
+        }
+
+        // Kiểm tra thực hành Cột dọc (Số 84 và 120)
+        function checkPracticeCol(num) {
+            const inputVal = document.getElementById(`practice-${num}`).value.trim().replace(/\s+/g, '');
+            const feedback = document.getElementById(`res-practice-${num}`);
+            feedback.classList.remove("hidden");
+
+            if (num === 84) {
+                if (inputVal === "2^2.3.7" || inputVal === "2^2*3*7") {
+                    feedback.className = "text-xs mt-1 font-bold text-emerald-600";
+                    feedback.innerText = "✅ Quá siêu! 84 = 2^2 . 3 . 7";
+                } else {
+                    feedback.className = "text-xs mt-1 font-bold text-rose-600";
+                    feedback.innerText = "❌ Sai mất rồi. Gợi ý: 84 = 4 . 21 = 2^2 . 3 . 7";
+                }
+            } else if (num === 120) {
+                if (inputVal === "2^3.3.5" || inputVal === "2^3*3*5") {
+                    feedback.className = "text-xs mt-1 font-bold text-emerald-600";
+                    feedback.innerText = "✅ Quá chuẩn! 120 = 2^3 . 3 . 5";
+                } else {
+                    feedback.className = "text-xs mt-1 font-bold text-rose-600";
+                    feedback.innerText = "❌ Thử tính toán lại nhé. Gợi ý: 120 = 8 . 15 = 2^3 . 3 . 5";
+                }
+            }
+        }
+
+        // Kiểm tra Mini Quiz của Trạm ôn tập
+        function checkMiniQuiz(questionId, optionChosen, isCorrect) {
+            const feedback = document.getElementById(`quiz-res-${questionId}`);
+            feedback.classList.remove("hidden");
+
+            if (isCorrect) {
+                feedback.className = "text-xs font-bold text-emerald-600 bg-emerald-50 p-2 rounded-xl border border-emerald-200 mt-2";
+                if (questionId === 1) {
+                    feedback.innerText = "🎉 Cực chuẩn! 15 có các ước {1, 3, 5, 15} nên là hợp số. Các số còn lại đều chỉ có 2 ước.";
+                } else if (questionId === 2) {
+                    feedback.innerText = "🎉 Chính xác! Số 0 và Số 1 không được coi là số nguyên tố hay hợp số theo định nghĩa.";
+                } else if (questionId === 3) {
+                    feedback.innerText = "🎉 Tuyệt vời! 72 = 8 . 9 = 2^3 . 3^2. Các thừa số đều là số nguyên tố.";
+                }
+            } else {
+                feedback.className = "text-xs font-bold text-rose-600 bg-rose-50 p-2 rounded-xl border border-rose-200 mt-2";
+                feedback.innerText = "❌ Ước gì em đã chọn đáp án khác. Hãy rà soát kỹ định nghĩa nhé!";
+            }
+        }
+
+        // scratchpad clear
+        function clearScratchpad() {
+            document.getElementById("scratchpad").value = "";
+        }
+    </script>
+</body>
+</html>
