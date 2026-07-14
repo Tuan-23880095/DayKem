@@ -51,11 +51,19 @@
                 <div id="pane-exercise" class="tab-pane fade-in doc-content hidden"></div>
 
                 <div id="pane-quiz" class="tab-pane fade-in hidden">
-                    <div id="quiz-setup" class="text-center py-10">
+                    <div id="quiz-setup" class="text-center py-10 max-w-md mx-auto">
                         <div class="text-6xl mb-4">🍕</div>
                         <h2 class="text-2xl font-bold text-slate-800 mb-2">Sẵn sàng thử thách?</h2>
-                        <p class="text-slate-500 mb-6">Hệ thống sẽ tính điểm và thời gian làm bài của bạn.</p>
-                        <button id="btn-start-quiz" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+                        <p class="text-slate-500 mb-6">Hệ thống sẽ tính điểm và ghi nhận thành tích của bạn.</p>
+                        
+                        <div class="mb-6 text-left bg-orange-50 p-5 rounded-2xl border border-orange-100 shadow-inner">
+                            <label for="student-name" class="block text-sm font-bold text-orange-900 mb-2">
+                                👤 Nhập tên của bạn để lưu điểm:
+                            </label>
+                            <input type="text" id="student-name" placeholder="VD: Nguyễn Văn A..." class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition font-medium text-slate-800" required>
+                        </div>
+
+                        <button id="btn-start-quiz" class="bg-orange-500 hover:bg-orange-600 w-full text-white font-bold py-4 px-8 rounded-xl shadow-lg transition transform hover:scale-105">
                             Bắt đầu Đấu trường
                         </button>
                     </div>
