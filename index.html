@@ -101,19 +101,41 @@
                     if (courseSessions.length === 0) {
                         sessionsHtml = `<p class="text-sm text-slate-400 italic p-4 text-center border border-dashed rounded-lg">Chưa có bài học nào được mở.</p>`;
                     } else {
+                        // Tự động sinh danh sách các buổi học động kèm tham số URL (?mon=...&buoi=...)
                         courseSessions.forEach(session => {
-                            sessionsHtml += `
-                            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 ${colors.borderHover} transition group">
-                                <div class="font-bold text-slate-900 text-sm pb-3 border-b border-slate-100 mb-3">
-                                    <span class="mr-1">🗓️</span> Buổi ${session.sessionId}: ${session.title}
-                                </div>
-                                <div class="flex justify-between items-center ml-2">
-                                    <span class="text-xs font-medium text-slate-500">Lý thuyết, Bài tập & Đấu trường</span>
-                                    <a href="hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 ${colors.btnHover} text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
-                                        Vào học <span class="ml-1">&rarr;</span>
-                                    </a>
-                                </div>
-                            </div>`;
+                            
+                            // TÍNH NĂNG MỚI: Kiểm tra trạng thái đóng/mở từ Google Sheet
+                            const isClosed = session.status && session.status.toString().trim().toLowerCase() === 'close';
+
+                            if (isClosed) {
+                                // HIỂN THỊ GIAO DIỆN KHÓA (Màu xám, có ổ khóa, không click được)
+                                sessionsHtml += `
+                                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 shadow-sm mb-3 opacity-75 cursor-not-allowed">
+                                    <div class="font-bold text-slate-500 text-sm pb-3 border-b border-slate-200 mb-3 flex items-center">
+                                        <span class="mr-1">🔒</span> Buổi ${session.sessionId}: ${session.title}
+                                    </div>
+                                    <div class="flex justify-between items-center ml-2">
+                                        <span class="text-xs font-medium text-slate-400">Bài học chưa được mở</span>
+                                        <span class="bg-slate-200 text-slate-400 text-xs font-bold px-4 py-2 rounded-lg inline-flex items-center cursor-not-allowed">
+                                            Đã khóa
+                                        </span>
+                                    </div>
+                                </div>`;
+                            } else {
+                                // HIỂN THỊ GIAO DIỆN MỞ BÌNH THƯỜNG (Có nút "Vào học")
+                                sessionsHtml += `
+                                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm mb-3 ${colors.borderHover} transition group">
+                                    <div class="font-bold text-slate-900 text-sm pb-3 border-b border-slate-100 mb-3 flex items-center">
+                                        <span class="mr-1">🗓️</span> Buổi ${session.sessionId}: ${session.title}
+                                    </div>
+                                    <div class="flex justify-between items-center ml-2">
+                                        <span class="text-xs font-medium text-slate-500">Lý thuyết, Bài tập & Đấu trường</span>
+                                        <a href="hoc-tap.html?mon=${course.id}&buoi=${session.sessionId}" class="btn-pop bg-slate-900 ${colors.btnHover} text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
+                                            Vào học <span class="ml-1">&rarr;</span>
+                                        </a>
+                                    </div>
+                                </div>`;
+                            }
                         });
                     }
 
