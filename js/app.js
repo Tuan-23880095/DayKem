@@ -106,6 +106,12 @@ class StudyApp {
             
             // 2. Bơm dữ liệu vào màn hình
             this.ui.renderDocContent(docData.lythuyet, docData.baitap);
+            // ==========================================
+            // TÍNH NĂNG MỚI: YÊU CẦU VẼ LẠI CÔNG THỨC TOÁN
+            // ==========================================
+            if (window.MathJax) {
+                MathJax.typesetPromise().catch((err) => console.error('Lỗi render Toán học: ', err));
+            }
 
             // 3. Khởi tạo Iframe cho trang Trắc nghiệm
             this.ui.setQuizIframe(mon, buoi);
