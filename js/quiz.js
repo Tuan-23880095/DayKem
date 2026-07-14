@@ -10,8 +10,12 @@ class QuizEngine {
     /**
      * @param {Array} questionObjects - Mảng các đối tượng câu hỏi đã được tạo từ QuestionFactory
      */
-    constructor(questionObjects) {
+    constructor(questionObjects, api, mon, buoi) {
         this.questions = questionObjects;
+        this.api = api;   // Lấy ApiService từ app.js
+        this.mon = mon;   // Lưu mã môn
+        this.buoi = buoi; // Lưu mã buổi
+        
         this.currentIndex = 0;
         this.score = 0;
         this.timer = null;
@@ -252,6 +256,34 @@ class QuizEngine {
             <div class="text-2xl font-bold text-slate-800 mb-2">${message}</div>
             Đạt <strong>${this.score} / ${this.questions.length}</strong> điểm <br>
             <span class="text-sm text-slate-500">Tỷ lệ chính xác: ${percentage}%</span>
+            <div id="save-status" class="mt-4 text-sm font-semibold text-indigo-500 animate-pulse">⏳ Đang đồng bộ điểm lên hệ thống...</div>
         `;
+        // Gọi API lưu điểm (Chạy ngầm không block UI)
+        if (this.api) {
+            try {
+                const payload = {
+                    studentName: "Học sinh Ẩn danh", // Ở phiên bản nâng cấp, bạn có thể lấy tên nhập từ prompt
+                    courseId: this.mon,
+                    sessionId: this.buoi,
+                    score: this.score,
+                    totalQuestions: this.questions.length,
+                    percentage: percentage
+                };
+                
+                await this.api.submitQuizResult(payload);
+                
+                // Cập nhật UI khi lưu thành công
+                const statusEl = document.getElementById('save-status');
+                statusEl.className = "mt-4 text-sm font-bold text-emerald-600";
+                statusEl.innerHTML = "✅ Kết quả đã được lưu!";
+                
+            } catch (error) {
+                // Xử lý báo lỗi
+                const statusEl = document.getElementById('save-status');
+                statusEl.className = "mt-4 text-sm font-bold text-red-500";
+                statusEl.innerHTML = "❌ Không thể lưu điểm. Vui lòng báo lại giáo viên!";
+                console.error(error);
+            }
+        }
     }
 }
