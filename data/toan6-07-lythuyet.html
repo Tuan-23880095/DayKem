@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 7: Ứng Dụng Phân Tích Thừa Số Nguyên Tố - Tìm ƯCLN và Bài Toán Thực Tế</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fcfcfc;
+            color: #111827;
+        }
+        .header-font {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b-4 border-emerald-500 py-6 px-4 shadow-sm sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-4xl">📐</span>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold header-font text-gray-900 tracking-tight">
+                        TOÁN HỌC 6 - BUỔI 7
+                    </h1>
+                    <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Ước chung lớn nhất & Ứng dụng thực tế</p>
+                </div>
+            </div>
+            <div id="quiz-stats" class="hidden flex items-center gap-4 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-200">
+                <div class="flex items-center gap-1.5 text-sm font-bold text-gray-700">
+                    <span>⏱️ Thời gian:</span>
+                    <span id="timer-display" class="text-emerald-700">00:00</span>
+                </div>
+                <div class="h-4 w-px bg-emerald-300"></div>
+                <div class="flex items-center gap-1.5 text-sm font-bold text-blue-600">
+                    <span>⭐ Điểm:</span>
+                    <span id="score-display">0/100</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-5xl my-6">
+        
+        <section class="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm mb-8">
+            <h2 class="text-2xl font-black header-font text-gray-900 mb-6 flex items-center gap-2 border-b-2 border-slate-100 pb-3">
+                <span class="text-emerald-500">📖</span> Phần 1: Lý Thuyết Trọng Tâm
+            </h2>
+
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-5 mb-6">
+                <h3 class="font-extrabold text-blue-900 mb-3 flex items-center gap-2">
+                    💡 Khởi động trực quan bằng hình ảnh
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-sm text-blue-800 leading-relaxed font-semibold">
+                            1. Mô hình Venn (ƯCLN của 12 và 18):
+                        </p>
+                        <ul class="list-disc list-inside text-xs text-blue-700 mt-1 space-y-1">
+                            <li><strong>Ước của 12:</strong> {1, 2, 3, 4, 6, 12}</li>
+                            <li><strong>Ước của 18:</strong> {1, 2, 3, 6, 9, 18}</li>
+                            <li><strong>Ước chung (phần giao):</strong> {1, 2, 3, 6}</li>
+                            <li><strong class="text-red-600">ƯCLN (số lớn nhất phần giao):</strong> 6</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-800 leading-relaxed font-semibold">
+                            2. Bài toán thực tế cắt gỗ:
+                        </p>
+                        <p class="text-xs text-blue-700 mt-1 leading-relaxed">
+                            Bác thợ mộc có hai thanh gỗ dài 18dm và 30dm, muốn cắt chúng thành các đoạn bằng nhau mà không bị thừa. Độ dài lớn nhất của mỗi đoạn gỗ chính là $ƯCLN(18, 30) = 6\text{dm}$.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-lg font-bold text-emerald-700 mb-3 flex items-center gap-2">
+                    🟩 Mức độ cơ bản (Nhận biết và kĩ năng tính toán)
+                </h3>
+                <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
+                    <div class="border-l-4 border-emerald-500 pl-4 bg-slate-50 py-3 rounded-r-lg">
+                        <strong class="text-gray-900 block mb-1">1. Khái niệm Ước chung (ƯC) & Ước chung lớn nhất (ƯCLN):</strong>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>Ước chung:</strong> Một số được gọi là ước chung của hai hay nhiều số nếu nó là ước của tất cả các số đó. Kí hiệu: $ƯC(a, b)$.</li>
+                            <li><strong>Ước chung lớn nhất:</strong> Là số lớn nhất trong tập hợp các ước chung. Kí hiệu: $ƯCLN(a, b)$.</li>
+                            <li><em>Lưu ý:</em> Với mọi số tự nhiên $a, b$ ta luôn có $ƯCLN(a, 1) = 1$; $ƯCLN(a, b, 1) = 1$.</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 border-emerald-500 pl-4 bg-slate-50 py-3 rounded-r-lg">
+                        <strong class="text-gray-900 block mb-1">2. Quy tắc tìm ƯCLN bằng cách phân tích ra thừa số nguyên tố:</strong>
+                        <p class="font-semibold text-red-600 mb-1">Gồm 3 bước nằm lòng:</p>
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li><strong>Bước 1:</strong> Phân tích mỗi số ra thừa số nguyên tố.</li>
+                            <li><strong>Bước 2:</strong> Chọn ra các thừa số nguyên tố chung.</li>
+                            <li><strong>Bước 3:</strong> Lập tích các thừa số chung đã chọn, mỗi thừa số lấy với số mũ <span class="underline">nhỏ nhất</span> của nó.</li>
+                        </ol>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200 mt-2 text-xs">
+                            <strong>Ví dụ minh họa:</strong> Tìm $ƯCLN(36, 60, 72)$
+                            <br>• Bước 1: $36 = 2^2 \cdot 3^2$; $60 = 2^2 \cdot 3 \cdot 5$; $72 = 2^3 \cdot 3^2$.
+                            <br>• Bước 2: Thừa số nguyên tố chung là $2$ và $3$.
+                            <br>• Bước 3: Số mũ nhỏ nhất của $2$ là $2$, của $3$ là $1$. $\Rightarrow ƯCLN(36, 60, 72) = 2^2 \cdot 3^1 = 12$.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-lg font-bold text-amber-700 mb-3 flex items-center gap-2">
+                    🟧 Mức độ vận dụng (Giải toán có lời văn thực tế)
+                </h3>
+                <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
+                    <div class="border-l-4 border-amber-500 pl-4 bg-slate-50 py-3 rounded-r-lg">
+                        <strong class="text-gray-900 block mb-1">Dấu hiệu nhận biết bài toán ƯCLN:</strong>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Từ khóa chỉ phép chia đều: <span class="text-amber-700 font-semibold">"chia đều", "chia tổ", "phân chia phần thưởng", "cắt thành các đoạn", "xếp thành các hàng bằng nhau"</span> $\rightarrow$ Gợi ý tìm Ước chung.</li>
+                            <li>Từ khóa chỉ cực trị: <span class="text-red-600 font-bold">"nhiều nhất", "lớn nhất", "dài nhất", "rộng nhất"</span> $\rightarrow$ Chắc chắn là bài toán tìm ƯCLN.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold text-red-700 mb-3 flex items-center gap-2">
+                    🟥 Mức độ nâng cao (Mở rộng tư duy & Kĩ thuật giải nhanh)
+                </h3>
+                <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
+                    <div class="border-l-4 border-red-500 pl-4 bg-slate-50 py-3 rounded-r-lg">
+                        <strong class="text-gray-900 block mb-1">1. Tìm ƯC nhanh thông qua ƯCLN:</strong>
+                        <p>Để tìm Ước chung của các số, ta tìm ƯCLN của chúng trước, sau đó tìm tập hợp các Ước của ƯCLN đó.</p>
+                        <p class="text-xs text-gray-500 italic mt-1">Công thức: $ƯC(a, b) = Ư(ƯCLN(a, b))$</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-red-500 pl-4 bg-slate-50 py-3 rounded-r-lg">
+                        <strong class="text-gray-900 block mb-1">2. Hai số nguyên tố cùng nhau:</strong>
+                        <p>Hai hay nhiều số tự nhiên được gọi là nguyên tố cùng nhau nếu chúng có ước chung lớn nhất bằng 1.</p>
+                        <p class="text-xs text-gray-500 italic mt-1">Ví dụ: $ƯCLN(14, 33) = 1$ nên 14 và 33 là hai số nguyên tố cùng nhau.</p>
+                    </div>
+
+                    <div class="border-l-4 border-red-500 pl-4 bg-slate-50 py-3 rounded-r-lg">
+                        <strong class="text-gray-900 block mb-1">3. Thuật toán Euclid (Ơ-clit) - Tìm ƯCLN của các số cực lớn:</strong>
+                        <p class="mb-1">Khi gặp các số quá lớn khó phân tích ra thừa số nguyên tố, ta lấy số lớn chia cho số nhỏ. Sau đó lấy số chia chia cho số dư mới. Cứ thực hiện liên tiếp cho đến khi phép chia có số dư bằng 0. Số dư cuối cùng khác 0 chính là ƯCLN.</p>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200 text-xs">
+                            <strong>Ví dụ:</strong> Tìm $ƯCLN(1575, 343)$
+                            <br>• $1575 = 343 \cdot 4 + 203$ (dư $203$)
+                            <br>• $343 = 203 \cdot 1 + 140$ (dư $140$)
+                            <br>• $203 = 140 \cdot 1 + 63$ (dư $63$)
+                            <br>• $140 = 63 \cdot 2 + 14$ (dư $14$)
+                            <br>• $63 = 14 \cdot 4 + 7$ (dư $7$)
+                            <br>• $14 = 7 \cdot 2 + 0$ (dư $0$) 
+                            <br><span class="text-red-600 font-bold">Kết quả:</span> Số dư cuối cùng khác 0 là <strong class="text-base text-emerald-600">7</strong>. Vậy $ƯCLN(1575, 343) = 7$.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-1 space-y-6">
+                <div id="info-card" class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-extrabold header-font text-gray-900 mb-4 flex items-center gap-2 text-emerald-600">
+                        <span>📝</span> Thông tin học sinh
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Họ và tên học sinh <span class="text-red-500">*</span></label>
+                            <input type="text" id="student-name" placeholder="Ví dụ: Đinh Quốc Tuấn" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all font-medium font-semibold text-slate-800">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Lớp học <span class="text-red-500">*</span></label>
+                            <input type="text" id="student-class" placeholder="Ví dụ: Lớp 6A" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all font-medium font-semibold text-slate-800">
+                        </div>
+                        <button onclick="startQuiz()" id="btn-start" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-emerald-100 flex items-center justify-center gap-2">
+                            Bắt đầu nộp bài 🏁
+                        </button>
+                    </div>
+                </div>
+
+                <div id="result-card" class="hidden bg-white rounded-2xl border-2 border-emerald-500 p-6 shadow-md text-center">
+                    <span class="text-5xl mb-3 block">🏆</span>
+                    <h3 class="text-xl font-extrabold header-font text-gray-900 mb-1">Kết quả của em</h3>
+                    <p class="text-xs text-gray-500 mb-4">Dữ liệu thi đấu của em đã gửi về hệ thống.</p>
+                    
+                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-100 mb-4 text-left">
+                        <p class="text-sm font-semibold">👤 Học sinh: <span id="res-name" class="font-bold text-emerald-600"></span></p>
+                        <p class="text-sm font-semibold">🎯 Điểm số: <span id="res-score" class="font-bold text-emerald-600"></span></p>
+                        <p class="text-sm font-semibold">⏱️ Thời gian: <span id="res-time" class="font-bold text-emerald-600"></span></p>
+                    </div>
+
+                    <div id="sync-status" class="text-xs font-bold text-blue-600 bg-blue-50 py-2.5 rounded-lg border border-blue-100 mb-4">
+                        ⏳ Đang gửi dữ liệu về bảng vàng...
+                    </div>
+
+                    <button onclick="window.location.reload()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-gray-700 font-bold rounded-xl transition-all text-sm">
+                        Làm lại bài thi 🔄
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
+                    <h3 class="text-lg font-black header-font text-gray-900 mb-6 flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-emerald-600">🧠 Đấu Trường Bài Tập</span>
+                        <span class="text-xs font-bold text-slate-400">TỔNG CỘNG: 10 CÂU HỎI</span>
+                    </h3>
+
+                    <div class="space-y-8" id="quiz-container">
+                        </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                        <button onclick="submitQuiz()" id="btn-submit" disabled class="px-8 py-3.5 bg-gray-200 text-gray-400 font-extrabold rounded-xl cursor-not-allowed transition-all text-base flex items-center gap-2">
+                            Hãy nhập thông tin để nộp bài 🔒
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500 font-medium">
+        <p class="mb-1">© Bản quyền thuộc ThS. Đinh Quốc Tuấn - Mục đích phi lợi nhuận - Vì giáo dục.</p>
+        <p>Phát triển bởi đội ngũ kỹ sư Công nghệ thông tin giáo dục KHTN</p>
+    </footer>
+
+    <script>
+        // Cấu hình URL App Script nhận kết quả thi
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzY7b7h4OwvhXuK5Vs6hl-aD88BPnAiAKbU5lfJobby0D4nzbIJVKT4n0AKCpAGoK0nZA/exec";
+        // Mã đề cố định cho buổi học này để ghi nhận chính xác vào cột mã đề trên Sheets
+        const EXAM_ID = "toan6-07"; 
+
+        // Khởi tạo bộ dữ liệu 10 câu hỏi bao gồm 3 cấp độ
+        const quizData = [
+            {
+                id: 1,
+                level: "Cơ bản",
+                levelClass: "bg-emerald-100 text-emerald-800",
+                question: "Câu 1: Cho $a = 2^3 \\cdot 3^2 \\cdot 5$ và $b = 2^2 \\cdot 3^3 \\cdot 7$. ƯCLN của hai số $a$ và $b$ bằng bao nhiêu?",
+                options: [
+                    { text: "$2^2 \\cdot 3^2 = 36$", isCorrect: true },
+                    { text: "$2^3 \\cdot 3^3 = 216$", isCorrect: false },
+                    { text: "$2^2 \\cdot 3^2 \\cdot 5 \\cdot 7 = 1260$", isCorrect: false },
+                    { text: "$2 \\cdot 3 = 6$", isCorrect: false }
+                ],
+                hint: "Chọn thừa số nguyên tố chung với số mũ nhỏ nhất."
+            },
+            {
+                id: 2,
+                level: "Cơ bản",
+                levelClass: "bg-emerald-100 text-emerald-800",
+                question: "Câu 2: Tìm ƯCLN của 24 và 60.",
+                options: [
+                    { text: "12", isCorrect: true },
+                    { text: "6", isCorrect: false },
+                    { text: "24", isCorrect: false },
+                    { text: "4", isCorrect: false }
+                ],
+                hint: "Phân tích: $24 = 2^3 \\cdot 3$; $60 = 2^2 \\cdot 3 \\cdot 5$. Thừa số chung là 2 và 3, số mũ nhỏ nhất lần lượt là 2 và 1."
+            },
+            {
+                id: 3,
+                level: "Cơ bản",
+                levelClass: "bg-emerald-100 text-emerald-800",
+                question: "Câu 3: Đâu là khẳng định ĐÚNG khi nói về số tự nhiên $a$ và 1?",
+                options: [
+                    { text: "$ƯCLN(a, 1) = 1$", isCorrect: true },
+                    { text: "$ƯCLN(a, 1) = a$", isCorrect: false },
+                    { text: "$ƯC(a, 1) = \\{a; 1\\}$", isCorrect: false },
+                    { text: "$ƯCLN(a, b, 1) = b$", isCorrect: false }
+                ],
+                hint: "Xem lại phần lưu ý ở Mục 1 trong Phần 1 Lý thuyết."
+            },
+            {
+                id: 4,
+                level: "Cơ bản",
+                levelClass: "bg-emerald-100 text-emerald-800",
+                question: "Câu 4: Ước chung lớn nhất của $15$ và $90$ là:",
+                options: [
+                    { text: "15", isCorrect: true },
+                    { text: "30", isCorrect: false },
+                    { text: "90", isCorrect: false },
+                    { text: "5", isCorrect: false }
+                ],
+                hint: "Xem mẹo giải nhanh: 90 có chia hết cho 15 không?"
+            },
+            {
+                id: 5,
+                level: "Vận dụng",
+                levelClass: "bg-amber-100 text-amber-800",
+                question: "Câu 5: Có 12 bạn nữ và 18 bạn nam muốn chia thành các nhóm sao cho số nam và nữ chia đều vào các nhóm. Có thể chia được NHIỀU NHẤT bao nhiêu nhóm?",
+                options: [
+                    { text: "6 nhóm", isCorrect: true },
+                    { text: "3 nhóm", isCorrect: false },
+                    { text: "2 nhóm", isCorrect: false },
+                    { text: "4 nhóm", isCorrect: false }
+                ],
+                hint: "Có từ khóa 'chia đều' và 'nhiều nhất'. Do đó ta cần tìm ƯCLN(12, 18)."
+            },
+            {
+                id: 6,
+                level: "Vận dụng",
+                levelClass: "bg-amber-100 text-amber-800",
+                question: "Câu 6: Cô giáo muốn chia đều 48 quyển vở và 72 chiếc bút thành các phần thưởng như nhau. Hỏi có thể chia được nhiều nhất bao nhiêu phần thưởng?",
+                options: [
+                    { text: "24 phần thưởng", isCorrect: true },
+                    { text: "12 phần thưởng", isCorrect: false },
+                    { text: "18 phần thưởng", isCorrect: false },
+                    { text: "48 phần thưởng", isCorrect: false }
+                ],
+                hint: "Số phần thưởng nhiều nhất chính là ƯCLN(48, 72)."
+            },
+            {
+                id: 7,
+                level: "Vận dụng",
+                levelClass: "bg-amber-100 text-amber-800",
+                question: "Câu 7: Một mảnh đất hình chữ nhật dài 52m, rộng 36m được chia thành các khoảng hình vuông bằng nhau để trồng rau có độ dài cạnh lớn nhất. Độ dài cạnh hình vuông đó bằng bao nhiêu?",
+                options: [
+                    { text: "4m", isCorrect: true },
+                    { text: "2m", isCorrect: false },
+                    { text: "6m", isCorrect: false },
+                    { text: "8m", isCorrect: false }
+                ],
+                hint: "Độ dài cạnh hình vuông lớn nhất chính là ƯCLN của chiều dài 52 và chiều rộng 36."
+            },
+            {
+                id: 8,
+                level: "Nâng cao",
+                levelClass: "bg-red-100 text-red-800",
+                question: "Câu 8: Biết $ƯCLN(48, 60) = 12$. Tập hợp ƯC(48, 60) gồm bao nhiêu phần tử?",
+                options: [
+                    { text: "6 phần tử", isCorrect: true },
+                    { text: "4 phần tử", isCorrect: false },
+                    { text: "12 phần tử", isCorrect: false },
+                    { text: "8 phần tử", isCorrect: false }
+                ],
+                hint: "Tìm số phần tử của tập hợp Ư(12) = {1; 2; 3; 4; 6; 12}."
+            },
+            {
+                id: 9,
+                level: "Nâng cao",
+                levelClass: "bg-red-100 text-red-800",
+                question: "Câu 9: Cặp số nào sau đây là hai số nguyên tố cùng nhau?",
+                options: [
+                    { text: "14 và 33", isCorrect: true },
+                    { text: "9 và 21", isCorrect: false },
+                    { text: "12 và 18", isCorrect: false },
+                    { text: "15 và 25", isCorrect: false }
+                ],
+                hint: "Hai số nguyên tố cùng nhau có ước chung lớn nhất bằng 1."
+            },
+            {
+                id: 10,
+                level: "Nâng cao",
+                levelClass: "bg-red-100 text-red-800",
+                question: "Câu 10: Áp dụng thuật toán Euclid, hãy tìm ƯCLN của hai số lớn: 1575 và 343.",
+                options: [
+                    { text: "7", isCorrect: true },
+                    { text: "49", isCorrect: false },
+                    { text: "1", isCorrect: false },
+                    { text: "14", isCorrect: false }
+                ],
+                hint: "Xem các bước tính toán chia dư của thuật toán Euclid đã cho trong mục 3 Phần 1."
+            }
+        ];
+
+        let hasStarted = false;
+        let timeElapsed = 0;
+        let timerInterval = null;
+        let studentName = "";
+        let studentClass = "";
+
+        // Tạo giao diện 10 câu hỏi
+        function renderQuiz() {
+            const container = document.getElementById("quiz-container");
+            container.innerHTML = "";
+
+            quizData.forEach((q, qIndex) => {
+                let optionsHtml = "";
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <label class="flex items-center gap-3 p-3.5 rounded-xl border-2 border-gray-100 hover:border-emerald-200 cursor-pointer bg-white transition-all text-sm font-semibold text-gray-800">
+                            <input type="radio" name="question-${q.id}" value="${optIndex}" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-gray-300">
+                            <span>${opt.text}</span>
+                        </label>
+                    `;
+                });
+
+                container.innerHTML += `
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="px-2.5 py-1 text-xs font-bold rounded-full ${q.levelClass}">${q.level}</span>
+                        </div>
+                        <p class="font-extrabold text-base text-gray-900 leading-relaxed">${q.question}</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${optionsHtml}
+                        </div>
+
+                        <div class="pt-2">
+                            <button onclick="toggleHint(${q.id})" class="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1 focus:outline-none">
+                                💡 Nhấp để xem gợi ý của thầy
+                            </button>
+                            <div id="hint-box-${q.id}" class="hidden mt-2 p-3 bg-amber-50 rounded-xl border border-amber-100 text-xs text-amber-800 italic leading-relaxed">
+                                ${q.hint}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Toggle Ẩn/Hiện gợi ý
+        function toggleHint(id) {
+            const hintBox = document.getElementById(`hint-box-${id}`);
+            hintBox.classList.toggle("hidden");
+        }
+
+        // Bắt đầu làm bài thi
+        function startQuiz() {
+            studentName = document.getElementById("student-name").value.trim();
+            studentClass = document.getElementById("student-class").value.trim();
+
+            if (!studentName || !studentClass) {
+                alert("Em vui lòng điền đầy đủ Họ tên và Lớp học trước khi làm bài nhé!");
+                return;
+            }
+
+            hasStarted = true;
+            
+            // Khóa form nhập
+            document.getElementById("student-name").disabled = true;
+            document.getElementById("student-class").disabled = true;
+            document.getElementById("btn-start").disabled = true;
+            document.getElementById("btn-start").className = "w-full py-3 bg-gray-100 text-gray-400 font-bold rounded-xl cursor-not-allowed text-center";
+            document.getElementById("btn-start").innerText = "Đã vào đấu trường 🎮";
+
+            // Kích hoạt nút nộp bài
+            const btnSubmit = document.getElementById("btn-submit");
+            btnSubmit.disabled = false;
+            btnSubmit.className = "px-8 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold rounded-xl shadow-md hover:shadow-emerald-100 transition-all text-base cursor-pointer flex items-center gap-2";
+            btnSubmit.innerText = "Nộp bài lên bảng vàng 🏁";
+
+            // Hiển thị bộ đếm giờ
+            document.getElementById("quiz-stats").classList.remove("hidden");
+            startTimer();
+        }
+
+        // Bộ đếm thời gian
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const mins = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const secs = (timeElapsed % 60).toString().padStart(2, '0');
+                document.getElementById("timer-display").innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        // Nộp bài và tính điểm
+        function submitQuiz() {
+            if (!hasStarted) return;
+
+            // Kiểm tra xem đã hoàn thành hết tất cả 10 câu chưa
+            let unanswered = [];
+            quizData.forEach(q => {
+                const checked = document.querySelector(`input[name="question-${q.id}"]:checked`);
+                if (!checked) {
+                    unanswered.push(q.id);
+                }
+            });
+
+            if (unanswered.length > 0) {
+                if (!confirm(`Em vẫn chưa làm các câu số: ${unanswered.join(", ")}. Em có chắc chắn muốn nộp bài sớm không?`)) {
+                    return;
+                }
+            } else {
+                if (!confirm("Em có chắc chắn nộp bài thi không? Hãy kiểm tra kĩ kết quả nhé!")) {
+                    return;
+                }
+            }
+
+            // Dừng tính giờ
+            clearInterval(timerInterval);
+
+            // Tính điểm số & Phân tích những câu làm sai
+            let score = 0;
+            let wrongQuestions = []; // Mảng chứa chi tiết câu làm sai
+
+            quizData.forEach(q => {
+                const checked = document.querySelector(`input[name="question-${q.id}"]:checked`);
+                if (checked) {
+                    const selectedIdx = parseInt(checked.value);
+                    if (q.options[selectedIdx].isCorrect) {
+                        score += 10; // Mỗi câu đúng 10 điểm
+                    } else {
+                        // Người dùng chọn sai: Lưu lại số câu và nội dung câu trả lời sai
+                        wrongQuestions.push(`Câu ${q.id} (chọn sai: ${q.options[selectedIdx].text.replace(/\$/g, '')})`);
+                    }
+                } else {
+                    // Không chọn: Coi như bỏ trống
+                    wrongQuestions.push(`Câu ${q.id} (bỏ trống)`);
+                }
+            });
+
+            // Hiển thị giao diện kết quả
+            document.getElementById("info-card").classList.add("hidden");
+            document.getElementById("result-card").classList.remove("hidden");
+
+            const finalMins = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+            const finalSecs = (timeElapsed % 60).toString().padStart(2, '0');
+            const totalTimeStr = `${finalMins}:${finalSecs}`;
+
+            document.getElementById("res-name").innerText = `${studentName} (${studentClass})`;
+            document.getElementById("res-score").innerText = `${score}/100`;
+            document.getElementById("res-time").innerText = totalTimeStr;
+
+            // Vô hiệu hóa lựa chọn trên các câu hỏi sau khi nộp bài
+            const allRadios = document.querySelectorAll('input[type="radio"]');
+            allRadios.forEach(radio => radio.disabled = true);
+
+            // Tạo chuỗi danh sách các câu sai để ghi nhận vào trường dữ liệu "cauSai" trên Sheet
+            const wrongQuestionsStr = wrongQuestions.length > 0 ? wrongQuestions.join(" | ") : "Không có (Đạt điểm tuyệt đối!)";
+
+            // Gửi dữ liệu điểm đồng bộ hoàn hảo 100% với hàm doPost(e) trên Apps Script
+            sendScoreToGoogleSheet(studentName, studentClass, score, totalTimeStr, wrongQuestionsStr);
+        }
+
+        // Gửi dữ liệu thi đấu lên Server App Script
+        function sendScoreToGoogleSheet(name, className, finalScore, finalTime, wrongQuestionsList) {
+            const syncStatus = document.getElementById("sync-status");
+            syncStatus.innerHTML = "⏳ Đang gửi kết quả về máy chủ bảng vàng...";
+            syncStatus.className = "text-xs font-bold text-amber-600 bg-amber-50 py-2.5 rounded-lg border border-amber-100 mb-4";
+
+            // Payload được ánh xạ chuẩn chỉnh chính xác với JSON.parse(e.postData.contents) bên Apps Script
+            const payload = {
+                hoTen: `${name} - Lớp ${className}`, // data.hoTen
+                maDe: EXAM_ID,                       // data.maDe (Mã đề được ghi nhận đúng cột)
+                diem: finalScore,                    // data.diem
+                thoiGian: finalTime,                // data.thoiGian
+                cauSai: wrongQuestionsList           // data.cauSai (Chi tiết câu sai đã phân tích trực quan)
+            };
+
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", // Thiết lập để vượt qua chặn CORS chéo miền trên Iframe Web
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                syncStatus.innerHTML = "✅ Kết quả thi đấu đã được khóa thành công trên bảng vàng!";
+                syncStatus.className = "text-xs font-bold text-green-700 bg-green-50 py-2.5 rounded-lg border border-green-100 mb-4";
+            })
+            .catch(error => {
+                syncStatus.innerHTML = "❌ Lỗi kết nối! Hãy chụp màn hình này để gửi cho Thầy cô nhé!";
+                syncStatus.className = "text-xs font-bold text-red-700 bg-red-50 py-2.5 rounded-lg border border-red-100 mb-4";
+            });
+        }
+
+        // Khởi động trang
+        window.onload = function() {
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>
